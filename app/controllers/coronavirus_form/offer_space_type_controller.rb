@@ -14,10 +14,10 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
     offer_space_type_other = sanitize(params[:offer_space_type_other]).presence
     session[:offer_space_type] = offer_space_type
     session[:offer_space_type_other] = if selected_other?(offer_space_type)
-                                               offer_space_type_other
-                                             else
-                                               ""
-                                             end
+                                         offer_space_type_other
+                                       else
+                                         ""
+                                       end
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: offer_space_type,
