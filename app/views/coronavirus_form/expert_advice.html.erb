@@ -2,12 +2,11 @@
     <% content_for :meta_tags do %>
       <meta name="description" content="<%= t('coronavirus_form.expert_advice.title') %>" />
     <% end %>
-    
+
     <% content_for :back_link do %>
       <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
     <% end %>
-    
-    <%= render "coronavirus_form/validation_error" %>
+
     <%= form_tag({},
       "data-module": "track-coronavirus-form-business-medical-equipment-type",
       "data-question-key": "expert_advice",
@@ -17,6 +16,7 @@
       heading: t('coronavirus_form.expert_advice.title'),
       is_page_heading: true,
       name: "expert_advice[]",
+      error_message: error_items('expert_advice'),
       items: [
         {
           value: t('coronavirus_form.expert_advice.options.medical.label'),
