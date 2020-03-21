@@ -32,6 +32,6 @@ private
   PAGE = "offer_food"
 
   def previous_path
-    coronavirus_form_do_you_have_offer_food_to_offer_path
+    coronavirus_form_hotel_rooms_path
   end
 end
