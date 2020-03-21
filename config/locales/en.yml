@@ -1,7 +1,24 @@
 en:
   start_page:
-    title: Offer support as a business to help with coronavirus
-    body: Use this service to share the types of things your business can help with or might be able to help with. You'll be contacted with more information about how you can help.
+    title: Offer coronavirus support from your business
+    body: |
+      <p>Use this service to share the types of support you think your business can offer.</p>
+      <p>The support needed includes:</p>
+      <ul>
+        <li>medical testing equipment</li>
+        <li>medical equipment design</li>
+        <li>protective equipment for healthcare workers, such as masks, gowns, and sanitiser</li>
+        <li>food</li>
+        <li>hotel rooms</li>
+        <li>manufacturing equipment</li>
+        <li>warehouse or office space</li>
+        <li>transport</li>
+        <li>social care</li>
+        <li>community support</li>
+        <li>expert advice or consultancy on IT, manufacturing, construction, project management, procurement or engineering</li>
+      </ul>
+      <p>You’ll be asked some questions about the type of support you can give. You’ll then be contacted if we need your help.</p>
+      <p>You’ll need your company number if you have one.</p>
     button_label: Start now
   check_your_answers:
     title: "Work in progress"
@@ -20,7 +37,7 @@ en:
       email_format: "Enter email address in the correct format, like name@example.com"
       postcode_format: "Enter a real postcode"
     medical_equipment:
-      title: Do you have medical equipment to offer?
+      title: Can you offer medical equipment?
       options:
         option_yes:
           label: "Yes"
@@ -37,8 +54,8 @@ en:
         other:
           label: "Other"
           input:
-            label: "Give a description"
-          error_message: Enter a description of the type of equipment
+            label: "Give a summary of the type of equipment – you can give more details later"
+          error_message: Enter a summary of the type of equipment
       custom_select_error: Select the type of medical equipment you can offer
     manufacturer_check:
       title: What kind of business are you?
@@ -54,7 +71,7 @@ en:
           label: Individual
       custom_select_error: Select the best way to describe your business
     product_details:
-      title: Tell us about the equipment that you're offering
+      title: Tell us about each product you're offering
       product_name:
         label: Name of product
       product_cost:
@@ -116,7 +133,7 @@ en:
           label: "I can't provide services"
       custom_select_error: Select what services can your business help with
     hotel_rooms:
-      title: Do you have hotel rooms to offer?
+      title: Can you offer hotel rooms?
       options:
         yes_staying_in:
           label: "Yes - for people to stay in"
