@@ -5,7 +5,7 @@ en:
     button_label: Start now
   check_your_answers:
     title: "Work in progress"
-  coronavirus_form:
+  business_volunteering:
     errors:
       heading: "There is a problem"
       radio_field: "Select %{field}"

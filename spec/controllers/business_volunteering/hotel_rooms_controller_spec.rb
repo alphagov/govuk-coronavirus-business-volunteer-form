@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-RSpec.describe CoronavirusForm::HotelRoomsController, type: :controller do
-  let(:current_template) { "coronavirus_form/hotel_rooms" }
+RSpec.describe BusinessVolunteering::HotelRoomsController, type: :controller do
+  let(:current_template) { "business_volunteering/hotel_rooms" }
   let(:session_key) { :hotel_rooms }
 
   describe "GET show" do
@@ -16,7 +16,7 @@ RSpec.describe CoronavirusForm::HotelRoomsController, type: :controller do
   describe "POST submit" do
     let(:selected) { permitted_values.sample }
     let(:permitted_values) do
-      I18n.t("coronavirus_form.hotel_rooms.options").map { |_, item| item[:label] }
+      I18n.t("business_volunteering.hotel_rooms.options").map { |_, item| item[:label] }
     end
 
     it "sets session variables" do
@@ -26,14 +26,14 @@ RSpec.describe CoronavirusForm::HotelRoomsController, type: :controller do
 
     it "redirects to next step for a permitted response" do
       post :submit, params: { hotel_rooms: selected }
-      expect(response).to redirect_to(coronavirus_form_offer_food_path)
+      expect(response).to redirect_to(business_volunteering_offer_food_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: { hotel_rooms: selected }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(business_volunteering_check_your_answers_path)
     end
 
     it "validates any option is chosen" do

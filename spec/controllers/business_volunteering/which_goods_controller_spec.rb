@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-RSpec.describe CoronavirusForm::WhichGoodsController, type: :controller do
-  let(:current_template) { "coronavirus_form/which_goods" }
+RSpec.describe BusinessVolunteering::WhichGoodsController, type: :controller do
+  let(:current_template) { "business_volunteering/which_goods" }
   let(:session_key) { :which_goods }
 
   describe "GET show" do

@@ -1,0 +1,13 @@
+<% content_for :title do %><%= t('business_volunteering.thank_you.title') %><% end %>
+<%= render "govuk_publishing_components/components/panel", {
+  title: t("business_volunteering.thank_you.title")
+} %>
+
+<%= tag.p t("business_volunteering.thank_you.sub_heading"), class: "govuk-body" %>
+
+<%= tag.p tag.strong(
+      link_to( t('business_volunteering.thank_you.next_text'),
+        t('business_volunteering.thank_you.next_link'),
+        class: "govuk-link",
+      )
+    ), class: "govuk-body" %>

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class CoronavirusForm::HotelRoomsController < ApplicationController
+class BusinessVolunteering::HotelRoomsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include FieldValidationHelper
 
   def show
-    render "coronavirus_form/#{PAGE}"
+    render "business_volunteering/#{PAGE}"
   end
 
   def submit
@@ -19,11 +19,11 @@ class CoronavirusForm::HotelRoomsController < ApplicationController
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render "business_volunteering/#{PAGE}"
     elsif session["check_answers_seen"]
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
+      redirect_to controller: "business_volunteering/check_answers", action: "show"
     else
-      redirect_to controller: "coronavirus_form/offer_food", action: "show"
+      redirect_to controller: "business_volunteering/offer_food", action: "show"
     end
   end
 
@@ -32,6 +32,6 @@ private
   PAGE = "hotel_rooms"
 
   def previous_path
-    coronavirus_form_do_you_have_medical_equipment_to_offer_path
+    business_volunteering_do_you_have_medical_equipment_to_offer_path
   end
 end

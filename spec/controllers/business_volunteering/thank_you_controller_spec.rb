@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-RSpec.describe CoronavirusForm::ThankYouController, type: :controller do
-  let(:current_template) { "coronavirus_form/thank_you" }
+RSpec.describe BusinessVolunteering::ThankYouController, type: :controller do
+  let(:current_template) { "business_volunteering/thank_you" }
 
   describe "GET show" do
     it "renders the form" do

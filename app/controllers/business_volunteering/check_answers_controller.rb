@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class CoronavirusForm::CheckAnswersController < ApplicationController
+class BusinessVolunteering::CheckAnswersController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
   def show
     session[:check_answers_seen] = true
-    render "coronavirus_form/check_answers"
+    render "business_volunteering/check_answers"
   end
 end

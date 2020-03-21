@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-RSpec.describe CoronavirusForm::MedicalEquipmentController, type: :controller do
-  let(:current_template) { "coronavirus_form/medical_equipment" }
+RSpec.describe BusinessVolunteering::MedicalEquipmentController, type: :controller do
+  let(:current_template) { "business_volunteering/medical_equipment" }
   let(:session_key) { :medical_equipment }
 
   describe "GET show" do
