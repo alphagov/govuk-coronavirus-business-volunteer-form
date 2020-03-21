@@ -40,7 +40,7 @@ private
 
   def selected_other?(expert_advice)
     expert_advice.include?(
-      I18n.t("coronavirus_form.expert_advice.options.other.label"),
+      I18n.t("coronavirus_form.#{PAGE}.options.other.label"),
     )
   end
 
