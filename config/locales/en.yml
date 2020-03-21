@@ -26,6 +26,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
+      custom_select_error: Select if you have medical equipment to offer
     medical_equipment_type:
       title: What medical equipment can you offer?
       options:
@@ -37,8 +38,8 @@ en:
           label: "Other"
           input:
             label: "Give a description"
-          error_message: Please provide details of the other medical equipment you can provide
-      custom_select_error: Please provide details of the medical equipment you can provide
+          error_message: Enter a description of the type of equipment
+      custom_select_error: Select the type of medical equipment you can offer
     manufacturer_check:
       title: What kind of business are you?
       hint: Select the best way to describe your work
@@ -51,6 +52,7 @@ en:
           label: Agent
         individual:
           label: Individual
+      custom_select_error: Select the best way to describe your business
     product_details:
       title: Tell us about the equipment that you're offering
       product_name:
@@ -122,6 +124,7 @@ en:
           label: "Yes - for any use"
         no_option:
           label: "No"
+      custom_select_error: Select if you can offer hotel rooms
     offer_food:
       title: Can you offer food?
       options:
@@ -129,7 +132,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
-      custom_select_error: Select whether you can offer food
+      custom_select_error: Select if you can offer food
     offer_space:
       title: Can you offer space?
       options:
@@ -137,7 +140,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
-      custom_select_error: Select whether you can offer space
+      custom_select_error: Select if you can offer space
     offer_space_type:
       title: What kind of space can you offer?
       options:
@@ -149,6 +152,8 @@ en:
           label: "Other"
           input:
             label: Give a description
+          error_message: Enter a description of the type of space you have
+      custom_select_error: Select the kind of space you can offer
     offer_transport:
       title: Can you offer transport?
       options:
@@ -156,7 +161,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
-      custom_select_error: Select whether you can offer transport
+      custom_select_error: Select if you can offer transport
     transport_type:
       title: What kind of transport can you offer?
       options:
@@ -185,7 +190,8 @@ en:
           label: "Other"
           input:
             label: "Give a description"
-      custom_select_error: Please provide details of the advice you can provide
+          error_message: Enter the best way to describe the type of expertise you have
+      custom_select_error: Select the best way to describe your expertise or consultancy experience
     offer_care:
       title: Can you offer social care or childcare?
       hint: For example, nursing or assistance to other people.
@@ -194,7 +200,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
-      custom_select_error: Select whether you can offer care
+      custom_select_error: Select if you can offer social care or childcare
     offer_community_support:
        title: Can you offer community support?
        hint: For example distributing food or helping homeless people.
@@ -203,7 +209,7 @@ en:
            label: "Yes"
          option_no:
            label: "No"
-       custom_select_error: Select which services you can provide
+       custom_select_error: Select if you can offer community support
     contact_details:
       title: Contact details
       name:
