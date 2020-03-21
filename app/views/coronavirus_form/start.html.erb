@@ -3,13 +3,13 @@
   title:t("start_page.title"),
   margin_top: 0
 } %>
-<%= render "govuk_publishing_components/components/lead_paragraph", {
-  text: t("start_page.body")
+<%= render "govuk_publishing_components/components/govspeak", {
+  content: sanitize(t("start_page.body"))
 } %>
 
 <%= render "govuk_publishing_components/components/button", {
   text: t("start_page.button_label"),
   href: coronavirus_form_medical_equipment_path,
   start: true,
-  rel: "external"
+  margin_bottom: true
 } %>
