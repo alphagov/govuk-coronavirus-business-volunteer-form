@@ -7,8 +7,6 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
-<%= render "coronavirus_form/validation_error" %>
-
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-offer-space-type",
   "data-question-key": "what_kind_of_space",
@@ -17,7 +15,8 @@
   <%= render "govuk_publishing_components/components/checkboxes", {
     heading: t('coronavirus_form.offer_space_type.title'),
     is_page_heading: true,
-    name: "offer_space_type[]",
+    name: "offer_space_type",
+    error_message: error_items("offer_space_type[]"),
     items: [
       {
         value: t('coronavirus_form.offer_space_type.options.warehouse_space.label'),
@@ -38,6 +37,7 @@
             text: t('coronavirus_form.offer_space_type.options.other.input.label'),
           },
           name: "offer_space_type_other",
+          error_message: error_items("offer_space_type_other"),
           value: session[:offer_space_type_other],
         })
       },
