@@ -130,6 +130,13 @@ en:
         option_no:
           label: "No"
       custom_select_error: Select which services you can provide
+    offer_space:
+      title: Can you offer space?
+      options:
+        option_yes:
+          label: "Yes"
+        option_no:
+          label: "No"
     thank_you:
       title: "Thank you for telling us how you can help"
       sub_heading: "We'll be in touch to discuss how you can help."
