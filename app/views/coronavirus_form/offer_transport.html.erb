@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.offer_food.title') %><% end %>
+<% content_for :title do %><%= t('coronavirus_form.offer_transport.title') %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.offer_food.title') %>" />
+  <meta name="description" content="<%= t('coronavirus_form.offer_transport.title') %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -9,19 +9,19 @@
 
 <%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
-  "data-module": "track-coronavirus-form-business-offer-food",
-  "data-question-key": "offer_food",
-  "id": "offer_food"
+  "data-module": "track-coronavirus-form-business-offer-transport",
+  "data-question-key": "offer_transport",
+  "id": "offer_transport"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.offer_food.title'),
+  heading: t('coronavirus_form.offer_transport.title'),
   is_page_heading: true,
-  name: "offer_food",
-  items: t('coronavirus_form.offer_food.options').map do |_, item|
+  name: "offer_transport",
+  items: t('coronavirus_form.offer_transport.options').map do |_, item|
     {
       value: item[:label],
       text: item[:label],
-      checked: session[:offer_food] == item[:label],
+      checked: session[:offer_transport] == item[:label],
     }
   end
 } %>
