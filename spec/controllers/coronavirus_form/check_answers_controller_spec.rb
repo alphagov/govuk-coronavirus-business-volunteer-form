@@ -11,4 +11,25 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
       expect(response).to render_template(current_template)
     end
   end
+
+  describe "POST submit" do
+    before do
+      allow_any_instance_of(described_class).to receive(:reference_number).and_return("abc")
+    end
+
+    it "resets session" do
+      post :submit
+      expect(session.to_hash).to eq({})
+    end
+
+    it "redirects to thank you if sucessfully creates record" do
+      post :submit
+
+      expect(response).to redirect_to({
+        controller: "thank_you",
+        action: "show",
+        params: { reference_number: "abc" },
+      })
+    end
+  end
 end
