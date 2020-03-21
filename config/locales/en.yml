@@ -52,7 +52,7 @@ en:
         individual:
           label: Individual
     product_details:
-      title: Tell us about the equipment that you are offering
+      title: Tell us about the equipment that you're offering
       product_name:
         label: Name of product
       product_cost:
