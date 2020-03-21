@@ -24,7 +24,7 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
 
   describe "POST submit" do
     let(:options) do
-      I18n.t("coronavirus_form.transport_type.options").map { |_, item| item[:label] }
+      I18n.t("coronavirus_form.questions.transport_type.options").map { |_, item| item[:label] }
     end
     let(:selected) { [options, [options.sample]].sample }
 

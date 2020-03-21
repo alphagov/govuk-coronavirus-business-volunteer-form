@@ -2,9 +2,9 @@
 
 require "spec_helper"
 
-RSpec.describe CoronavirusForm::WhichServicesController, type: :controller do
-  let(:current_template) { "coronavirus_form/which_services" }
-  let(:session_key) { :which_services }
+RSpec.describe CoronavirusForm::AreYouAManufacturerController, type: :controller do
+  let(:current_template) { "coronavirus_form/are_you_a_manufacturer" }
+  let(:session_key) { :are_you_a_manufacturer }
 
   describe "GET show" do
     it "renders the form when first question answered" do
@@ -23,35 +23,41 @@ RSpec.describe CoronavirusForm::WhichServicesController, type: :controller do
   end
 
   describe "POST submit" do
-    let(:selected) { %w[Transport Consultancy] }
+    let(:selected) { %w[Distributor Manufacturer] }
 
     it "sets session variables" do
-      post :submit, params: { which_services: selected }
+      post :submit, params: { are_you_a_manufacturer: selected }
 
       expect(session[session_key]).to eq selected
     end
 
     it "redirects to next step" do
-      post :submit, params: { which_services: selected }
+      post :submit, params: { are_you_a_manufacturer: selected }
 
-      expect(response).to redirect_to("/thank-you")
+      expect(response).to redirect_to(medical_equipment_type_path)
     end
 
-    it "redirects to check your answers if check your answers previously seen" do
+    it "redirects to check your answers if check your answers already seen" do
       session[:check_answers_seen] = true
-      post :submit, params: { which_services: selected }
+      post :submit, params: { are_you_a_manufacturer: selected }
 
-      expect(response).to redirect_to("/check-your-answers")
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "validates any option is chosen" do
-      post :submit, params: { which_services: [] }
+      post :submit, params: { are_you_a_manufacturer: [] }
 
       expect(response).to render_template(current_template)
     end
 
     it "validates a valid option is chosen" do
-      post :submit, params: { which_services: ["<script></script", "invalid option", "Transport"] }
+      post :submit, params: {
+        are_you_a_manufacturer: [
+          "<script></script",
+          "invalid option",
+          "Medical equipment",
+        ],
+      }
 
       expect(response).to render_template(current_template)
     end

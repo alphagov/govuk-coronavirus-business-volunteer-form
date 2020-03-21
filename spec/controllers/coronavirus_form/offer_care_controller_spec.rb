@@ -23,8 +23,8 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
   end
 
   describe "POST submit" do
-    let(:selected_yes) { I18n.t("coronavirus_form.offer_care.options.option_yes.label") }
-    let(:selected_no) { I18n.t("coronavirus_form.offer_care.options.option_no.label") }
+    let(:selected_yes) { I18n.t("coronavirus_form.questions.offer_care.options.option_yes.label") }
+    let(:selected_no) { I18n.t("coronavirus_form.questions.offer_care.options.option_no.label") }
 
     it "sets session variables" do
       post :submit, params: { offer_care: selected_yes }

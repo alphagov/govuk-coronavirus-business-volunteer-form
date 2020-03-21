@@ -23,7 +23,7 @@ class CoronavirusForm::OfferCareController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
-    elsif session[:offer_care] == I18n.t("coronavirus_form.offer_care.options.option_yes.label")
+    elsif session[:offer_care] == I18n.t("coronavirus_form.questions.#{PAGE}.options.option_yes.label")
       redirect_to controller: "coronavirus_form/offer_care_qualifications", action: "show"
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"

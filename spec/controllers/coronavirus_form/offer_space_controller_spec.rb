@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
   describe "POST submit" do
     let(:selected) { permitted_values.sample }
     let(:permitted_values) do
-      I18n.t("coronavirus_form.offer_space.options").map { |_, item| item[:label] }
+      I18n.t("coronavirus_form.questions.offer_space.options").map { |_, item| item[:label] }
     end
 
     it "sets session variables" do
@@ -40,14 +40,21 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
 
     it "redirects to next step for a 'Yes' response" do
       post :submit, params: { offer_space: "Yes" }
-      expect(response).to redirect_to(what_kind_of_space_path)
+      expect(response).to redirect_to(offer_space_type_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      post :submit, params: { offer_space: selected }
+      post :submit, params: { offer_space: "No" }
 
       expect(response).to redirect_to(check_your_answers_path)
+    end
+
+    it "redirects to check your answers if answer is Yes regardless of check your answers state" do
+      session[:check_answers_seen] = true
+      post :submit, params: { offer_space: "Yes" }
+
+      expect(response).to redirect_to(offer_space_type_path)
     end
 
     it "validates any option is chosen" do

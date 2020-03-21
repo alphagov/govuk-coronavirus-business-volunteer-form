@@ -21,7 +21,7 @@ class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: expert_advice_type,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
+      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
       other: expert_advice_type_other,
     )
 
@@ -40,7 +40,7 @@ private
 
   def selected_other?(expert_advice_type)
     expert_advice_type.include?(
-      I18n.t("coronavirus_form.#{PAGE}.options.other.label"),
+      I18n.t("coronavirus_form.questions.#{PAGE}.options.other.label"),
     )
   end
 

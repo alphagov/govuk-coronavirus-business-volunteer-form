@@ -20,20 +20,14 @@ Rails.application.routes.draw do
   get "/hotel-rooms" => "coronavirus_form/hotel_rooms#show"
   post "/hotel-rooms" => "coronavirus_form/hotel_rooms#submit"
 
-  get "/are-you-a-manufacturer" => "coronavirus_form/manufacturer_check#show"
-  post "/are-you-a-manufacturer" => "coronavirus_form/manufacturer_check#submit"
+  get "/are-you-a-manufacturer" => "coronavirus_form/are_you_a_manufacturer#show"
+  post "/are-you-a-manufacturer" => "coronavirus_form/are_you_a_manufacturer#submit"
 
   get "/product-details" => "coronavirus_form/product_details#show"
   post "/product-details" => "coronavirus_form/product_details#submit"
 
-  get "/additional-product" => "coronavirus_form/additional_product_check#show"
-  post "/additional-product" => "coronavirus_form/additional_product_check#submit"
-
-  get "/which-goods" => "coronavirus_form/which_goods#show"
-  post "/which-goods" => "coronavirus_form/which_goods#submit"
-
-  get "/which-services" => "coronavirus_form/which_services#show"
-  post "/which-services" => "coronavirus_form/which_services#submit"
+  get "/additional-product" => "coronavirus_form/additional_product#show"
+  post "/additional-product" => "coronavirus_form/additional_product#submit"
 
   get "/offer-transport" => "coronavirus_form/offer_transport#show"
   post "/offer-transport" => "coronavirus_form/offer_transport#submit"
@@ -41,8 +35,8 @@ Rails.application.routes.draw do
   get "/offer-space" => "coronavirus_form/offer_space#show"
   post "/offer-space" => "coronavirus_form/offer_space#submit"
 
-  get "/what-kind-of-space" => "coronavirus_form/offer_space_type#show"
-  post "/what-kind-of-space" => "coronavirus_form/offer_space_type#submit"
+  get "/offer-space-type" => "coronavirus_form/offer_space_type#show"
+  post "/offer-space-type" => "coronavirus_form/offer_space_type#submit"
 
   get "/expert-advice" => "coronavirus_form/expert_advice#show"
   post "/expert-advice" => "coronavirus_form/expert_advice#submit"
@@ -50,8 +44,8 @@ Rails.application.routes.draw do
   get "/expert-advice-type" => "coronavirus_form/expert_advice_type#show"
   post "/expert-advice-type" => "coronavirus_form/expert_advice_type#submit"
 
-  get "/what-kind-of-transport" => "coronavirus_form/transport_type#show"
-  post "/what-kind-of-transport" => "coronavirus_form/transport_type#submit"
+  get "/transport-type" => "coronavirus_form/transport_type#show"
+  post "/transport-type" => "coronavirus_form/transport_type#submit"
 
   get "/offer-care" => "coronavirus_form/offer_care#show"
   post "/offer-care" => "coronavirus_form/offer_care#submit"

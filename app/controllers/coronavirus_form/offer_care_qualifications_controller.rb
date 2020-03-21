@@ -21,7 +21,7 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: offer_care_qualifications,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
+      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
       other: offer_care_qualifications_type,
       other_field: "nursing_or_healthcare_qualification",
     )

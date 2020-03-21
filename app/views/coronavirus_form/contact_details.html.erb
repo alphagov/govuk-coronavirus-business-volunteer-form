@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.contact_details.title') %><% end %>
+<% content_for :title do %><%= t('coronavirus_form.questions.contact_details.title') %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.contact_details.title') %>" />
+  <meta name="description" content="<%= t('coronavirus_form.questions.contact_details.title') %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -8,7 +8,7 @@
 <% end %>
 
 <%= render "govuk_publishing_components/components/title", {
-  title:t("coronavirus_form.contact_details.title"),
+  title:t("coronavirus_form.questions.contact_details.title"),
   margin_top: 0
 } %>
 
@@ -19,7 +19,7 @@
 ) do %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
-    text: t('coronavirus_form.contact_details.contact_name.label')
+    text: t('coronavirus_form.questions.contact_details.contact_name.label')
   },
   name: "contact_name",
   error_message: error_items("contact_name"),
@@ -27,7 +27,7 @@
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
-    text: t('coronavirus_form.contact_details.role.label')
+    text: t('coronavirus_form.questions.contact_details.role.label')
   },
   name: "role",
   error_message: error_items('role'),
@@ -35,7 +35,7 @@
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
-    text: t('coronavirus_form.contact_details.phone_number.label')
+    text: t('coronavirus_form.questions.contact_details.phone_number.label')
   },
   name: "phone_number",
   error_message: error_items('phone_number'),
@@ -43,7 +43,7 @@
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
-    text: t('coronavirus_form.contact_details.email.label')
+    text: t('coronavirus_form.questions.contact_details.email.label')
   },
   name: "email",
   error_message: error_items('email'),

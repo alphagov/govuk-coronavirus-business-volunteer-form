@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.business_details.title') %><% end %>
+<% content_for :title do %><%= t('coronavirus_form.questions.business_details.title') %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.business_details.title') %>" />
+  <meta name="description" content="<%= t('coronavirus_form.questions.business_details.title') %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -14,14 +14,14 @@
 ) do %>
 
 <%= render "govuk_publishing_components/components/title", {
-  title: t('coronavirus_form.business_details.title'),
+  title: t('coronavirus_form.questions.business_details.title'),
   margin_top: 0,
 } %>
 
 <%= render "govuk_publishing_components/components/input", {
   name: "company_name",
   label: {
-    text: t('coronavirus_form.business_details.company_name.label'),
+    text: t('coronavirus_form.questions.business_details.company_name.label'),
   },
   error_message: error_items('company_name'),
   value: session.dig("business_details", "company_name"),
@@ -30,18 +30,18 @@
 <%= render "govuk_publishing_components/components/input", {
   name: "company_number",
   label: {
-    text: t('coronavirus_form.business_details.company_number.label'),
+    text: t('coronavirus_form.questions.business_details.company_number.label'),
   },
   error_message: error_items('company_number'),
   value: session.dig("business_details", "company_number"),
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.business_details.company_size.label'),
+  heading: t('coronavirus_form.questions.business_details.company_size.label'),
   heading_size: "s",
   name: "company_size",
   error_message: error_items('company_size'),
-  items: t('coronavirus_form.business_details.company_size.options').map do |_, item|
+  items: t('coronavirus_form.questions.business_details.company_size.options').map do |_, item|
     {
       value:  item[:label],
       text:  item[:label],
@@ -51,11 +51,11 @@
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.business_details.company_location.label'),
+  heading: t('coronavirus_form.questions.business_details.company_location.label'),
   heading_size: "s",
   name: "company_location",
   error_message: error_items('company_location'),
-  items: t('coronavirus_form.business_details.company_location.options').map do |_, item|
+  items: t('coronavirus_form.questions.business_details.company_location.options').map do |_, item|
     {
       value:  item[:label],
       text:  item[:label],

@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.offer_care_qualifications.title') %><% end %>
+<% content_for :title do %><%= t('coronavirus_form.questions.offer_care_qualifications.title') %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.offer_care_qualifications.title') %>" />
+  <meta name="description" content="<%= t('coronavirus_form.questions.offer_care_qualifications.title') %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -13,24 +13,24 @@
   "id": "what_qualifications_do_you_have"
 ) do %>
   <%= render "govuk_publishing_components/components/checkboxes", {
-    heading: t('coronavirus_form.offer_care_qualifications.title'),
-    hint_text: t('coronavirus_form.offer_care_qualifications.hint'),
+    heading: t('coronavirus_form.questions.offer_care_qualifications.title'),
+    hint_text: t('coronavirus_form.questions.offer_care_qualifications.hint'),
     is_page_heading: true,
     name: "offer_care_qualifications[]",
     error: error_items("offer_care_qualifications"),
     items: [
       {
-        value: t('coronavirus_form.offer_care_qualifications.options.dbs_check.label'),
-        label: t('coronavirus_form.offer_care_qualifications.options.dbs_check.label'),
-        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.offer_care_qualifications.options.dbs_check.label')),
+        value: t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label'),
+        label: t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label'),
+        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label')),
       },
       {
-        value: t('coronavirus_form.offer_care_qualifications.options.nursing_or_healthcare_qualification.label'),
-        label: t('coronavirus_form.offer_care_qualifications.options.nursing_or_healthcare_qualification.label'),
-        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.offer_care_qualifications.options.nursing_or_healthcare_qualification.label')),
+        value: t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label'),
+        label: t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label'),
+        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label')),
         conditional: render("govuk_publishing_components/components/textarea", {
           label: {
-            text: t('coronavirus_form.offer_care_qualifications.options.nursing_or_healthcare_qualification.input.label'),
+            text: t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.input.label'),
           },
           name: "offer_care_qualifications_type",
           error_message: error_items("offer_care_qualifications_type"),
@@ -38,9 +38,9 @@
         })
       },
       {
-        value: t('coronavirus_form.offer_care_qualifications.options.no_qualification.label'),
-        label: t('coronavirus_form.offer_care_qualifications.options.no_qualification.label'),
-        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.offer_care_qualifications.options.no_qualification.label')),
+        value: t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label'),
+        label: t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label'),
+        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label')),
       },
     ]
   } %>

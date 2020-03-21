@@ -7,8 +7,8 @@ module FieldValidationHelper
       next if session[page][field].present?
 
       invalid_fields << { field: field.to_s,
-                          text: t("coronavirus_form.#{page}.#{field}.custom_error",
-                                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.#{page}.#{field}.label")).humanize) }
+                          text: t("coronavirus_form.questions.#{page}.#{field}.custom_error",
+                                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.questions.#{page}.#{field}.label")).humanize) }
     end
     invalid_fields
   end
@@ -17,16 +17,16 @@ module FieldValidationHelper
     if radio.blank?
       return [{ field: page.to_s,
                 text: t(
-                  "coronavirus_form.#{page}.custom_select_error",
-                  default: t("coronavirus_form.errors.radio_field", field: t("coronavirus_form.#{page}.title")).humanize,
+                  "coronavirus_form.questions.#{page}.custom_select_error",
+                  default: t("coronavirus_form.errors.radio_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
                 ) }]
     end
 
     if other != false && other.blank? && %w[Yes Other].include?(radio)
       return [{ field: page.to_s,
                 text: t(
-                  "coronavirus_form.#{page}.custom_enter_error",
-                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.#{page}.title")).humanize,
+                  "coronavirus_form.questions.#{page}.custom_enter_error",
+                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
                 ) }]
     end
 
@@ -37,24 +37,24 @@ module FieldValidationHelper
     if values.blank? || values.empty?
       return [{ field: page.to_s,
                 text: t(
-                  "coronavirus_form.#{page}.custom_select_error",
-                  default: t("coronavirus_form.errors.checkbox_field", field: t("coronavirus_form.#{page}.title")).humanize,
+                  "coronavirus_form.questions.#{page}.custom_select_error",
+                  default: t("coronavirus_form.errors.checkbox_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
                 ) }]
     end
 
     if (values - allowed_values).any?
       return [{ field: page.to_s,
                 text: t(
-                  "coronavirus_form.#{page}.custom_select_error",
-                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.#{page}.title")).humanize,
+                  "coronavirus_form.questions.#{page}.custom_select_error",
+                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
                 ) }]
     end
 
-    if other != false && other.blank? && values.include?(I18n.t("coronavirus_form.#{page}.options.#{other_field}.label"))
+    if other != false && other.blank? && values.include?(I18n.t("coronavirus_form.questions.#{page}.options.#{other_field}.label"))
       return [{ field: page.to_s,
                 text: t(
-                  "coronavirus_form.#{page}.options.#{other_field}.error_message",
-                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.#{page}.title")).humanize,
+                  "coronavirus_form.questions.#{page}.options.#{other_field}.error_message",
+                  default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
                 ) }]
     end
 

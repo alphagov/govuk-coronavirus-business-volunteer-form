@@ -23,11 +23,11 @@ class CoronavirusForm::OfferTransportController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
+    elsif session[:offer_transport] == I18n.t("coronavirus_form.questions.#{PAGE}.options.option_yes.label")
+      redirect_to controller: "coronavirus_form/transport_type", action: "show"
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
-    elsif session[:offer_transport] == I18n.t("coronavirus_form.#{PAGE}.options.option_yes.label")
-      redirect_to controller: "coronavirus_form/transport_type", action: "show"
-    elsif session[:offer_transport] == I18n.t("coronavirus_form.#{PAGE}.options.option_no.label")
+    elsif session[:offer_transport] == I18n.t("coronavirus_form.questions.#{PAGE}.options.option_no.label")
       redirect_to controller: "coronavirus_form/offer_space", action: "show"
     end
   end

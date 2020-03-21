@@ -36,7 +36,7 @@ private
   NEXT_PAGE = "product_details"
 
   def selected_other?(medical_equipment_type)
-    medical_equipment_type == I18n.t("coronavirus_form.#{PAGE}.options.other.label")
+    medical_equipment_type == I18n.t("coronavirus_form.questions.#{PAGE}.options.other.label")
   end
 
   def previous_path

@@ -10,8 +10,8 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
   REQUIRED_FIELDS = %w(product_name product_cost certification_details product_location lead_time).freeze
 
   def show
-    session[:products] ||= []
-    @product = find_product(params["product_id"], session[:products])
+    session["product_details"] ||= []
+    @product = find_product(params["product_id"], session["product_details"])
     render "coronavirus_form/#{PAGE}"
   end
 
@@ -31,20 +31,20 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
 
 private
 
-  NEXT_PAGE = "additional_product_check"
+  NEXT_PAGE = "additional_product"
   PAGE = "product_details"
 
   helper_method :selected_ppe?
 
   def selected_ppe?
     session["medical_equipment_type"] == I18n.t(
-      "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+      "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
     )
   end
 
   def selected_made_in_uk?(product)
     product["product_location"] == I18n.t(
-      "coronavirus_form.product_details.product_location.options.option_uk.label",
+      "coronavirus_form.questions.product_details.product_location.options.option_uk.label",
     )
   end
 
@@ -64,7 +64,7 @@ private
     if product["product_postcode"].blank?
       return [{
         field: "product_postcode".to_s,
-        text: t("coronavirus_form.#{PAGE}.product_location.options.option_uk.input.custom_error"),
+        text: t("coronavirus_form.questions.#{PAGE}.product_location.options.option_uk.input.custom_error"),
       }]
     end
 
@@ -80,9 +80,9 @@ private
 
       invalid_fields << {
         field: field.to_s,
-        text: t("coronavirus_form.#{PAGE}.#{field}.custom_error",
+        text: t("coronavirus_form.questions.#{PAGE}.#{field}.custom_error",
                 default: t("coronavirus_form.errors.missing_mandatory_text_field",
-                           field: t("coronavirus_form.#{PAGE}.#{field}.label")).humanize),
+                           field: t("coronavirus_form.questions.#{PAGE}.#{field}.label")).humanize),
       }
     end
   end
@@ -102,11 +102,11 @@ private
   end
 
   def add_product_to_session(product)
-    session[:products] ||= []
-    products = session[:products].reject do |prod|
+    session["product_details"] ||= []
+    products = session["product_details"].reject do |prod|
       prod["product_id"] == product["product_id"]
     end
-    session[:products] = products << @product
+    session["product_details"] = products << @product
   end
 
   def previous_path

@@ -20,7 +20,7 @@ class CoronavirusForm::TransportTypeController < ApplicationController
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: transport_type,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
+      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
     )
 
     if invalid_fields.any?

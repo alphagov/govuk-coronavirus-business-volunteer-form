@@ -15,7 +15,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
 
   describe "POST submit" do
     let(:options) do
-      I18n.t("coronavirus_form.expert_advice_type.options").map { |_, item| item[:label] }
+      I18n.t("coronavirus_form.questions.expert_advice_type.options").map { |_, item| item[:label] }
     end
     let(:selected) { options.first(2) }
     it "sets session variables" do
