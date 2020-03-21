@@ -17,6 +17,15 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
       allow_any_instance_of(described_class).to receive(:reference_number).and_return("abc")
     end
 
+    it "saves the form response to the database" do
+      session["attribute"] = "key"
+      post :submit
+
+      expect(FormResponse.first.form_response).to eq(
+        [%w[attribute key], %w[reference_number abc]],
+      )
+    end
+
     it "resets session" do
       post :submit
       expect(session.to_hash).to eq({})
