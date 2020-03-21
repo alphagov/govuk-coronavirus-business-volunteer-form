@@ -221,7 +221,7 @@ en:
       email:
         label: Email of main contact
     thank_you:
-      title: "Thank you for telling us how you can help"
-      sub_heading: "We'll be in touch to discuss how you can help."
-      next_text: "View all coronavirus (COVID-19) content"
+      title: "Thank you for offering support"
+      sub_heading: "We'll be in touch if we need your help."
+      next_text: "View all information on coronavirus (COVID-19)"
       next_link: "https://www.gov.uk/coronavirus"
