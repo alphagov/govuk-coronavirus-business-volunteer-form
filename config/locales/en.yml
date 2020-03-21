@@ -240,6 +240,32 @@ en:
     offer_other_support:
         title: Can you offer any other kind of support?
         hint: Give a description
+    business_details:
+      title: Your business details
+      company_name:
+        label: "Company name"
+      company_number:
+        label: "Company number (optional)"
+      company_size:
+        label: "Company size"
+        options:
+          under_50_people:
+            label: "Under 50 people"
+          50_to_250_people:
+            label: "50 to 250 people"
+          more_than_250_people:
+            label: "More than 250 people"
+        custom_select_error: Select your company size
+      company_location:
+        label: "Location of main office"
+        options:
+          united_kingdom:
+            label: "United Kingdom"
+          european_union:
+            label: "European Union"
+          rest_of_world:
+            label: "Rest of world"
+        custom_select_error: Select your company location
     thank_you:
       title: "Thank you for offering support"
       sub_heading: "We'll be in touch if we need your help."
