@@ -24,9 +24,14 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
       expect(session[session_key]).to eq selected
     end
 
-    it "redirects to next step for a permitted response" do
-      post :submit, params: { offer_space: selected }
+    it "redirects to next step for a 'No' response" do
+      post :submit, params: { offer_space: "No" }
       expect(response).to redirect_to(coronavirus_form_expert_advice_path)
+    end
+
+    it "redirects to next step for a 'Yes' response" do
+      post :submit, params: { offer_space: "Yes" }
+      expect(response).to redirect_to(coronavirus_form_what_kind_of_space_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do

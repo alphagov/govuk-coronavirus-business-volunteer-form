@@ -22,6 +22,8 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
       render "coronavirus_form/#{PAGE}"
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
+    elsif offer_space.eql? "Yes"
+      redirect_to controller: "coronavirus_form/offer_space_type", action: "show"
     else
       redirect_to controller: "coronavirus_form/expert_advice", action: "show"
     end

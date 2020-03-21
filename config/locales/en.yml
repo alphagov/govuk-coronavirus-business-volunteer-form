@@ -138,6 +138,17 @@ en:
         option_no:
           label: "No"
       custom_select_error: Select whether you can offer space
+    offer_space_type:
+      title: What kind of space can you offer?
+      options:
+        warehouse_space:
+          label: "Warehouse space"
+        office_space:
+          label: "Office space"
+        other:
+          label: "Other"
+          input:
+            label: Give a description
     offer_transport:
       title: Can you offer transport?
       options:
