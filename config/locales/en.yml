@@ -175,6 +175,15 @@ en:
           input:
             label: "Give a description"
       custom_select_error: Please provide details of the advice you can provide
+    offer_care:
+      title: Can you offer social care or childcare?
+      hint: For example, nursing or assistance to other people.
+      options:
+        option_yes:
+          label: "Yes"
+        option_no:
+          label: "No"
+      custom_select_error: Select whether you can offer care
     thank_you:
       title: "Thank you for telling us how you can help"
       sub_heading: "We'll be in touch to discuss how you can help."
