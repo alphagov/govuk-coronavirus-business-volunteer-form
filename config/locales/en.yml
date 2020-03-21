@@ -193,6 +193,16 @@ en:
          option_no:
            label: "No"
        custom_select_error: Select which services you can provide
+    contact_details:
+      title: Contact details
+      name:
+        label: Name of main contact
+      role:
+        label: Role of main contact (optional)
+      phone_number:
+        label: Phone number of main contact
+      email:
+        label: Email of main contact
     thank_you:
       title: "Thank you for telling us how you can help"
       sub_heading: "We'll be in touch to discuss how you can help."

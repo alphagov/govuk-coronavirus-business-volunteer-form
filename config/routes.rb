@@ -53,6 +53,14 @@ Rails.application.routes.draw do
   get "/coronavirus-form/offer-community-support" => "coronavirus_form/offer_community_support#show"
   post "/coronavirus-form/offer-community-support" => "coronavirus_form/offer_community_support#submit"
 
+  # Question 11
+  get "/coronavirus-form/business-details" => "coronavirus_form/business_details#show"
+  post "/coronavirus-form/business-details" => "coronavirus_form/business_details#submit"
+
+  # Question 12
+  get "/coronavirus-form/contact-details" => "coronavirus_form/contact_details#show"
+  post "/coronavirus-form/contact-details" => "coronavirus_form/contact_details#submit"
+
   # Check answers page
   get "/coronavirus-form/check-your-answers" => "coronavirus_form/check_answers#show"
   post "/coronavirus-form/check-your-answers" => "coronavirus_form/check_answers#submit"
