@@ -15,7 +15,6 @@ RSpec.describe CoronavirusForm::OfferCommunitySupportController, type: :controll
 
   describe "POST submit" do
     let(:selected_yes) { I18n.t("coronavirus_form.offer_care.options.option_yes.label") }
-    let(:selected_no) { I18n.t("coronavirus_form.offer_care.options.option_no.label") }
 
     it "sets session variables" do
       post :submit, params: { offer_community_support: selected_yes }
@@ -28,17 +27,6 @@ RSpec.describe CoronavirusForm::OfferCommunitySupportController, type: :controll
 
       expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
     end
-
-    it "redirects to next step for a Yes response" do
-      post :submit, params: { offer_care: selected_yes }
-      expect(response).to redirect_to(coronavirus_form_thank_you_path)
-    end
-
-    it "redirects to next step for a No response" do
-      post :submit, params: { offer_care: selected_no }
-      expect(response).to redirect_to(coronavirus_form_thank_you_path)
-    end
-
 
     it "validates any option is chosen" do
       post :submit, params: { offer_community_support: "" }
