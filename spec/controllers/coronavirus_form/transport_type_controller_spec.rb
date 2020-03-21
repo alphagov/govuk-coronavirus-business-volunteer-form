@@ -33,8 +33,6 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      puts "selected"
-      puts selected
       post :submit, params: { transport_type: selected }
 
       expect(response).to redirect_to("/coronavirus-form/check-your-answers")
