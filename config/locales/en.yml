@@ -144,6 +144,13 @@ en:
           label: "Yes"
         option_no:
           label: "No"
+    transport_type:
+      title: What kind of transport can you offer?
+      options:
+        moving_people:
+          label: "Moving people"
+        moving_goods:
+          label: "Moving goods"
     thank_you:
       title: "Thank you for telling us how you can help"
       sub_heading: "We'll be in touch to discuss how you can help."

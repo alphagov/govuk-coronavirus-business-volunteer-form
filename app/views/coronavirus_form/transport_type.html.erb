@@ -1,0 +1,29 @@
+<% content_for :title do %><%= t('coronavirus_form.transport_type.title') %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.transport_type.title') %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= render "coronavirus_form/validation_error" %>
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-business-transport-type",
+  "data-question-key": "transport_type",
+  "id": "transport_type"
+) do %>
+<%= render "govuk_publishing_components/components/checkboxes", {
+  heading: t('coronavirus_form.transport_type.title'),
+  is_page_heading: true,
+  name: "transport_type",
+  items: t('coronavirus_form.transport_type.options').map do |_, item|
+    {
+      value:  item[:label],
+      label:  item[:label],
+      checked: session[:transport_type].include?(item[:label]),
+    }
+  end
+} %>
+<%= render "govuk_publishing_components/components/button", text: "Save and continue", margin_bottom: true %>
+<% end %>
