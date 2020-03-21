@@ -7,7 +7,6 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
-<%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-manufacturer-check",
   "data-question-key": "additional_product_check",
@@ -17,6 +16,7 @@
   heading: t('coronavirus_form.additional_product_check.title'),
   is_page_heading: true,
   name: "additional_product_check",
+  error_message: error_items('additional_product_check'),
   items: [
     {
       value: t('coronavirus_form.additional_product_check.options.option_yes.label'),

@@ -7,7 +7,6 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
-<%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-transport-type",
   "data-question-key": "transport_type",
@@ -17,6 +16,7 @@
   heading: t('coronavirus_form.transport_type.title'),
   is_page_heading: true,
   name: "transport_type",
+  error_message: error_items('transport_type'),
   items: t('coronavirus_form.transport_type.options').map do |_, item|
     {
       value:  item[:label],

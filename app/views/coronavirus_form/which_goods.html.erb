@@ -7,7 +7,6 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
-<%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-which-goods",
   "data-question-key": "which_goods",
@@ -17,6 +16,7 @@
   heading: t('coronavirus_form.which_goods.title'),
   is_page_heading: true,
   name: "which_goods[]",
+  error_message: error_items('which_goods'),
   items: [
     {
       value: t('coronavirus_form.which_goods.options.medical_equipment.label'),

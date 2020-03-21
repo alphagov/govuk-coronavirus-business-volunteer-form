@@ -7,7 +7,6 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
-<%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-offer-food",
   "data-question-key": "offer_food",
@@ -17,6 +16,7 @@
   heading: t('coronavirus_form.offer_food.title'),
   is_page_heading: true,
   name: "offer_food",
+  error_message: error_items('offer_food'),
   items: t('coronavirus_form.offer_food.options').map do |_, item|
     {
       value: item[:label],

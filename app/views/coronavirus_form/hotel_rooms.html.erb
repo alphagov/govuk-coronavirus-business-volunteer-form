@@ -7,7 +7,6 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
-<%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-hotel-rooms",
   "data-question-key": "hotel_rooms",
@@ -17,6 +16,7 @@
   heading: t('coronavirus_form.hotel_rooms.title'),
   is_page_heading: true,
   name: "hotel_rooms",
+  error_message: error_items('hotel_rooms'),
   items: t('coronavirus_form.hotel_rooms.options').map do |_, item|
     {
       value: item[:label],
