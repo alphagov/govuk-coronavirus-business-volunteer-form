@@ -36,7 +36,7 @@ class CoronavirusForm::ExpertAdviceController < ApplicationController
 private
 
   PAGE = "expert_advice"
-  NEXT_PAGE = "manufacturer_check"
+  NEXT_PAGE = "offer_care"
 
   def selected_other?(expert_advice)
     expert_advice.include?(
@@ -45,6 +45,6 @@ private
   end
 
   def previous_path
-    "/coronavirus-form/medical-equipment"
+    "/coronavirus-form/offer-space"
   end
 end

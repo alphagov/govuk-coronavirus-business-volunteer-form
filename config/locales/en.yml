@@ -171,7 +171,7 @@ en:
         manufacturing:
           label: "Manufacturing expertise"
         other:
-          label: "Other expertise"
+          label: "Other"
           input:
             label: "Give a description"
     thank_you:
