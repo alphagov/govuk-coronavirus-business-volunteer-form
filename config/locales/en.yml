@@ -41,7 +41,7 @@ en:
       custom_select_error: Please provide details of the medical equipment you can provide
     manufacturer_check:
       title: What kind of business are you?
-      hint: Select the best way to describe your business
+      hint: Select the best way to describe your work
       options:
         manufacturer:
           label: Manufacturer
