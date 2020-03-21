@@ -95,7 +95,7 @@ en:
             label: Please provide a description
         no_goods:
           label: "I can't provide goods"
-      custom_select_error: Select which goods you can provide
+      custom_select_error: Select what goods can your business help with
     which_services:
       title: What services can your business help with?
       hint: Select the types of things you think you can help with
@@ -112,7 +112,7 @@ en:
           label: "Other services"
         no_services:
           label: "I can't provide services"
-      custom_select_error: Select select which services you can provide
+      custom_select_error: Select what services can your business help with
     hotel_rooms:
       title: Do you have hotel rooms to offer?
       options:
@@ -129,7 +129,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
-      custom_select_error: Select which services you can provide
+      custom_select_error: Select whether you can offer food
     offer_space:
       title: Can you offer space?
       options:
@@ -137,6 +137,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
+      custom_select_error: Select whether you can offer space
     offer_transport:
       title: Can you offer transport?
       options:
@@ -144,6 +145,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
+      custom_select_error: Select whether you can offer transport
     transport_type:
       title: What kind of transport can you offer?
       options:
@@ -151,6 +153,7 @@ en:
           label: "Moving people"
         moving_goods:
           label: "Moving goods"
+      custom_select_error: Select what kind of transport can you offer
     thank_you:
       title: "Thank you for telling us how you can help"
       sub_heading: "We'll be in touch to discuss how you can help."

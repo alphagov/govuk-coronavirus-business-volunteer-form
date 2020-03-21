@@ -12,7 +12,6 @@
   margin_top: 0
 } %>
 
-<%= render "coronavirus_form/validation_error" %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-product-details",
   "data-question-key": "product_details",
@@ -29,6 +28,7 @@
     text: t('coronavirus_form.product_details.product_name.label')
   },
   name: "product_name",
+  error_message: error_items('product_name'),
   value: @product["product_name"],
 } %>
 <%= render "govuk_publishing_components/components/input", {
@@ -37,6 +37,7 @@
   },
   hint: t('coronavirus_form.product_details.product_cost.hint'),
   name: "product_cost",
+  error_message: error_items('product_cost'),
   value: @product["product_cost"],
 } %>
 <%= render "govuk_publishing_components/components/input", {
@@ -45,6 +46,7 @@
   },
   hint: t('coronavirus_form.product_details.certification_details.hint'),
   name: "certification_details",
+  error_message: error_items('certification_details'),
   value: @product["certification_details"],
 } %>
 <%= render "govuk_publishing_components/components/input", {
@@ -52,6 +54,7 @@
     text: t('coronavirus_form.product_details.product_postcode.label')
   },
   name: "product_postcode",
+  error_message: error_items('product_postcode'),
   value: @product["product_postcode"],
 } %>
 <%= render "govuk_publishing_components/components/input", {
@@ -59,6 +62,7 @@
     text: t('coronavirus_form.product_details.product_url.label')
   },
   name: "product_url",
+  error_message: error_items('product_url'),
   value: @product["product_url"],
 } %>
 <%= render "govuk_publishing_components/components/input", {
@@ -66,6 +70,7 @@
     text: t('coronavirus_form.product_details.lead_time.label')
   },
   name: "lead_time",
+  error_message: error_items('lead_time'),
   type: "number",
   value: @product["lead_time"],
   width: 10,
