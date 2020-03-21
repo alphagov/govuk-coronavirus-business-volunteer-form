@@ -237,6 +237,9 @@ en:
         label: Phone number of main contact
       email:
         label: Email of main contact
+    offer_other_support:
+        title: Can you offer any other kind of support?
+        hint: Give a description
     thank_you:
       title: "Thank you for offering support"
       sub_heading: "We'll be in touch if we need your help."
