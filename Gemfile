@@ -24,7 +24,10 @@ group :test do
 end
 
 group :development, :test do
+  gem 'awesome_print', '~> 1.8'
   gem "byebug", "~> 10"
+  gem 'pry', '~> 0.12.2'
+  gem 'pry-rails', '~> 0.3.9'
   gem "foreman", "~> 0.87.0"
   gem "rails-controller-testing", "~> 1.0"
   gem "rspec-rails", "~> 4.0.0.beta2"
