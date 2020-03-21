@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CoronavirusForm::OfferCareController < ApplicationController
+class CoronavirusForm::OfferCommunitySupportController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include FieldValidationHelper
 
@@ -9,12 +9,12 @@ class CoronavirusForm::OfferCareController < ApplicationController
   end
 
   def submit
-    offer_care = sanitize(params[:offer_care]).presence
-    session[:offer_care] = offer_care
+    offer_community_support = sanitize(params[:offer_community_support]).presence
+    session[:offer_community_support] = offer_community_support
 
     invalid_fields = validate_radio_field(
       PAGE,
-      radio: offer_care,
+      radio: offer_community_support,
     )
 
     if invalid_fields.any?
@@ -29,10 +29,10 @@ class CoronavirusForm::OfferCareController < ApplicationController
 
 private
 
-  PAGE = "offer_care"
-  NEXT_PAGE = "offer_community_support"
+  PAGE = "offer_community_support"
+  NEXT_PAGE = "thank_you"
 
   def previous_path
-    coronavirus_form_expert_advice_path
+    coronavirus_form_offer_care_path
   end
 end

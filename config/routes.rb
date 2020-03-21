@@ -50,6 +50,9 @@ Rails.application.routes.draw do
   get "/coronavirus-form/offer-care" => "coronavirus_form/offer_care#show"
   post "/coronavirus-form/offer-care" => "coronavirus_form/offer_care#submit"
 
+  get "/coronavirus-form/offer-community-support" => "coronavirus_form/offer_community_support#show"
+  post "/coronavirus-form/offer-community-support" => "coronavirus_form/offer_community_support#submit"
+
   # Check answers page
   get "/coronavirus-form/check-your-answers" => "coronavirus_form/check_answers#show"
   post "/coronavirus-form/check-your-answers" => "coronavirus_form/check_answers#submit"
