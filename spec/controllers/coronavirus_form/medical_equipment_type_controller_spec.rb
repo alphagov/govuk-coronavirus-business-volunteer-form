@@ -33,7 +33,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       session[:check_answers_seen] = true
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to("/coronavirus-form/check-your-answers")
+      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
     end
 
     it "validates any option is chosen" do
