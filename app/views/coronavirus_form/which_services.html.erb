@@ -16,7 +16,7 @@
   heading: t('coronavirus_form.which_services.title'),
   is_page_heading: true,
   name: "which_services[]",
-  error_message: error_items('which_services'),
+  error: error_items('which_services'),
   items: t('coronavirus_form.which_services.options').map do |_, item|
     {
       value: item[:label],
