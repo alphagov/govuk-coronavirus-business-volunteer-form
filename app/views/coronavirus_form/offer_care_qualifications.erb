@@ -14,6 +14,7 @@
 ) do %>
   <%= render "govuk_publishing_components/components/checkboxes", {
     heading: t('coronavirus_form.offer_care_qualifications.title'),
+    hint_text: t('coronavirus_form.offer_care_qualifications.hint'),
     is_page_heading: true,
     name: "offer_care_qualifications[]",
     error: error_items("offer_care_qualifications"),

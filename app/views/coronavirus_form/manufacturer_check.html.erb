@@ -14,6 +14,7 @@
 ) do %>
 <%= render "govuk_publishing_components/components/checkboxes", {
   heading: t('coronavirus_form.manufacturer_check.title'),
+  hint_text: t('coronavirus_form.manufacturer_check.hint'),
   is_page_heading: true,
   name: "manufacturer_check",
   error: error_items('manufacturer_check'),
