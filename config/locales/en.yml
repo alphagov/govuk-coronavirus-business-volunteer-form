@@ -70,7 +70,7 @@ en:
           label: Individual
       custom_select_error: Select the best way to describe your business
     product_details:
-      title: Tell us about each product you're offering
+      title: Tell us about each product you’re offering
       product_name:
         label: Name of product
       product_cost:
@@ -112,7 +112,7 @@ en:
           input:
             label: Please provide a description
         no_goods:
-          label: "I can't provide goods"
+          label: "I can’t provide goods"
       custom_select_error: Select what goods can your business help with
     which_services:
       title: What services can your business help with?
@@ -129,7 +129,7 @@ en:
         other_services:
           label: "Other services"
         no_services:
-          label: "I can't provide services"
+          label: "I can’t provide services"
       custom_select_error: Select what services can your business help with
     hotel_rooms:
       title: Can you offer hotel rooms?
@@ -291,6 +291,6 @@ en:
         custom_select_error: Select your company location
     thank_you:
       title: "Thank you for offering support"
-      sub_heading: "We'll be in touch if we need your help."
+      sub_heading: "We’ll be in touch if we need your help."
       next_text: "View all information on coronavirus (COVID-19)"
       next_link: "https://www.gov.uk/coronavirus"
