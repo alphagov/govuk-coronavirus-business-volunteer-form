@@ -1,67 +1,29 @@
 <% content_for :title do %><%= t('coronavirus_form.expert_advice.title') %><% end %>
-    <% content_for :meta_tags do %>
-      <meta name="description" content="<%= t('coronavirus_form.expert_advice.title') %>" />
-    <% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.expert_advice.title') %>" />
+<% end %>
 
-    <% content_for :back_link do %>
-      <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
-    <% end %>
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
 
-    <%= form_tag({},
-      "data-module": "track-coronavirus-form-business-medical-equipment-type",
-      "data-question-key": "expert_advice",
-      "id": "expert_advice"
-    ) do %>
-    <%= render "govuk_publishing_components/components/checkboxes", {
-      heading: t('coronavirus_form.expert_advice.title'),
-      is_page_heading: true,
-      name: "expert_advice[]",
-      error: error_items('expert_advice'),
-      items: [
-        {
-          value: t('coronavirus_form.expert_advice.options.medical.label'),
-          label: t('coronavirus_form.expert_advice.options.medical.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.medical.label')),
-        },
-        {
-          value: t('coronavirus_form.expert_advice.options.engineering.label'),
-          label: t('coronavirus_form.expert_advice.options.engineering.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.engineering.label')),
-        },
-        {
-          value: t('coronavirus_form.expert_advice.options.construction.label'),
-          label: t('coronavirus_form.expert_advice.options.construction.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.construction.label')),
-        },
-        {
-          value: t('coronavirus_form.expert_advice.options.project_management.label'),
-          label: t('coronavirus_form.expert_advice.options.project_management.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.project_management.label')),
-        },
-        {
-          value: t('coronavirus_form.expert_advice.options.it.label'),
-          label: t('coronavirus_form.expert_advice.options.it.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.it.label')),
-        },
-        {
-          value: t('coronavirus_form.expert_advice.options.manufacturing.label'),
-          label: t('coronavirus_form.expert_advice.options.manufacturing.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.manufacturing.label')),
-        },
-        {
-          value: t('coronavirus_form.expert_advice.options.other.label'),
-          label: t('coronavirus_form.expert_advice.options.other.label'),
-          checked: session[:expert_advice].include?(t('coronavirus_form.expert_advice.options.other.label')),
-          conditional: render("govuk_publishing_components/components/input", {
-            label: {
-              text: t('coronavirus_form.expert_advice.options.other.input.label'),
-            },
-            name: "expert_advice_other",
-            value: session[:expert_advice_other],
-            width: 50
-          })
-        },
-      ]
-    } %>
-    <%= render "govuk_publishing_components/components/button", text: "Save and continue", margin_bottom: true %>
-    <% end %>
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-business-expert-advice",
+  "data-question-key": "expert_advice",
+  "id": "expert_advice"
+) do %>
+<%= render "govuk_publishing_components/components/radio", {
+  heading: t('coronavirus_form.expert_advice.title'),
+  is_page_heading: true,
+  name: "expert_advice",
+  error_message: error_items('expert_advice'),
+  items: t('coronavirus_form.expert_advice.options').map do |_, item|
+    {
+      value: item[:label],
+      text: item[:label],
+      checked: session[:expert_advice] == item[:label],
+    }
+  end
+} %>
+<%= render "govuk_publishing_components/components/button", text: "Save and continue", margin_bottom: true %>
+<% end %>

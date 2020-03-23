@@ -14,66 +14,54 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
   end
 
   describe "POST submit" do
-    let(:options) do
+    let(:selected) { permitted_values.sample }
+    let(:permitted_values) do
       I18n.t("coronavirus_form.expert_advice.options").map { |_, item| item[:label] }
     end
-    let(:selected) { options.first(2) }
+
     it "sets session variables" do
       post :submit, params: { expert_advice: selected }
-
       expect(session[session_key]).to eq selected
     end
 
-    it "redirects to next step" do
-      post :submit, params: { expert_advice: selected }
-
-      expect(response).to redirect_to(offer_care_path)
+    it "redirects to next step for a 'No' response" do
+      post :submit, params: {
+        expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_no.label"),
+      }
+      expect(response).to redirect_to(offer_space_path)
     end
 
-    it "redirects to check your answers if check your answers already seen" do
-      session[:check_answers_seen] = true
-      post :submit, params: { expert_advice: selected }
+    it "redirects to next sub-question for a 'Yes' response" do
+      post :submit, params: {
+         expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_yes.label"),
+       }
+      expect(response).to redirect_to(expert_advice_type_path)
+    end
 
+    it "redirects to check your answers if check your answers previously seen and response is 'No'" do
+      session[:check_answers_seen] = true
+      post :submit, params: {
+         expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_no.label"),
+       }
       expect(response).to redirect_to(check_your_answers_path)
     end
 
-    it "validates any option is chosen" do
-      post :submit, params: { expert_advice: [] }
-
-      expect(response).to render_template(current_template)
+    it "redirects to next sub-question if check your answers previously seen and response is 'Yes'" do
+      session[:check_answers_seen] = true
+      post :submit, params: {
+         expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_yes.label"),
+       }
+      expect(response).to redirect_to(expert_advice_type_path)
     end
 
-    context "when Other option is selected" do
-      it "validates the Other option description is provided" do
-        post :submit, params: { expert_advice: %w[Other] }
+    it "validates any option is chosen" do
+      post :submit, params: { expert_advice: "" }
 
-        expect(response).to render_template(current_template)
-      end
-
-      it "adds the other option description to the session" do
-        post :submit, params: {
-          expert_advice: %w[Other] + selected,
-          expert_advice_other: "Demo text",
-        }
-
-        expect(session[session_key]).to eq %w[Other] + selected
-        expect(session[:expert_advice_other]).to eq "Demo text"
-        expect(response).to redirect_to(offer_care_path)
-      end
+      expect(response).to render_template(current_template)
     end
 
     it "validates a valid option is chosen" do
-      post :submit, params: {
-        expert_advice: ["<script></script", "invalid option"],
-      }
-
-      expect(response).to render_template(current_template)
-    end
-
-    it "validates only valid options are chosen" do
-      post :submit, params: {
-        expert_advice: ["<script></script", "invalid option"] + selected,
-      }
+      post :submit, params: { expert_advice: "<script></script>" }
 
       expect(response).to render_template(current_template)
     end

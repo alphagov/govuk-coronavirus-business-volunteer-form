@@ -188,13 +188,23 @@ en:
           label: "Moving goods"
       custom_select_error: Select what kind of transport can you offer
     expert_advice:
-      title: Can you offer expert advice?
-      hint: Select the types of expertise or consultancy experience you have
+      title: "Can you offer expert advice?"
+      hint: "For example, consultancy experience or expertise in a specific sector."
+      options:
+        option_yes:
+          label: "Yes"
+        option_no:
+          label: "No"
+    expert_advice_type:
+      title: "What kind of expert advice can you offer?"
+      hint: "Select the types of expertise or consultancy experience you have"
       options:
         medical:
           label: "Medical expertise"
         engineering:
           label: "Engineering expertise"
+        communications:
+          label: "Communications expertise"
         construction:
           label: "Construction expertise"
         project_management:
@@ -207,8 +217,8 @@ en:
           label: "Other"
           input:
             label: "Give a description"
-          error_message: Enter the best way to describe the type of expertise you have
-      custom_select_error: Select the best way to describe your expertise or consultancy experience
+          error_message: "Enter the best way to describe the type of expertise you have"
+      custom_select_error: "Select the best way to describe your expertise or consultancy experience"
     offer_care:
       title: Can you offer social care or childcare?
       hint: For example, nursing or assistance to other people.

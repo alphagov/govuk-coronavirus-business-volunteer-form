@@ -5,46 +5,35 @@ class CoronavirusForm::ExpertAdviceController < ApplicationController
   include FieldValidationHelper
 
   def show
-    session[:expert_advice] ||= []
     render "coronavirus_form/#{PAGE}"
   end
 
   def submit
-    expert_advice = Array(params[:expert_advice]).map { |item| sanitize(item).presence }.compact
-    expert_advice_other = sanitize(params[:expert_advice_other]).presence
+    expert_advice = sanitize(params[:expert_advice]).presence
     session[:expert_advice] = expert_advice
-    session[:expert_advice_other] = if selected_other?(expert_advice)
-                                      expert_advice_other
-                                    else
-                                      ""
-                                    end
-    invalid_fields = validate_checkbox_field(
+
+    invalid_fields = validate_radio_field(
       PAGE,
-      values: expert_advice,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
-      other: expert_advice_other,
+      radio: expert_advice,
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
+    elsif session[:expert_advice] == I18n.t("coronavirus_form.expert_advice.options.option_yes.label")
+      redirect_to controller: "coronavirus_form/expert_advice_type", action: "show"
+    elsif session["check_answers_seen"]
+      redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
-      redirect_to controller: session["check_answers_seen"] ? "coronavirus_form/check_answers" : "coronavirus_form/#{NEXT_PAGE}", action: "show"
+      redirect_to controller: "coronavirus_form/offer_space", action: "show"
     end
   end
 
 private
 
   PAGE = "expert_advice"
-  NEXT_PAGE = "offer_care"
-
-  def selected_other?(expert_advice)
-    expert_advice.include?(
-      I18n.t("coronavirus_form.#{PAGE}.options.other.label"),
-    )
-  end
 
   def previous_path
-    "/offer-space"
+    offer_space_path
   end
 end
