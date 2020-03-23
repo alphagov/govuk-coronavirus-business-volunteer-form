@@ -85,6 +85,27 @@ en:
         label: URL of product specification document (optional)
       lead_time:
         label: Lead time in days
+      equipment_type:
+        label: What type of equipment is it?
+        options:
+          ffp3_respirators:
+            label: FFP3 respirators
+          ffp2respirators:
+            label: FFP2 respirators
+          aprons:
+            label: Aprons
+          gloves:
+            label: Gloves
+          iir_face_masks:
+            label: Type IIR face masks
+          safety_glasses:
+            label: Safety glasses or visors
+          hand_gel:
+            label: Alcohol hand gel
+          gowns:
+            label: Gowns
+          other:
+            label: Something else
     additional_product_check:
       title: Can you offer another product?
       options:

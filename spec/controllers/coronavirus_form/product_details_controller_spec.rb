@@ -86,10 +86,11 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         params.merge(
           "product_id" => product_id,
           "product_name" => "My product",
+          "equipment_type" => nil,
         )
       }
       let(:product_2) {
-        params.merge("product_id" => SecureRandom.uuid)
+        params.merge("product_id" => SecureRandom.uuid, "equipment_type" => nil)
       }
 
       before :each do
@@ -122,6 +123,33 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       post :submit, params: params
 
       expect(response).to redirect_to(additional_product_path)
+    end
+
+
+    context "when the user has selected PPE" do
+      before :each do
+        session["medical_equipment_type"] = [I18n.t(
+          "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+        )]
+      end
+
+      it "errors if the user has selected has not told us the equipment type" do
+        post :submit, params: params #.merge("equipment_type" => nil)
+
+        expect(response).to render_template(current_template)
+      end
+
+      it "redirects to next step if we're given the equipment type" do
+        post :submit, params: params.merge("equipment_type" => "Gloves")
+
+        expect(response).to redirect_to(additional_product_path)
+      end
+
+      it "saves equipment type when given" do
+        post :submit, params: params.merge("equipment_type" => "Gloves")
+
+        expect(session[session_key].first["equipment_type"]).to eq "Gloves"
+      end
     end
 
     it "redirects to check your answers if check your answers previously seen" do

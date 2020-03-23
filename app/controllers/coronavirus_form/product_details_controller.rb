@@ -34,6 +34,14 @@ private
   NEXT_PAGE = "additional_product_check"
   PAGE = "product_details"
 
+  helper_method :selected_ppe?
+
+  def selected_ppe?
+    (session["medical_equipment_type"] || []).include? I18n.t(
+      "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+    )
+  end
+
   def find_product(product_id, products)
     products.find { |product| product["product_id"] == product_id } || {}
   end
@@ -45,7 +53,10 @@ private
   end
 
   def validate_missing_fields(product)
-    REQUIRED_FIELDS.each_with_object([]) do |field, invalid_fields|
+    required = []
+    required.concat REQUIRED_FIELDS
+    required << "equipment_type" if selected_ppe?
+    required.each_with_object([]) do |field, invalid_fields|
       next if product[field].present?
 
       invalid_fields << {
@@ -60,6 +71,7 @@ private
   def sanitized_product(params)
     {
       "product_id" => sanitize(params[:product_id]).presence || SecureRandom.uuid,
+      "equipment_type" => sanitize(params[:equipment_type]).presence,
       "product_name" => sanitize(params[:product_name]).presence,
       "product_cost" => sanitize(params[:product_cost]).presence,
       "certification_details" => sanitize(params[:certification_details]).presence,

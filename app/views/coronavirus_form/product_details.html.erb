@@ -31,6 +31,22 @@
   error_message: error_items('product_name'),
   value: @product["product_name"],
 } %>
+<% if selected_ppe? %>
+  <%= render "govuk_publishing_components/components/radio", {
+    description: t('coronavirus_form.product_details.equipment_type.label'),
+    is_page_heading: true,
+    name: "equipment_type",
+    error_message: error_items('equipment_type'),
+    items: t('coronavirus_form.product_details.equipment_type.options').map do |_, item|
+      {
+        value: item[:label],
+        text: item[:label],
+        checked: @product["equipment_type"] == item[:label],
+      }
+    end
+  } %>
+<% end %>
+
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: t('coronavirus_form.product_details.product_cost.label'),
