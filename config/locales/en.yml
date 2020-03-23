@@ -189,26 +189,12 @@ en:
       custom_select_error: Select what kind of transport can you offer
     expert_advice:
       title: Can you offer expert advice?
-      hint: Select the types of expertise or consultancy experience you have
       options:
-        medical:
-          label: "Medical expertise"
-        engineering:
-          label: "Engineering expertise"
-        construction:
-          label: "Construction expertise"
-        project_management:
-          label: "Project management or procurement expertise"
-        it:
-          label: "IT services expertise"
-        manufacturing:
-          label: "Manufacturing expertise"
-        other:
-          label: "Other"
-          input:
-            label: "Give a description"
-          error_message: Enter the best way to describe the type of expertise you have
-      custom_select_error: Select the best way to describe your expertise or consultancy experience
+        option_yes:
+          label: "Yes"
+        option_no:
+          label: "No"
+      custom_select_error: Select if you can offer advice
     offer_care:
       title: Can you offer social care or childcare?
       hint: For example, nursing or assistance to other people.

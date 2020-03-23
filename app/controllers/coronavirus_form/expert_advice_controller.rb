@@ -8,46 +8,38 @@ class CoronavirusForm::ExpertAdviceController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
   def show
-    session[:expert_advice] ||= []
+    session[:expert_advice] ||= ""
     render "coronavirus_form/#{PAGE}"
   end
 
   def submit
-    expert_advice = Array(params[:expert_advice]).map { |item| sanitize(item).presence }.compact
-    expert_advice_other = sanitize(params[:expert_advice_other]).presence
-    session[:expert_advice] = expert_advice
-    session[:expert_advice_other] = if selected_other?(expert_advice)
-                                      expert_advice_other
-                                    else
-                                      ""
-                                    end
-    invalid_fields = validate_checkbox_field(
+    session[:expert_advice] ||= ""
+    session[:expert_advice] = sanitize(params[:expert_advice]).presence
+
+    invalid_fields = validate_radio_field(
       PAGE,
-      values: expert_advice,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
-      other: expert_advice_other,
+      radio: session[:expert_advice],
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
+    elsif session["check_answers_seen"]
+      redirect_to controller: "coronavirus_form/check_answers", action: "show"
+    elsif session[:expert_advice] == "Yes"
+      redirect_to controller: "coronavirus_form/expert_advice_type", action: "show"
+    elsif session[:expert_advice] == "No"
+      redirect_to controller: "coronavirus_form/offer_care", action: "show"
     else
-      redirect_to controller: session["check_answers_seen"] ? "coronavirus_form/check_answers" : "coronavirus_form/#{NEXT_PAGE}", action: "show"
+      redirect_to controller: "coronavirus_form/", action: "show"
     end
   end
 
 private
 
   PAGE = "expert_advice"
-  NEXT_PAGE = "offer_care"
-
-  def selected_other?(expert_advice)
-    expert_advice.include?(
-      I18n.t("coronavirus_form.#{PAGE}.options.other.label"),
-    )
-  end
 
   def previous_path
-    "/offer-space"
+    offer_space_path
   end
 end
