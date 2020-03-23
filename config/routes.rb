@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get "/what-kind-of-space" => "coronavirus_form/offer_space_type#show"
   post "/what-kind-of-space" => "coronavirus_form/offer_space_type#submit"
 
+  # Question 6.0: Can you offer expert advice?
   get "/expert-advice" => "coronavirus_form/expert_advice#show"
   post "/expert-advice" => "coronavirus_form/expert_advice#submit"
 
