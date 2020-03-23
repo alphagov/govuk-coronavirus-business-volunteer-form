@@ -28,6 +28,6 @@ private
   NEXT_PAGE = "thank_you"
 
   def previous_path
-    coronavirus_form_offer_community_support_path
+    offer_community_support_path
   end
 end

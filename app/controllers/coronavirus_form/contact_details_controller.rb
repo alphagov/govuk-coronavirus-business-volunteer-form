@@ -52,6 +52,6 @@ private
   end
 
   def previous_path
-    coronavirus_form_business_details_path
+    business_details_path
   end
 end

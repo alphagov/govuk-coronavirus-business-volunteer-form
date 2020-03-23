@@ -26,17 +26,17 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
       session[:check_answers_seen] = true
       post :submit, params: { offer_care: selected_yes }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "redirects to next step for a Yes response" do
       post :submit, params: { offer_care: selected_yes }
-      expect(response).to redirect_to(coronavirus_form_offer_community_support_path)
+      expect(response).to redirect_to(offer_community_support_path)
     end
 
     it "redirects to next step for a No response" do
       post :submit, params: { offer_care: selected_no }
-      expect(response).to redirect_to(coronavirus_form_offer_community_support_path)
+      expect(response).to redirect_to(offer_community_support_path)
     end
 
     it "validates any option is chosen" do

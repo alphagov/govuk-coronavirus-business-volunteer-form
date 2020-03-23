@@ -31,7 +31,7 @@ RSpec.describe CoronavirusForm::OfferOtherSupportController, type: :controller d
       session[:check_answers_seen] = true
       post :submit, params: { offer_other_support: text_response }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
   end
 end

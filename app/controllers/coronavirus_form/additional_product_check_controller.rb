@@ -35,6 +35,6 @@ private
   def previous_path
     session[:products] ||= []
     latest_product_id = (session[:products].last || {}).dig("product_id")
-    "/coronavirus-form/product-details?product_id=#{latest_product_id}"
+    "/product-details?product_id=#{latest_product_id}"
   end
 end

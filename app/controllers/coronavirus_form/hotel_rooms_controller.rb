@@ -32,6 +32,6 @@ private
   PAGE = "hotel_rooms"
 
   def previous_path
-    coronavirus_form_medical_equipment_path
+    medical_equipment_path
   end
 end

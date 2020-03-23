@@ -34,6 +34,6 @@ private
   NEXT_PAGE = "thank_you"
 
   def previous_path
-    "/coronavirus-form/which-goods"
+    "/which-goods"
   end
 end

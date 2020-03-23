@@ -24,14 +24,14 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
     it "redirects to next step" do
       post :submit, params: { offer_space_type: selected }
 
-      expect(response).to redirect_to(coronavirus_form_expert_advice_path)
+      expect(response).to redirect_to(expert_advice_path)
     end
 
     it "redirects to check your answers if check your answers already seen" do
       session[:check_answers_seen] = true
       post :submit, params: { offer_space_type: selected }
 
-      expect(response).to redirect_to("/coronavirus-form/check-your-answers")
+      expect(response).to redirect_to("/check-your-answers")
     end
 
     context "when Other option is selected" do
@@ -47,7 +47,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
           offer_space_type_other: "A really big garden.",
         }
 
-        expect(response).to redirect_to(coronavirus_form_expert_advice_path)
+        expect(response).to redirect_to(expert_advice_path)
         expect(session[session_key]).to eq ["Other", "Office space"]
         expect(session[:offer_space_type_other]).to eq "A really big garden."
       end
@@ -69,7 +69,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
       session[:check_answers_seen] = true
       post :submit, params: { offer_space_type: selected }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
   end
 end

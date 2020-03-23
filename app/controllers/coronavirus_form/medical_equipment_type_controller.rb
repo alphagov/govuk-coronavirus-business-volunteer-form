@@ -45,6 +45,6 @@ private
   end
 
   def previous_path
-    "/coronavirus-form/medical-equipment"
+    "/medical-equipment"
   end
 end

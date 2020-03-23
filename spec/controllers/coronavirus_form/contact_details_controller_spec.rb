@@ -40,14 +40,14 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
     it "redirects to next step when all required fields are provided" do
       post :submit, params: params
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "does not require role" do
       post :submit, params: params.except("role")
 
       expect(session[session_key]).to eq contact_details.merge("role" => nil)
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     described_class::REQUIRED_FIELDS.each do |field|
