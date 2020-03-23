@@ -5,24 +5,24 @@ class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
   include FieldValidationHelper
 
   def show
-    session[:expert_advice] ||= []
+    session[:expert_advice_type] ||= []
     render "coronavirus_form/#{PAGE}"
   end
 
   def submit
-    expert_advice = Array(params[:expert_advice]).map { |item| sanitize(item).presence }.compact
-    expert_advice_other = sanitize(params[:expert_advice_other]).presence
-    session[:expert_advice_type] = expert_advice
-    session[:expert_advice_other] = if selected_other?(expert_advice)
-                                      expert_advice_other
-                                    else
-                                      ""
-                                    end
+    expert_advice_type = Array(params[:expert_advice_type]).map { |item| sanitize(item).presence }.compact
+    expert_advice_type_other = sanitize(params[:expert_advice_type_other]).presence
+    session[:expert_advice_type] = expert_advice_type
+    session[:expert_advice_type_other] = if selected_other?(expert_advice_type)
+                                           expert_advice_type_other
+                                         else
+                                           ""
+                                         end
     invalid_fields = validate_checkbox_field(
       PAGE,
-      values: expert_advice,
+      values: expert_advice_type,
       allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
-      other: expert_advice_other,
+      other: expert_advice_type_other,
     )
 
     if invalid_fields.any?
@@ -38,8 +38,8 @@ private
   PAGE = "expert_advice_type"
   NEXT_PAGE = "offer_care"
 
-  def selected_other?(expert_advice)
-    expert_advice.include?(
+  def selected_other?(expert_advice_type)
+    expert_advice_type.include?(
       I18n.t("coronavirus_form.#{PAGE}.options.other.label"),
     )
   end
