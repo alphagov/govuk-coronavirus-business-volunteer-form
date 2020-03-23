@@ -26,7 +26,7 @@ RSpec.describe CoronavirusForm::HotelRoomsController, type: :controller do
 
     it "redirects to next step for a permitted response" do
       post :submit, params: { hotel_rooms: selected }
-      expect(response).to redirect_to(coronavirus_form_offer_food_path)
+      expect(response).to redirect_to(coronavirus_form_offer_transport_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
