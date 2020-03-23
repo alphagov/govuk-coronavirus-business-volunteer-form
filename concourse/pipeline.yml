@@ -70,6 +70,7 @@ jobs:
                 cf set-env govuk-coronavirus-business-volunteer-form BASIC_AUTH_PASSWORD "$BASIC_AUTH_PASSWORD"
                 cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
                 cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname govuk-coronavirus-business-volunteer-form-stg
+                cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN" 
 
   - name: smoke-test-staging
     plan:
