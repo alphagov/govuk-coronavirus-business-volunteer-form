@@ -151,6 +151,7 @@ en:
           label: "No"
       custom_select_error: Select if you can offer food
     offer_space:
+      hint: For example, offices or warehouses for medical use or storage.
       title: Can you offer space?
       options:
         option_yes:
@@ -264,6 +265,7 @@ en:
         hint: Give a description
     business_details:
       title: Your business details
+      hint: Select the best way to describe your work.
       company_name:
         label: "Company name"
       company_number:
