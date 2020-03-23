@@ -2,6 +2,9 @@
 
 class CoronavirusForm::CheckAnswersController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
+  include FormFlowHelper
+
+  before_action :check_first_question_answered, only: :show
 
   def show
     session[:check_answers_seen] = true

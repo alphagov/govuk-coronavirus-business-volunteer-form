@@ -7,9 +7,18 @@ RSpec.describe CoronavirusForm::WhichGoodsController, type: :controller do
   let(:session_key) { :which_goods }
 
   describe "GET show" do
-    it "renders the form" do
+    it "renders the form when first question answered" do
+      session["medical_equipment"] = "Yes"
       get :show
       expect(response).to render_template(current_template)
+    end
+
+    it "redirects to first question when first question not answered" do
+      get :show
+      expect(response).to redirect_to({
+        controller: "medical_equipment",
+        action: "show",
+      })
     end
   end
 
