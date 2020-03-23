@@ -35,6 +35,6 @@ private
   PAGE = "manufacturer_check"
 
   def previous_path
-    "/coronavirus-form/medical-equipment-type"
+    "/medical-equipment-type"
   end
 end

@@ -8,67 +8,67 @@ Rails.application.routes.draw do
   get "/", to: "coronavirus_form/start#show"
 
   # Question pages
-  get "/coronavirus-form/medical-equipment" => "coronavirus_form/medical_equipment#show"
-  post "/coronavirus-form/medical-equipment" => "coronavirus_form/medical_equipment#submit"
+  get "/medical-equipment" => "coronavirus_form/medical_equipment#show"
+  post "/medical-equipment" => "coronavirus_form/medical_equipment#submit"
 
-  get "/coronavirus-form/medical-equipment-type" => "coronavirus_form/medical_equipment_type#show"
-  post "/coronavirus-form/medical-equipment-type" => "coronavirus_form/medical_equipment_type#submit"
+  get "/medical-equipment-type" => "coronavirus_form/medical_equipment_type#show"
+  post "/medical-equipment-type" => "coronavirus_form/medical_equipment_type#submit"
 
-  get "/coronavirus-form/hotel-rooms" => "coronavirus_form/hotel_rooms#show"
-  post "/coronavirus-form/hotel-rooms" => "coronavirus_form/hotel_rooms#submit"
+  get "/hotel-rooms" => "coronavirus_form/hotel_rooms#show"
+  post "/hotel-rooms" => "coronavirus_form/hotel_rooms#submit"
 
-  get "/coronavirus-form/are-you-a-manufacturer" => "coronavirus_form/manufacturer_check#show"
-  post "/coronavirus-form/are-you-a-manufacturer" => "coronavirus_form/manufacturer_check#submit"
+  get "/are-you-a-manufacturer" => "coronavirus_form/manufacturer_check#show"
+  post "/are-you-a-manufacturer" => "coronavirus_form/manufacturer_check#submit"
 
-  get "/coronavirus-form/product-details" => "coronavirus_form/product_details#show"
-  post "/coronavirus-form/product-details" => "coronavirus_form/product_details#submit"
+  get "/product-details" => "coronavirus_form/product_details#show"
+  post "/product-details" => "coronavirus_form/product_details#submit"
 
-  get "/coronavirus-form/additional-product" => "coronavirus_form/additional_product_check#show"
-  post "/coronavirus-form/additional-product" => "coronavirus_form/additional_product_check#submit"
+  get "/additional-product" => "coronavirus_form/additional_product_check#show"
+  post "/additional-product" => "coronavirus_form/additional_product_check#submit"
 
-  get "/coronavirus-form/which-goods" => "coronavirus_form/which_goods#show"
-  post "/coronavirus-form/which-goods" => "coronavirus_form/which_goods#submit"
+  get "/which-goods" => "coronavirus_form/which_goods#show"
+  post "/which-goods" => "coronavirus_form/which_goods#submit"
 
-  get "/coronavirus-form/which-services" => "coronavirus_form/which_services#show"
-  post "/coronavirus-form/which-services" => "coronavirus_form/which_services#submit"
+  get "/which-services" => "coronavirus_form/which_services#show"
+  post "/which-services" => "coronavirus_form/which_services#submit"
 
-  get "/coronavirus-form/offer-transport" => "coronavirus_form/offer_transport#show"
-  post "/coronavirus-form/offer-transport" => "coronavirus_form/offer_transport#submit"
+  get "/offer-transport" => "coronavirus_form/offer_transport#show"
+  post "/offer-transport" => "coronavirus_form/offer_transport#submit"
 
-  get "/coronavirus-form/offer-space" => "coronavirus_form/offer_space#show"
-  post "/coronavirus-form/offer-space" => "coronavirus_form/offer_space#submit"
+  get "/offer-space" => "coronavirus_form/offer_space#show"
+  post "/offer-space" => "coronavirus_form/offer_space#submit"
 
-  get "/coronavirus-form/what-kind-of-space" => "coronavirus_form/offer_space_type#show"
-  post "/coronavirus-form/what-kind-of-space" => "coronavirus_form/offer_space_type#submit"
+  get "/what-kind-of-space" => "coronavirus_form/offer_space_type#show"
+  post "/what-kind-of-space" => "coronavirus_form/offer_space_type#submit"
 
-  get "/coronavirus-form/expert-advice" => "coronavirus_form/expert_advice#show"
-  post "/coronavirus-form/expert-advice" => "coronavirus_form/expert_advice#submit"
+  get "/expert-advice" => "coronavirus_form/expert_advice#show"
+  post "/expert-advice" => "coronavirus_form/expert_advice#submit"
 
-  get "/coronavirus-form/what-kind-of-transport" => "coronavirus_form/transport_type#show"
-  post "/coronavirus-form/what-kind-of-transport" => "coronavirus_form/transport_type#submit"
+  get "/what-kind-of-transport" => "coronavirus_form/transport_type#show"
+  post "/what-kind-of-transport" => "coronavirus_form/transport_type#submit"
 
-  get "/coronavirus-form/offer-care" => "coronavirus_form/offer_care#show"
-  post "/coronavirus-form/offer-care" => "coronavirus_form/offer_care#submit"
+  get "/offer-care" => "coronavirus_form/offer_care#show"
+  post "/offer-care" => "coronavirus_form/offer_care#submit"
 
-  get "/coronavirus-form/offer-community-support" => "coronavirus_form/offer_community_support#show"
-  post "/coronavirus-form/offer-community-support" => "coronavirus_form/offer_community_support#submit"
+  get "/offer-community-support" => "coronavirus_form/offer_community_support#show"
+  post "/offer-community-support" => "coronavirus_form/offer_community_support#submit"
 
   # Question 10
-  get "/coronavirus-form/offer-other-support" => "coronavirus_form/offer_other_support#show"
-  post "/coronavirus-form/offer-other-support" => "coronavirus_form/offer_other_support#submit"
+  get "/offer-other-support" => "coronavirus_form/offer_other_support#show"
+  post "/offer-other-support" => "coronavirus_form/offer_other_support#submit"
 
   # Question 11
-  get "/coronavirus-form/business-details" => "coronavirus_form/business_details#show"
-  post "/coronavirus-form/business-details" => "coronavirus_form/business_details#submit"
+  get "/business-details" => "coronavirus_form/business_details#show"
+  post "/business-details" => "coronavirus_form/business_details#submit"
 
   # Question 12
-  get "/coronavirus-form/contact-details" => "coronavirus_form/contact_details#show"
-  post "/coronavirus-form/contact-details" => "coronavirus_form/contact_details#submit"
+  get "/contact-details" => "coronavirus_form/contact_details#show"
+  post "/contact-details" => "coronavirus_form/contact_details#submit"
 
   # Check answers page
-  get "/coronavirus-form/check-your-answers" => "coronavirus_form/check_answers#show"
-  post "/coronavirus-form/check-your-answers" => "coronavirus_form/check_answers#submit"
+  get "/check-your-answers" => "coronavirus_form/check_answers#show"
+  post "/check-your-answers" => "coronavirus_form/check_answers#submit"
 
   # Final page
-  get "/coronavirus-form/thank-you" => "coronavirus_form/thank_you#show"
+  get "/thank-you" => "coronavirus_form/thank_you#show"
 end

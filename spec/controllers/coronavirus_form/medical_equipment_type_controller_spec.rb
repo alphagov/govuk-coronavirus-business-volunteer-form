@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       post :submit, params: { medical_equipment_type: selected }
 
       expect(response).to redirect_to(
-        "/coronavirus-form/are-you-a-manufacturer",
+        "/are-you-a-manufacturer",
       )
     end
 
@@ -33,7 +33,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       session[:check_answers_seen] = true
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "validates any option is chosen" do
@@ -56,7 +56,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
         }
 
         expect(response).to redirect_to(
-          "/coronavirus-form/are-you-a-manufacturer",
+          "/are-you-a-manufacturer",
         )
         expect(session[session_key]).to eq ["Other", "Personal protection equipment"]
         expect(session[:medical_equipment_type_other]).to eq "Demo text"

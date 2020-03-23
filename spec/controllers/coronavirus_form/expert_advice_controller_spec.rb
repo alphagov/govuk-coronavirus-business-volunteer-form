@@ -27,14 +27,14 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
     it "redirects to next step" do
       post :submit, params: { expert_advice: selected }
 
-      expect(response).to redirect_to(coronavirus_form_offer_care_path)
+      expect(response).to redirect_to(offer_care_path)
     end
 
     it "redirects to check your answers if check your answers already seen" do
       session[:check_answers_seen] = true
       post :submit, params: { expert_advice: selected }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "validates any option is chosen" do
@@ -58,7 +58,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
 
         expect(session[session_key]).to eq %w[Other] + selected
         expect(session[:expert_advice_other]).to eq "Demo text"
-        expect(response).to redirect_to(coronavirus_form_offer_care_path)
+        expect(response).to redirect_to(offer_care_path)
       end
     end
 

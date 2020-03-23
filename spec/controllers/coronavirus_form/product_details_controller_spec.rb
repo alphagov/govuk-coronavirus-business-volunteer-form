@@ -91,7 +91,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         it "edits the existing the existing product" do
           post :submit, params: new_product
           expect(session[session_key]).to contain_exactly(new_product, product_2)
-          expect(response).to redirect_to(coronavirus_form_additional_product_path)
+          expect(response).to redirect_to(additional_product_path)
         end
       end
 
@@ -103,7 +103,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
           post :submit, params: new_product
           expect(session[session_key]).to include(product, product_2)
           expect(session[session_key].last).to include(new_product)
-          expect(response).to redirect_to(coronavirus_form_additional_product_path)
+          expect(response).to redirect_to(additional_product_path)
         end
       end
     end
@@ -111,14 +111,14 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
     it "redirects to next step when given valid product details" do
       post :submit, params: params
 
-      expect(response).to redirect_to(coronavirus_form_additional_product_path)
+      expect(response).to redirect_to(additional_product_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: params
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     described_class::REQUIRED_FIELDS.each do |field|

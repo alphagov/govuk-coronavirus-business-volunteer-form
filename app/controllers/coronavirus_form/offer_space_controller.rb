@@ -34,6 +34,6 @@ private
   PAGE = "offer_space"
 
   def previous_path
-    coronavirus_form_offer_transport_path
+    offer_transport_path
   end
 end

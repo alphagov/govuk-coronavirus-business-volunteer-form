@@ -28,14 +28,14 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
     it "redirects to next step" do
       post :submit, params: { transport_type: selected }
 
-      expect(response).to redirect_to(coronavirus_form_offer_space_path)
+      expect(response).to redirect_to(offer_space_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: { transport_type: selected }
 
-      expect(response).to redirect_to("/coronavirus-form/check-your-answers")
+      expect(response).to redirect_to("/check-your-answers")
     end
 
     it "validates any option is chosen" do

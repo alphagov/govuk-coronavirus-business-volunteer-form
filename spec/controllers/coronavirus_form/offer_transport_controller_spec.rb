@@ -24,19 +24,19 @@ RSpec.describe CoronavirusForm::OfferTransportController, type: :controller do
 
     it "redirects to next step for a YES response" do
       post :submit, params: { offer_transport: selected_yes }
-      expect(response).to redirect_to(coronavirus_form_what_kind_of_transport_path)
+      expect(response).to redirect_to(what_kind_of_transport_path)
     end
 
     it "redirects to next step for a NO response" do
       post :submit, params: { offer_transport: selected_no }
-      expect(response).to redirect_to(coronavirus_form_offer_space_path)
+      expect(response).to redirect_to(offer_space_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: { offer_transport: [selected_yes, selected_no].sample }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "validates any option is chosen" do

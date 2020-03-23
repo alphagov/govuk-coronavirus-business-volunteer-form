@@ -33,6 +33,6 @@ private
   NEXT_PAGE = "offer_community_support"
 
   def previous_path
-    coronavirus_form_expert_advice_path
+    expert_advice_path
   end
 end

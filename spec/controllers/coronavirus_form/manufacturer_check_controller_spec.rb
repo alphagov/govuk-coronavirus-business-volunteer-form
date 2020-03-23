@@ -25,14 +25,14 @@ RSpec.describe CoronavirusForm::ManufacturerCheckController, type: :controller d
     it "redirects to next step" do
       post :submit, params: { manufacturer_check: selected }
 
-      expect(response).to redirect_to("/coronavirus-form/product-details")
+      expect(response).to redirect_to("/product-details")
     end
 
     it "redirects to check your answers if check your answers already seen" do
       session[:check_answers_seen] = true
       post :submit, params: { manufacturer_check: selected }
 
-      expect(response).to redirect_to("/coronavirus-form/check-your-answers")
+      expect(response).to redirect_to("/check-your-answers")
     end
 
     it "validates any option is chosen" do

@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::OfferCommunitySupportController, type: :controll
       session[:check_answers_seen] = true
       post :submit, params: { offer_community_support: selected_yes }
 
-      expect(response).to redirect_to(coronavirus_form_check_your_answers_path)
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "validates any option is chosen" do

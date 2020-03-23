@@ -75,10 +75,10 @@ private
   end
 
   def previous_path
-    return coronavirus_form_additional_product_path if params["product_id"]
+    return additional_product_path if params["product_id"]
 
-    return coronavirus_form_check_your_answers_path if session["check_answers_seen"]
+    return check_your_answers_path if session["check_answers_seen"]
 
-    coronavirus_form_are_you_a_manufacturer_path
+    are_you_a_manufacturer_path
   end
 end
