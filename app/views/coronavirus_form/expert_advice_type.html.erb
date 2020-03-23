@@ -53,7 +53,7 @@
           value: t("coronavirus_form.expert_advice_type.options.other.label"),
           label: t("coronavirus_form.expert_advice_type.options.other.label"),
           checked: session[:expert_advice].include?(t("coronavirus_form.expert_advice_type.options.other.label")),
-          conditional: render("govuk_publishing_components/components/input", {
+          conditional: render("govuk_publishing_components/components/textarea", {
             label: {
               text: t("coronavirus_form.expert_advice_type.options.other.input.label"),
             },
