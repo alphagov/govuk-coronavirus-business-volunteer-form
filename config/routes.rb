@@ -45,6 +45,10 @@ Rails.application.routes.draw do
   get "/expert-advice" => "coronavirus_form/expert_advice#show"
   post "/expert-advice" => "coronavirus_form/expert_advice#submit"
 
+  # Question 6.1: What kind of expert advice can you offer?
+  get "/expert-advice-type" => "coronavirus_form/expert_advice_type#show"
+  post "/expert-advice-type" => "coronavirus_form/expert_advice_type#submit"
+
   get "/what-kind-of-transport" => "coronavirus_form/transport_type#show"
   post "/what-kind-of-transport" => "coronavirus_form/transport_type#submit"
 
