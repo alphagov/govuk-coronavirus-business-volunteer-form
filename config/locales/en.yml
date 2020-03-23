@@ -172,13 +172,13 @@ en:
           error_message: Enter a description of the type of space you have
       custom_select_error: Select the kind of space you can offer
     offer_transport:
-      title: Can you offer transport?
+      title: Can you offer transport or logistics?
       options:
         option_yes:
           label: "Yes"
         option_no:
           label: "No"
-      custom_select_error: Select if you can offer transport
+      custom_select_error: Select if you can offer transport or logistics
     transport_type:
       title: What kind of transport can you offer?
       options:
