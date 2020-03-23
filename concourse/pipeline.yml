@@ -53,6 +53,7 @@ jobs:
             CF_ORG: govuk_development
             CF_SPACE: staging
             BASIC_AUTH_PASSWORD: ((basic-auth-password))
+            SENTRY_DSN: https://((sentry-dsn))
           run:
             dir: src
             path: sh
