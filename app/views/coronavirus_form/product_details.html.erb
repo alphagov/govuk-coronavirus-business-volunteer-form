@@ -11,7 +11,9 @@
   title:t("coronavirus_form.product_details.title"),
   margin_top: 0
 } %>
-
+<%= render "govuk_publishing_components/components/hint", {
+  text: t("coronavirus_form.product_details.hint"),
+} %>
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-product-details",
   "data-question-key": "product_details",
@@ -31,6 +33,22 @@
   error_message: error_items('product_name'),
   value: @product["product_name"],
 } %>
+<% if selected_ppe? %>
+  <%= render "govuk_publishing_components/components/radio", {
+    description: t('coronavirus_form.product_details.equipment_type.label'),
+    is_page_heading: true,
+    name: "equipment_type",
+    error_message: error_items('equipment_type'),
+    items: t('coronavirus_form.product_details.equipment_type.options').map do |_, item|
+      {
+        value: item[:label],
+        text: item[:label],
+        checked: @product["equipment_type"] == item[:label],
+      }
+    end
+  } %>
+<% end %>
+
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: t('coronavirus_form.product_details.product_cost.label'),
@@ -39,6 +57,7 @@
   name: "product_cost",
   error_message: error_items('product_cost'),
   value: @product["product_cost"],
+  width: 10,
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -49,13 +68,37 @@
   error_message: error_items('certification_details'),
   value: @product["certification_details"],
 } %>
-<%= render "govuk_publishing_components/components/input", {
-  label: {
-    text: t('coronavirus_form.product_details.product_postcode.label')
-  },
-  name: "product_postcode",
-  error_message: error_items('product_postcode'),
-  value: @product["product_postcode"],
+<%= render "govuk_publishing_components/components/radio", {
+  description: t('coronavirus_form.product_details.product_location.label'),
+  is_page_heading: true,
+  name: "product_location",
+  error_message: error_items('product_location'),
+  items: [
+    {
+      value: t('coronavirus_form.product_details.product_location.options.option_uk.label'),
+      text: t('coronavirus_form.product_details.product_location.options.option_uk.label'),
+      checked: @product["product_location"] == t('coronavirus_form.product_details.product_location.options.option_uk.label'),
+      conditional: render("govuk_publishing_components/components/input", {
+        label: {
+          text: t('coronavirus_form.product_details.product_location.options.option_uk.input.label'),
+        },
+        name: "product_postcode",
+        error_message: error_items('product_postcode'),
+        value: @product["product_postcode"],
+        width: 10
+      })
+    },
+    {
+      value: t('coronavirus_form.product_details.product_location.options.option_eu.label'),
+      text: t('coronavirus_form.product_details.product_location.options.option_eu.label'),
+      checked: @product["product_location"] == t('coronavirus_form.product_details.product_location.options.option_eu.label'),
+    },
+    {
+      value: t('coronavirus_form.product_details.product_location.options.option_rest_of_world.label'),
+      text: t('coronavirus_form.product_details.product_location.options.option_rest_of_world.label'),
+      checked: @product["product_location"] == t('coronavirus_form.product_details.product_location.options.option_rest_of_world.label'),
+    },
+  ]
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {

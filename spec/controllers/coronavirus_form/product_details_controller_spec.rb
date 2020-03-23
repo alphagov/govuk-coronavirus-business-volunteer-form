@@ -10,6 +10,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       "product_name" => "Defibrillator",
       "product_cost" => "£10.99",
       "certification_details" => "CE",
+      "product_location" => "United Kingdom",
       "product_postcode" => "SW1A 2AA",
       "product_url" => nil,
       "lead_time" => "2",
@@ -86,10 +87,11 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         params.merge(
           "product_id" => product_id,
           "product_name" => "My product",
+          "equipment_type" => nil,
         )
       }
       let(:product_2) {
-        params.merge("product_id" => SecureRandom.uuid)
+        params.merge("product_id" => SecureRandom.uuid, "equipment_type" => nil)
       }
 
       before :each do
@@ -124,6 +126,33 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       expect(response).to redirect_to(additional_product_path)
     end
 
+
+    context "when the user has selected PPE" do
+      before :each do
+        session["medical_equipment_type"] = [I18n.t(
+          "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+        )]
+      end
+
+      it "errors if the user has selected has not told us the equipment type" do
+        post :submit, params: params #.merge("equipment_type" => nil)
+
+        expect(response).to render_template(current_template)
+      end
+
+      it "redirects to next step if we're given the equipment type" do
+        post :submit, params: params.merge("equipment_type" => "Gloves")
+
+        expect(response).to redirect_to(additional_product_path)
+      end
+
+      it "saves equipment type when given" do
+        post :submit, params: params.merge("equipment_type" => "Gloves")
+
+        expect(session[session_key].first["equipment_type"]).to eq "Gloves"
+      end
+    end
+
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: params
@@ -137,6 +166,14 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         expect(response).to render_template(current_template)
       end
+    end
+
+    it "requires that product postcode be provided only if product is in UK" do
+      post :submit, params: params.merge("product_postcode" => nil)
+      expect(response).to render_template(current_template)
+
+      post :submit, params: params.merge("product_postcode" => "SW1A 2AA")
+      expect(response).to redirect_to(additional_product_path)
     end
 
     it "validates valid text is provided" do
