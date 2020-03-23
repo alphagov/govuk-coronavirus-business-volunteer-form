@@ -18,17 +18,15 @@ class CoronavirusForm::OfferOtherSupportController < ApplicationController
 
     if session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
-    elsif !session[:offer_other_support].nil?
-      redirect_to controller: "coronavirus_form/#{NEXT_PAGE}", action: "show"
     else
-      redirect_to controller: "coronavirus_form/#{PAGE}", action: "show"
+      redirect_to controller: "coronavirus_form/#{NEXT_PAGE}", action: "show"
     end
   end
 
 private
 
   PAGE = "offer_other_support"
-  NEXT_PAGE = "thank_you"
+  NEXT_PAGE = "business_details"
 
   def previous_path
     offer_community_support_path

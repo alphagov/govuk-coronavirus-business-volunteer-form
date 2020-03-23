@@ -36,6 +36,11 @@ RSpec.describe CoronavirusForm::OfferOtherSupportController, type: :controller d
       expect(session[session_key]).to eq "I offer you, my hacking script!"
     end
 
+    it "takes you to the next page regardless of input" do
+      post :submit
+      expect(response).to redirect_to(business_details_path)
+    end
+
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: { offer_other_support: text_response }
