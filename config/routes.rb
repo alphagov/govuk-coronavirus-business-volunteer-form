@@ -53,6 +53,9 @@ Rails.application.routes.draw do
   get "/offer-care" => "coronavirus_form/offer_care#show"
   post "/offer-care" => "coronavirus_form/offer_care#submit"
 
+  get "/offer-care-qualifications" => "coronavirus_form/offer_care_qualifications#show"
+  post "/offer-care-qualifications" => "coronavirus_form/offer_care_qualifications#submit"
+
   get "/offer-community-support" => "coronavirus_form/offer_community_support#show"
   post "/offer-community-support" => "coronavirus_form/offer_community_support#submit"
 

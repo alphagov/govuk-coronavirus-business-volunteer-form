@@ -228,6 +228,18 @@ en:
         option_no:
           label: "No"
       custom_select_error: Select if you can offer social care or childcare
+    offer_care_qualifications:
+      title: "What qualifications or certificates do you have?"
+      hint: "Select the qualifications that you or people in your business have"
+      options:
+        dbs_check:
+          label: "DBS check"
+        nursing_or_healthcare_qualification:
+          label: "Nursing or other healthcare qualification"
+          input:
+            label: "Give a description"
+        no_qualification:
+          label: "I do not have a qualification"
     offer_community_support:
        title: Can you offer community support?
        hint: For example distributing food or helping homeless people.
