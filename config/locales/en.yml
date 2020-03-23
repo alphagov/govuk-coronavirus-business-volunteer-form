@@ -8,16 +8,15 @@ en:
         <li>medical testing equipment</li>
         <li>medical equipment design</li>
         <li>protective equipment for healthcare workers, such as masks, gowns, and sanitiser</li>
-        <li>food</li>
         <li>hotel rooms</li>
         <li>manufacturing equipment</li>
-        <li>warehouse or office space</li>
+        <li>warehouse or office space for medical use or storage</li>
         <li>transport</li>
         <li>social care</li>
         <li>community support</li>
         <li>expert advice or consultancy on IT, manufacturing, construction, project management, procurement or engineering</li>
       </ul>
-      <p>You’ll be asked some questions about the type of support you can give. You’ll then be contacted if we need your help.</p>
+      <p>You’ll be asked some questions about the type of support you can give. You’ll then be contacted as soons as possible if we need your help.</p>
       <p>You’ll need your company number if you have one.</p>
     button_label: Start now
   check_your_answers:
@@ -71,7 +70,7 @@ en:
           label: Individual
       custom_select_error: Select the best way to describe your business
     product_details:
-      title: Tell us about each product you're offering
+      title: Tell us about each product you’re offering
       product_name:
         label: Name of product
       product_cost:
@@ -93,6 +92,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
+      custom_select_error: Select if you can offer another product
     which_goods:
       title: What goods can your business help with?
       hint: Select the types of things you think you can help with
@@ -113,7 +113,7 @@ en:
           input:
             label: Please provide a description
         no_goods:
-          label: "I can't provide goods"
+          label: "I can’t provide goods"
       custom_select_error: Select what goods can your business help with
     which_services:
       title: What services can your business help with?
@@ -130,7 +130,7 @@ en:
         other_services:
           label: "Other services"
         no_services:
-          label: "I can't provide services"
+          label: "I can’t provide services"
       custom_select_error: Select what services can your business help with
     hotel_rooms:
       title: Can you offer hotel rooms?
@@ -151,8 +151,8 @@ en:
           label: "No"
       custom_select_error: Select if you can offer food
     offer_space:
-      hint: For example, offices or warehouses for medical use or storage.
       title: Can you offer space?
+      hint: For example, offices or warehouses for medical use or storage.
       options:
         option_yes:
           label: "Yes"
@@ -231,7 +231,7 @@ en:
       custom_select_error: Select if you can offer social care or childcare
     offer_care_qualifications:
       title: "What qualifications or certificates do you have?"
-      hint: "Select the qualifications that you or people in your business have"
+      hint: "Select the qualifications that you or people in your business have."
       options:
         dbs_check:
           label: "DBS check"
@@ -243,7 +243,7 @@ en:
           label: "I do not have a qualification"
     offer_community_support:
        title: Can you offer community support?
-       hint: For example distributing food or helping homeless people.
+       hint: For example, giving out food, or educational support.
        options:
          option_yes:
            label: "Yes"
@@ -265,7 +265,6 @@ en:
         hint: Give a description
     business_details:
       title: Your business details
-      hint: Select the best way to describe your work.
       company_name:
         label: "Company name"
       company_number:
@@ -292,6 +291,6 @@ en:
         custom_select_error: Select your company location
     thank_you:
       title: "Thank you for offering support"
-      sub_heading: "We'll be in touch if we need your help."
+      sub_heading: "We’ll be in touch if we need your help."
       next_text: "View all information on coronavirus (COVID-19)"
       next_link: "https://www.gov.uk/coronavirus"
