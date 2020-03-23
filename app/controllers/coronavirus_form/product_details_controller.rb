@@ -7,7 +7,7 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
 
   before_action :check_first_question_answered, only: :show
 
-  REQUIRED_FIELDS = %w(product_name product_cost certification_details product_postcode lead_time).freeze
+  REQUIRED_FIELDS = %w(product_name product_cost certification_details product_location lead_time).freeze
 
   def show
     session[:products] ||= []
@@ -42,14 +42,33 @@ private
     )
   end
 
+  def selected_made_in_uk?(product)
+    product["product_location"] == I18n.t(
+      "coronavirus_form.product_details.product_location.options.option_uk.label",
+    )
+  end
+
   def find_product(product_id, products)
     products.find { |product| product["product_id"] == product_id } || {}
   end
 
   def validate_fields(product)
     missing_fields = validate_missing_fields(product)
-    postcode_validation = validate_postcode("product_postcode", product["product_postcode"])
+    postcode_validation = validate_product_postcode(product)
     missing_fields + postcode_validation
+  end
+
+  def validate_product_postcode(product)
+    return [] unless selected_made_in_uk?(product)
+
+    if product["product_postcode"].blank?
+      return [{
+        field: "product_postcode".to_s,
+        text: t("coronavirus_form.#{PAGE}.product_location.options.option_uk.input.custom_error"),
+      }]
+    end
+
+    validate_postcode("product_postcode", product["product_postcode"])
   end
 
   def validate_missing_fields(product)
@@ -75,6 +94,7 @@ private
       "product_name" => sanitize(params[:product_name]).presence,
       "product_cost" => sanitize(params[:product_cost]).presence,
       "certification_details" => sanitize(params[:certification_details]).presence,
+      "product_location" => sanitize(params[:product_location]).presence,
       "product_postcode" => sanitize(params[:product_postcode]).presence,
       "product_url" => sanitize(params[:product_url]).presence,
       "lead_time" => sanitize(params[:lead_time]).presence,

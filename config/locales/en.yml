@@ -71,16 +71,27 @@ en:
       custom_select_error: Select the best way to describe your business
     product_details:
       title: Tell us about each product you’re offering
+      hint: Give details for one product at a time.
       product_name:
         label: Name of product
       product_cost:
-        label: Cost of product
-        hint: For example, £23.99. Enter 0 if you will donate it.
+        label: Cost of product in pounds
+        hint: For example, 23.99. Enter 0 if you will donate it.
       certification_details:
         label: Certification details
         hint: For example, CE marking or EN standards.
-      product_postcode:
-        label: Postcode of stock location or manufacture
+      product_location:
+        label: Where is the product made, or stored if it's already made?
+        options:
+          option_uk:
+            label: United Kingdom
+            input:
+              label: Postcode
+              custom_error: Please enter a UK postcode
+          option_eu:
+            label: European Union
+          option_rest_of_world:
+            label: Rest of world
       product_url:
         label: URL of product specification document (optional)
       lead_time:

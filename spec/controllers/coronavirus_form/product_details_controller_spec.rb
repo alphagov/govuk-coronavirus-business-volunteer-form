@@ -10,6 +10,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       "product_name" => "Defibrillator",
       "product_cost" => "£10.99",
       "certification_details" => "CE",
+      "product_location" => "United Kingdom",
       "product_postcode" => "SW1A 2AA",
       "product_url" => nil,
       "lead_time" => "2",
@@ -165,6 +166,14 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         expect(response).to render_template(current_template)
       end
+    end
+
+    it "requires that product postcode be provided only if product is in UK" do
+      post :submit, params: params.merge("product_postcode" => nil)
+      expect(response).to render_template(current_template)
+
+      post :submit, params: params.merge("product_postcode" => "SW1A 2AA")
+      expect(response).to redirect_to(additional_product_path)
     end
 
     it "validates valid text is provided" do
