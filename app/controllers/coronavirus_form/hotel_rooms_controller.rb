@@ -23,7 +23,7 @@ class CoronavirusForm::HotelRoomsController < ApplicationController
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
-      redirect_to controller: "coronavirus_form/offer_food", action: "show"
+      redirect_to controller: "coronavirus_form/offer_transport", action: "show"
     end
   end
 
