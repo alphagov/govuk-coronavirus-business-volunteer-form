@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   get "/expert-advice" => "coronavirus_form/expert_advice#show"
   post "/expert-advice" => "coronavirus_form/expert_advice#submit"
 
+  get "/expert-advice-type" => "coronavirus_form/expert_advice_type#show"
+  post "/expert-advice-type" => "coronavirus_form/expert_advice_type#submit"
+
   get "/what-kind-of-transport" => "coronavirus_form/transport_type#show"
   post "/what-kind-of-transport" => "coronavirus_form/transport_type#submit"
 

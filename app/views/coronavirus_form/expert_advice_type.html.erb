@@ -1,0 +1,68 @@
+<% content_for :title do %><%= t("coronavirus_form.expert_advice_type.title") %><% end %>
+    <% content_for :meta_tags do %>
+      <meta name="description" content="<%= t("coronavirus_form.expert_advice_type.title") %>" />
+    <% end %>
+
+    <% content_for :back_link do %>
+      <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+    <% end %>
+
+    <%= form_tag({},
+      "data-module": "track-coronavirus-form-business-medical-equipment-type",
+      "data-question-key": "expert_advice_type",
+      "id": "expert_advice_type"
+    ) do %>
+    <%= render "govuk_publishing_components/components/checkboxes", {
+      heading: t("coronavirus_form.expert_advice_type.title"),
+      hint_text: t("coronavirus_form.expert_advice_type.hint"),
+      is_page_heading: true,
+      name: "expert_advice_type[]",
+      error: error_items("expert_advice_type"),
+      items: [
+        {
+          value: t("coronavirus_form.expert_advice_type.options.medical.label"),
+          label: t("coronavirus_form.expert_advice_type.options.medical.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.medical.label")),
+        },
+        {
+          value: t("coronavirus_form.expert_advice_type.options.engineering.label"),
+          label: t("coronavirus_form.expert_advice_type.options.engineering.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.engineering.label")),
+        },
+        {
+          value: t("coronavirus_form.expert_advice_type.options.construction.label"),
+          label: t("coronavirus_form.expert_advice_type.options.construction.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.construction.label")),
+        },
+        {
+          value: t("coronavirus_form.expert_advice_type.options.project_management.label"),
+          label: t("coronavirus_form.expert_advice_type.options.project_management.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.project_management.label")),
+        },
+        {
+          value: t("coronavirus_form.expert_advice_type.options.it.label"),
+          label: t("coronavirus_form.expert_advice_type.options.it.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.it.label")),
+        },
+        {
+          value: t("coronavirus_form.expert_advice_type.options.manufacturing.label"),
+          label: t("coronavirus_form.expert_advice_type.options.manufacturing.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.manufacturing.label")),
+        },
+        {
+          value: t("coronavirus_form.expert_advice_type.options.other.label"),
+          label: t("coronavirus_form.expert_advice_type.options.other.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.expert_advice_type.options.other.label")),
+          conditional: render("govuk_publishing_components/components/textarea", {
+            label: {
+              text: t("coronavirus_form.expert_advice_type.options.other.input.label"),
+            },
+            name: "expert_advice_type_other",
+            error_message: error_items("expert_advice_type_other"),
+            value: session[:expert_advice_type_other],
+          })
+        },
+      ]
+    } %>
+    <%= render "govuk_publishing_components/components/button", text: "Save and continue", margin_bottom: true %>
+    <% end %>
