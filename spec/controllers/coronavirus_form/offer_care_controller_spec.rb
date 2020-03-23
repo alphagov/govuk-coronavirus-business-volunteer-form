@@ -31,16 +31,23 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
       expect(session[session_key]).to eq selected_yes
     end
 
-    it "redirects to check your answers if check your answers previously seen" do
+    it "redirects to check your answers if check your answers previously seen and response is No" do
       session[:check_answers_seen] = true
-      post :submit, params: { offer_care: selected_yes }
+      post :submit, params: { offer_care: selected_no }
 
       expect(response).to redirect_to(check_your_answers_path)
     end
 
-    it "redirects to next step for a Yes response" do
+    it "redirects to next sub-question if check your answers previously seen and response is Yes" do
+      session[:check_answers_seen] = true
       post :submit, params: { offer_care: selected_yes }
-      expect(response).to redirect_to(offer_community_support_path)
+
+      expect(response).to redirect_to(offer_care_qualifications_path)
+    end
+
+    it "redirects to next sub-question for a Yes response" do
+      post :submit, params: { offer_care: selected_yes }
+      expect(response).to redirect_to(offer_care_qualifications_path)
     end
 
     it "redirects to next step for a No response" do

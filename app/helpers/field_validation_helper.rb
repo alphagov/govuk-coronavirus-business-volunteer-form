@@ -33,7 +33,7 @@ module FieldValidationHelper
     []
   end
 
-  def validate_checkbox_field(page, values:, allowed_values:, other: false)
+  def validate_checkbox_field(page, values:, allowed_values:, other: false, other_field: "other")
     if values.blank? || values.empty?
       return [{ field: page.to_s,
                 text: t(
@@ -50,10 +50,10 @@ module FieldValidationHelper
                 ) }]
     end
 
-    if other != false && other.blank? && values.include?("Other")
+    if other != false && other.blank? && values.include?(I18n.t("coronavirus_form.#{page}.options.#{other_field}.label"))
       return [{ field: page.to_s,
                 text: t(
-                  "coronavirus_form.#{page}.options.other.error_message",
+                  "coronavirus_form.#{page}.options.#{other_field}.error_message",
                   default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.#{page}.title")).humanize,
                 ) }]
     end
