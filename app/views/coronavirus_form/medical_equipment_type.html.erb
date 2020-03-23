@@ -32,13 +32,12 @@
       value: t('coronavirus_form.medical_equipment_type.options.other.label'),
       label: t('coronavirus_form.medical_equipment_type.options.other.label'),
       checked: session[:medical_equipment_type].include?(t('coronavirus_form.medical_equipment_type.options.other.label')),
-      conditional: render("govuk_publishing_components/components/input", {
+      conditional: render("govuk_publishing_components/components/textarea", {
         label: {
           text: t('coronavirus_form.medical_equipment_type.options.other.input.label'),
         },
         name: "medical_equipment_type_other",
-        value: session[:medical_equipment_type_other],
-        width: 10
+        value: session[:medical_equipment_type_other]
       })
     },
   ]
