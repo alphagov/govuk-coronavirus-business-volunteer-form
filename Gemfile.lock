@@ -63,7 +63,7 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
-    byebug (10.0.2)
+    byebug (11.1.1)
     coderay (1.1.2)
     colorize (0.8.1)
     concurrent-ruby (1.1.6)
@@ -300,7 +300,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print (~> 1.8)
   bootsnap (~> 1)
-  byebug (~> 10)
+  byebug (~> 11)
   foreman (~> 0.87.0)
   govuk_app_config (~> 2.1.1)
   govuk_publishing_components (~> 21.32.0)
