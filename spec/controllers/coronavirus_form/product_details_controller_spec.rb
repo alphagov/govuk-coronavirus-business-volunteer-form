@@ -17,9 +17,18 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   end
 
   describe "GET show" do
-    it "renders the form" do
+    it "renders the form when first question answered" do
+      session["medical_equipment"] = "Yes"
       get :show
       expect(response).to render_template(current_template)
+    end
+
+    it "redirects to first question when first question not answered" do
+      get :show
+      expect(response).to redirect_to({
+        controller: "medical_equipment",
+        action: "show",
+      })
     end
 
     context "when there are existing products" do
@@ -31,6 +40,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         )
       }
       before :each do
+        session["medical_equipment"] = "Yes"
         session[session_key] = [
           product,
           params.merge("product_id" => SecureRandom.uuid),

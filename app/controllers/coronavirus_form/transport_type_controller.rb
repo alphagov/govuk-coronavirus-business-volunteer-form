@@ -3,6 +3,9 @@
 class CoronavirusForm::TransportTypeController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include FieldValidationHelper
+  include FormFlowHelper
+
+  before_action :check_first_question_answered, only: :show
 
   def show
     session[:transport_type] ||= []

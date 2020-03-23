@@ -3,6 +3,9 @@
 class CoronavirusForm::ProductDetailsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include FieldValidationHelper
+  include FormFlowHelper
+
+  before_action :check_first_question_answered, only: :show
 
   REQUIRED_FIELDS = %w(product_name product_cost certification_details product_postcode lead_time).freeze
 
