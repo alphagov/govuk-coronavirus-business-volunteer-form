@@ -54,6 +54,9 @@ jobs:
             CF_SPACE: staging
             BASIC_AUTH_PASSWORD: ((basic-auth-password))
             SENTRY_DSN: https://((sentry-dsn))
+            AWS_ACCESS_KEY_ID: ((aws-access-key-id))
+            AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
+            AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-staging
           run:
             dir: src
             path: sh
@@ -71,6 +74,9 @@ jobs:
                 cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
                 cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname govuk-coronavirus-business-volunteer-form-stg
                 cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN" 
+                cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
+                cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
+                cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
 
   - name: smoke-test-staging
     plan:
