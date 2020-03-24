@@ -161,6 +161,7 @@ en:
               label: Gowns
             other:
               label: Something else
+          custom_select_error: Select a type of equipment, or ‘something else’
       additional_product:
         title: Can you offer another product?
         link: |
