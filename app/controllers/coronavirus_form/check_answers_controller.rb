@@ -65,7 +65,7 @@ private
           field: t("coronavirus_form.questions.#{question}.title"),
           value: sanitize(value),
           edit: {
-            href: question.dasherize,
+            href: "#{question.dasherize}?change-answer",
           },
         }]
       }.compact.flatten
