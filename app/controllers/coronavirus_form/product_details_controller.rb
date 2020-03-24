@@ -4,6 +4,7 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include FieldValidationHelper
   include FormFlowHelper
+  include ProductHelper
 
   before_action :check_first_question_answered, only: :show
 
@@ -16,7 +17,7 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
   end
 
   def submit
-    @product = sanitized_product(params)
+    @product = current_product(params[:product_id], session[:product_details]).merge(sanitized_product(params))
     add_product_to_session(@product)
 
     invalid_fields = validate_fields(@product)
@@ -37,19 +38,15 @@ private
   helper_method :selected_ppe?
 
   def selected_ppe?
-    session["medical_equipment_type"] == I18n.t(
+    @product["medical_equipment_type"] == I18n.t(
       "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
     )
   end
 
-  def selected_made_in_uk?(product)
-    product["product_location"] == I18n.t(
+  def selected_made_in_uk?
+    @product["product_location"] == I18n.t(
       "coronavirus_form.questions.product_details.product_location.options.option_uk.label",
     )
-  end
-
-  def find_product(product_id, products)
-    products.find { |product| product["product_id"] == product_id } || {}
   end
 
   def validate_fields(product)
@@ -59,7 +56,7 @@ private
   end
 
   def validate_product_postcode(product)
-    return [] unless selected_made_in_uk?(product)
+    return [] unless selected_made_in_uk?
 
     if product["product_postcode"].blank?
       return [{
@@ -99,14 +96,6 @@ private
       "product_url" => sanitize(params[:product_url]).presence,
       "lead_time" => sanitize(params[:lead_time]).presence,
     }
-  end
-
-  def add_product_to_session(product)
-    session["product_details"] ||= []
-    products = session["product_details"].reject do |prod|
-      prod["product_id"] == product["product_id"]
-    end
-    session["product_details"] = products << @product
   end
 
   def previous_path

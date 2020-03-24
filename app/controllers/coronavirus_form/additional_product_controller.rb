@@ -23,7 +23,7 @@ class CoronavirusForm::AdditionalProductController < ApplicationController
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
     elsif additional_product == I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
-      redirect_to controller: "coronavirus_form/product_details", action: "show"
+      redirect_to controller: "coronavirus_form/medical_equipment_type", action: "show"
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
