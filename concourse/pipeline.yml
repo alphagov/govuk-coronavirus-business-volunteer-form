@@ -35,50 +35,21 @@ jobs:
       - get: govuk-coronavirus-business-volunteer-form-travis-build
         trigger: true
       - get: govuk-coronavirus-business-volunteer-form
-      - task: paas-staging
+      - task: deploy-to-paas
         config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: governmentpaas/cf-cli
-              tag: latest
-          inputs:
-            - name: govuk-coronavirus-business-volunteer-form
-              path: src
-          params:
-            CF_API: https://api.cloud.service.gov.uk
-            CF_USERNAME: ((paas-username))
-            CF_PASSWORD: ((paas-password))
-            CF_ORG: govuk_development
-            CF_SPACE: staging
-            BASIC_AUTH_PASSWORD: ((basic-auth-password))
-            SENTRY_DSN: https://((sentry-dsn))
-            AWS_ACCESS_KEY_ID: ((aws-access-key-id))
-            AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
-            AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-staging
-            SECRET_KEY_BASE: ((secret-key-base-staging))
-          run:
-            dir: src
-            path: sh
-            args:
-              - '-c'
-              - |
-                set -eu
-
-                cf api "$CF_API"
-                cf auth
-                cf t -o "$CF_ORG" -s "$CF_SPACE"
-                cf v3-create-app govuk-coronavirus-business-volunteer-form || true
-                cf v3-apply-manifest -f manifest.yml
-                cf set-env govuk-coronavirus-business-volunteer-form BASIC_AUTH_PASSWORD "$BASIC_AUTH_PASSWORD"
-                cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN" 
-                cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
-                cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
-                cf set-env govuk-coronavirus-business-volunteer-form AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME "$AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME"
-                cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
-                cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
-                cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname govuk-coronavirus-business-volunteer-form-stg
+        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/deploy-to-govuk-paas.yml
+        params:
+          CF_SPACE: staging
+          INSTANCES: 5
+          CF_STARTUP_TIMEOUT: 5 # minutes
+          REQUIRE_BASIC_AUTH: "true"
+          BASIC_AUTH_PASSWORD: ((basic-auth-password))
+          AWS_ACCESS_KEY_ID: ((aws-access-key-id))
+          AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
+          SECRET_KEY_BASE: ((secret-key-base-staging))
+          AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-staging
+          HOSTNAME: govuk-coronavirus-business-volunteer-form-stg
+          SENTRY_DSN: ((sentry-dsn))
 
   - name: smoke-test-staging
     plan:
@@ -86,14 +57,39 @@ jobs:
         trigger: true
         passed: [deploy-to-staging]
       - task: smoke-test
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: governmentpaas/curl-ssl
-          run:
-            # TODO we can come up with a more thorough test than this
-            path: curl
-            args: ['--fail', '--silent', '--verbose', '--user', 'gds:((basic-auth-password))', 'https://govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital/']
+        file: govuk-coronavirus-vulnerable-people-form/concourse/tasks/smoke-test.yml
+        params:
+          URL: 'https://govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital/'
+          MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
 
+  - name: deploy-to-prod
+    serial: true
+    plan:
+      - get: govuk-coronavirus-business-volunteer-form
+        trigger: true
+        passed: [smoke-test-staging]
+      - task: deploy-to-paas
+        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/deploy-to-govuk-paas.yml
+        params:
+          CF_SPACE: production
+          INSTANCES: 30
+          CF_STARTUP_TIMEOUT: 15 # minutes
+          REQUIRE_BASIC_AUTH:
+          BASIC_AUTH_PASSWORD: ((basic-auth-password))
+          AWS_ACCESS_KEY_ID: ((aws-access-key-id-prod))
+          AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key-prod))
+          SECRET_KEY_BASE: ((secret-key-base-prod))
+          AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-prod
+          HOSTNAME: govuk-coronavirus-business-volunteer-form-prod
+          SENTRY_DSN: ((sentry-dsn))
+
+  - name: smoke-test-prod
+    plan:
+      - get: govuk-coronavirus-business-volunteer-form
+        trigger: true
+        passed: [deploy-to-prod]
+      - task: smoke-test
+        file: govuk-coronavirus-vulnerable-people-form/concourse/tasks/smoke-test.yml
+        params:
+          URL: 'https://govuk-coronavirus-business-volunteer-form-prod.cloudapps.digital/'
+          MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
