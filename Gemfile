@@ -7,6 +7,7 @@ source "https://rubygems.org"
 gem "rails", "~> 6.0.2"
 
 gem "bootsnap", "~> 1"
+gem "dynamoid"
 gem "govuk_app_config", "~> 2.1.1"
 gem "govuk_publishing_components", "~> 21.34.0"
 gem "puma", "~> 4.3"

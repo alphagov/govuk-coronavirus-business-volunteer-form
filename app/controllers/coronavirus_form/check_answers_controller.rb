@@ -14,8 +14,13 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   def submit
     submission_reference = reference_number
 
-    session[:reference_number] = submission_reference
-    FormResponse.create(form_response: session)
+    session[:reference_id] = submission_reference
+
+    FormResponse.create(
+      ReferenceId: submission_reference,
+      UnixTimestamp: Time.zone.now,
+      FormResponse: session,
+    )
 
     reset_session
 
