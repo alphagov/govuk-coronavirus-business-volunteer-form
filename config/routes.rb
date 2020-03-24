@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/healthcheck", to: proc { [200, {}, %w[OK]] }
 
   # Start page
-  get "/", to: "coronavirus_form/start#show"
+  get "/" => redirect("https://www.gov.uk/coronavirus-support-from-business")
 
   # Privacy notice
   get "/privacy", to: "coronavirus_form/privacy#show"
