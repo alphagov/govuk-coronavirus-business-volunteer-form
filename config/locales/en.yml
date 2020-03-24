@@ -215,7 +215,7 @@ en:
         custom_select_error: Select if you can offer hotel rooms
       offer_space:
         title: Can you offer space?
-        hint: For example, offices or warehouses for medical use or storage.
+        hint: For example, offices or warehouses, for medical use or storage.
         options:
           option_yes:
             label: "Yes"
