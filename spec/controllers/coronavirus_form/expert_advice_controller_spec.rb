@@ -37,7 +37,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
       post :submit, params: {
         expert_advice: I18n.t("coronavirus_form.questions.expert_advice.options.option_no.label"),
       }
-      expect(response).to redirect_to(offer_space_path)
+      expect(response).to redirect_to(offer_care_path)
     end
 
     it "redirects to next sub-question for a 'Yes' response" do
