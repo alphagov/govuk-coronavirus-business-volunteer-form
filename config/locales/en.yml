@@ -1,4 +1,6 @@
 en:
+  privacy_notice_footer_link:
+    label: Privacy notice
   privacy_page:
     title: Privacy notice
     body_text: |
