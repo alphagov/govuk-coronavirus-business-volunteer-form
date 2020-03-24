@@ -323,6 +323,6 @@ en:
         custom_select_error: Select your company location
     thank_you:
       title: "Thank you for offering support"
-      sub_heading: "We’ll be in touch if we need your help."
+      sub_heading: "If your help is needed you'll be contacted as soon as possible."
       next_text: "View all information on coronavirus (COVID-19)"
       next_link: "https://www.gov.uk/coronavirus"
