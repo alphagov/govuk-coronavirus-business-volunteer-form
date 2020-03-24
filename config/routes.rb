@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # Start page
   get "/", to: "coronavirus_form/start#show"
 
+  # Privacy notice
+  get "/privacy", to: "coronavirus_form/privacy#show"
+
   # Question pages
   get "/medical-equipment" => "coronavirus_form/medical_equipment#show"
   post "/medical-equipment" => "coronavirus_form/medical_equipment#submit"

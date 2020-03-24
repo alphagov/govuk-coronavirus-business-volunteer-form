@@ -1,4 +1,11 @@
 en:
+  privacy_notice_footer_link:
+    label: Privacy notice
+  privacy_page:
+    title: Privacy notice
+    body_text: |
+      <p class="govuk-body">Last updated: 24 March 2020</p>
+      <p class="govuk-body">Placeholder</p>
   start_page:
     title: Offer coronavirus support from your business
     body: |

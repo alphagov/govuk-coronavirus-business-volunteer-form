@@ -29,7 +29,16 @@
         </div>
       </main>
     </div>
-    <%= render "govuk_publishing_components/components/layout_footer" %>
+    <%= render "govuk_publishing_components/components/layout_footer", {
+      meta: {
+        items: [
+          {
+            href: "/privacy",
+            text: t("privacy_notice_footer_link.label")
+          },
+        ]
+      }
+    } %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
