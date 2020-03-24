@@ -26,14 +26,15 @@
   label: {
     text: t('coronavirus_form.questions.product_details.product_name.label')
   },
+  id: "product_name",
   name: "product_name",
   error_message: error_items('product_name'),
   value: @product["product_name"],
 } %>
 <% if selected_ppe? %>
   <%= render "govuk_publishing_components/components/radio", {
-    description: t('coronavirus_form.questions.product_details.equipment_type.label'),
-    is_page_heading: true,
+    heading: t('coronavirus_form.questions.product_details.equipment_type.label'),
+    heading_size: 's',
     name: "equipment_type",
     error_message: error_items('equipment_type'),
     items: t('coronavirus_form.questions.product_details.equipment_type.options').map do |_, item|
@@ -51,6 +52,7 @@
     text: t('coronavirus_form.questions.product_details.product_cost.label'),
   },
   hint: t('coronavirus_form.questions.product_details.product_cost.hint'),
+  id: "product_cost",
   name: "product_cost",
   error_message: error_items('product_cost'),
   value: @product["product_cost"],
@@ -61,13 +63,14 @@
     text: t('coronavirus_form.questions.product_details.certification_details.label'),
   },
   hint: t('coronavirus_form.questions.product_details.certification_details.hint'),
+  id: "certification_details",
   name: "certification_details",
   error_message: error_items('certification_details'),
   value: @product["certification_details"],
 } %>
 <%= render "govuk_publishing_components/components/radio", {
-  description: t('coronavirus_form.questions.product_details.product_location.label'),
-  is_page_heading: true,
+  heading: t('coronavirus_form.questions.product_details.product_location.label'),
+  heading_size: "s",
   name: "product_location",
   error_message: error_items('product_location'),
   items: [
@@ -109,6 +112,7 @@
   label: {
     text: t('coronavirus_form.questions.product_details.lead_time.label')
   },
+  id: "lead_time",
   name: "lead_time",
   error_message: error_items('lead_time'),
   type: "number",
