@@ -5,7 +5,6 @@ applications:
   memory: 1G
   instances: 5
   services:
-  - govuk-coronavirus-business-volunteer-form-db
   - logit-ssl-drain
   - splunk-ssl-drain
   env:
