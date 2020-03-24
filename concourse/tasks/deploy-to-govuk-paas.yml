@@ -1,0 +1,53 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: governmentpaas/cf-cli
+    tag: latest
+inputs:
+  - name: govuk-coronavirus-business-volunteer-form
+    path: src
+params:
+  CF_API: https://api.cloud.service.gov.uk
+  CF_USERNAME: ((paas-username))
+  CF_PASSWORD: ((paas-password))
+  CF_ORG: govuk_development
+  SENTRY_DSN: https://((sentry-dsn))
+  SECRET_KEY_BASE:
+  CF_STARTUP_TIMEOUT:
+  CF_SPACE:
+  HOSTNAME:
+  INSTANCES:
+  BASIC_AUTH_PASSWORD:
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME:
+run:
+  dir: src
+  path: sh
+  args:
+    - '-c'
+    - |
+      set -eu
+
+      cf api "$CF_API"
+      cf auth
+      cf t -o "$CF_ORG" -s "$CF_SPACE"
+      cf v3-create-app govuk-coronavirus-business-volunteer-form || true
+      cf v3-apply-manifest -f manifest.yml
+      cf set-env govuk-coronavirus-business-volunteer-form CF_STARTUP_TIMEOUT "$CF_STARTUP_TIMEOUT"
+
+      cf scale -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
+
+      cf set-env govuk-coronavirus-business-volunteer-form AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME "$AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME"
+      if [[ "${REQUIRE_BASIC_AUTH:-}" = "true" ]]; then
+        cf set-env govuk-coronavirus-business-volunteer-form REQUIRE_BASIC_AUTH "$REQUIRE_BASIC_AUTH"
+      fi
+      cf set-env govuk-coronavirus-business-volunteer-form BASIC_AUTH_PASSWORD "$BASIC_AUTH_PASSWORD"
+      cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN"
+      cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
+      cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
+      cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
+
+      cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
+      cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname "$HOSTNAME"
