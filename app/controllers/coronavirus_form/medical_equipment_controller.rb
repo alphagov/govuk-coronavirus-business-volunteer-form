@@ -24,9 +24,13 @@ class CoronavirusForm::MedicalEquipmentController < ApplicationController
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
     elsif session[:medical_equipment] == I18n.t("coronavirus_form.medical_equipment.options.option_yes.label")
-      redirect_to controller: "coronavirus_form/medical_equipment_type", action: "show"
-    else
+      # YES goes to what kind of business are you / manufacturer_check
+      redirect_to controller: "coronavirus_form/manufacturer_check", action: "show"
+    elsif session[:medical_equipment] == I18n.t("coronavirus_form.medical_equipment.options.option_no.label")
+      # NO goes to hotel rooms
       redirect_to controller: "coronavirus_form/hotel_rooms", action: "show"
+    else
+      render "coronavirus_form/#{PAGE}"
     end
   end
 

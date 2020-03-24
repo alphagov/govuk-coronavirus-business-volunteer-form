@@ -29,7 +29,7 @@ class CoronavirusForm::ManufacturerCheckController < ApplicationController
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
-      redirect_to controller: "coronavirus_form/product_details", action: "show"
+      redirect_to controller: "coronavirus_form/medical_equipment_type", action: "show"
     end
   end
 
@@ -38,6 +38,6 @@ private
   PAGE = "manufacturer_check"
 
   def previous_path
-    "/medical-equipment-type"
+    medical_equipment_path
   end
 end

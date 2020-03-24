@@ -114,6 +114,6 @@ private
 
     return check_your_answers_path if session["check_answers_seen"]
 
-    are_you_a_manufacturer_path
+    medical_equipment_type_path
   end
 end

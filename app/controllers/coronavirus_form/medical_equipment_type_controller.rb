@@ -39,7 +39,7 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
 private
 
   PAGE = "medical_equipment_type"
-  NEXT_PAGE = "manufacturer_check"
+  NEXT_PAGE = "product_details"
 
   def selected_other?(medical_equipment_type)
     medical_equipment_type.include?(
@@ -48,6 +48,6 @@ private
   end
 
   def previous_path
-    "/medical-equipment"
+    manufacturer_check_path
   end
 end

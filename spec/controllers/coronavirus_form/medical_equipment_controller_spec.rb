@@ -23,7 +23,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentController, type: :controller do
     it "redirects to next step for yes response" do
       post :submit, params: { medical_equipment: "Yes" }
 
-      expect(response).to redirect_to(medical_equipment_type_path)
+      expect(response).to redirect_to(are_you_a_manufacturer_path)
     end
 
     it "redirects to next sub-question for no response" do

@@ -33,9 +33,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     it "redirects to next step" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to(
-        "/are-you-a-manufacturer",
-      )
+      expect(response).to redirect_to(product_details_path)
     end
 
     it "redirects to check your answers if check your answers already seen" do
@@ -64,9 +62,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
           medical_equipment_type_other: "Demo text",
         }
 
-        expect(response).to redirect_to(
-          "/are-you-a-manufacturer",
-        )
+        expect(response).to redirect_to(product_details_path)
         expect(session[session_key]).to eq ["Other", "Personal protection equipment"]
         expect(session[:medical_equipment_type_other]).to eq "Demo text"
       end
