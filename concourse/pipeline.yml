@@ -57,7 +57,7 @@ jobs:
         trigger: true
         passed: [deploy-to-staging]
       - task: smoke-test
-        file: govuk-coronavirus-vulnerable-people-form/concourse/tasks/smoke-test.yml
+        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/smoke-test.yml
         params:
           URL: 'https://govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital/'
           MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
@@ -89,7 +89,7 @@ jobs:
         trigger: true
         passed: [deploy-to-prod]
       - task: smoke-test
-        file: govuk-coronavirus-vulnerable-people-form/concourse/tasks/smoke-test.yml
+        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/smoke-test.yml
         params:
           URL: 'https://govuk-coronavirus-business-volunteer-form-prod.cloudapps.digital/'
           MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
