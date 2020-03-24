@@ -15,7 +15,7 @@
 <%= render "govuk_publishing_components/components/checkboxes", {
   heading: t('coronavirus_form.transport_type.title'),
   is_page_heading: true,
-  name: "transport_type",
+  name: "transport_type[]",
   error: error_items('transport_type'),
   items: t('coronavirus_form.transport_type.options').map do |_, item|
     {
