@@ -21,6 +21,7 @@
   label: {
     text: t('coronavirus_form.questions.contact_details.contact_name.label')
   },
+  id: "contact_name",
   name: "contact_name",
   error_message: error_items("contact_name"),
   value: session[:contact_details]["contact_name"],
@@ -37,6 +38,7 @@
   label: {
     text: t('coronavirus_form.questions.contact_details.phone_number.label')
   },
+  id: "phone_number",
   name: "phone_number",
   error_message: error_items('phone_number'),
   value: session[:contact_details]["phone_number"],
@@ -45,6 +47,7 @@
   label: {
     text: t('coronavirus_form.questions.contact_details.email.label')
   },
+  id: "email",
   name: "email",
   error_message: error_items('email'),
   value: session[:contact_details]["email"],
