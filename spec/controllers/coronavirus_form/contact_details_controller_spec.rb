@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
   describe "POST submit" do
     let(:params) do
       {
-        "name" => "John<script></script>",
+        "contact_name" => "John<script></script>",
         "role" => "<script></script>CEO",
         "phone_number" => "0118 999 881 999 119 7253",
         "email" => "john@example.org",
@@ -33,7 +33,7 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
     end
     let(:contact_details) do
       {
-        "name" => "John",
+        "contact_name" => "John",
         "role" => "CEO",
         "phone_number" => "0118 999 881 999 119 7253",
         "email" => "john@example.org",
