@@ -28,7 +28,7 @@ class CoronavirusForm::ExpertAdviceController < ApplicationController
     elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
-      redirect_to controller: "coronavirus_form/offer_space", action: "show"
+      redirect_to controller: "coronavirus_form/offer_care", action: "show"
     end
   end
 
