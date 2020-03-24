@@ -50,7 +50,7 @@ en:
       <p class="govuk-body">The contact details for the data controller are: Cabinet Office (Government Digital Service), The White Chapel Building, 10 Whitechapel High Street, London, E1 8QS, or <a href="mailto:gds-privacy-office@digital.cabinet-office.gov.uk" class="govuk-link">gds-privacy-office@digital.cabinet-office.gov.uk</a></p>
       <p class="govuk-body">The contact details for the data controller’s Data Protection Officer are: Stephen Jones, Data Protection Officer, Cabinet Office, 70 Whitehall, London, SW1A 2AS, or <a href="mailto:dpo@cabinetoffice.gov.uk" class="govuk-link">dpo@cabinetoffice.gov.uk.</a></p>
       <p class="govuk-body">The Data Protection Officer provides independent advice and monitoring of Cabinet Office’s use of personal information.</p>
-      <p class="govuk-body">If you consider that your personal information has been misused or mishandled, you can make a complaint to the Information Commissioner, who is an independent regulator. The Information Commissioner can be contacted at:  Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF, or 0303 123 1113, or <a href="mailto:casework@ico.org.uk" class="govuk-link">casework@ico.org.uk</a>. Any complaint to the Information Commissioner won’t affect your right to seek redress through the courts.</p>
+      <p class="govuk-body">If you consider that your personal information has been misused or mishandled, you can make a complaint to the Information Commissioner, who is an independent regulator. The Information Commissioner can be contacted at:  Information Commissioner’s Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF, or 0303 123 1113, or <a href="mailto:casework@ico.org.uk" class="govuk-link">casework@ico.org.uk</a>. Any complaint to the Information Commissioner won’t affect your right to seek redress through the courts.</p>
 
       <h2 class="govuk-heading-m">Changes to this notice</h2>
       <p class="govuk-body">We may change this privacy notice. When we make changes to this notice, the ‘last updated’ date at the top of this page will also change. Any changes to this privacy notice will apply to you and your information immediately. If these changes affect how your personal information is processed, the Cabinet Office will take reasonable steps to make sure you know.</p>
@@ -75,7 +75,7 @@ en:
       <p>You’ll need your company number if you have one.</p>
     button_label: Start now
   check_your_answers:
-    title: Check your answers before sending your application
+    title: Check your answers before submitting
     heading: Now send your application
     confirmation: By submitting this application you’re confirming that, to the best of your knowledge, the details you’re providing are correct.
     submit: Accept and send
@@ -131,7 +131,6 @@ en:
         custom_select_error: Select the best way to describe your business
       product_details:
         title: Tell us about each product you’re offering
-        hint: Give details for one product at a time.
         product_name:
           label: Name of product
           custom_error: Enter the name of the product
@@ -144,7 +143,7 @@ en:
           hint: For example, CE marking or EN standards.
           custom_error: Enter the certification details of the product. If you do not have any put ‘none’.
         product_location:
-          label: Where is the product made, or stored if it's already made?
+          label: Where is the product made, or stored if it’s already made?
           options:
             option_uk:
               label: United Kingdom
@@ -185,8 +184,8 @@ en:
       additional_product:
         title: Can you offer another product?
         link: |
-          <p class='govuk-body'>
-            <a href='/product-details' class'govuk-link'>Add an additional product</a>
+          <p class="govuk-body">
+            <a href="/product-details" class="govuk-link">Add an additional product</a>
           </p>
         options:
           option_yes:
@@ -373,6 +372,6 @@ en:
           custom_select_error: Select the location of your main office
     thank_you:
       title: "Thank you for offering support"
-      sub_heading: "If your help is needed you'll be contacted as soon as possible."
+      sub_heading: "If your help is needed you’ll be contacted as soon as possible."
       next_text: "View all information on coronavirus (COVID-19)"
       next_link: "https://www.gov.uk/coronavirus"
