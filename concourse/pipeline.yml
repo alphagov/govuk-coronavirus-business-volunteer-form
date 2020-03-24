@@ -77,6 +77,7 @@ jobs:
                 cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN" 
                 cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
                 cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
+                cf set-env govuk-coronavirus-vulnerable-people-form AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME "$AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME"
                 cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
 
   - name: smoke-test-staging
