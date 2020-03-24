@@ -45,6 +45,6 @@ private
   end
 
   def previous_path
-    "/coronavirus-form/offer-space"
+    offer_space_path
   end
 end
