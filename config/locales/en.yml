@@ -56,7 +56,7 @@ en:
           input:
             label: "Give a summary of the type of equipment – you can give more details later"
       custom_select_error: Select the type of medical equipment you can offer
-      custom_enter_error: Enter a summary of the type of equipment
+      custom_enter_error: Enter a description of the type of equipment
     manufacturer_check:
       title: What kind of business are you?
       hint: Select the best way to describe your work
@@ -75,12 +75,15 @@ en:
       hint: Give details for one product at a time.
       product_name:
         label: Name of product
+        custom_error: Enter the name of the product
       product_cost:
         label: Cost of product in pounds
         hint: For example, 23.99. Enter 0 if you will donate it.
+        custom_error: Enter a cost, like 23.99, or 0 if you will donate it. Do not put the £ symbol.
       certification_details:
         label: Certification details
         hint: For example, CE marking or EN standards.
+        custom_error: Enter the certification details of the product. If you do not have any put ‘none’.
       product_location:
         label: Where is the product made, or stored if it's already made?
         options:
@@ -93,10 +96,12 @@ en:
             label: European Union
           option_rest_of_world:
             label: Rest of world
+        custom_select_error: Select a location
       product_url:
         label: URL of product specification document (optional)
       lead_time:
         label: Lead time in days
+        custom_error: Enter a number
       equipment_type:
         label: What type of equipment is it?
         options:
@@ -118,6 +123,7 @@ en:
             label: Gowns
           other:
             label: Something else
+        custom_select_error: Select a type of equipment, or ‘something else’
     additional_product_check:
       title: Can you offer another product?
       options:
@@ -220,7 +226,7 @@ en:
           label: "Moving people"
         moving_goods:
           label: "Moving goods"
-      custom_select_error: Select what kind of transport can you offer
+      custom_select_error: Select if you can offer transport for people or goods
     expert_advice:
       title: "Can you offer expert advice?"
       hint: "For example, consultancy experience or expertise in a specific sector."
@@ -229,6 +235,7 @@ en:
           label: "Yes"
         option_no:
           label: "No"
+      custom_select_error: Select if you can offer expert advice
     expert_advice_type:
       title: "What kind of expert advice can you offer?"
       hint: "Select the types of expertise or consultancy experience you have"
@@ -272,8 +279,10 @@ en:
           label: "Nursing or other healthcare qualification"
           input:
             label: "Give a description"
+            custom_error: Give a description of your qualification
         no_qualification:
           label: "I do not have a qualification"
+      custom_select_error: Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’
     offer_community_support:
        title: Can you offer community support?
        hint: For example, giving out food, or educational support.
@@ -287,12 +296,15 @@ en:
       title: Contact details
       contact_name:
         label: Name of main contact
+        custom_error: Enter the name of the main contact in your organisation who can coordinate the support
       role:
         label: Role of main contact (optional)
       phone_number:
         label: Phone number of main contact
+        custom_error: Enter a number
       email:
         label: Email of main contact
+        custom_error: Enter an email address in the correct format, like name@example.com
     offer_other_support:
         title: Can you offer any other kind of support?
         hint: Give a description
@@ -300,6 +312,7 @@ en:
       title: Your business details
       company_name:
         label: "Company name"
+        custom_error: Enter the name of your company
       company_number:
         label: "Company number (optional)"
       company_size:
@@ -311,7 +324,7 @@ en:
             label: "50 to 250 people"
           more_than_250_people:
             label: "More than 250 people"
-        custom_select_error: Select your company size
+        custom_select_error: Select the size of your company
       company_location:
         label: "Location of main office"
         options:
@@ -321,7 +334,7 @@ en:
             label: "European Union"
           rest_of_world:
             label: "Rest of world"
-        custom_select_error: Select your company location
+        custom_select_error: Select the location of your main office
     thank_you:
       title: "Thank you for offering support"
       sub_heading: "If your help is needed you'll be contacted as soon as possible."
