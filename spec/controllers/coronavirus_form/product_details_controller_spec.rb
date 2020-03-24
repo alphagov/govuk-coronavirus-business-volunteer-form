@@ -4,7 +4,7 @@ require "spec_helper"
 
 RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   let(:current_template) { "coronavirus_form/product_details" }
-  let(:session_key) { :products }
+  let(:session_key) { :product_details }
   let(:params) do
     {
       "product_name" => "Defibrillator",
@@ -130,7 +130,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
     context "when the user has selected PPE" do
       before :each do
         session["medical_equipment_type"] = I18n.t(
-          "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
         )
       end
 

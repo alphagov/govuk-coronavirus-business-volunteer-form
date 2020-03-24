@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.offer_space.title') %><% end %>
+<% content_for :title do %><%= t('coronavirus_form.questions.offer_space.title') %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.offer_space_type.title') %>" />
+  <meta name="description" content="<%= t('coronavirus_form.questions.offer_space_type.title') %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -9,33 +9,33 @@
 
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-offer-space-type",
-  "data-question-key": "what_kind_of_space",
-  "id": "what_kind_of_space"
+  "data-question-key": "offer_space_type",
+  "id": "offer_space_type"
 ) do %>
   <%= render "govuk_publishing_components/components/checkboxes", {
-    heading: t('coronavirus_form.offer_space_type.title'),
-    hint: t('coronavirus_form.offer_space_type.hint'),
+    heading: t('coronavirus_form.questions.offer_space_type.title'),
+    hint: t('coronavirus_form.questions.offer_space_type.hint'),
     is_page_heading: true,
     name: "offer_space_type[]",
     error: error_items("offer_space_type"),
     items: [
       {
-        value: t('coronavirus_form.offer_space_type.options.warehouse_space.label'),
-        label: t('coronavirus_form.offer_space_type.options.warehouse_space.label'),
-        checked: session[:offer_space_type].include?(t('coronavirus_form.offer_space_type.options.warehouse_space.label')),
+        value: t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label'),
+        label: t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label'),
+        checked: session[:offer_space_type].include?(t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label')),
       },
       {
-        value: t('coronavirus_form.offer_space_type.options.office_space.label'),
-        label: t('coronavirus_form.offer_space_type.options.office_space.label'),
-        checked: session[:offer_space_type].include?(t('coronavirus_form.offer_space_type.options.office_space.label')),
+        value: t('coronavirus_form.questions.offer_space_type.options.office_space.label'),
+        label: t('coronavirus_form.questions.offer_space_type.options.office_space.label'),
+        checked: session[:offer_space_type].include?(t('coronavirus_form.questions.offer_space_type.options.office_space.label')),
       },
       {
-        value: t('coronavirus_form.offer_space_type.options.other.label'),
-        label: t('coronavirus_form.offer_space_type.options.other.label'),
-        checked: session[:offer_space_type].include?(t('coronavirus_form.offer_space_type.options.other.label')),
+        value: t('coronavirus_form.questions.offer_space_type.options.other.label'),
+        label: t('coronavirus_form.questions.offer_space_type.options.other.label'),
+        checked: session[:offer_space_type].include?(t('coronavirus_form.questions.offer_space_type.options.other.label')),
         conditional: render("govuk_publishing_components/components/textarea", {
           label: {
-            text: t('coronavirus_form.offer_space_type.options.other.input.label'),
+            text: t('coronavirus_form.questions.offer_space_type.options.other.input.label'),
           },
           name: "offer_space_type_other",
           error_message: error_items("offer_space_type_other"),

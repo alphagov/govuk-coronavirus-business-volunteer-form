@@ -23,7 +23,7 @@ RSpec.describe CoronavirusForm::OfferCommunitySupportController, type: :controll
   end
 
   describe "POST submit" do
-    let(:selected_yes) { I18n.t("coronavirus_form.offer_community_support.options.option_yes.label") }
+    let(:selected_yes) { I18n.t("coronavirus_form.questions.offer_community_support.options.option_yes.label") }
 
     it "sets session variables" do
       post :submit, params: { offer_community_support: selected_yes }

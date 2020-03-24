@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.offer_other_support.title') %><% end %>
+<% content_for :title do %><%= t('coronavirus_form.questions.offer_other_support.title') %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.offer_other_support.title') %>" />
+  <meta name="description" content="<%= t('coronavirus_form.questions.offer_other_support.title') %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -17,9 +17,9 @@
   label: {
     is_page_heading: true,
     heading_size: "xl",
-    text: t('coronavirus_form.offer_other_support.title')
+    text: t('coronavirus_form.questions.offer_other_support.title')
   },
-  hint: t('coronavirus_form.offer_other_support.hint'),
+  hint: t('coronavirus_form.questions.offer_other_support.hint'),
   name: "offer_other_support",
   value: session[:offer_other_support]
 } %>

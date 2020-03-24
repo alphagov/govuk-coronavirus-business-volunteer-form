@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::HotelRoomsController, type: :controller do
   describe "POST submit" do
     let(:selected) { permitted_values.sample }
     let(:permitted_values) do
-      I18n.t("coronavirus_form.hotel_rooms.options").map { |_, item| item[:label] }
+      I18n.t("coronavirus_form.questions.hotel_rooms.options").map { |_, item| item[:label] }
     end
 
     it "sets session variables" do

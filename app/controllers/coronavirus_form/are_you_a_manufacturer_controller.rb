@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CoronavirusForm::ManufacturerCheckController < ApplicationController
+class CoronavirusForm::AreYouAManufacturerController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include FieldValidationHelper
   include FormFlowHelper
@@ -8,19 +8,18 @@ class CoronavirusForm::ManufacturerCheckController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
   def show
-    session[:manufacturer_check] ||= []
+    session["are_you_a_manufacturer"] ||= []
     render "coronavirus_form/#{PAGE}"
   end
 
   def submit
-    manufacturer_check = Array(params[:manufacturer_check]).map { |item| sanitize(item).presence }.compact
-
-    session[:manufacturer_check] = manufacturer_check
+    are_you_a_manufacturer = Array(params[:are_you_a_manufacturer]).map { |item| sanitize(item).presence }.compact
+    session["are_you_a_manufacturer"] = are_you_a_manufacturer
 
     invalid_fields = validate_checkbox_field(
       PAGE,
-      values: manufacturer_check,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
+      values: are_you_a_manufacturer,
+      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
     )
 
     if invalid_fields.any?
@@ -35,7 +34,7 @@ class CoronavirusForm::ManufacturerCheckController < ApplicationController
 
 private
 
-  PAGE = "manufacturer_check"
+  PAGE = "are_you_a_manufacturer"
 
   def previous_path
     medical_equipment_path

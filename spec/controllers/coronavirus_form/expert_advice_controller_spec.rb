@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
   describe "POST submit" do
     let(:selected) { permitted_values.sample }
     let(:permitted_values) do
-      I18n.t("coronavirus_form.expert_advice.options").map { |_, item| item[:label] }
+      I18n.t("coronavirus_form.questions.expert_advice.options").map { |_, item| item[:label] }
     end
 
     it "sets session variables" do
@@ -35,14 +35,14 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
 
     it "redirects to next step for a 'No' response" do
       post :submit, params: {
-        expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_no.label"),
+        expert_advice: I18n.t("coronavirus_form.questions.expert_advice.options.option_no.label"),
       }
       expect(response).to redirect_to(offer_space_path)
     end
 
     it "redirects to next sub-question for a 'Yes' response" do
       post :submit, params: {
-         expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_yes.label"),
+         expert_advice: I18n.t("coronavirus_form.questions.expert_advice.options.option_yes.label"),
        }
       expect(response).to redirect_to(expert_advice_type_path)
     end
@@ -50,7 +50,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
     it "redirects to check your answers if check your answers previously seen and response is 'No'" do
       session[:check_answers_seen] = true
       post :submit, params: {
-         expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_no.label"),
+         expert_advice: I18n.t("coronavirus_form.questions.expert_advice.options.option_no.label"),
        }
       expect(response).to redirect_to(check_your_answers_path)
     end
@@ -58,7 +58,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceController, type: :controller do
     it "redirects to next sub-question if check your answers previously seen and response is 'Yes'" do
       session[:check_answers_seen] = true
       post :submit, params: {
-         expert_advice: I18n.t("coronavirus_form.expert_advice.options.option_yes.label"),
+         expert_advice: I18n.t("coronavirus_form.questions.expert_advice.options.option_yes.label"),
        }
       expect(response).to redirect_to(expert_advice_type_path)
     end

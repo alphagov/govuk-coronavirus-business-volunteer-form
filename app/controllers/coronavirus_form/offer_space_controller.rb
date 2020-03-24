@@ -23,10 +23,10 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
-    elsif session["check_answers_seen"]
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
     elsif offer_space.eql? "Yes"
       redirect_to controller: "coronavirus_form/offer_space_type", action: "show"
+    elsif session["check_answers_seen"]
+      redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
       redirect_to controller: "coronavirus_form/expert_advice", action: "show"
     end
