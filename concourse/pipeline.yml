@@ -57,6 +57,7 @@ jobs:
             AWS_ACCESS_KEY_ID: ((aws-access-key-id))
             AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
             AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-staging
+            SECRET_KEY_BASE: ((secret-key-base-staging))
           run:
             dir: src
             path: sh
