@@ -284,7 +284,7 @@ en:
        custom_select_error: Select if you can offer community support
     contact_details:
       title: Contact details
-      name:
+      contact_name:
         label: Name of main contact
       role:
         label: Role of main contact (optional)
