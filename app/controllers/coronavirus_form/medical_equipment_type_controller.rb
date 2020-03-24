@@ -8,23 +8,17 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
   def show
-    session[:medical_equipment_type] ||= []
     render "coronavirus_form/#{PAGE}"
   end
 
   def submit
-    medical_equipment_type = Array(params[:medical_equipment_type]).map { |item| sanitize(item).presence }.compact
+    medical_equipment_type = sanitize(params[:medical_equipment_type]).presence
     medical_equipment_type_other = sanitize(params[:medical_equipment_type_other]).presence
     session[:medical_equipment_type] = medical_equipment_type
-    session[:medical_equipment_type_other] = if selected_other?(medical_equipment_type)
-                                               medical_equipment_type_other
-                                             else
-                                               ""
-                                             end
-    invalid_fields = validate_checkbox_field(
+    session[:medical_equipment_type_other] = medical_equipment_type_other
+    invalid_fields = validate_radio_field(
       PAGE,
-      values: medical_equipment_type,
-      allowed_values: I18n.t("coronavirus_form.#{PAGE}.options").map { |_, item| item.dig(:label) },
+      radio: medical_equipment_type,
       other: medical_equipment_type_other,
     )
 
@@ -42,12 +36,10 @@ private
   NEXT_PAGE = "product_details"
 
   def selected_other?(medical_equipment_type)
-    medical_equipment_type.include?(
-      I18n.t("coronavirus_form.medical_equipment_type.options.other.label"),
-    )
+    medical_equipment_type == I18n.t("coronavirus_form.#{PAGE}.options.other.label")
   end
 
   def previous_path
-    manufacturer_check_path
+    are_you_a_manufacturer_path
   end
 end

@@ -44,18 +44,19 @@ en:
           label: "No"
       custom_select_error: Select if you have medical equipment to offer
     medical_equipment_type:
-      title: What medical equipment can you offer?
+      title: Tell us about the medical equipment you can offer
+      hint: Give details for one product at a time.
       options:
         number_ppe:
           label: "Personal protection equipment"
         number_testing_equipment:
           label: "Testing equipment"
         other:
-          label: "Other"
+          label: Other
           input:
             label: "Give a summary of the type of equipment – you can give more details later"
-          error_message: Enter a summary of the type of equipment
       custom_select_error: Select the type of medical equipment you can offer
+      custom_enter_error: Enter a summary of the type of equipment
     manufacturer_check:
       title: What kind of business are you?
       hint: Select the best way to describe your work

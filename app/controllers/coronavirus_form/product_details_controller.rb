@@ -37,7 +37,7 @@ private
   helper_method :selected_ppe?
 
   def selected_ppe?
-    (session["medical_equipment_type"] || []).include? I18n.t(
+    session["medical_equipment_type"] == I18n.t(
       "coronavirus_form.medical_equipment_type.options.number_ppe.label",
     )
   end

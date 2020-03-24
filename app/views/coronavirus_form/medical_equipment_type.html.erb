@@ -12,26 +12,27 @@
   "data-question-key": "medical_equipment_type",
   "id": "medical_equipment_type"
 ) do %>
-<%= render "govuk_publishing_components/components/checkboxes", {
+<%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.medical_equipment_type.title'),
+  hint: "Give details for one product at a time.",
   is_page_heading: true,
-  name: "medical_equipment_type[]",
+  name: "medical_equipment_type",
   error: error_items('medical_equipment_type'),
   items: [
     {
       value: t('coronavirus_form.medical_equipment_type.options.number_ppe.label'),
-      label: t('coronavirus_form.medical_equipment_type.options.number_ppe.label'),
-      checked: session[:medical_equipment_type].include?(t('coronavirus_form.medical_equipment_type.options.number_ppe.label')),
+      text: t('coronavirus_form.medical_equipment_type.options.number_ppe.label'),
+      checked: session[:medical_equipment_type] == t('coronavirus_form.medical_equipment_type.options.number_ppe.label'),
     },
     {
       value: t('coronavirus_form.medical_equipment_type.options.number_testing_equipment.label'),
-      label: t('coronavirus_form.medical_equipment_type.options.number_testing_equipment.label'),
-      checked: session[:medical_equipment_type].include?(t('coronavirus_form.medical_equipment_type.options.number_testing_equipment.label')),
+      text: t('coronavirus_form.medical_equipment_type.options.number_testing_equipment.label'),
+      checked: session[:medical_equipment_type] == t('coronavirus_form.medical_equipment_type.options.number_testing_equipment.label'),
     },
     {
       value: t('coronavirus_form.medical_equipment_type.options.other.label'),
-      label: t('coronavirus_form.medical_equipment_type.options.other.label'),
-      checked: session[:medical_equipment_type].include?(t('coronavirus_form.medical_equipment_type.options.other.label')),
+      text: t('coronavirus_form.medical_equipment_type.options.other.label'),
+      checked: session[:medical_equipment_type] == t('coronavirus_form.medical_equipment_type.options.other.label'),
       conditional: render("govuk_publishing_components/components/textarea", {
         label: {
           text: t('coronavirus_form.medical_equipment_type.options.other.input.label'),

@@ -23,7 +23,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
   end
 
   describe "POST submit" do
-    let(:selected) { ["Personal protection equipment", "Testing equipment"] }
+    let(:selected) { "Personal protection equipment" }
     it "sets session variables" do
       post :submit, params: { medical_equipment_type: selected }
 
@@ -44,33 +44,33 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     end
 
     it "validates any option is chosen" do
-      post :submit, params: { medical_equipment_type: [] }
+      post :submit, params: { medical_equipment_type: nil }
 
       expect(response).to render_template(current_template)
     end
 
     context "when Other option is selected" do
       it "validates the Other option description is provided" do
-        post :submit, params: { medical_equipment_type: ["Other", "Personal protection equipment"] }
+        post :submit, params: { medical_equipment_type: "Other" }
 
         expect(response).to render_template(current_template)
       end
 
       it "adds the other option description to the session" do
         post :submit, params: {
-          medical_equipment_type: ["Other", "Personal protection equipment"],
+          medical_equipment_type: "Other",
           medical_equipment_type_other: "Demo text",
         }
 
         expect(response).to redirect_to(product_details_path)
-        expect(session[session_key]).to eq ["Other", "Personal protection equipment"]
+        expect(session[session_key]).to eq "Other"
         expect(session[:medical_equipment_type_other]).to eq "Demo text"
       end
     end
 
     it "validates a valid option is chosen" do
       post :submit, params: {
-        medical_equipment_type: ["<script></script", "invalid option", "Personal protection equipment"],
+        medical_equipment_type: "<script></script",
       }
 
       expect(response).to render_template(current_template)

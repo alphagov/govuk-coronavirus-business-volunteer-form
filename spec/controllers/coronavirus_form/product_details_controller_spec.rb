@@ -129,13 +129,13 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
     context "when the user has selected PPE" do
       before :each do
-        session["medical_equipment_type"] = [I18n.t(
+        session["medical_equipment_type"] = I18n.t(
           "coronavirus_form.medical_equipment_type.options.number_ppe.label",
-        )]
+        )
       end
 
       it "errors if the user has selected has not told us the equipment type" do
-        post :submit, params: params #.merge("equipment_type" => nil)
+        post :submit, params: params
 
         expect(response).to render_template(current_template)
       end
