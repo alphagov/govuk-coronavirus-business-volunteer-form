@@ -49,6 +49,8 @@ private
         # We have answers as strings and hashes. The hashes need a little more
         # work to make them readable.
 
+        next if question.eql?("medical_equipment_type")
+
         if question.eql?("additional_product")
           next add_extra_product(question)
         end
@@ -89,6 +91,11 @@ private
     joiner = "<br>"
     products.map do |product|
       prod = []
+      prod << if product["medical_equipment_type_other"]
+                "Type: #{product['medical_equipment_type']} (#{product['medical_equipment_type_other']})"
+              else
+                "Type: #{product['medical_equipment_type']}"
+              end
       prod << "Product: #{product['product_name']}" if product["product_name"]
       prod << "Equipment type: #{product['equipment_type']}" if product["equipment_type"]
       prod << "Cost: #{product['product_cost']}" if product["product_cost"]

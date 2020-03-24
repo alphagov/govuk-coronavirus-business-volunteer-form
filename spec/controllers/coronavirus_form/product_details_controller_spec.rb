@@ -5,8 +5,10 @@ require "spec_helper"
 RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   let(:current_template) { "coronavirus_form/product_details" }
   let(:session_key) { :product_details }
+  let(:product_id) { SecureRandom.uuid }
   let(:params) do
     {
+      "product_id" => product_id,
       "product_name" => "Defibrillator",
       "product_cost" => "£10.99",
       "certification_details" => "CE",
@@ -20,7 +22,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   describe "GET show" do
     it "renders the form when first question answered" do
       session["medical_equipment"] = "Yes"
-      get :show
+      get :show, params: { product_id: product_id }
       expect(response).to render_template(current_template)
     end
 
@@ -72,6 +74,15 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   end
 
   describe "POST submit" do
+    before :each do
+      session[session_key] = [{
+        "product_id" => product_id,
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+        ),
+      }]
+    end
+
     it "sets session variables" do
       post :submit, params: params
 
@@ -118,20 +129,60 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
           expect(response).to redirect_to(additional_product_path)
         end
       end
+
+      it "redirects to check your answers if check your answers previously seen" do
+        session[:check_answers_seen] = true
+        post :submit, params: params
+
+        expect(response).to redirect_to(check_your_answers_path)
+      end
     end
 
-    it "redirects to next step when given valid product details" do
-      post :submit, params: params
+    context "when there are not existing products" do
+      before :each do
+        session[:product_details] = [{
+          "product_id" => product_id,
+          "medical_equipment_type" => "Some field",
+        }]
+      end
 
-      expect(response).to redirect_to(additional_product_path)
+      it "redirects to next step when given valid product details" do
+        post :submit, params: params
+
+        expect(response).to redirect_to(additional_product_path)
+      end
+
+      described_class::REQUIRED_FIELDS.each do |field|
+        it "requires that key #{field} be provided" do
+          post :submit, params: params.except(field)
+
+          expect(response).to render_template(current_template)
+        end
+      end
+
+      it "requires that product postcode be provided only if product is in UK" do
+        post :submit, params: params.merge("product_postcode" => nil)
+        expect(response).to render_template(current_template)
+
+        post :submit, params: params.merge("product_postcode" => "SW1A 2AA")
+        expect(response).to redirect_to(additional_product_path)
+      end
+
+      it "validates valid text is provided" do
+        post :submit, params: params.merge({ "product_postcode": "<script></script>" })
+
+        expect(response).to render_template(current_template)
+      end
     end
-
 
     context "when the user has selected PPE" do
       before :each do
-        session["medical_equipment_type"] = I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        )
+        session[session_key] = [{
+          "product_id" => product_id,
+          "medical_equipment_type" => I18n.t(
+            "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+          ),
+        }]
       end
 
       it "errors if the user has selected has not told us the equipment type" do
@@ -151,35 +202,6 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         expect(session[session_key].first["equipment_type"]).to eq "Gloves"
       end
-    end
-
-    it "redirects to check your answers if check your answers previously seen" do
-      session[:check_answers_seen] = true
-      post :submit, params: params
-
-      expect(response).to redirect_to(check_your_answers_path)
-    end
-
-    described_class::REQUIRED_FIELDS.each do |field|
-      it "requires that key #{field} be provided" do
-        post :submit, params: params.except(field)
-
-        expect(response).to render_template(current_template)
-      end
-    end
-
-    it "requires that product postcode be provided only if product is in UK" do
-      post :submit, params: params.merge("product_postcode" => nil)
-      expect(response).to render_template(current_template)
-
-      post :submit, params: params.merge("product_postcode" => "SW1A 2AA")
-      expect(response).to redirect_to(additional_product_path)
-    end
-
-    it "validates valid text is provided" do
-      post :submit, params: params.merge({ "product_postcode": "<script></script>" })
-
-      expect(response).to render_template(current_template)
     end
   end
 end

@@ -24,7 +24,7 @@ RSpec.describe CoronavirusForm::AdditionalProductController, type: :controller d
   describe "POST submit" do
     it "redirects to next step for yes response" do
       post :submit, params: { additional_product: "Yes" }
-      expect(response).to redirect_to(product_details_path)
+      expect(response).to redirect_to(medical_equipment_type_path)
     end
 
     it "redirects to next sub-question for no response" do
@@ -37,14 +37,14 @@ RSpec.describe CoronavirusForm::AdditionalProductController, type: :controller d
       session[:check_answers_seen] = true
       post :submit, params: { additional_product: "No" }
 
-      expect(response).to redirect_to("/check-your-answers")
+      expect(response).to redirect_to(check_your_answers_path)
     end
 
-    it "redirects to check your answers regardless of if check your answers previously seen" do
+    it "does not redirect to check your answers if answers seen but additional product selected" do
       session[:check_answers_seen] = true
       post :submit, params: { additional_product: "Yes" }
 
-      expect(response).to redirect_to(product_details_path)
+      expect(response).to redirect_to(medical_equipment_type_path)
     end
 
     it "validates any option is chosen" do

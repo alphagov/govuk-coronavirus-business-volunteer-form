@@ -4,7 +4,9 @@ require "spec_helper"
 
 RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controller do
   let(:current_template) { "coronavirus_form/medical_equipment_type" }
-  let(:session_key) { :medical_equipment_type }
+  let(:session_key) { :product_details }
+
+  before { allow(SecureRandom).to receive(:uuid).and_return("abcd1234") }
 
   describe "GET show" do
     it "renders the form when first question answered" do
@@ -27,13 +29,17 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     it "sets session variables" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(session[session_key]).to eq selected
+      expect(session[session_key][0]["medical_equipment_type"]).to eq selected
     end
 
     it "redirects to next step" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to(product_details_path)
+      expect(response).to redirect_to(
+        controller: "coronavirus_form/product_details",
+        action: :show,
+        params: { product_id: "abcd1234" },
+      )
     end
 
     it "redirects to check your answers if check your answers already seen" do
@@ -62,9 +68,13 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
           medical_equipment_type_other: "Demo text",
         }
 
-        expect(response).to redirect_to(product_details_path)
-        expect(session[session_key]).to eq "Other"
-        expect(session[:medical_equipment_type_other]).to eq "Demo text"
+        expect(response).to redirect_to(
+          controller: "coronavirus_form/product_details",
+          action: :show,
+          params: { product_id: "abcd1234" },
+        )
+        expect(session[session_key][0]["medical_equipment_type"]).to eq "Other"
+        expect(session[session_key][0]["medical_equipment_type_other"]).to eq "Demo text"
       end
     end
 
