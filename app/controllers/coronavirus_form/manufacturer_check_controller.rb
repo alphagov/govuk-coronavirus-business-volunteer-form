@@ -8,7 +8,7 @@ class CoronavirusForm::ManufacturerCheckController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
   def show
-    session[:manufacturer_check] = []
+    session[:manufacturer_check] ||= []
     render "coronavirus_form/#{PAGE}"
   end
 
