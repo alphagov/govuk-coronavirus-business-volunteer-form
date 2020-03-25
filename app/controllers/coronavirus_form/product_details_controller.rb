@@ -47,9 +47,10 @@ private
 
   def validate_fields(product)
     missing_fields = validate_missing_fields(product)
+    product_equipment_type = selected_ppe? ? validate_radio_field("#{PAGE}.equipment_type", radio: product["equipment_type"]) : []
     product_location_validation = validate_radio_field("#{PAGE}.product_location", radio: product["product_location"])
     postcode_validation = validate_product_postcode(product)
-    missing_fields + product_location_validation + postcode_validation
+    missing_fields + product_equipment_type + product_location_validation + postcode_validation
   end
 
   def validate_product_postcode(product)
@@ -68,7 +69,6 @@ private
   def validate_missing_fields(product)
     required = []
     required.concat REQUIRED_FIELDS
-    required << "equipment_type" if selected_ppe?
     required.each_with_object([]) do |field, invalid_fields|
       next if product[field].present?
 
