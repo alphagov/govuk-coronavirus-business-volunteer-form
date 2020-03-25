@@ -98,8 +98,9 @@ Rails.application.configure do
 
   # https://docs.cloud.service.gov.uk/deploying_services/redis
   # https://docs.cloud.service.gov.uk/deploying_apps.html#system-provided-environment-variables
-  if ENV["VCAP_SERVICES"].present? && ENV["VCAP_SERVICES"].dig("redis").present?
-    instance = ENV["VCAP_SERVICES"].dig("redis").first
+  if ENV["VCAP_SERVICES"].present?
+    redis = JSON.parse(ENV["VCAP_SERVICES"]).to_h.fetch("redis", [])
+    instance = redis.first
     config.cache_store = :redis_cache_store, { url: instance.dig("credentials", "uri") }
     config.session_store :cache_store, expires_in: 2.hours, key: "_sessions_store"
   end
