@@ -169,7 +169,7 @@ en:
         title: Can you offer another product?
         link: |
           <p class="govuk-body">
-            <a href="/product-details" class="govuk-link">Add an additional product</a>
+            <a href="/medical-equipment-type" class="govuk-link">Add an additional product</a>
           </p>
         options:
           option_yes:
