@@ -96,8 +96,6 @@ private
   end
 
   def previous_path
-    return additional_product_path if params["product_id"]
-
     return check_your_answers_path if session["check_answers_seen"]
 
     medical_equipment_type_path
