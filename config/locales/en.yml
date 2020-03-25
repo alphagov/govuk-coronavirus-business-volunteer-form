@@ -113,7 +113,7 @@ en:
             label: Individual
         custom_select_error: Select the best way to describe your business
       product_details:
-        title: Tell us about each product you’re offering
+        title: Tell us about the product you’re offering
         product_name:
           label: Name of product
           custom_error: Enter the name of the product
