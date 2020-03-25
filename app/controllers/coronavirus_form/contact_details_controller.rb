@@ -7,7 +7,7 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
 
   before_action :check_first_question_answered, only: :show
 
-  REQUIRED_FIELDS = %w(contact_name phone_number email).freeze
+  REQUIRED_FIELDS = %w(contact_name phone_number).freeze
 
   def show
     session[:contact_details] ||= {}

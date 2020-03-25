@@ -8,7 +8,7 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
 
   before_action :check_first_question_answered, only: :show
 
-  REQUIRED_FIELDS = %w(product_name product_cost certification_details product_location lead_time).freeze
+  REQUIRED_FIELDS = %w(product_name product_cost certification_details lead_time).freeze
 
   def show
     session["product_details"] ||= []
@@ -51,8 +51,9 @@ private
 
   def validate_fields(product)
     missing_fields = validate_missing_fields(product)
+    product_location_validation = validate_radio_field("#{PAGE}.product_location", radio: product["product_location"])
     postcode_validation = validate_product_postcode(product)
-    missing_fields + postcode_validation
+    missing_fields + product_location_validation + postcode_validation
   end
 
   def validate_product_postcode(product)

@@ -71,7 +71,7 @@ en:
       missing_day: "%{field} must include a day"
       invalid_date: "Enter a real %{field}"
       date_order: "The end date must be after the start date"
-      email_format: "Enter email address in the correct format, like name@example.com"
+      email_format: "Enter an email address in the correct format, like name@example.com"
       postcode_format: "Enter a real postcode"
     questions:
       medical_equipment:
@@ -161,6 +161,7 @@ en:
               label: Gowns
             other:
               label: Something else
+          custom_select_error: Select a type of equipment, or ‘something else’
       additional_product:
         title: Can you offer another product?
         link: |
