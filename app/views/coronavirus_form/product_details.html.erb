@@ -40,7 +40,7 @@
     error_message: error_items('equipment_type'),
     items: t('coronavirus_form.questions.product_details.equipment_type.options').map.with_index do |(_, item), index|
       {
-        id: ("equipment_type" if index == 0),
+        id: ("product_details.equipment_type" if index == 0),
         value: item[:label],
         text: item[:label],
         checked: @product["equipment_type"] == item[:label],
