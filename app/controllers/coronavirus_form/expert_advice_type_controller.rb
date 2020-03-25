@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-
   def show
     session[:expert_advice_type] ||= []
     render "coronavirus_form/#{PAGE}"

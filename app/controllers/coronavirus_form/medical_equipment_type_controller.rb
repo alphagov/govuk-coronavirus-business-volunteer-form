@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-  include FormFlowHelper
-  include ProductHelper
-
   before_action :check_first_question_answered, only: :show
 
   def show

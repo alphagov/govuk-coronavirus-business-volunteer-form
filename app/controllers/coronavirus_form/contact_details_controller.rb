@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ContactDetailsController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-  include FormFlowHelper
-
   before_action :check_first_question_answered, only: :show
 
   REQUIRED_FIELDS = %w(contact_name phone_number).freeze
