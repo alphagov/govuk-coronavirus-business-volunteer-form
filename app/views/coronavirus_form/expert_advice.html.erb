@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-expert-advice",
   "data-question-key": "expert_advice",
-  "id": "expert_advice"
+  "id": "expert_advice",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.questions.expert_advice.title'),

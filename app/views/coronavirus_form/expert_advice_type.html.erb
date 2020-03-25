@@ -10,7 +10,8 @@
     <%= form_tag({},
       "data-module": "track-coronavirus-form-business-medical-equipment-type",
       "data-question-key": "expert_advice_type",
-      "id": "expert_advice_type"
+      "id": "expert_advice_type",
+      "novalidate": "true"
     ) do %>
     <%= render "govuk_publishing_components/components/checkboxes", {
       heading: t("coronavirus_form.questions.expert_advice_type.title"),

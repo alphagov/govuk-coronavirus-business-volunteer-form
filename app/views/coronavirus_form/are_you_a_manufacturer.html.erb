@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-manufacturer-check",
   "data-question-key": "are_you_a_manufacturer",
-  "id": "are_you_a_manufacturer"
+  "id": "are_you_a_manufacturer",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/checkboxes", {
   heading: t('coronavirus_form.questions.are_you_a_manufacturer.title'),

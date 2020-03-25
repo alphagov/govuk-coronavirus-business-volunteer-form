@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-hotel-rooms",
   "data-question-key": "hotel_rooms",
-  "id": "hotel_rooms"
+  "id": "hotel_rooms",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.questions.hotel_rooms.title'),

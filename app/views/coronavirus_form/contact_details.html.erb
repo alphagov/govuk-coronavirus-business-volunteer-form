@@ -15,7 +15,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-contact-details",
   "data-question-key": "contact_details",
-  "id": "contact_details"
+  "id": "contact_details",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/input", {
   label: {

@@ -10,7 +10,8 @@
  <%= form_tag({},
    "data-module": "track-coronavirus-form-offer-community-support",
    "data-question-key": "offer_community_support",
-   "id": "offer_community_support"
+   "id": "offer_community_support",
+   "novalidate": "true"
  ) do %>
  <%= render "govuk_publishing_components/components/radio", {
    heading: t('coronavirus_form.questions.offer_community_support.title'),

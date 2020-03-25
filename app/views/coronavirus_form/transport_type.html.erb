@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-transport-type",
   "data-question-key": "transport_type",
-  "id": "transport_type"
+  "id": "transport_type",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/checkboxes", {
   heading: t('coronavirus_form.questions.transport_type.title'),

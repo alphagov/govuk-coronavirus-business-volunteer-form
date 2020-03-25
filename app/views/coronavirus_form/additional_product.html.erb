@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-manufacturer-check",
   "data-question-key": "additional_product",
-  "id": "additional_product"
+  "id": "additional_product",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.questions.additional_product.title'),

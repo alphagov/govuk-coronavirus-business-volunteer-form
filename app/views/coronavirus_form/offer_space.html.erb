@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-offer-space",
   "data-question-key": "offer_space",
-  "id": "offer_space"
+  "id": "offer_space",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.questions.offer_space.title'),

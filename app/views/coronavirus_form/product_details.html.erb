@@ -14,7 +14,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-product-details",
   "data-question-key": "product_details",
-  "id": "product_details"
+  "id": "product_details",
+  "novalidate": "true"
 ) do %>
 <div style="display:none;">
   <%= render "govuk_publishing_components/components/input", {

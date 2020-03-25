@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-medical-equipment",
   "data-question-key": "medical_equipment",
-  "id": "medical_equipment"
+  "id": "medical_equipment",
+  "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.questions.medical_equipment.title'),
