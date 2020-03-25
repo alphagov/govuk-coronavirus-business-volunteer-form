@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 module FieldValidationHelper
+  def validate_field_response_length(page, fields)
+    invalid_fields = []
+    fields.each do |field|
+      next unless params[field]
+      next if params[field].length <= 1000
+
+      invalid_fields << { field: field,
+                          text: t("coronavirus_form.questions.#{page}.#{field}.custom_length_error",
+                                  default: t("coronavirus_form.errors.field_length_error", field: t("coronavirus_form.questions.#{page}.#{field}.label")).humanize) }
+    end
+    invalid_fields
+  end
+
   def validate_mandatory_text_fields(mandatory_fields, page)
     invalid_fields = []
     mandatory_fields.each do |field|

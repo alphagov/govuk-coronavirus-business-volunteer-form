@@ -47,5 +47,15 @@ RSpec.describe CoronavirusForm::OfferOtherSupportController, type: :controller d
 
       expect(response).to redirect_to(check_your_answers_path)
     end
+
+    described_class::TEXT_FIELDS.each do |field|
+      it "validates that #{field} is 1000 or fewer characters" do
+        params = { offer_other_support: evil_script_response }
+        params[field] = SecureRandom.hex(1001)
+        post :submit, params: params
+
+        expect(response).to render_template(current_template)
+      end
+    end
   end
 end

@@ -77,5 +77,16 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
 
       expect(response).to render_template(current_template)
     end
+
+
+    described_class::TEXT_FIELDS.each do |field|
+      it "validates that #{field} is 1000 or fewer characters" do
+        params = { expert_advice_type: %w[Other] }
+        params[field] = SecureRandom.hex(1001)
+        post :submit, params: params
+
+        expect(response).to render_template(current_template)
+      end
+    end
   end
 end

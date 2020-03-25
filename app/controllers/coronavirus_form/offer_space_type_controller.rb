@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::OfferSpaceTypeController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-  include FormFlowHelper
-
   before_action :check_first_question_answered, only: :show
+
+  TEXT_FIELDS = %w(offer_space_type_other).freeze
 
   def show
     session[:offer_space_type] ||= []
@@ -21,12 +19,14 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
                                        else
                                          ""
                                        end
-    invalid_fields = validate_checkbox_field(
-      PAGE,
-      values: offer_space_type,
-      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
-      other: offer_space_type_other,
-    )
+
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+      validate_checkbox_field(
+        PAGE,
+        values: offer_space_type,
+        allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
+        other: offer_space_type_other,
+      )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

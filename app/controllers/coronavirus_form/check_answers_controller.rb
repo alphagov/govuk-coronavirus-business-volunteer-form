@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::CheckAnswersController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FormFlowHelper
-  include CheckAnswersHelper
-
   before_action :check_first_question_answered, only: :show
 
   def show

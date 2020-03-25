@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::BusinessDetailsController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-  include FormFlowHelper
-
   before_action :check_first_question_answered, only: :show
 
   REQUIRED_FIELDS = %w(company_name).freeze
+  TEXT_FIELDS = %w(company_name company_number).freeze
 
   def show
     render "coronavirus_form/#{PAGE}"
@@ -17,7 +14,8 @@ class CoronavirusForm::BusinessDetailsController < ApplicationController
     @business_details = sanitized_business_details(params)
     session[:business_details] = @business_details
 
-    invalid_fields = validate_fields(@business_details)
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+      validate_fields(@business_details)
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

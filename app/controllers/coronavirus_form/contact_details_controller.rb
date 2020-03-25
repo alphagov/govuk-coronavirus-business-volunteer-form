@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ContactDetailsController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-  include FormFlowHelper
-
   before_action :check_first_question_answered, only: :show
 
   REQUIRED_FIELDS = %w(contact_name phone_number).freeze
+  TEXT_FIELDS = %w(contact_name role phone_number email).freeze
 
   def show
     session[:contact_details] ||= {}
@@ -21,7 +18,8 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
     session[:contact_details]["phone_number"] = sanitize(params[:phone_number]).presence
     session[:contact_details]["email"] = sanitize(params[:email]).presence
 
-    invalid_fields = validate_fields(session[:contact_details])
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+      validate_fields(session[:contact_details])
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

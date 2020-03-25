@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::OfferOtherSupportController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-  include FieldValidationHelper
-  include FormFlowHelper
-
   before_action :check_first_question_answered, only: :show
+
+  TEXT_FIELDS = %w(offer_other_support).freeze
 
   def show
     render "coronavirus_form/#{PAGE}"
@@ -16,7 +14,12 @@ class CoronavirusForm::OfferOtherSupportController < ApplicationController
 
     session[:offer_other_support] = offer_other_support
 
-    if session["check_answers_seen"]
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS)
+
+    if invalid_fields.any?
+      flash.now[:validation] = invalid_fields
+      render "coronavirus_form/#{PAGE}"
+    elsif session["check_answers_seen"]
       redirect_to controller: "coronavirus_form/check_answers", action: "show"
     else
       redirect_to controller: "coronavirus_form/#{NEXT_PAGE}", action: "show"

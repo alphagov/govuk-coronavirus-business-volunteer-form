@@ -64,6 +64,7 @@ en:
       heading: "There is a problem"
       radio_field: "Select %{field}"
       checkbox_field: "Select at least one %{field}"
+      field_length_error: "%{field} must be 1000 characters or fewer "
       missing_mandatory_text_field: "Enter %{field}"
       invalid_money: "%{field} must be an amount of money, like 15000"
       missing_year: "%{field} must include a year"
@@ -96,6 +97,8 @@ en:
               label: "Give a summary of the type of equipment – you can give more details later"
         custom_select_error: Select the type of medical equipment you can offer
         custom_enter_error: Enter a description of the type of equipment
+        medical_equipment_type_other:
+          custom_length_error: Description of the equipment must be 1000 characters or fewer
       are_you_a_manufacturer:
         title: What kind of business are you?
         hint: Select the best ways to describe your work
@@ -186,6 +189,8 @@ en:
             input:
               label: Give a description
             error_message: Enter a description of the type of space you have
+        offer_space_type_other:
+          custom_length_error: Description of your expertise must be 1000 characters or fewer
         custom_select_error: Select the kind of space you can offer
       offer_transport:
         title: Can you offer transport or logistics?
@@ -276,6 +281,8 @@ en:
               label: "Give a description"
             error_message: "Enter the best way to describe the type of expertise you have"
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
+        expert_advice_type_other:
+          custom_length_error: Description of your expertise must be 1000 characters or fewer
       offer_care:
         title: Can you offer social care or childcare?
         hint: For example, nursing or assistance to other people.
@@ -299,6 +306,8 @@ en:
           no_qualification:
             label: "I do not have a qualification"
         custom_select_error: Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’
+        offer_care_qualifications_type:
+          custom_length_error: Description of your qualification must be 1000 characters or fewer
       offer_community_support:
          title: Can you offer community support?
          hint: For example, giving out food, or educational support.
@@ -324,6 +333,8 @@ en:
       offer_other_support:
           title: Can you offer any other kind of support?
           hint: Give a description
+          offer_other_support:
+            custom_length_error: Description of the support you can offer must be 1000 characters or fewer
       business_details:
         title: Your business details
         company_name:
