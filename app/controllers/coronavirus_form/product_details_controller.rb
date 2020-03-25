@@ -4,6 +4,7 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
   REQUIRED_FIELDS = %w(product_name product_cost certification_details lead_time).freeze
+  TEXT_FIELDS = %w(product_name product_cost certification_details product_postcode product_url lead_time).freeze
 
   def show
     session["product_details"] ||= []
@@ -15,7 +16,7 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
     @product = current_product(params[:product_id], session[:product_details]).merge(sanitized_product(params))
     add_product_to_session(@product)
 
-    invalid_fields = validate_fields(@product)
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) + validate_fields(@product)
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

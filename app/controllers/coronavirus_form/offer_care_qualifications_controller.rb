@@ -3,6 +3,8 @@
 class CoronavirusForm::OfferCareQualificationsController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
+  TEXT_FIELDS = %w(offer_care_qualifications_type).freeze
+
   def show
     session[:offer_care_qualifications] ||= []
     render "coronavirus_form/#{PAGE}"
@@ -14,13 +16,15 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
 
     session[:offer_care_qualifications] = offer_care_qualifications
     session[:offer_care_qualifications_type] = offer_care_qualifications_type
-    invalid_fields = validate_checkbox_field(
-      PAGE,
-      values: offer_care_qualifications,
-      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
-      other: offer_care_qualifications_type,
-      other_field: "nursing_or_healthcare_qualification",
-    )
+
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+      validate_checkbox_field(
+        PAGE,
+        values: offer_care_qualifications,
+        allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
+        other: offer_care_qualifications_type,
+        other_field: "nursing_or_healthcare_qualification",
+      )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

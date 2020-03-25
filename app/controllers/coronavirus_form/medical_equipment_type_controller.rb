@@ -3,6 +3,8 @@
 class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
+  TEXT_FIELDS = %w(medical_equipment_type_other).freeze
+
   def show
     session[:product_details] ||= []
     @product = find_product(params["product_id"], session[:product_details])
@@ -14,11 +16,12 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
     @product = sanitized_product(params)
     add_product_to_session(@product)
 
-    invalid_fields = validate_radio_field(
-      PAGE,
-      radio: @product["medical_equipment_type"],
-      other: @product["medical_equipment_type_other"],
-    )
+    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+      validate_radio_field(
+        PAGE,
+        radio: @product["medical_equipment_type"],
+        other: @product["medical_equipment_type_other"],
+      )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
