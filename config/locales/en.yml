@@ -167,10 +167,6 @@ en:
           custom_select_error: Select a type of equipment, or ‘something else’
       additional_product:
         title: Can you offer another product?
-        link: |
-          <p class="govuk-body">
-            <a href="/medical-equipment-type" class="govuk-link">Add an additional product</a>
-          </p>
         options:
           option_yes:
             label: "Yes"

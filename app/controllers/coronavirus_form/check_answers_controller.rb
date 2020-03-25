@@ -27,7 +27,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
 
 private
 
-  helper_method :items
+  helper_method :items_part_1, :items_part_2
 
   def reference_number
     timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%S")
@@ -46,10 +46,6 @@ private
         # work to make them readable.
 
         next if question.eql?("medical_equipment_type")
-
-        if question.eql?("additional_product")
-          next add_extra_product(question)
-        end
 
         if question.eql?("product_details")
           next product_details(session[question])
@@ -75,10 +71,12 @@ private
     end
   end
 
-  def add_extra_product(question)
-    {
-      field: sanitize(t("coronavirus_form.questions.#{question}.link")),
-    }
+  def items_part_1
+    items.select.with_index { |_, index| index < questions.index("additional_product") }
+  end
+
+  def items_part_2
+    items.select.with_index { |_, index| index > questions.index("additional_product") }
   end
 
   def product_details(products)
