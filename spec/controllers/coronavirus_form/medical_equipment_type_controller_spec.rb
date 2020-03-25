@@ -42,13 +42,6 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       )
     end
 
-    it "redirects to check your answers if check your answers already seen" do
-      session[:check_answers_seen] = true
-      post :submit, params: { medical_equipment_type: selected }
-
-      expect(response).to redirect_to(check_your_answers_path)
-    end
-
     it "validates any option is chosen" do
       post :submit, params: { medical_equipment_type: nil }
 
