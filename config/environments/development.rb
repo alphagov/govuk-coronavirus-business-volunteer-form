@@ -31,6 +31,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.cache_store = :redis_cache_store
+  config.session_store :cache_store, expires_in: 2.hours, key: "_sessions_store"
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

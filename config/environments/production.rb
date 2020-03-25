@@ -96,6 +96,14 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
 
+  # https://docs.cloud.service.gov.uk/deploying_services/redis
+  # https://docs.cloud.service.gov.uk/deploying_apps.html#system-provided-environment-variables
+  if ENV.dig("VCAP_SERVICES", "redis").present? && ENV.dig("VCAP_SERVICES", "redis").any?
+    instance = ENV.dig("VCAP_SERVICES", "redis").first
+    config.cache_store = :redis_cache_store, { url: instance.dig("credentials", "uri") }
+    config.session_store :cache_store, expires_in: 2.hours, key: "_sessions_store"
+  end
+
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
