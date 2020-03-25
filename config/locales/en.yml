@@ -98,7 +98,7 @@ en:
         custom_enter_error: Enter a description of the type of equipment
       are_you_a_manufacturer:
         title: What kind of business are you?
-        hint: Select the best way to describe your work
+        hint: Select the best ways to describe your work
         options:
           manufacturer:
             label: Manufacturer
