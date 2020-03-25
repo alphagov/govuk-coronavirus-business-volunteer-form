@@ -33,6 +33,6 @@ private
   PAGE = "offer_transport"
 
   def previous_path
-    offer_transport_path
+    hotel_rooms_path
   end
 end
