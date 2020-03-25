@@ -7,6 +7,7 @@ applications:
   services:
   - logit-ssl-drain
   - splunk-ssl-drain
+  - govuk-coronavirus-business-volunteer-form-redis
   env:
     GOVUK_APP_DOMAIN: cloudapps.digital
     GOVUK_WEBSITE_ROOT: www.gov.uk
