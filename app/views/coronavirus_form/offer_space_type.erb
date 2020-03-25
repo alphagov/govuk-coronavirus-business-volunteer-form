@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-offer-space-type",
   "data-question-key": "offer_space_type",
-  "id": "offer_space_type"
+  "id": "offer_space_type",
+  "novalidate": "true"
 ) do %>
   <%= render "govuk_publishing_components/components/checkboxes", {
     heading: t('coronavirus_form.questions.offer_space_type.title'),

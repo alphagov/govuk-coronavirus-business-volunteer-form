@@ -10,7 +10,8 @@
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-offer-care-qualifications",
   "data-question-key": "offer_care_qualifications",
-  "id": "what_qualifications_do_you_have"
+  "id": "what_qualifications_do_you_have",
+  "novalidate": "true"
 ) do %>
   <%= render "govuk_publishing_components/components/checkboxes", {
     heading: t('coronavirus_form.questions.offer_care_qualifications.title'),
