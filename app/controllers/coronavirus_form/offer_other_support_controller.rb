@@ -32,6 +32,6 @@ private
   NEXT_PAGE = "business_details"
 
   def previous_path
-    offer_community_support_path
+    offer_care_path
   end
 end

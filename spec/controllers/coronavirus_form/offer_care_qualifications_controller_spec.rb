@@ -33,7 +33,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
     it "redirects to next step" do
       post :submit, params: { offer_care_qualifications: selected }
 
-      expect(response).to redirect_to(offer_community_support_path)
+      expect(response).to redirect_to(offer_other_support_path)
     end
 
     it "redirects to check your answers if check your answers already seen" do
@@ -62,7 +62,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
           offer_care_qualifications_type: "Registered Nurse",
         }
 
-        expect(response).to redirect_to(offer_community_support_path)
+        expect(response).to redirect_to(offer_other_support_path)
         expect(session[session_key]).to eq ["DBS check", "Nursing or other healthcare qualification"]
         expect(session[:offer_care_qualifications_type]).to eq "Registered Nurse"
       end

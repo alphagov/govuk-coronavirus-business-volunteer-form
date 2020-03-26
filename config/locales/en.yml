@@ -287,15 +287,6 @@ en:
         custom_select_error: Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’
         offer_care_qualifications_type:
           custom_length_error: Description of your qualification must be 1000 characters or fewer
-      offer_community_support:
-         title: Can you offer community support?
-         hint: For example, giving out food, or educational support.
-         options:
-           option_yes:
-             label: "Yes"
-           option_no:
-             label: "No"
-         custom_select_error: Select if you can offer community support
       offer_other_support:
           title: Can you offer any other kind of support?
           hint: Give a description
