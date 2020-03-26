@@ -46,6 +46,6 @@ private
   end
 
   def previous_path
-    expert_space_path
+    offer_space_path
   end
 end
