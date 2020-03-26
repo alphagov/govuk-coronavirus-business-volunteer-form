@@ -59,3 +59,11 @@ which is configured in [concourse/pipeline.yml](concourse/pipeline.yml).
 
 The concourse pipeline has credentials for the `govuk-forms-deployer` user in
 GOV.UK PaaS. This user has the SpaceDeveloper role, so it can `cf push` the application.
+
+## Exporting data
+
+Data can be exported in JSON format for a single data using a Rake task:
+
+```
+rake export:form_responses["2020-03-26"]
+```
