@@ -34,6 +34,6 @@ private
   NEXT_PAGE = "offer_other_support"
 
   def previous_path
-    expert_advice_path
+    expert_advice_type_path
   end
 end

@@ -33,7 +33,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
     it "redirects to next step" do
       post :submit, params: { offer_space_type: selected }
 
-      expect(response).to redirect_to(expert_advice_path)
+      expect(response).to redirect_to(expert_advice_type_path)
     end
 
     it "redirects to check your answers if check your answers already seen" do
@@ -56,7 +56,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
           offer_space_type_other: "A really big garden.",
         }
 
-        expect(response).to redirect_to(expert_advice_path)
+        expect(response).to redirect_to(expert_advice_type_path)
         expect(session[session_key]).to eq ["Other", "Office space"]
         expect(session[:offer_space_type_other]).to eq "A really big garden."
       end

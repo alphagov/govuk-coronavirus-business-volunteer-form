@@ -41,7 +41,7 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
 private
 
   PAGE = "offer_space_type"
-  NEXT_PAGE = "expert_advice"
+  NEXT_PAGE = "expert_advice_type"
 
   def selected_other?(offer_space_type)
     offer_space_type.include?(

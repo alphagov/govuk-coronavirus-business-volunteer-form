@@ -69,6 +69,11 @@
             value: session[:expert_advice_type_other],
           })
         },
+        {
+          value: t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label"),
+          label: t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label"),
+          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")),
+        },
       ]
     } %>
     <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
