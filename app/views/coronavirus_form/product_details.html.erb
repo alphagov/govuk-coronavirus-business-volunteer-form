@@ -51,6 +51,17 @@
 
 <%= render "govuk_publishing_components/components/input", {
   label: {
+    text: t('coronavirus_form.questions.product_details.product_quantity.label'),
+  },
+  hint: t('coronavirus_form.questions.product_details.product_quantity.hint'),
+  id: "product_quantity",
+  name: "product_quantity",
+  error_message: error_items('product_quantity'),
+  value: @product["product_quantity"],
+  width: 10,
+} %>
+<%= render "govuk_publishing_components/components/input", {
+  label: {
     text: t('coronavirus_form.questions.product_details.product_cost.label'),
   },
   hint: t('coronavirus_form.questions.product_details.product_cost.hint'),

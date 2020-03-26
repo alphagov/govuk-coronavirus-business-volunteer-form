@@ -89,6 +89,7 @@ private
               end
       prod << "Product: #{product['product_name']}" if product["product_name"]
       prod << "Equipment type: #{product['equipment_type']}" if product["equipment_type"]
+      prod << "Quantity: #{product['product_quantity']}" if product["product_quantity"]
       prod << "Cost: #{product['product_cost']}" if product["product_cost"]
       prod << "Certification details: #{product['certification_details']}" if product["certification_details"]
       prod << "Location: #{product['product_location']}" if product["product_location"]
