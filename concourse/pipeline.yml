@@ -44,10 +44,7 @@ jobs:
           CF_STARTUP_TIMEOUT: 5 # minutes
           REQUIRE_BASIC_AUTH: "true"
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
-          AWS_ACCESS_KEY_ID: ((aws-access-key-id))
-          AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
           SECRET_KEY_BASE: ((secret-key-base-staging))
-          AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-staging
           HOSTNAME: govuk-coronavirus-business-volunteer-form-stg
           SENTRY_DSN: https://((sentry-dsn))
 
@@ -76,10 +73,7 @@ jobs:
           CF_STARTUP_TIMEOUT: 15 # minutes
           REQUIRE_BASIC_AUTH:
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
-          AWS_ACCESS_KEY_ID: ((aws-access-key-id-prod))
-          AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key-prod))
           SECRET_KEY_BASE: ((secret-key-base-prod))
-          AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME: coronavirus-business-prod
           HOSTNAME: govuk-coronavirus-business-volunteer-form-prod
           SENTRY_DSN: https://((sentry-dsn))
 

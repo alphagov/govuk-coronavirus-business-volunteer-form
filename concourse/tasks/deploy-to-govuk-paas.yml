@@ -19,9 +19,6 @@ params:
   HOSTNAME:
   INSTANCES:
   BASIC_AUTH_PASSWORD:
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME:
 run:
   dir: src
   path: sh
@@ -39,16 +36,12 @@ run:
 
       cf scale -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
 
-      cf set-env govuk-coronavirus-business-volunteer-form AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME "$AWS_DYNAMODB_SUBMISSIONS_TABLE_NAME"
       if [[ "${REQUIRE_BASIC_AUTH:-}" = "true" ]]; then
         cf set-env govuk-coronavirus-business-volunteer-form REQUIRE_BASIC_AUTH "$REQUIRE_BASIC_AUTH"
       fi
       cf set-env govuk-coronavirus-business-volunteer-form BASIC_AUTH_PASSWORD "$BASIC_AUTH_PASSWORD"
       cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN"
       cf set-env govuk-coronavirus-business-volunteer-form SENTRY_CURRENT_ENV "$CF_SPACE"
-      cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
-      cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
-      cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
 
       cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
       cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname "$HOSTNAME"

@@ -5,9 +5,9 @@ ruby File.read(".ruby-version").strip
 source "https://rubygems.org"
 
 gem "bootsnap", "~> 1"
-gem "dynamoid"
 gem "govuk_app_config", "~> 2.1.1"
 gem "govuk_publishing_components", "~> 21.35.0"
+gem "pg", "~> 1"
 gem "puma", "~> 4.3"
 gem "rails", "~> 6.0.2"
 gem "redis"
