@@ -52,7 +52,7 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
 
     it "redirects to next step for a No response" do
       post :submit, params: { offer_care: selected_no }
-      expect(response).to redirect_to(offer_community_support_path)
+      expect(response).to redirect_to(offer_other_support_path)
     end
 
     it "validates any option is chosen" do
