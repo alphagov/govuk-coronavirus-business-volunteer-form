@@ -122,7 +122,7 @@ en:
           hint: Approximate amount, for example 10, 500, 10000.
           custom_error: Enter the quantity of the product.
         product_cost:
-          label: Cost of product in pounds
+          label: Cost per item, in pounds
           hint: For example, 23.99. Enter 0 if you will donate it.
           custom_error: Enter a cost, like 23.99, or 0 if you will donate it. Do not put the £ symbol.
         certification_details:
