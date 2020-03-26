@@ -15,6 +15,7 @@
 ) do %>
 <%= render "govuk_publishing_components/components/checkboxes", {
   heading: t('coronavirus_form.questions.location.title'),
+  hint_text: t('coronavirus_form.questions.location.hint'),
   is_page_heading: true,
   name: "location[]",
   error: error_items('location'),
