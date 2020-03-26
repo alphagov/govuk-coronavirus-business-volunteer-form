@@ -47,6 +47,6 @@ private
   end
 
   def previous_path
-    offer_other_support_path
+    location_path
   end
 end
