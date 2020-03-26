@@ -227,38 +227,31 @@ en:
         offer_space_type_other:
           custom_length_error: Description of your expertise must be 1000 characters or fewer
         custom_select_error: Select the kind of space you can offer
-      expert_advice:
-        title: "Can you offer expert advice?"
-        hint: "For example, consultancy experience or expertise in a specific sector."
-        options:
-          option_yes:
-            label: "Yes"
-          option_no:
-            label: "No"
-        custom_select_error: Select if you can offer expert advice
       expert_advice_type:
-        title: "What kind of expert advice can you offer?"
-        hint: "Select the types of expertise or consultancy experience you have"
+        title: "What kind of expertise can you offer?"
+        hint: "Select the types of support you can offer"
         options:
           medical:
-            label: "Medical expertise"
+            label: "Medical"
           engineering:
-            label: "Engineering expertise"
+            label: "Engineering"
           communications:
-            label: "Communications expertise"
+            label: "Communications"
           construction:
-            label: "Construction expertise"
+            label: "Construction"
           project_management:
-            label: "Project management or procurement expertise"
+            label: "Project management or procurement"
           it:
-            label: "IT services expertise"
+            label: "IT services"
           manufacturing:
-            label: "Manufacturing expertise"
+            label: "Manufacturing"
           other:
             label: "Other"
             input:
               label: "Give a description"
             error_message: "Enter the best way to describe the type of expertise you have"
+          no_expertise:
+            label: "I cannot offer expertise"
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
         expert_advice_type_other:
           custom_length_error: Description of your expertise must be 1000 characters or fewer
