@@ -94,7 +94,7 @@ Rails.application.configure do
   end
 
   # Do not dump schema after migrations.
-  # config.active_record.dump_schema_after_migration = false
+  config.active_record.dump_schema_after_migration = false
 
   # https://docs.cloud.service.gov.uk/deploying_services/redis
   # https://docs.cloud.service.gov.uk/deploying_apps.html#system-provided-environment-variables
