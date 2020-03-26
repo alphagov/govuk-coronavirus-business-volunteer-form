@@ -35,7 +35,7 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
 
     it "redirects to next step for a 'No' response" do
       post :submit, params: { offer_space: "No" }
-      expect(response).to redirect_to(expert_advice_path)
+      expect(response).to redirect_to(expert_advice_type_path)
     end
 
     it "redirects to next step for a 'Yes' response" do
