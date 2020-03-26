@@ -3,8 +3,8 @@
 class CoronavirusForm::ProductDetailsController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
-  REQUIRED_FIELDS = %w(product_name product_cost certification_details lead_time).freeze
-  TEXT_FIELDS = %w(product_name product_cost certification_details product_postcode product_url lead_time).freeze
+  REQUIRED_FIELDS = %w(product_name product_quantity product_cost certification_details lead_time).freeze
+  TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
 
   def show
     session["product_details"] ||= []
@@ -86,6 +86,7 @@ private
       "product_id" => sanitize(params[:product_id]).presence || SecureRandom.uuid,
       "equipment_type" => sanitize(params[:equipment_type]).presence,
       "product_name" => sanitize(params[:product_name]).presence,
+      "product_quantity" => sanitize(params[:product_quantity]).presence,
       "product_cost" => sanitize(params[:product_cost]).presence,
       "certification_details" => sanitize(params[:certification_details]).presence,
       "product_location" => sanitize(params[:product_location]).presence,

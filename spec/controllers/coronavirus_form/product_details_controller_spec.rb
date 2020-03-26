@@ -10,6 +10,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
     {
       "product_id" => product_id,
       "product_name" => "Defibrillator",
+      "product_quantity" => "100",
       "product_cost" => "£10.99",
       "certification_details" => "CE",
       "product_location" => "United Kingdom",

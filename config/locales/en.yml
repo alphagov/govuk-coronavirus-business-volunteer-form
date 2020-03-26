@@ -117,6 +117,10 @@ en:
         product_name:
           label: Name of product
           custom_error: Enter the name of the product
+        product_quantity:
+          label: Quantity of this product
+          hint: Approximate amount, for example 10, 500, 10000.
+          custom_error: Enter the quantity of the product.
         product_cost:
           label: Cost of product in pounds
           hint: For example, 23.99. Enter 0 if you will donate it.
