@@ -29,7 +29,7 @@ class CoronavirusForm::OfferOtherSupportController < ApplicationController
 private
 
   PAGE = "offer_other_support"
-  NEXT_PAGE = "business_details"
+  NEXT_PAGE = "location"
 
   def previous_path
     offer_care_path
