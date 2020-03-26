@@ -301,6 +301,35 @@ en:
           hint: Give a description
           offer_other_support:
             custom_length_error: Description of the support you can offer must be 1000 characters or fewer
+      location:
+        title: Where can you offer your services?
+        hint: If your service is available anywhere, please select all the regions
+        options:
+          east_of_england:
+            label: East of England
+          east_midlands:
+            label: East Midlands
+          west_midland:
+            label: West Midlands
+          london:
+            label: London
+          north_east:
+            label: North East
+          north_west:
+            label: North West
+          south_east:
+            label: South East
+          south_west:
+            label: South West
+          yorkshire:
+            label: Yorkshire and the Humber
+          northern_ireland:
+            label: Northern Ireland
+          scotland:
+            label: Scotland
+          wales:
+            label: Wales
+        custom_select_error: Select all the areas where you can offer your services
       business_details:
         title: Your business details
         company_name:

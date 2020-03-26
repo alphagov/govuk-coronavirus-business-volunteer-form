@@ -1,0 +1,30 @@
+<% content_for :title do %><%= t('coronavirus_form.questions.location.title') %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.questions.location.title') %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-business-transport-type",
+  "data-question-key": "location",
+  "id": "location",
+  "novalidate": "true"
+) do %>
+<%= render "govuk_publishing_components/components/checkboxes", {
+  heading: t('coronavirus_form.questions.location.title'),
+  is_page_heading: true,
+  name: "location[]",
+  error: error_items('location'),
+  items: t('coronavirus_form.questions.location.options').map do |_, item|
+    {
+      value:  item[:label],
+      label:  item[:label],
+      checked: session[:location].include?(item[:label]),
+    }
+  end
+} %>
+<%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
+<% end %>

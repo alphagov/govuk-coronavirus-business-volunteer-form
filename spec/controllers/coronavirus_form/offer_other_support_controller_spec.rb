@@ -38,7 +38,7 @@ RSpec.describe CoronavirusForm::OfferOtherSupportController, type: :controller d
 
     it "takes you to the next page regardless of input" do
       post :submit
-      expect(response).to redirect_to(business_details_path)
+      expect(response).to redirect_to(location_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
