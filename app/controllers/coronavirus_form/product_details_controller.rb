@@ -35,19 +35,17 @@ private
 
   NEXT_PAGE = "additional_product"
   PAGE = "product_details"
+  PPE = I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label")
+  UK = I18n.t("coronavirus_form.questions.product_details.product_location.options.option_uk.label")
 
   helper_method :selected_ppe?
 
   def selected_ppe?
-    @product["medical_equipment_type"] == I18n.t(
-      "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-    )
+    @product["medical_equipment_type"] == PPE
   end
 
   def selected_made_in_uk?
-    @product["product_location"] == I18n.t(
-      "coronavirus_form.questions.product_details.product_location.options.option_uk.label",
-    )
+    @product["product_location"] == UK
   end
 
   def validate_fields(product)

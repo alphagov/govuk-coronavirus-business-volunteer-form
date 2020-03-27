@@ -3,8 +3,6 @@
 class CoronavirusForm::OfferCareQualificationsController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
-  TEXT_FIELDS = %w(offer_care_qualifications_type).freeze
-
   def show
     session[:offer_care_qualifications] ||= []
     render "coronavirus_form/#{PAGE}"
@@ -21,7 +19,7 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
       validate_checkbox_field(
         PAGE,
         values: offer_care_qualifications,
-        allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
+        allowed_values: ALLOWED_VALUES,
         other: offer_care_qualifications_type,
         other_field: "nursing_or_healthcare_qualification",
       )
@@ -40,6 +38,8 @@ private
 
   PAGE = "offer_care_qualifications"
   NEXT_PAGE = "offer_other_support"
+  TEXT_FIELDS = %w(offer_care_qualifications_type).freeze
+  ALLOWED_VALUES = I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) }
 
   def previous_path
     offer_care_path

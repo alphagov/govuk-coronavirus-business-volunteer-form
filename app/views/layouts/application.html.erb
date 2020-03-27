@@ -17,7 +17,9 @@
       document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
     <%= render "govuk_publishing_components/components/skip_link" %>
-    <%= render "govuk_publishing_components/components/layout_header", { environment: "public" } %>
+    <% cache [publishing_components_version, "header-v1"] do %>
+      <%= render "govuk_publishing_components/components/layout_header", { environment: "public" } %>
+    <% end %>
     <div class="govuk-width-container">
       <%= yield(:back_link) %>
       <main class="govuk-main-wrapper<%= " govuk-main-wrapper--l" if yield(:back_link).blank?%>" id="main-content" role="main">
@@ -29,16 +31,18 @@
         </div>
       </main>
     </div>
-    <%= render "govuk_publishing_components/components/layout_footer", {
-      meta: {
-        items: [
-          {
-            href: "/privacy",
-            text: t("privacy_notice_footer_link.label")
-          },
-        ]
-      }
-    } %>
+    <% cache [publishing_components_version, "footer-v1", t("privacy_notice_footer_link.label")] do %>
+      <%= render "govuk_publishing_components/components/layout_footer", {
+        meta: {
+          items: [
+            {
+              href: "/privacy",
+              text: t("privacy_notice_footer_link.label")
+            },
+          ]
+        }
+      } %>
+    <% end %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

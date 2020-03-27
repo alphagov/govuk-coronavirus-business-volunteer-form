@@ -24,7 +24,7 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
       validate_checkbox_field(
         PAGE,
         values: offer_space_type,
-        allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
+        allowed_values: ALLOWED_VALUES,
         other: offer_space_type_other,
       )
 
@@ -42,11 +42,11 @@ private
 
   PAGE = "offer_space_type"
   NEXT_PAGE = "expert_advice_type"
+  ALLOWED_VALUES = I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) }
+  OTHER = I18n.t("coronavirus_form.questions.#{PAGE}.options.other.label")
 
   def selected_other?(offer_space_type)
-    offer_space_type.include?(
-      I18n.t("coronavirus_form.questions.#{PAGE}.options.other.label"),
-    )
+    offer_space_type.include?(OTHER)
   end
 
   def previous_path

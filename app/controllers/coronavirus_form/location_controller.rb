@@ -16,7 +16,7 @@ class CoronavirusForm::LocationController < ApplicationController
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: location,
-      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
+      allowed_values: ALLOWED_VALUES,
     )
 
     if invalid_fields.any?
@@ -32,6 +32,7 @@ class CoronavirusForm::LocationController < ApplicationController
 private
 
   PAGE = "location"
+  ALLOWED_VALUES = I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) }
 
   def previous_path
     offer_other_support_path

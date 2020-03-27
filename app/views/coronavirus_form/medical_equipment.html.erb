@@ -13,18 +13,20 @@
   "id": "medical_equipment",
   "novalidate": "true"
 ) do %>
-<%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.questions.medical_equipment.title'),
-  is_page_heading: true,
-  name: "medical_equipment",
-  error_message: error_items('medical_equipment'),
-  items: t('coronavirus_form.questions.medical_equipment.options').map do |_, item|
-    {
-      value: item[:label],
-      text: item[:label],
-      checked: session[:medical_equipment] == item[:label],
-    }
-  end
-} %>
+<% cache [publishing_components_version, "medical-equipment-v1", session[:medical_equipment]] do %>
+  <%= render "govuk_publishing_components/components/radio", {
+    heading: t('coronavirus_form.questions.medical_equipment.title'),
+    is_page_heading: true,
+    name: "medical_equipment",
+    error_message: error_items('medical_equipment'),
+    items: t('coronavirus_form.questions.medical_equipment.options').map do |_, item|
+      {
+        value: item[:label],
+        text: item[:label],
+        checked: session[:medical_equipment] == item[:label],
+      }
+    end
+  } %>
+<% end %>
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
 <% end %>

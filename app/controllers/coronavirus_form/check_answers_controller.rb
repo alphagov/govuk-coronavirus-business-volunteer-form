@@ -10,24 +10,26 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   end
 
   def submit
-    submission_reference = reference_number
-
-    session[:reference_number] = submission_reference
+    session[:reference_number] = reference_number
     FormResponse.create(form_response: session)
 
     reset_session
 
-    redirect_to controller: "coronavirus_form/thank_you", action: "show", reference_number: submission_reference
+    redirect_to controller: "coronavirus_form/thank_you", action: "show", reference_number: reference_number
   end
 
 private
 
   helper_method :items_part_1, :items_part_2
 
+  QUESTIONS = YAML.load_file(Rails.root.join("config/locales/en.yml")).dig("en", "coronavirus_form", "questions").keys
+
   def reference_number
-    timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%S")
-    random_id = SecureRandom.hex(3).upcase
-    "#{timestamp}-#{random_id}"
+    @reference_number ||= begin
+      timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%S")
+      random_id = SecureRandom.hex(3).upcase
+      "#{timestamp}-#{random_id}"
+    end
   end
 
   def previous_path
@@ -71,15 +73,17 @@ private
   end
 
   def additional_product_index
-    items.index { |item| item[:field] === t("coronavirus_form.questions.additional_product.title") }
+    @additional_product_index ||= items.index do |item|
+      item[:field] == t("coronavirus_form.questions.additional_product.title")
+    end
   end
 
   def items_part_1
-    items.select.with_index { |_, index| index < additional_product_index }
+    items.slice(0, additional_product_index)
   end
 
   def items_part_2
-    items.select.with_index { |_, index| index > additional_product_index }
+    items.slice(additional_product_index + 1..)
   end
 
   def product_details(products)
@@ -160,7 +164,6 @@ private
   end
 
   def questions
-    @questions ||= YAML.load_file(Rails.root.join("config/locales/en.yml"))
-    @questions["en"]["coronavirus_form"]["questions"].keys
+    @questions ||= QUESTIONS
   end
 end

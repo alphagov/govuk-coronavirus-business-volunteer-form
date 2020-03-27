@@ -17,6 +17,7 @@
   "id": "product_details",
   "novalidate": "true"
 ) do %>
+<% cache [publishing_components_version, "product-v1", @product] do %>
 <%= tag.input type: "hidden", name: "product_id", value: @product["product_id"] %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -132,4 +133,5 @@
   width: 10,
 } %>
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
+<% end %>
 <% end %>

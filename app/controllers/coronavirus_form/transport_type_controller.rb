@@ -20,8 +20,8 @@ class CoronavirusForm::TransportTypeController < ApplicationController
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: transport_type,
-      allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
-                      ) +
+      allowed_values: ALLOWED_VALUES,
+    ) +
       validate_mandatory_text_fields(PAGE, REQUIRED_FIELDS) +
       validate_field_response_length(PAGE, TEXT_FIELDS)
 
@@ -38,6 +38,7 @@ class CoronavirusForm::TransportTypeController < ApplicationController
 private
 
   PAGE = "transport_type"
+  ALLOWED_VALUES = I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) }
 
   def previous_path
     offer_transport_path

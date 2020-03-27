@@ -17,8 +17,13 @@ class ApplicationController < ActionController::Base
 private
 
   helper_method :previous_path
+  helper_method :publishing_components_version
 
   def previous_path
     raise NotImplementedError, "Define a previous path"
+  end
+
+  def publishing_components_version
+    Gem.loaded_specs["govuk_publishing_components"].version.version
   end
 end
