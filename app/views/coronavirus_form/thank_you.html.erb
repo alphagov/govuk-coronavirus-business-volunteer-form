@@ -3,11 +3,4 @@
   title: t("coronavirus_form.thank_you.title")
 } %>
 
-<%= tag.p t("coronavirus_form.thank_you.sub_heading"), class: "govuk-body" %>
-
-<%= tag.p tag.strong(
-      link_to( t('coronavirus_form.thank_you.next_text'),
-        t('coronavirus_form.thank_you.next_link'),
-        class: "govuk-link",
-      )
-    ), class: "govuk-body" %>
+<%= sanitize(t('coronavirus_form.thank_you.description')) %>
