@@ -66,12 +66,16 @@ private
     end
   end
 
+  def additional_product_index
+    items.index { |item| item[:field] === t("coronavirus_form.questions.additional_product.title") }
+  end
+
   def items_part_1
-    items.select.with_index { |_, index| index < questions.index("additional_product") }
+    items.select.with_index { |_, index| index < additional_product_index }
   end
 
   def items_part_2
-    items.select.with_index { |_, index| index > questions.index("additional_product") }
+    items.select.with_index { |_, index| index > additional_product_index }
   end
 
   def product_details(products)
