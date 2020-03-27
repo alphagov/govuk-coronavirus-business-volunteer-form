@@ -15,7 +15,7 @@
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t('coronavirus_form.questions.medical_equipment_type.title'),
-  hint: "Give details for one product at a time.",
+  hint: t('coronavirus_form.questions.medical_equipment_type.hint'),
   is_page_heading: true,
   name: "medical_equipment_type",
   error: error_items('medical_equipment_type'),
