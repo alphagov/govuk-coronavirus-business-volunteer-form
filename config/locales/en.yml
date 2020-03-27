@@ -181,9 +181,9 @@ en:
         title: Can you offer hotel rooms?
         options:
           yes_staying_in:
-            label: "Yes - for people to stay in"
+            label: "Yes – for people to stay in"
           yes_all_uses:
-            label: "Yes - for any use"
+            label: "Yes – for any use"
           no_option:
             label: "No"
         custom_select_error: Select if you can offer hotel rooms
