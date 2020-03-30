@@ -9,7 +9,7 @@ class CoronavirusForm::LocationController < ApplicationController
   end
 
   def submit
-    location = Array(params[:location]).map { |item| sanitize(item).presence }.compact
+    location = Array(params[:location]).map { |item| strip_tags(item).presence }.compact
 
     session[:location] = location
 

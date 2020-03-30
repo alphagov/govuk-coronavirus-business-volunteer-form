@@ -50,9 +50,9 @@ private
 
   def sanitized_product(params)
     {
-      "product_id" => sanitize(params[:product_id]).presence || SecureRandom.uuid,
-      "medical_equipment_type" => sanitize(params[:medical_equipment_type]).presence,
-      "medical_equipment_type_other" => sanitize(params[:medical_equipment_type_other]).presence,
+      "product_id" => strip_tags(params[:product_id]).presence || SecureRandom.uuid,
+      "medical_equipment_type" => strip_tags(params[:medical_equipment_type]).presence,
+      "medical_equipment_type_other" => strip_tags(params[:medical_equipment_type_other]).presence,
     }
   end
 end

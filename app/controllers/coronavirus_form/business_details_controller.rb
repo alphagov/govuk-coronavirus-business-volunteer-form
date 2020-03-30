@@ -39,10 +39,10 @@ private
 
   def sanitized_business_details(params)
     {
-      "company_name" => sanitize(params[:company_name]).presence,
-      "company_number" => sanitize(params[:company_number]).presence,
-      "company_size" => sanitize(params[:company_size]).presence,
-      "company_location" => sanitize(params[:company_location]).presence,
+      "company_name" => strip_tags(params[:company_name]).presence,
+      "company_number" => strip_tags(params[:company_number]).presence,
+      "company_size" => strip_tags(params[:company_size]).presence,
+      "company_location" => strip_tags(params[:company_location]).presence,
     }
   end
 

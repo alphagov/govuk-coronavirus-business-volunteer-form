@@ -9,8 +9,8 @@ class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
   end
 
   def submit
-    expert_advice_type = Array(params[:expert_advice_type]).map { |item| sanitize(item).presence }.compact
-    expert_advice_type_other = sanitize(params[:expert_advice_type_other]).presence
+    expert_advice_type = Array(params[:expert_advice_type]).map { |item| strip_tags(item).presence }.compact
+    expert_advice_type_other = strip_tags(params[:expert_advice_type_other]).presence
     session[:expert_advice_type] = expert_advice_type
     session[:expert_advice_type_other] = if selected_other?(expert_advice_type)
                                            expert_advice_type_other

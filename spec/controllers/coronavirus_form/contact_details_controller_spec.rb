@@ -46,6 +46,18 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
       expect(session[session_key]).to eq contact_details
     end
 
+    it "strips html characters" do
+      nasty_params = {
+        "contact_name" => "<h1 class='big'><p>John</p></h1><script></script>",
+        "role" => "<script></script>CEO",
+        "phone_number" => "<img src='x' onerror=alert(124)>0118 999 881 999 119 7253",
+        "email" => "john@example.org",
+      }
+
+      post :submit, params: nasty_params
+      expect(session[session_key]).to eq contact_details
+    end
+
     it "redirects to next step when all required fields are provided" do
       post :submit, params: params
 

@@ -10,7 +10,7 @@ class CoronavirusForm::OfferOtherSupportController < ApplicationController
   end
 
   def submit
-    offer_other_support = sanitize(params[:offer_other_support]).presence
+    offer_other_support = strip_tags(params[:offer_other_support]).presence
 
     session[:offer_other_support] = offer_other_support
 

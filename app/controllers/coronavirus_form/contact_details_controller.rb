@@ -13,10 +13,10 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
 
   def submit
     session[:contact_details] ||= {}
-    session[:contact_details]["contact_name"] = sanitize(params[:contact_name]).presence
-    session[:contact_details]["role"] = sanitize(params[:role]).presence
-    session[:contact_details]["phone_number"] = sanitize(params[:phone_number]).presence
-    session[:contact_details]["email"] = sanitize(params[:email]).presence
+    session[:contact_details]["contact_name"] = strip_tags(params[:contact_name]).presence
+    session[:contact_details]["role"] = strip_tags(params[:role]).presence
+    session[:contact_details]["phone_number"] = strip_tags(params[:phone_number]).presence
+    session[:contact_details]["email"] = strip_tags(params[:email]).presence
 
     invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
       validate_fields(session[:contact_details])

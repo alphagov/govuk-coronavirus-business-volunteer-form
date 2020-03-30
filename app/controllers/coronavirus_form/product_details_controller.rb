@@ -88,16 +88,16 @@ private
 
   def sanitized_product(params)
     {
-      "product_id" => sanitize(params[:product_id]).presence || SecureRandom.uuid,
-      "equipment_type" => sanitize(params[:equipment_type]).presence,
-      "product_name" => sanitize(params[:product_name]).presence,
-      "product_quantity" => sanitize(params[:product_quantity]).presence,
-      "product_cost" => sanitize(params[:product_cost]).presence,
-      "certification_details" => sanitize(params[:certification_details]).presence,
-      "product_location" => sanitize(params[:product_location]).presence,
-      "product_postcode" => sanitize(params[:product_postcode]).presence,
-      "product_url" => sanitize(params[:product_url]).presence,
-      "lead_time" => sanitize(params[:lead_time]).presence,
+      "product_id" => strip_tags(params[:product_id]).presence || SecureRandom.uuid,
+      "equipment_type" => strip_tags(params[:equipment_type]).presence,
+      "product_name" => strip_tags(params[:product_name]).presence,
+      "product_quantity" => strip_tags(params[:product_quantity]).presence,
+      "product_cost" => strip_tags(params[:product_cost]).presence,
+      "certification_details" => strip_tags(params[:certification_details]).presence,
+      "product_location" => strip_tags(params[:product_location]).presence,
+      "product_postcode" => strip_tags(params[:product_postcode]).presence,
+      "product_url" => strip_tags(params[:product_url]).presence,
+      "lead_time" => strip_tags(params[:lead_time]).presence,
     }
   end
 
