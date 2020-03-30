@@ -23,7 +23,7 @@
     {
       value:  item[:label],
       label:  item[:label],
-      checked: session[:location].include?(item[:label]),
+      checked: session.fetch(:location, []).include?(item[:label]),
     }
   end
 } %>

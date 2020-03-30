@@ -1,37 +1,28 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::OfferCareController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
-  def show
-    render "coronavirus_form/#{PAGE}"
-  end
-
   def submit
     offer_care = strip_tags(params[:offer_care]).presence
     session[:offer_care] = offer_care
 
     invalid_fields = validate_radio_field(
-      PAGE,
+      controller_name,
       radio: offer_care,
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
-    elsif session[:offer_care] == I18n.t("coronavirus_form.questions.#{PAGE}.options.option_yes.label")
-      redirect_to controller: "coronavirus_form/offer_care_qualifications", action: "show"
+      render controller_path
+    elsif session[:offer_care] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_yes.label")
+      redirect_to offer_care_qualifications_path
     elsif session["check_answers_seen"]
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
+      redirect_to check_your_answers_path
     else
-      redirect_to controller: "coronavirus_form/#{NEXT_PAGE}", action: "show"
+      redirect_to offer_other_support_path
     end
   end
 
 private
-
-  PAGE = "offer_care"
-  NEXT_PAGE = "offer_other_support"
 
   def previous_path
     expert_advice_type_path

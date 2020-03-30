@@ -8,6 +8,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
 
   describe "GET show" do
     it "renders the form" do
+      session["medical_equipment"] = "Yes"
       get :show
       expect(response).to render_template(current_template)
     end

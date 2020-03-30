@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::MedicalEquipmentController < ApplicationController
-  def show
-    render "coronavirus_form/#{PAGE}"
-  end
+  skip_before_action :check_first_question_answered
 
   def submit
     medical_equipment = strip_tags(params[:medical_equipment]).presence
@@ -11,29 +9,27 @@ class CoronavirusForm::MedicalEquipmentController < ApplicationController
     session[:medical_equipment] = medical_equipment
 
     invalid_fields = validate_radio_field(
-      PAGE,
+      controller_name,
       radio: medical_equipment,
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
     elsif session["check_answers_seen"]
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
-    elsif session[:medical_equipment] == I18n.t("coronavirus_form.questions.#{PAGE}.options.option_yes.label")
+      redirect_to check_your_answers_path
+    elsif session[:medical_equipment] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_yes.label")
       # YES goes to what kind of business are you / are_you_a_manufacturer
-      redirect_to controller: "coronavirus_form/are_you_a_manufacturer", action: "show"
-    elsif session[:medical_equipment] == I18n.t("coronavirus_form.questions.#{PAGE}.options.option_no.label")
+      redirect_to are_you_a_manufacturer_path
+    elsif session[:medical_equipment] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
       # NO goes to hotel rooms
-      redirect_to controller: "coronavirus_form/hotel_rooms", action: "show"
+      redirect_to hotel_rooms_path
     else
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
     end
   end
 
 private
-
-  PAGE = "medical_equipment"
 
   def previous_path
     "/"

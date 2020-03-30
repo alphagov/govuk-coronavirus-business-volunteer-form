@@ -23,12 +23,12 @@
       {
         value: t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label'),
         label: t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label'),
-        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label')),
+        checked: session.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.options.dbs_check.label')),
       },
       {
         value: t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label'),
         label: t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label'),
-        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label')),
+        checked: session.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.label')),
         conditional: render("govuk_publishing_components/components/textarea", {
           label: {
             text: t('coronavirus_form.questions.offer_care_qualifications.options.nursing_or_healthcare_qualification.input.label'),
@@ -42,7 +42,7 @@
       {
         value: t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label'),
         label: t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label'),
-        checked: session[:offer_care_qualifications].include?(t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label')),
+        checked: session.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.options.no_qualification.label')),
       },
     ]
   } %>

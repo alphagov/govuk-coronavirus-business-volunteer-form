@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ContactDetailsController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
   REQUIRED_FIELDS = %w(contact_name phone_number).freeze
   TEXT_FIELDS = %w(contact_name role phone_number email).freeze
 
   def show
     session[:contact_details] ||= {}
-    render "coronavirus_form/#{PAGE}"
+    super
   end
 
   def submit
@@ -18,20 +16,18 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
     session[:contact_details]["phone_number"] = strip_tags(params[:phone_number]).presence
     session[:contact_details]["email"] = strip_tags(params[:email]).presence
 
-    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+    invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
       validate_fields(session[:contact_details])
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
     else
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
+      redirect_to check_your_answers_path
     end
   end
 
 private
-
-  PAGE = "contact_details"
 
   def validate_fields(contact_details)
     missing_fields = validate_missing_fields(contact_details)
@@ -45,9 +41,9 @@ private
 
       invalid_fields << {
         field: field.to_s,
-        text: t("coronavirus_form.questions.#{PAGE}.#{field}.custom_error",
+        text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
                 default: t("coronavirus_form.errors.missing_mandatory_text_field",
-                           field: t("coronavirus_form.questions.#{PAGE}.#{field}.label")).humanize),
+                           field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
       }
     end
   end
