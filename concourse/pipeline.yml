@@ -11,14 +11,6 @@ resource_types:
       repository: rbakergds/travis-resource
       tag: latest
 
-  - name: every-day-after-midnight
-    type: time
-    icon: clock-outline
-    source:
-      start: 00:00
-      stop: 01:00
-      location: Europe/London
-
 resources:
   - name: govuk-coronavirus-business-volunteer-form
     type: git
@@ -35,6 +27,14 @@ resources:
       travis-token: ((travis-api-token))
       branch: master
       pro: true
+
+  - name: every-day-after-midnight
+    type: time
+    icon: clock-outline
+    source:
+      start: 00:00
+      stop: 01:00
+      location: Europe/London
 
 jobs:
   - name: deploy-to-staging
