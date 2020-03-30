@@ -85,7 +85,7 @@ en:
         custom_select_error: Select if you have medical equipment to offer
       medical_equipment_type:
         title: Tell us about the medical equipment you can offer
-        hint: Give details for one product at a time.
+        hint: Give details for one product at a time
         options:
           number_ppe:
             label: "Personal protection equipment"
@@ -101,7 +101,7 @@ en:
           custom_length_error: Description of the equipment must be 1000 characters or fewer
       are_you_a_manufacturer:
         title: What kind of business are you?
-        hint: Select the best ways to describe your work.
+        hint: Select the best ways to describe your work
         options:
           manufacturer:
             label: Manufacturer
@@ -197,6 +197,7 @@ en:
         custom_select_error: Select if you can offer transport or logistics
       transport_type:
         title: What kind of transport can you offer?
+        hint: Select all that apply
         options:
           moving_people:
             label: "Moving people"
@@ -214,6 +215,7 @@ en:
         custom_select_error: Select if you can offer space
       offer_space_type:
         title: What kind of space can you offer?
+        hint: Select all that apply
         options:
           warehouse_space:
             label: "Warehouse space"
@@ -229,7 +231,7 @@ en:
         custom_select_error: Select the kind of space you can offer
       expert_advice_type:
         title: "What kind of expertise can you offer?"
-        hint: "Select the types of support you can offer."
+        hint: "Select the types of support you can offer"
         options:
           medical:
             label: "Medical"
@@ -266,7 +268,7 @@ en:
         custom_select_error: Select if you can offer social care or childcare
       offer_care_qualifications:
         title: "What qualifications or certificates do you have?"
-        hint: "Select the qualifications that you or people in your business have."
+        hint: "Select the qualifications that you or people in your business have"
         options:
           dbs_check:
             label: "DBS check"
@@ -282,7 +284,7 @@ en:
           custom_length_error: Description of your qualification must be 1000 characters or fewer
       offer_other_support:
           title: Can you offer any other kind of support?
-          hint: Give a description.
+          hint: Give a description
           offer_other_support:
             custom_length_error: Description of the support you can offer must be 1000 characters or fewer
       location:
