@@ -47,7 +47,7 @@ private
         end
 
         if question.eql?("transport_type")
-          next transport_type(question)
+          next transport_type
         end
 
         value = case session[question]
@@ -116,16 +116,16 @@ private
     end
   end
 
-  def transport_type(question)
+  def transport_type
     answer = []
-    answer << session["transport_type"].flatten.to_sentence
+    answer << Array(session["transport_type"]).flatten.to_sentence
     answer << session["transport_description"]
 
     [{
-      field: t("coronavirus_form.questions.#{question}.title"),
+      field: t("coronavirus_form.questions.transport_type.title"),
       value: sanitize(answer.join("<br>")),
       edit: {
-        href: "#{question.dasherize}?change-answer",
+        href: "transport-type?change-answer",
       },
     }]
   end
