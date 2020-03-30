@@ -8,7 +8,7 @@ class CoronavirusForm::OfferCareController < ApplicationController
   end
 
   def submit
-    offer_care = sanitize(params[:offer_care]).presence
+    offer_care = strip_tags(params[:offer_care]).presence
     session[:offer_care] = offer_care
 
     invalid_fields = validate_radio_field(

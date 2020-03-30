@@ -9,7 +9,7 @@ class CoronavirusForm::TransportTypeController < ApplicationController
   end
 
   def submit
-    transport_type = Array(params[:transport_type]).map { |item| sanitize(item).presence }.compact
+    transport_type = Array(params[:transport_type]).map { |item| strip_tags(item).presence }.compact
 
     session[:transport_type] = transport_type
 

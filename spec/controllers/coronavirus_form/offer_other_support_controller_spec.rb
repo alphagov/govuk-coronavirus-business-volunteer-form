@@ -31,9 +31,18 @@ RSpec.describe CoronavirusForm::OfferOtherSupportController, type: :controller d
       expect(session[session_key]).to eq text_response
     end
 
-    it "cleans sanitizers any html in the text response" do
+    it "sanitizers any html in the text response" do
       post :submit, params: { offer_other_support: evil_script_response }
       expect(session[session_key]).to eq "I offer you, my hacking script!"
+    end
+
+    it "strips html characters" do
+      params = {
+        "offer_other_support" => '<a href="https://www.example.com">Link</a>',
+      }
+
+      post :submit, params: params
+      expect(session[session_key]).to eq "Link"
     end
 
     it "takes you to the next page regardless of input" do

@@ -8,7 +8,7 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
   end
 
   def submit
-    offer_space = sanitize(params[:offer_space]).presence
+    offer_space = strip_tags(params[:offer_space]).presence
     session[:offer_space] = offer_space
 
     invalid_fields = validate_radio_field(

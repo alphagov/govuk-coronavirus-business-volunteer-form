@@ -6,7 +6,7 @@ class CoronavirusForm::MedicalEquipmentController < ApplicationController
   end
 
   def submit
-    medical_equipment = sanitize(params[:medical_equipment]).presence
+    medical_equipment = strip_tags(params[:medical_equipment]).presence
 
     session[:medical_equipment] = medical_equipment
 

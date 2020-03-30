@@ -11,8 +11,8 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
   end
 
   def submit
-    offer_space_type = Array(params[:offer_space_type]).map { |item| sanitize(item).presence }.compact
-    offer_space_type_other = sanitize(params[:offer_space_type_other]).presence
+    offer_space_type = Array(params[:offer_space_type]).map { |item| strip_tags(item).presence }.compact
+    offer_space_type_other = strip_tags(params[:offer_space_type_other]).presence
     session[:offer_space_type] = offer_space_type
     session[:offer_space_type_other] = if selected_other?(offer_space_type)
                                          offer_space_type_other

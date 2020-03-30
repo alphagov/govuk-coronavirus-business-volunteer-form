@@ -8,7 +8,7 @@ class CoronavirusForm::AdditionalProductController < ApplicationController
   end
 
   def submit
-    additional_product = sanitize(params[:additional_product]).presence
+    additional_product = strip_tags(params[:additional_product]).presence
 
     invalid_fields = validate_radio_field(
       PAGE,

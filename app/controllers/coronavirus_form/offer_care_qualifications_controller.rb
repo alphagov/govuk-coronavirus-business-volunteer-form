@@ -11,8 +11,8 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
   end
 
   def submit
-    offer_care_qualifications = Array(params[:offer_care_qualifications]).map { |item| sanitize(item).presence }.compact
-    offer_care_qualifications_type = sanitize(params[:offer_care_qualifications_type]).presence
+    offer_care_qualifications = Array(params[:offer_care_qualifications]).map { |item| strip_tags(item).presence }.compact
+    offer_care_qualifications_type = strip_tags(params[:offer_care_qualifications_type]).presence
 
     session[:offer_care_qualifications] = offer_care_qualifications
     session[:offer_care_qualifications_type] = offer_care_qualifications_type

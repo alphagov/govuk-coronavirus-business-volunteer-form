@@ -9,7 +9,7 @@ class CoronavirusForm::AreYouAManufacturerController < ApplicationController
   end
 
   def submit
-    are_you_a_manufacturer = Array(params[:are_you_a_manufacturer]).map { |item| sanitize(item).presence }.compact
+    are_you_a_manufacturer = Array(params[:are_you_a_manufacturer]).map { |item| strip_tags(item).presence }.compact
     session["are_you_a_manufacturer"] = are_you_a_manufacturer
 
     invalid_fields = validate_checkbox_field(

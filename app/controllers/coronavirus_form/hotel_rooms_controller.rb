@@ -8,7 +8,7 @@ class CoronavirusForm::HotelRoomsController < ApplicationController
   end
 
   def submit
-    hotel_rooms = sanitize(params[:hotel_rooms]).presence
+    hotel_rooms = strip_tags(params[:hotel_rooms]).presence
     session[:hotel_rooms] = hotel_rooms
 
     invalid_fields = validate_radio_field(
