@@ -3,6 +3,9 @@
 class CoronavirusForm::TransportTypeController < ApplicationController
   before_action :check_first_question_answered, only: :show
 
+  REQUIRED_FIELDS = %w(transport_description).freeze
+  TEXT_FIELDS = %w(transport_description).freeze
+
   def show
     session[:transport_type] ||= []
     render "coronavirus_form/#{PAGE}"
@@ -12,12 +15,15 @@ class CoronavirusForm::TransportTypeController < ApplicationController
     transport_type = Array(params[:transport_type]).map { |item| strip_tags(item).presence }.compact
 
     session[:transport_type] = transport_type
+    session[:transport_description] = params[:transport_description]
 
     invalid_fields = validate_checkbox_field(
       PAGE,
       values: transport_type,
       allowed_values: I18n.t("coronavirus_form.questions.#{PAGE}.options").map { |_, item| item.dig(:label) },
-    )
+                      ) +
+      validate_mandatory_text_fields(PAGE, REQUIRED_FIELDS) +
+      validate_field_response_length(PAGE, TEXT_FIELDS)
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

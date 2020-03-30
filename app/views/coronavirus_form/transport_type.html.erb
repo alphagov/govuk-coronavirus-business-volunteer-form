@@ -13,6 +13,7 @@
   "id": "transport_type",
   "novalidate": "true"
 ) do %>
+
 <%= render "govuk_publishing_components/components/checkboxes", {
   heading: t('coronavirus_form.questions.transport_type.title'),
   hint_text: t('coronavirus_form.questions.transport_type.hint'),
@@ -27,5 +28,15 @@
     }
   end
 } %>
+
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: t("coronavirus_form.questions.transport_type.transport_description.label")
+  },
+  name: "transport_description",
+  error: error_items("transport_description"),
+  value: session[:transport_description]
+} %>
+
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
 <% end %>

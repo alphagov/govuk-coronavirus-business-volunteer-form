@@ -14,10 +14,10 @@ module FieldValidationHelper
     invalid_fields
   end
 
-  def validate_mandatory_text_fields(mandatory_fields, page)
+  def validate_mandatory_text_fields(page, mandatory_fields)
     invalid_fields = []
     mandatory_fields.each do |field|
-      next if session[page][field].present?
+      next if params[field].present?
 
       invalid_fields << { field: field.to_s,
                           text: t("coronavirus_form.questions.#{page}.#{field}.custom_error",
