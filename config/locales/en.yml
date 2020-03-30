@@ -1,8 +1,8 @@
 en:
   privacy_notice_footer_link:
-    label: Privacy notice
+    label: "Privacy notice"
   privacy_page:
-    title: Privacy
+    title: "Privacy"
     body_text: |
       <p class="govuk-body">Last updated: 24 March 2020</p>
       <p class="govuk-body">This service is run by the Cabinet Office.</p>
@@ -55,10 +55,10 @@ en:
       <h2 class="govuk-heading-m">Changes to this notice</h2>
       <p class="govuk-body">We may change this privacy notice. When we make changes to this notice, the ‘last updated’ date at the top of this page will also change. Any changes to this privacy notice will apply to you and your information immediately. If these changes affect how your personal information is processed, the Cabinet Office will take reasonable steps to make sure you know.</p>
   check_your_answers:
-    title: Check your answers before submitting
-    heading: Now send your application
-    confirmation: By submitting this application you’re confirming that, to the best of your knowledge, the details you’re providing are correct.
-    submit: Accept and send
+    title: "Check your answers before submitting"
+    heading: "Now send your application"
+    confirmation: "By submitting this application you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
+    submit: "Accept and send"
   coronavirus_form:
     errors:
       heading: "There is a problem"
@@ -76,109 +76,109 @@ en:
       postcode_format: "Enter a real postcode"
     questions:
       medical_equipment:
-        title: Can you offer medical equipment?
+        title: "Can you offer medical equipment?"
         options:
           option_yes:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: Select if you have medical equipment to offer
+        custom_select_error: "Select if you have medical equipment to offer"
       medical_equipment_type:
-        title: Tell us about the medical equipment you can offer
-        hint: Give details for one product at a time
+        title: "Tell us about the medical equipment you can offer"
+        hint: "Give details for one product at a time"
         options:
           number_ppe:
             label: "Personal protection equipment"
           number_testing_equipment:
             label: "Testing equipment"
           other:
-            label: Other
+            label: "Other"
             input:
               label: "Give a summary of the type of equipment – you can give more details later"
-        custom_select_error: Select the type of medical equipment you can offer
-        custom_enter_error: Enter a description of the type of equipment
+        custom_select_error: "Select the type of medical equipment you can offer"
+        custom_enter_error: "Enter a description of the type of equipment"
         medical_equipment_type_other:
-          custom_length_error: Description of the equipment must be 1000 characters or fewer
+          custom_length_error: "Description of the equipment must be 1000 characters or fewer"
       are_you_a_manufacturer:
-        title: What kind of business are you?
-        hint: Select the best ways to describe your work
+        title: "What kind of business are you?"
+        hint: "Select the best ways to describe your work"
         options:
           manufacturer:
-            label: Manufacturer
+            label: "Manufacturer"
           distributor:
-            label: Distributor
+            label: "Distributor"
           agent:
-            label: Agent
+            label: "Agent"
           individual:
-            label: Individual
-        custom_select_error: Select the best way to describe your business
+            label: "Individual"
+        custom_select_error: "Select the best way to describe your business"
       product_details:
-        title: Tell us about the product you’re offering
+        title: "Tell us about the product you’re offering"
         product_name:
-          label: Name of product
-          custom_error: Enter the name of the product
+          label: "Name of product"
+          custom_error: "Enter the name of the product"
         product_quantity:
-          label: Quantity of this product
-          hint: Approximate amount, for example 10, 500, 10000.
-          custom_error: Enter the quantity of the product
+          label: "Quantity of this product"
+          hint: "Approximate amount, for example 10, 500, 10000."
+          custom_error: "Enter the quantity of the product"
         product_cost:
-          label: Cost per item, in pounds
-          hint: For example, 23.99. Enter 0 if you will donate it.
-          custom_error: Enter a cost, like 23.99, or 0 if you will donate it. Do not put the £ symbol.
+          label: "Cost per item, in pounds"
+          hint: "For example, 23.99. Enter 0 if you will donate it."
+          custom_error: "Enter a cost, like 23.99, or 0 if you will donate it. Do not put the £ symbol."
         certification_details:
-          label: Certification details
-          hint: For example, CE marking or EN standards.
-          custom_error: Enter the certification details of the product. If you do not have any put ‘none’.
+          label: "Certification details"
+          hint: "For example, CE marking or EN standards."
+          custom_error: "Enter the certification details of the product. If you do not have any put ‘none’."
         product_location:
-          label: Where is the product made, or stored if it’s already made?
+          label: "Where is the product made, or stored if it’s already made?"
           options:
             option_uk:
-              label: United Kingdom
+              label: "United Kingdom"
               input:
-                label: Postcode
-                custom_error: Please enter a UK postcode
+                label: "Postcode"
+                custom_error: "Please enter a UK postcode"
             option_eu:
-              label: European Union
+              label: "European Union"
             option_rest_of_world:
-              label: Rest of world
-          custom_select_error: Select a location
+              label: "Rest of world"
+          custom_select_error: "Select a location"
         product_url:
-          label: URL of product specification document (optional)
+          label: "URL of product specification document (optional)"
         lead_time:
-          label: Lead time in days
-          custom_error: Enter a number
+          label: "Lead time in days"
+          custom_error: "Enter a number"
         equipment_type:
-          label: What type of equipment is it?
+          label: "What type of equipment is it?"
           options:
             ffp3_respirators:
-              label: FFP3 respirators
+              label: "FFP3 respirators"
             ffp2respirators:
-              label: FFP2 respirators
+              label: "FFP2 respirators"
             aprons:
-              label: Aprons
+              label: "Aprons"
             gloves:
-              label: Gloves
+              label: "Gloves"
             iir_face_masks:
-              label: Type IIR face masks
+              label: "Type IIR face masks"
             safety_glasses:
-              label: Safety glasses or visors
+              label: "Safety glasses or visors"
             hand_gel:
-              label: Alcohol hand gel
+              label: "Alcohol hand gel"
             gowns:
-              label: Gowns
+              label: "Gowns"
             other:
-              label: Something else
-          custom_select_error: Select a type of equipment, or ‘something else’
+              label: "Something else"
+          custom_select_error: "Select a type of equipment, or ‘something else’"
       additional_product:
-        title: Can you offer another product?
+        title: "Can you offer another product?"
         options:
           option_yes:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: Select if you can offer another product
+        custom_select_error: "Select if you can offer another product"
       hotel_rooms:
-        title: Can you offer hotel rooms?
+        title: "Can you offer hotel rooms?"
         options:
           yes_staying_in:
             label: "Yes – for people to stay in"
@@ -186,36 +186,36 @@ en:
             label: "Yes – for any use"
           no_option:
             label: "No"
-        custom_select_error: Select if you can offer hotel rooms
+        custom_select_error: "Select if you can offer hotel rooms"
       offer_transport:
-        title: Can you offer transport or logistics?
+        title: "Can you offer transport or logistics?"
         options:
           option_yes:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: Select if you can offer transport or logistics
+        custom_select_error: "Select if you can offer transport or logistics"
       transport_type:
-        title: What kind of transport can you offer?
-        hint: Select all that apply
+        title: "What kind of transport can you offer?"
+        hint: "Select all that apply"
         options:
           moving_people:
             label: "Moving people"
           moving_goods:
             label: "Moving goods"
-        custom_select_error: Select what kind of transport can you offer
+        custom_select_error: "Select what kind of transport can you offer"
       offer_space:
-        title: Can you offer space?
-        hint: For example, offices or warehouses, for medical use or storage.
+        title: "Can you offer space?"
+        hint: "For example, offices or warehouses, for medical use or storage."
         options:
           option_yes:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: Select if you can offer space
+        custom_select_error: "Select if you can offer space"
       offer_space_type:
-        title: What kind of space can you offer?
-        hint: Select all that apply
+        title: "What kind of space can you offer?"
+        hint: "Select all that apply"
         options:
           warehouse_space:
             label: "Warehouse space"
@@ -224,11 +224,11 @@ en:
           other:
             label: "Other"
             input:
-              label: Give a description
-            error_message: Enter a description of the type of space you have
+              label: "Give a description"
+            error_message: "Enter a description of the type of space you have"
         offer_space_type_other:
-          custom_length_error: Description of your expertise must be 1000 characters or fewer
-        custom_select_error: Select the kind of space you can offer
+          custom_length_error: "Description of your expertise must be 1000 characters or fewer"
+        custom_select_error: "Select the kind of space you can offer"
       expert_advice_type:
         title: "What kind of expertise can you offer?"
         hint: "Select the types of support you can offer"
@@ -256,16 +256,16 @@ en:
             label: "I cannot offer expertise"
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
         expert_advice_type_other:
-          custom_length_error: Description of your expertise must be 1000 characters or fewer
+          custom_length_error: "Description of your expertise must be 1000 characters or fewer"
       offer_care:
-        title: Can you offer social care or childcare?
-        hint: For example, nursing or assistance to other people.
+        title: "Can you offer social care or childcare?"
+        hint: "For example, nursing or assistance to other people."
         options:
           option_yes:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: Select if you can offer social care or childcare
+        custom_select_error: "Select if you can offer social care or childcare"
       offer_care_qualifications:
         title: "What qualifications or certificates do you have?"
         hint: "Select the qualifications that you or people in your business have"
@@ -276,51 +276,51 @@ en:
             label: "Nursing or other healthcare qualification"
             input:
               label: "Give a description"
-              custom_error: Give a description of your qualification
+              custom_error: "Give a description of your qualification"
           no_qualification:
             label: "I do not have a qualification"
-        custom_select_error: Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’
+        custom_select_error: "Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’"
         offer_care_qualifications_type:
-          custom_length_error: Description of your qualification must be 1000 characters or fewer
+          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
       offer_other_support:
-          title: Can you offer any other kind of support?
-          hint: Give a description
+          title: "Can you offer any other kind of support?"
+          hint: "Give a description"
           offer_other_support:
-            custom_length_error: Description of the support you can offer must be 1000 characters or fewer
+            custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
       location:
-        title: Where can you offer your services?
-        hint: If your service is available anywhere, please select all the regions.
+        title: "Where can you offer your services?"
+        hint: "If your service is available anywhere, please select all the regions."
         options:
           east_of_england:
-            label: East of England
+            label: "East of England"
           east_midlands:
-            label: East Midlands
+            label: "East Midlands"
           west_midland:
-            label: West Midlands
+            label: "West Midlands"
           london:
-            label: London
+            label: "London"
           north_east:
-            label: North East
+            label: "North East"
           north_west:
-            label: North West
+            label: "North West"
           south_east:
-            label: South East
+            label: "South East"
           south_west:
-            label: South West
+            label: "South West"
           yorkshire:
-            label: Yorkshire and the Humber
+            label: "Yorkshire and the Humber"
           northern_ireland:
-            label: Northern Ireland
+            label: "Northern Ireland"
           scotland:
-            label: Scotland
+            label: "Scotland"
           wales:
-            label: Wales
-        custom_select_error: Select all the areas where you can offer your services
+            label: "Wales"
+        custom_select_error: "Select all the areas where you can offer your services"
       business_details:
-        title: Your business details
+        title: "Your business details"
         company_name:
           label: "Company name"
-          custom_error: Enter the name of your company
+          custom_error: "Enter the name of your company"
         company_number:
           label: "Company number (optional)"
         company_size:
@@ -332,7 +332,7 @@ en:
               label: "50 to 250 people"
             more_than_250_people:
               label: "More than 250 people"
-          custom_select_error: Select the size of your company
+          custom_select_error: "Select the size of your company"
         company_location:
           label: "Location of main office"
           options:
@@ -342,20 +342,20 @@ en:
               label: "European Union"
             rest_of_world:
               label: "Rest of world"
-          custom_select_error: Select the location of your main office
+          custom_select_error: "Select the location of your main office"
       contact_details:
-        title: Contact details
+        title: "Contact details"
         contact_name:
-          label: Name of main contact
-          custom_error: Enter the name of the main contact in your organisation who can coordinate the support
+          label: "Name of main contact"
+          custom_error: "Enter the name of the main contact in your organisation who can coordinate the support"
         role:
-          label: Role of main contact (optional)
+          label: "Role of main contact (optional)"
         phone_number:
-          label: Phone number of main contact
-          custom_error: Enter a number
+          label: "Phone number of main contact"
+          custom_error: "Enter a number"
         email:
-          label: Email of main contact
-          custom_error: Enter an email address in the correct format, like name@example.com
+          label: "Email of main contact"
+          custom_error: "Enter an email address in the correct format, like name@example.com"
     thank_you:
       title: "Thank you for offering support"
       description: |
