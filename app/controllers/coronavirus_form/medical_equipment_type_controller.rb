@@ -45,7 +45,7 @@ private
   end
 
   def previous_path
-    are_you_a_manufacturer_path
+    session[:product_details].empty? ? are_you_a_manufacturer_path : additional_product_path
   end
 
   def sanitized_product(params)
