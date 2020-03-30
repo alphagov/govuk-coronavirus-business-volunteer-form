@@ -1,0 +1,25 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: governmentpaas/cf-cli
+    tag: latest
+params:
+  CF_API: https://api.cloud.service.gov.uk
+  CF_USERNAME: ((paas-username))
+  CF_PASSWORD: ((paas-password))
+  CF_ORG: govuk_development
+  SENTRY_DSN: https://((sentry-dsn))
+  CF_SPACE:
+run:
+  dir: src
+  path: sh
+  args:
+    - '-c'
+    - |
+      set -eu
+
+      cf api "$CF_API"
+      cf auth
+      cf t -o "$CF_ORG" -s "$CF_SPACE"
+      cf run-task govuk-coronavirus-business-volunteer-form "rake export:form_responses_s3"
