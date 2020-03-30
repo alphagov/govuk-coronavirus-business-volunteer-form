@@ -31,7 +31,7 @@ private
   PAGE = "business_details"
 
   def validate_fields(business_details)
-    missing_fields = validate_mandatory_text_fields(REQUIRED_FIELDS, PAGE)
+    missing_fields = validate_mandatory_text_fields(PAGE, REQUIRED_FIELDS)
     company_size_validation = validate_radio_field("#{PAGE}.company_size", radio: business_details["company_size"])
     company_location_validation = validate_radio_field("#{PAGE}.company_location", radio: business_details["company_location"])
     missing_fields + company_size_validation + company_location_validation
