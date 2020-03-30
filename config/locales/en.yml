@@ -238,6 +238,7 @@ en:
       expert_advice_type:
         title: "What kind of expertise can you offer?"
         hint: "Select the types of support you can offer"
+        or: "Or"
         options:
           medical:
             label: "Medical"
