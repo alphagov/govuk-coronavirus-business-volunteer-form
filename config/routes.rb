@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post "/are-you-a-manufacturer" => "coronavirus_form/are_you_a_manufacturer#submit"
 
   get "/product-details" => "coronavirus_form/product_details#show"
+  get "/product-details/:id/delete" => "coronavirus_form/product_details#destroy"
   post "/product-details" => "coronavirus_form/product_details#submit"
 
   get "/additional-product" => "coronavirus_form/additional_product#show"
