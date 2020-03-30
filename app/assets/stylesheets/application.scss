@@ -1,5 +1,29 @@
-@import 'govuk_publishing_components/all_components';
+// Helpers
+@import 'govuk_publishing_components/govuk_frontend_support';
+@import 'govuk_publishing_components/component_support';
 
+// Components
+@import 'govuk_publishing_components/components/back-link';
+@import 'govuk_publishing_components/components/breadcrumbs';
+@import 'govuk_publishing_components/components/button';
+@import 'govuk_publishing_components/components/checkboxes';
+@import 'govuk_publishing_components/components/error-message';
+@import 'govuk_publishing_components/components/error-summary';
+@import 'govuk_publishing_components/components/fieldset';
+@import 'govuk_publishing_components/components/heading';
+@import 'govuk_publishing_components/components/hint';
+@import 'govuk_publishing_components/components/input';
+@import 'govuk_publishing_components/components/label';
+@import 'govuk_publishing_components/components/layout-footer';
+@import 'govuk_publishing_components/components/layout-header';
+@import 'govuk_publishing_components/components/panel';
+@import 'govuk_publishing_components/components/radio';
+@import 'govuk_publishing_components/components/skip-link';
+@import 'govuk_publishing_components/components/summary-list';
+@import 'govuk_publishing_components/components/textarea';
+@import 'govuk_publishing_components/components/title';
+
+// Application
 .app-body--right {
   @include govuk-media-query($from: tablet) {
     text-align: right;
