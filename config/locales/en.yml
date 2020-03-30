@@ -196,14 +196,20 @@ en:
             label: "No"
         custom_select_error: "Select if you can offer transport or logistics"
       transport_type:
-        title: "What kind of transport can you offer?"
+        title: "What kind of services can you offer?"
         hint: "Select all that apply"
         options:
           moving_people:
             label: "Moving people"
           moving_goods:
             label: "Moving goods"
+          other:
+            label: "Other"
         custom_select_error: "Select what kind of transport can you offer"
+        transport_description:
+          label: "Give a description, for example how many vehicles you can offer"
+          custom_error: "Enter a description"
+          custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
       offer_space:
         title: "Can you offer space?"
         hint: "For example, offices or warehouses, for medical use or storage."

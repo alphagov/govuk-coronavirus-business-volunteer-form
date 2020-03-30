@@ -46,6 +46,10 @@ private
           next product_details(session[question])
         end
 
+        if question.eql?("transport_type")
+          next transport_type(question)
+        end
+
         value = case session[question]
                 when Hash
                   concat_answer(session[question], question)
@@ -110,6 +114,20 @@ private
         },
       }
     end
+  end
+
+  def transport_type(question)
+    answer = []
+    answer << session["transport_type"].flatten.to_sentence
+    answer << session["transport_description"]
+
+    [{
+      field: t("coronavirus_form.questions.#{question}.title"),
+      value: sanitize(answer.join("<br>")),
+      edit: {
+        href: "#{question.dasherize}?change-answer",
+      },
+    }]
   end
 
   def concat_answer(answer, question)
