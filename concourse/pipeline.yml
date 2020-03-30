@@ -11,6 +11,14 @@ resource_types:
       repository: rbakergds/travis-resource
       tag: latest
 
+  - name: every-day-after-midnight
+    type: time
+    icon: clock-outline
+    source:
+      start: 00:00
+      stop: 01:00
+      location: Europe/London
+
 resources:
   - name: govuk-coronavirus-business-volunteer-form
     type: git
@@ -87,3 +95,13 @@ jobs:
         params:
           URL: 'https://govuk-coronavirus-business-volunteer-form-prod.cloudapps.digital/'
           MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
+
+  - name: export-form-responses-daily
+    plan:
+      - get: every-day-after-midnight
+        trigger: true
+      - task: export-form-responses
+        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/export-form-responses.yml
+        params:
+          CF_SPACE: production
+          SENTRY_DSN: https://((sentry-dsn))
