@@ -74,6 +74,27 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
     end
   end
 
+  describe "GET destroy" do
+    let(:product_1) do
+      params.merge("product_id" => product_id)
+    end
+    let(:product_2) do
+      params.merge("product_id" => SecureRandom.uuid)
+    end
+    before :each do
+      session[session_key] = [product_1, product_2]
+    end
+    it "deletes a product" do
+      get :destroy, params: { id: product_id }
+      expect(session[session_key]).to contain_exactly(product_2)
+    end
+
+    it "redirects to the check answers page" do
+      get :destroy, params: { id: product_id }
+      expect(response).to redirect_to(check_your_answers_path)
+    end
+  end
+
   describe "POST submit" do
     before :each do
       session[session_key] = [{

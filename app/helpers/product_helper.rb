@@ -14,4 +14,11 @@ module ProductHelper
   def current_product(product_id, products)
     find_product(product_id, products)
   end
+
+  def remove_product_from_session(product_id)
+    session[:product_details] ||= []
+    session[:product_details] = session[:product_details].reject do |prod|
+      prod["product_id"] == product_id
+    end
+  end
 end

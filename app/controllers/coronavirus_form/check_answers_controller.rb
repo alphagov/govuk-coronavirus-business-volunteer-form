@@ -105,6 +105,9 @@ private
         edit: {
           href: "/product-details?product_id=#{product['product_id']}",
         },
+        delete: {
+          href: "/product-details/#{product['product_id']}/delete",
+        },
       }
     end
   end

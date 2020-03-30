@@ -26,6 +26,11 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
     end
   end
 
+  def destroy
+    remove_product_from_session(params[:id])
+    redirect_to check_your_answers_path, action: "show"
+  end
+
 private
 
   NEXT_PAGE = "additional_product"
