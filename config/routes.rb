@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     # Privacy notice
     get "/privacy", to: "privacy#show"
 
+    # Accessibility statement
+    get "/accessibility-statement", to: "accessibility_statement#show"
+
     # Question pages
     get "/medical-equipment", to: "medical_equipment#show"
     post "/medical-equipment", to: "medical_equipment#submit"
