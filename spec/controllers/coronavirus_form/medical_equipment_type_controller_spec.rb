@@ -48,6 +48,11 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       expect(response).to render_template(current_template)
     end
 
+    it "doesn't store my response if it is invalid" do
+      post :submit, params: { medical_equipment_type: nil }
+      expect(session[session_key]).to eq []
+    end
+
     context "when Other option is selected" do
       it "validates the Other option description is provided" do
         post :submit, params: { medical_equipment_type: "Other" }

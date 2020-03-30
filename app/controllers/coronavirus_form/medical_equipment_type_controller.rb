@@ -14,7 +14,6 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
   def submit
     session[:product_details] ||= []
     @product = sanitized_product(params)
-    add_product_to_session(@product)
 
     invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
       validate_radio_field(
@@ -27,6 +26,7 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
       flash.now[:validation] = invalid_fields
       render "coronavirus_form/#{PAGE}"
     else
+      add_product_to_session(@product)
       redirect_to(
         controller: "coronavirus_form/#{NEXT_PAGE}",
         action: "show",
