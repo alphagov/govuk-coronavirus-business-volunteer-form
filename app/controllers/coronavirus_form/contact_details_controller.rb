@@ -23,7 +23,7 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
       flash.now[:validation] = invalid_fields
       render controller_path
     else
-      redirect_to check_your_answers_path
+      redirect_to check_your_answers_url
     end
   end
 
@@ -49,6 +49,6 @@ private
   end
 
   def previous_path
-    business_details_path
+    business_details_url
   end
 end

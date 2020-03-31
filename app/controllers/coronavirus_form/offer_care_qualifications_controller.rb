@@ -23,15 +23,15 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
       flash.now[:validation] = invalid_fields
       render controller_path
     elsif session["check_answers_seen"]
-      redirect_to check_your_answers_path
+      redirect_to check_your_answers_url
     else
-      redirect_to offer_other_support_path
+      redirect_to offer_other_support_url
     end
   end
 
 private
 
   def previous_path
-    offer_care_path
+    offer_care_url
   end
 end

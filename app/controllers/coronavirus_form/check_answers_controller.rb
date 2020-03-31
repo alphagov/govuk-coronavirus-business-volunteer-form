@@ -14,7 +14,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
 
     reset_session
 
-    redirect_to thank_you_path(reference_number: submission_reference)
+    redirect_to thank_you_url(reference_number: submission_reference)
   end
 
 private
@@ -28,7 +28,7 @@ private
   end
 
   def previous_path
-    contact_details_path
+    contact_details_url
   end
 
   def items
@@ -104,7 +104,7 @@ private
         field: "Details for product #{product['product_name']}",
         value: sanitize(prod.join(joiner)),
         edit: {
-          href: product_details_path(product_id: product["product_id"]),
+          href: product_details_url(product_id: product["product_id"]),
         },
         delete: {
           href: "/product-details/#{product['product_id']}/delete",

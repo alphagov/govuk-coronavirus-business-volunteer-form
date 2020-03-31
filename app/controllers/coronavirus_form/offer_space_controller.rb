@@ -11,17 +11,17 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
       flash.now[:validation] = invalid_fields
       render controller_path
     elsif offer_space.eql? "Yes"
-      redirect_to offer_space_type_path
+      redirect_to offer_space_type_url
     elsif session["check_answers_seen"]
-      redirect_to check_your_answers_path
+      redirect_to check_your_answers_url
     else
-      redirect_to expert_advice_type_path
+      redirect_to expert_advice_type_url
     end
   end
 
 private
 
   def previous_path
-    offer_transport_path
+    offer_transport_url
   end
 end

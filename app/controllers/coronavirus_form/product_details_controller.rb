@@ -20,15 +20,15 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
       flash.now[:validation] = invalid_fields
       render controller_path
     elsif session["check_answers_seen"]
-      redirect_to check_your_answers_path
+      redirect_to check_your_answers_url
     else
-      redirect_to additional_product_path
+      redirect_to additional_product_url
     end
   end
 
   def destroy
     remove_product_from_session(params[:id])
-    redirect_to check_your_answers_path
+    redirect_to check_your_answers_url
   end
 
 private
@@ -99,8 +99,8 @@ private
   end
 
   def previous_path
-    return check_your_answers_path if session["check_answers_seen"]
+    return check_your_answers_url if session["check_answers_seen"]
 
-    medical_equipment_type_path
+    medical_equipment_type_url
   end
 end

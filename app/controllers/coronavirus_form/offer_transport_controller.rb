@@ -14,17 +14,17 @@ class CoronavirusForm::OfferTransportController < ApplicationController
       flash.now[:validation] = invalid_fields
       render controller_path
     elsif session[:offer_transport] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_yes.label")
-      redirect_to transport_type_path
+      redirect_to transport_type_url
     elsif session["check_answers_seen"]
-      redirect_to check_your_answers_path
+      redirect_to check_your_answers_url
     elsif session[:offer_transport] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
-      redirect_to offer_space_path
+      redirect_to offer_space_url
     end
   end
 
 private
 
   def previous_path
-    hotel_rooms_path
+    hotel_rooms_url
   end
 end

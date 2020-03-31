@@ -13,11 +13,11 @@ class CoronavirusForm::AdditionalProductController < ApplicationController
       flash.now[:validation] = invalid_fields
       render controller_path
     elsif additional_product == I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
-      redirect_to medical_equipment_type_path
+      redirect_to medical_equipment_type_url
     elsif session["check_answers_seen"]
-      redirect_to check_your_answers_path
+      redirect_to check_your_answers_url
     else
-      redirect_to hotel_rooms_path
+      redirect_to hotel_rooms_url
     end
   end
 
@@ -26,6 +26,6 @@ private
   def previous_path
     session["product_details"] ||= []
     latest_product_id = (session["product_details"].last || {}).dig("product_id")
-    "/product-details?product_id=#{latest_product_id}"
+    product_details_url(product_id: latest_product_id)
   end
 end
