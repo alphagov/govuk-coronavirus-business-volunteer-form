@@ -98,6 +98,7 @@ jobs:
 
   - name: export-form-responses-daily
     plan:
+      - get: govuk-coronavirus-business-volunteer-form
       - get: every-day-after-midnight
         trigger: true
       - task: export-form-responses
