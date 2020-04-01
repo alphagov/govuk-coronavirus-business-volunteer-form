@@ -23,17 +23,17 @@
       {
         value: t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label'),
         label: t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label'),
-        checked: session[:offer_space_type].include?(t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label')),
+        checked: session.fetch(:offer_space_type, []).include?(t('coronavirus_form.questions.offer_space_type.options.warehouse_space.label')),
       },
       {
         value: t('coronavirus_form.questions.offer_space_type.options.office_space.label'),
         label: t('coronavirus_form.questions.offer_space_type.options.office_space.label'),
-        checked: session[:offer_space_type].include?(t('coronavirus_form.questions.offer_space_type.options.office_space.label')),
+        checked: session.fetch(:offer_space_type, []).include?(t('coronavirus_form.questions.offer_space_type.options.office_space.label')),
       },
       {
         value: t('coronavirus_form.questions.offer_space_type.options.other.label'),
         label: t('coronavirus_form.questions.offer_space_type.options.other.label'),
-        checked: session[:offer_space_type].include?(t('coronavirus_form.questions.offer_space_type.options.other.label')),
+        checked: session.fetch(:offer_space_type, []).include?(t('coronavirus_form.questions.offer_space_type.options.other.label')),
         conditional: render("govuk_publishing_components/components/textarea", {
           label: {
             text: t('coronavirus_form.questions.offer_space_type.options.other.input.label'),

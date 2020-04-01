@@ -1,36 +1,31 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::HotelRoomsController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
-  def show
-    render "coronavirus_form/#{PAGE}"
-  end
-
   def submit
     hotel_rooms = strip_tags(params[:hotel_rooms]).presence
     session[:hotel_rooms] = hotel_rooms
 
     invalid_fields = validate_radio_field(
-      PAGE,
+      controller_name,
       radio: hotel_rooms,
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
+    elsif session[:hotel_rooms] == I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_staying_in.label") ||
+        session[:hotel_rooms] == I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_all_uses.label")
+      redirect_to hotel_rooms_number_url
     elsif session["check_answers_seen"]
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
+      redirect_to check_your_answers_url
     else
-      redirect_to controller: "coronavirus_form/offer_transport", action: "show"
+      redirect_to offer_transport_url
     end
   end
 
 private
 
-  PAGE = "hotel_rooms"
-
   def previous_path
-    medical_equipment_path
+    medical_equipment_url
   end
 end

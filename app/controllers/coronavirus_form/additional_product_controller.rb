@@ -1,39 +1,31 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::AdditionalProductController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
-  def show
-    render "coronavirus_form/#{PAGE}"
-  end
-
   def submit
     additional_product = strip_tags(params[:additional_product]).presence
 
     invalid_fields = validate_radio_field(
-      PAGE,
+      controller_name,
       radio: additional_product,
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
     elsif additional_product == I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
-      redirect_to controller: "coronavirus_form/medical_equipment_type", action: "show"
+      redirect_to medical_equipment_type_url
     elsif session["check_answers_seen"]
-      redirect_to controller: "coronavirus_form/check_answers", action: "show"
+      redirect_to check_your_answers_url
     else
-      redirect_to controller: "coronavirus_form/hotel_rooms", action: "show"
+      redirect_to hotel_rooms_url
     end
   end
 
 private
 
-  PAGE = "additional_product"
-
   def previous_path
     session["product_details"] ||= []
     latest_product_id = (session["product_details"].last || {}).dig("product_id")
-    "/product-details?product_id=#{latest_product_id}"
+    product_details_url(product_id: latest_product_id)
   end
 end

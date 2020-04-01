@@ -1,39 +1,32 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::BusinessDetailsController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
   REQUIRED_FIELDS = %w(company_name).freeze
   TEXT_FIELDS = %w(company_name company_number).freeze
-
-  def show
-    render "coronavirus_form/#{PAGE}"
-  end
 
   def submit
     @business_details = sanitized_business_details(params)
     session[:business_details] = @business_details
 
-    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) +
+    invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
       validate_fields(@business_details)
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
+    elsif session["check_answers_seen"]
+      redirect_to check_your_answers_url
     else
-      redirect_to controller: session["check_answers_seen"] ? "coronavirus_form/check_answers" : "coronavirus_form/#{NEXT_PAGE}", action: "show"
+      redirect_to contact_details_url
     end
   end
 
 private
 
-  NEXT_PAGE = "contact_details"
-  PAGE = "business_details"
-
   def validate_fields(business_details)
-    missing_fields = validate_mandatory_text_fields(PAGE, REQUIRED_FIELDS)
-    company_size_validation = validate_radio_field("#{PAGE}.company_size", radio: business_details["company_size"])
-    company_location_validation = validate_radio_field("#{PAGE}.company_location", radio: business_details["company_location"])
+    missing_fields = validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS)
+    company_size_validation = validate_radio_field("#{controller_name}.company_size", radio: business_details["company_size"])
+    company_location_validation = validate_radio_field("#{controller_name}.company_location", radio: business_details["company_location"])
     missing_fields + company_size_validation + company_location_validation
   end
 
@@ -47,6 +40,6 @@ private
   end
 
   def previous_path
-    location_path
+    location_url
   end
 end

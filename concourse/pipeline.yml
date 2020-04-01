@@ -33,6 +33,7 @@ resources:
     icon: clock-outline
     source: {interval: 6h}
 
+
 jobs:
   - name: deploy-to-staging
     serial: true

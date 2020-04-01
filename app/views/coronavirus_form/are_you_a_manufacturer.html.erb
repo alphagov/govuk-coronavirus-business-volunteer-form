@@ -23,7 +23,7 @@
     {
       value:  item[:label],
       label:  item[:label],
-      checked: session["are_you_a_manufacturer"].include?(item[:label]),
+      checked: session.fetch("are_you_a_manufacturer", []).include?(item[:label]),
     }
   end
 } %>

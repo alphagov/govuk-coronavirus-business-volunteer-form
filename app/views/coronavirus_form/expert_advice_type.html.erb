@@ -23,42 +23,42 @@
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.medical.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.medical.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.medical.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.medical.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.engineering.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.engineering.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.engineering.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.engineering.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.communications.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.communications.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.communications.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.communications.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.construction.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.construction.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.project_management.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.project_management.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.project_management.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.project_management.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.it.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.it.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.it.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.it.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.other.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.other.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.other.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.other.label")),
           conditional: render("govuk_publishing_components/components/textarea", {
             label: {
               text: t("coronavirus_form.questions.expert_advice_type.options.other.input.label"),
@@ -78,7 +78,7 @@
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label"),
-          checked: session[:expert_advice_type].include?(t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")),
+          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")),
         },
       ],
     }%>

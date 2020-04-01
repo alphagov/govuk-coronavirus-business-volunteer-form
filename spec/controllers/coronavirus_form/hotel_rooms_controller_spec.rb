@@ -33,14 +33,24 @@ RSpec.describe CoronavirusForm::HotelRoomsController, type: :controller do
       expect(session[session_key]).to eq selected
     end
 
-    it "redirects to next step for a permitted response" do
-      post :submit, params: { hotel_rooms: selected }
+    it "redirects to hotel room numbers for a yes stay in response" do
+      post :submit, params: { hotel_rooms: I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_staying_in.label") }
+      expect(response).to redirect_to(hotel_rooms_number_path)
+    end
+
+    it "redirects to hotel room numbers for a yes all uses response" do
+      post :submit, params: { hotel_rooms: I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_all_uses.label") }
+      expect(response).to redirect_to(hotel_rooms_number_path)
+    end
+
+    it "redirects to transport for a no response" do
+      post :submit, params: { hotel_rooms: I18n.t("coronavirus_form.questions.hotel_rooms.options.no_option.label") }
       expect(response).to redirect_to(offer_transport_path)
     end
 
-    it "redirects to check your answers if check your answers previously seen" do
+    it "redirects to check your answers if check your answers previously seen and answer is no" do
       session[:check_answers_seen] = true
-      post :submit, params: { hotel_rooms: selected }
+      post :submit, params: { hotel_rooms: I18n.t("coronavirus_form.questions.hotel_rooms.options.no_option.label") }
 
       expect(response).to redirect_to(check_your_answers_path)
     end
