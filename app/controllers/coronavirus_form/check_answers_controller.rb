@@ -47,6 +47,10 @@ private
           next transport_type
         end
 
+        if question.eql?("offer_care_qualifications")
+          next offer_care_qualifications
+        end
+
         value = case session[question]
                 when Hash
                   concat_answer(session[question], question)
@@ -123,6 +127,22 @@ private
       value: sanitize(answer.join("<br>")),
       edit: {
         href: "transport-type?change-answer",
+      },
+    }]
+  end
+
+  def offer_care_qualifications
+    [{
+      field: t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.title"),
+      value: sanitize(Array(session["offer_care_type"]).flatten.to_sentence),
+      edit: {
+        href: "offer-care-qualifications?change-answer",
+      },
+    }, {
+      field: t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.title"),
+      value: sanitize(Array(session["offer_care_qualifications"]).flatten.to_sentence),
+      edit: {
+        href: "offer-care-qualifications?change-answer",
       },
     }]
   end

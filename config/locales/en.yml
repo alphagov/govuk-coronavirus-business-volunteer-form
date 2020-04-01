@@ -274,21 +274,32 @@ en:
             label: "No"
         custom_select_error: "Select if you can offer social care or childcare"
       offer_care_qualifications:
-        title: "What qualifications or certificates do you have?"
-        hint: "Select the qualifications that you or people in your business have"
-        options:
-          dbs_check:
-            label: "DBS check"
-          nursing_or_healthcare_qualification:
-            label: "Nursing or other healthcare qualification"
-            input:
-              label: "Give a description"
-              custom_error: "Give a description of your qualification"
-          no_qualification:
-            label: "I do not have a qualification"
-        custom_select_error: "Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’"
-        offer_care_qualifications_type:
-          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+        title: "What kind of care can you offer?"
+        offer_care_type:
+          title: "What kind of care can you offer?"
+          hint: ""
+          options:
+            adult_care:
+              label: "Care for adults"
+            child_care:
+              label: "Care for children"
+          custom_select_error: "Select if you can offer care for adults or children"
+        care_qualifications:
+          title: "What qualifications or certificates do you have?"
+          hint: "Select the qualifications that you or people in your business have"
+          options:
+            dbs_check:
+              label: "DBS check"
+            nursing_or_healthcare_qualification:
+              label: "Nursing or other healthcare qualification"
+              input:
+                label: "Give a description"
+              error_message: "Give a description of your qualification"
+            no_qualification:
+              label: "I do not have a qualification"
+          custom_select_error: "Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’"
+          offer_care_qualifications_type:
+            custom_length_error: "Description of your qualification must be 1000 characters or fewer"
       offer_other_support:
           title: "Can you offer any other kind of support?"
           hint: "Give a description"
