@@ -12,6 +12,7 @@ class CoronavirusForm::OfferTransportController < ApplicationController
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
+      log_validation_error(invalid_fields)
       render controller_path
     elsif session[:offer_transport] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_yes.label")
       redirect_to transport_type_url

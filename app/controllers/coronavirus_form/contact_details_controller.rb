@@ -21,6 +21,7 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
+      log_validation_error(invalid_fields)
       render controller_path
     else
       redirect_to check_your_answers_url

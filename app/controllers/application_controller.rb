@@ -27,4 +27,8 @@ private
   def previous_path
     raise NotImplementedError, "Define a previous path"
   end
+
+  def log_validation_error(invalid_fields)
+    logger.info "validation error - #{invalid_fields.pluck(:text).to_sentence}"
+  end
 end

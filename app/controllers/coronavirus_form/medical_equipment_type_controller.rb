@@ -22,6 +22,7 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
+      log_validation_error(invalid_fields)
       render controller_path
     else
       add_product_to_session(@product)

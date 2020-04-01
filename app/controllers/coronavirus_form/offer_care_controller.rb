@@ -12,6 +12,7 @@ class CoronavirusForm::OfferCareController < ApplicationController
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
+      log_validation_error(invalid_fields)
       render controller_path
     elsif session[:offer_care] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_yes.label")
       redirect_to offer_care_qualifications_url
