@@ -29,6 +29,10 @@ private
   end
 
   def log_validation_error(invalid_fields)
-    logger.info "validation error - #{invalid_fields.pluck(:text).to_sentence}"
+    logger.info do
+      {
+        validation_error: { text: invalid_fields.pluck(:text).to_sentence },
+      }.to_json
+    end
   end
 end
