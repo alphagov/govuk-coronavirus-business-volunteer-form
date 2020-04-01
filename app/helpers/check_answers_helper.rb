@@ -52,27 +52,10 @@ module CheckAnswersHelper
   def product_details(products)
     return unless products && products.any?
 
-    joiner = "<br>"
     products.map do |product|
-      prod = []
-      prod << if product["medical_equipment_type_other"]
-                "Type: #{product['medical_equipment_type']} (#{product['medical_equipment_type_other']})"
-              else
-                "Type: #{product['medical_equipment_type']}"
-              end
-      prod << "Product: #{product['product_name']}" if product["product_name"]
-      prod << "Equipment type: #{product['equipment_type']}" if product["equipment_type"]
-      prod << "Quantity: #{product['product_quantity']}" if product["product_quantity"]
-      prod << "Cost: #{product['product_cost']}" if product["product_cost"]
-      prod << "Certification details: #{product['certification_details']}" if product["certification_details"]
-      prod << "Location: #{product['product_location']}" if product["product_location"]
-      prod << "Postcode: #{product['product_postcode']}" if product["product_postcode"]
-      prod << "URL: #{product['product_url']}" if product["product_url"]
-      prod << "Lead time: #{product['lead_time']}" if product["lead_time"]
-
       {
         field: "Details for product #{product['product_name']}",
-        value: sanitize(prod.join(joiner)),
+        value: sanitize(product_info(product)),
         edit: {
           href: product_details_url(product_id: product["product_id"]),
         },
@@ -81,6 +64,26 @@ module CheckAnswersHelper
         },
       }
     end
+  end
+
+  def product_info(product)
+    prod = []
+    prod << if product["medical_equipment_type_other"]
+              "Type: #{product['medical_equipment_type']} (#{product['medical_equipment_type_other']})"
+            else
+              "Type: #{product['medical_equipment_type']}"
+            end
+    prod << "Product: #{product['product_name']}" if product["product_name"]
+    prod << "Equipment type: #{product['equipment_type']}" if product["equipment_type"]
+    prod << "Quantity: #{product['product_quantity']}" if product["product_quantity"]
+    prod << "Cost: #{product['product_cost']}" if product["product_cost"]
+    prod << "Certification details: #{product['certification_details']}" if product["certification_details"]
+    prod << "Location: #{product['product_location']}" if product["product_location"]
+    prod << "Postcode: #{product['product_postcode']}" if product["product_postcode"]
+    prod << "URL: #{product['product_url']}" if product["product_url"]
+    prod << "Lead time: #{product['lead_time']}" if product["lead_time"]
+
+    prod.join("<br>")
   end
 
   def transport_type

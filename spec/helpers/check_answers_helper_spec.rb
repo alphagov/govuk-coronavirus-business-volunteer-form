@@ -1,6 +1,50 @@
 require "spec_helper"
 
 RSpec.describe CheckAnswersHelper, type: :helper do
+  describe "#product_info" do
+    it "concatenates product information with a line break" do
+      product = {
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+        ),
+        "product_name" => "Product name",
+        "equipment_type" => "Equipment type",
+        "product_quantity" => 100,
+        "product_cost" => 5,
+        "certification_details" => "Certification",
+        "product_location" => "UK",
+        "product_postcode" => "E1 8QS",
+        "product_url" => "https://www.example.com",
+        "lead_time" => 5,
+      }
+
+      expected_answer = "Type: #{product['medical_equipment_type']}<br>" \
+                          "Product: #{product['product_name']}<br>" \
+                          "Equipment type: #{product['equipment_type']}<br>" \
+                          "Quantity: #{product['product_quantity']}<br>" \
+                          "Cost: #{product['product_cost']}<br>" \
+                          "Certification details: #{product['certification_details']}<br>" \
+                          "Location: #{product['product_location']}<br>" \
+                          "Postcode: #{product['product_postcode']}<br>" \
+                          "URL: #{product['product_url']}<br>" \
+                          "Lead time: #{product['lead_time']}"
+
+      expect(helper.product_info(product)).to eq(expected_answer)
+    end
+
+    it "only concatenates the fields that have a value" do
+      product = {
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+        ),
+        "product_name" => "Product name",
+      }
+
+      expected_answer = "Type: #{product['medical_equipment_type']}<br>Product: #{product['product_name']}"
+      expect(helper.product_info(product)).to eq(expected_answer)
+    end
+  end
+
   describe "#concat_answer" do
     context "contact_details" do
       let(:question) { "contact_details" }
