@@ -268,8 +268,6 @@ en:
             label: "Medical"
           engineering:
             label: "Engineering"
-          communications:
-            label: "Communications, including outdoor or digital advertising"
           construction:
             label: "Construction"
           project_management:
