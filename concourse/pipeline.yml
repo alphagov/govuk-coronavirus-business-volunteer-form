@@ -37,7 +37,7 @@ resources:
 jobs:
   - name: update-pipeline
     plan:
-      - get: govuk-coronavirus-business-volunteer-people-form
+      - get: govuk-coronavirus-business-volunteer-form
         trigger: true
       - set_pipeline: govuk-corona-business-volunteer-form
         file: govuk-coronavirus-business-volunteer-form/concourse/pipeline.yml
