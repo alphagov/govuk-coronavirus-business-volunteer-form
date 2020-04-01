@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::AccessibilityStatementController < ApplicationController
-  def show
-    render "coronavirus_form/accessibility_statement"
-  end
+  skip_before_action :check_first_question_answered
 end
