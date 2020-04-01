@@ -9,6 +9,7 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
+      log_validation_error(invalid_fields)
       render controller_path
     elsif offer_space.eql? "Yes"
       redirect_to offer_space_type_url
