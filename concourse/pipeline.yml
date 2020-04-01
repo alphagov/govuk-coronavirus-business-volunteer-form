@@ -32,8 +32,8 @@ resources:
     type: time
     icon: clock-outline
     source:
-      start: 00:00
-      stop: 01:00
+      start: 01:01
+      stop: 02:01
       location: Europe/London
 
 jobs:
