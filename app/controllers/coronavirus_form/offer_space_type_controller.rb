@@ -7,11 +7,7 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
     offer_space_type = Array(params[:offer_space_type]).map { |item| strip_tags(item).presence }.compact
     offer_space_type_other = strip_tags(params[:offer_space_type_other]).presence
     session[:offer_space_type] = offer_space_type
-    session[:offer_space_type_other] = if selected_other?(offer_space_type)
-                                         offer_space_type_other
-                                       else
-                                         ""
-                                       end
+    session[:offer_space_type_other] = description(:offer_space_type_other, :other, offer_space_type)
 
     invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
       validate_checkbox_field(
@@ -33,9 +29,17 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
 
 private
 
-  def selected_other?(offer_space_type)
-    offer_space_type.include?(
-      I18n.t("coronavirus_form.questions.#{controller_name}.options.other.label"),
+  def description(field, parent_field, checkboxes)
+    if selected_field?(parent_field, checkboxes)
+      strip_tags(params[field]).presence
+    else
+      ""
+    end
+  end
+
+  def selected_field?(field, checkboxes)
+    checkboxes.include?(
+      I18n.t("coronavirus_form.questions.#{controller_name}.options.#{field}.label"),
     )
   end
 
