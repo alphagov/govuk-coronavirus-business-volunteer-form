@@ -187,6 +187,11 @@ en:
           no_option:
             label: "No"
         custom_select_error: "Select if you can offer hotel rooms"
+      hotel_rooms_number:
+        title: "How many hotel rooms can you offer?"
+        hint: "Approximate amount, for example 10, 500, 10000."
+        hotel_rooms_number:
+          custom_error: "Enter the approximate amount of rooms you think you can offer"
       offer_transport:
         title: "Can you offer transport or logistics?"
         options:

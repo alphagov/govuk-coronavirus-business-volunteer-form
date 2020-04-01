@@ -13,6 +13,9 @@ class CoronavirusForm::HotelRoomsController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       render controller_path
+    elsif session[:hotel_rooms] == I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_staying_in.label") ||
+        session[:hotel_rooms] == I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_all_uses.label")
+      redirect_to hotel_rooms_number_url
     elsif session["check_answers_seen"]
       redirect_to check_your_answers_url
     else

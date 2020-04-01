@@ -1,0 +1,30 @@
+<% content_for :title do %><%= t("coronavirus_form.questions.hotel_rooms_number.title") %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.questions.hotel_rooms_number.title') %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-hotel-rooms-number",
+  "data-question-key": "hotel_rooms_number",
+  "novalidate": "true"
+) do %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    is_page_heading: true,
+    heading_size: "xl",
+    text: t("coronavirus_form.questions.hotel_rooms_number.title")
+  },
+  hint: t("coronavirus_form.questions.hotel_rooms_number.hint"),
+  id: "hotel_rooms_number",
+  name: "hotel_rooms_number",
+  width: 10,
+  value: session[:hotel_rooms_number],
+  error_message: error_items("hotel_rooms_number")
+} %>
+<%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
+<% end %>

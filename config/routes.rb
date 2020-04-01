@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     get "/hotel-rooms", to: "hotel_rooms#show"
     post "/hotel-rooms", to: "hotel_rooms#submit"
 
+    get "/hotel-rooms-number", to: "hotel_rooms_number#show"
+    post "/hotel-rooms-number", to: "hotel_rooms_number#submit"
+
     get "/are-you-a-manufacturer", to: "are_you_a_manufacturer#show"
     post "/are-you-a-manufacturer", to: "are_you_a_manufacturer#submit"
 
