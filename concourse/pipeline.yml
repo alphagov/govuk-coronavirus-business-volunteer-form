@@ -37,6 +37,13 @@ resources:
       location: Europe/London
 
 jobs:
+  - name: update-pipeline
+    plan:
+      - get: govuk-coronavirus-business-volunteer-people-form
+        trigger: true
+      - set_pipeline: govuk-corona-business-volunteer-form
+        file: govuk-coronavirus-business-volunteer-form/concourse/pipeline.yml
+
   - name: deploy-to-staging
     serial: true
     plan:
