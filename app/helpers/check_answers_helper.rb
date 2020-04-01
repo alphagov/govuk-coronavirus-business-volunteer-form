@@ -130,12 +130,6 @@ module CheckAnswersHelper
       concatenated_answer << "Company location: #{answer['company_location']}" if answer["company_location"]
       concatenated_answer << "Company postcode: #{answer['company_postcode']}" if answer["company_postcode"]
       joiner = "<br>"
-    elsif question.eql?("support_address")
-      concatenated_answer = answer.values.compact
-      joiner = ",<br>"
-    elsif question.eql?("date_of_birth")
-      concatenated_answer = answer.values.compact
-      joiner = "/"
     else
       concatenated_answer = answer.values.compact
     end
