@@ -24,7 +24,7 @@
     {
       value:  item[:label],
       label:  item[:label],
-      checked: session[:transport_type].include?(item[:label]),
+      checked: session.fetch(:transport_type, []).include?(item[:label]),
     }
   end
 } %>

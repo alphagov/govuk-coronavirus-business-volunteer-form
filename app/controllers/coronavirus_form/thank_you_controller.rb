@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ThankYouController < ApplicationController
-  def show
-    render "coronavirus_form/thank_you"
-  end
+  skip_before_action :check_first_question_answered
 end

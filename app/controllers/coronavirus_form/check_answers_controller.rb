@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::CheckAnswersController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
   def show
     session[:check_answers_seen] = true
-
-    render "coronavirus_form/check_answers"
+    super
   end
 
   def submit
@@ -17,7 +14,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
 
     reset_session
 
-    redirect_to controller: "coronavirus_form/thank_you", action: "show", reference_number: submission_reference
+    redirect_to thank_you_url(reference_number: submission_reference)
   end
 
 private
@@ -31,7 +28,7 @@ private
   end
 
   def previous_path
-    contact_details_path
+    contact_details_url
   end
 
   def items
@@ -107,7 +104,7 @@ private
         field: "Details for product #{product['product_name']}",
         value: sanitize(prod.join(joiner)),
         edit: {
-          href: "/product-details?product_id=#{product['product_id']}",
+          href: product_details_url(product_id: product["product_id"]),
         },
         delete: {
           href: "/product-details/#{product['product_id']}/delete",

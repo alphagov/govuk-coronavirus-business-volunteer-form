@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::PrivacyController < ApplicationController
-  def show
-    render "coronavirus_form/privacy"
-  end
+  skip_before_action :check_first_question_answered
 end

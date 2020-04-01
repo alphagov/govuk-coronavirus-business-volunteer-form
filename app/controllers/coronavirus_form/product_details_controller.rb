@@ -1,40 +1,37 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ProductDetailsController < ApplicationController
-  before_action :check_first_question_answered, only: :show
-
   REQUIRED_FIELDS = %w(product_name product_quantity product_cost certification_details lead_time).freeze
   TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
 
   def show
     session["product_details"] ||= []
     @product = find_product(params["product_id"], session["product_details"])
-    render "coronavirus_form/#{PAGE}"
+    super
   end
 
   def submit
     @product = current_product(params[:product_id], session[:product_details]).merge(sanitized_product(params))
     add_product_to_session(@product)
 
-    invalid_fields = validate_field_response_length(PAGE, TEXT_FIELDS) + validate_fields(@product)
+    invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) + validate_fields(@product)
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
-      render "coronavirus_form/#{PAGE}"
+      render controller_path
+    elsif session["check_answers_seen"]
+      redirect_to check_your_answers_url
     else
-      redirect_to controller: session["check_answers_seen"] ? "coronavirus_form/check_answers" : "coronavirus_form/#{NEXT_PAGE}", action: "show"
+      redirect_to additional_product_url
     end
   end
 
   def destroy
     remove_product_from_session(params[:id])
-    redirect_to check_your_answers_path, action: "show"
+    redirect_to check_your_answers_url
   end
 
 private
-
-  NEXT_PAGE = "additional_product"
-  PAGE = "product_details"
 
   helper_method :selected_ppe?
 
@@ -52,8 +49,8 @@ private
 
   def validate_fields(product)
     missing_fields = validate_missing_fields(product)
-    product_equipment_type = selected_ppe? ? validate_radio_field("#{PAGE}.equipment_type", radio: product["equipment_type"]) : []
-    product_location_validation = validate_radio_field("#{PAGE}.product_location", radio: product["product_location"])
+    product_equipment_type = selected_ppe? ? validate_radio_field("#{controller_name}.equipment_type", radio: product["equipment_type"]) : []
+    product_location_validation = validate_radio_field("#{controller_name}.product_location", radio: product["product_location"])
     postcode_validation = validate_product_postcode(product)
     missing_fields + product_equipment_type + product_location_validation + postcode_validation
   end
@@ -64,7 +61,7 @@ private
     if product["product_postcode"].blank?
       return [{
         field: "product_postcode".to_s,
-        text: t("coronavirus_form.questions.#{PAGE}.product_location.options.option_uk.input.custom_error"),
+        text: t("coronavirus_form.questions.#{controller_name}.product_location.options.option_uk.input.custom_error"),
       }]
     end
 
@@ -79,9 +76,9 @@ private
 
       invalid_fields << {
         field: field.to_s,
-        text: t("coronavirus_form.questions.#{PAGE}.#{field}.custom_error",
+        text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
                 default: t("coronavirus_form.errors.missing_mandatory_text_field",
-                           field: t("coronavirus_form.questions.#{PAGE}.#{field}.label")).humanize),
+                           field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
       }
     end
   end
@@ -102,8 +99,8 @@ private
   end
 
   def previous_path
-    return check_your_answers_path if session["check_answers_seen"]
+    return check_your_answers_url if session["check_answers_seen"]
 
-    medical_equipment_type_path
+    medical_equipment_type_url
   end
 end
