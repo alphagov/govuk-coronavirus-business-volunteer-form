@@ -74,9 +74,10 @@ en:
       <h2 class="govuk-heading-m">Changes to this notice</h2>
       <p class="govuk-body">We may change this privacy notice. When we make changes to this notice, the ‘last updated’ date at the top of this page will also change. Any changes to this privacy notice will apply to you and your information immediately. If these changes affect how your personal information is processed, the Cabinet Office will take reasonable steps to make sure you know.</p>
   check_your_answers:
-    title: "Check your answers before submitting"
-    heading: "Now send your application"
-    confirmation: "By submitting this application you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
+    title: "Are you ready to send the form?"
+    description: "Check your answers, then send the form."
+    heading: "Now send the form"
+    confirmation: "By submitting this form you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
     submit: "Accept and send"
   coronavirus_form:
     errors:
