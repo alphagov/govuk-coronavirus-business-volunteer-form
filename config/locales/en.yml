@@ -297,6 +297,7 @@ en:
               error_message: "Give a description of your qualification"
             no_qualification:
               label: "I do not have a qualification"
+          or: "Or"
           custom_select_error: "Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’"
           offer_care_qualifications_type:
             custom_length_error: "Description of your qualification must be 1000 characters or fewer"
