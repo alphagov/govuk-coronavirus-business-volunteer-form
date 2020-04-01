@@ -37,5 +37,41 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
     end
+
+    context "business_details" do
+      let(:question) { "business_details" }
+
+      it "concatenates business_details with a line break" do
+        answer = {
+          "company_name" => "Snow White Inc",
+          "company_number" => rand(10),
+          "company_size" => 1000,
+          "company_location" => "UK",
+        }
+
+        expected_answer =
+          "Company name: #{answer['company_name']}<br>" \
+            "Company number: #{answer['company_number']}<br>" \
+            "Company size number: #{answer['company_size']}<br>" \
+            "Company location: #{answer['company_location']}"
+
+        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
+      end
+
+      it "returns nothing if the business details are empty" do
+        answer = {}
+
+        expect(helper.concat_answer(answer, question)).to be_empty
+      end
+
+      it "only concatenates the fields that have a value" do
+        answer = {
+          "company_name" => "Snow White Inc",
+        }
+
+        expected_answer = "Company name: #{answer['company_name']}"
+        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
+      end
+    end
   end
 end
