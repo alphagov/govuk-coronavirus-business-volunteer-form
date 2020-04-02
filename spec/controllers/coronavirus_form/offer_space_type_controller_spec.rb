@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/offer_space_type" }
   let(:session_key) { :offer_space_type }
 

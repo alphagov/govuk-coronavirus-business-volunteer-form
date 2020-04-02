@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::AdditionalProductController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/additional_product" }
 
   describe "GET show" do

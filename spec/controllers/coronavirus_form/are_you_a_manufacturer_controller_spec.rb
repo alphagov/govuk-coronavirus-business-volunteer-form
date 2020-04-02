@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::AreYouAManufacturerController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/are_you_a_manufacturer" }
   let(:session_key) { :are_you_a_manufacturer }
 

@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   include FormFlowHelper
   include ProductHelper
 
+  rescue_from ActionController::InvalidAuthenticityToken, with: :session_expired
+
   before_action :check_first_question_answered, only: :show
 
   if ENV["REQUIRE_BASIC_AUTH"]
@@ -23,6 +25,11 @@ class ApplicationController < ActionController::Base
 private
 
   helper_method :previous_path
+
+  def session_expired
+    reset_session
+    redirect_to session_expired_path
+  end
 
   def previous_path
     raise NotImplementedError, "Define a previous path"

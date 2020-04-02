@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::MedicalEquipmentController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/medical_equipment" }
   let(:session_key) { :medical_equipment }
 

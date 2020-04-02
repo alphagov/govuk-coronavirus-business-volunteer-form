@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::LocationController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/location" }
   let(:session_key) { :location }
 

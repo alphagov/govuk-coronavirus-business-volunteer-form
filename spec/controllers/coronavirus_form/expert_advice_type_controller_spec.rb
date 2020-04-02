@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/expert_advice_type" }
   let(:session_key) { :expert_advice_type }
 

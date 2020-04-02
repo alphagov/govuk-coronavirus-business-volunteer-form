@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/product_details" }
   let(:session_key) { :product_details }
   let(:product_id) { SecureRandom.uuid }
