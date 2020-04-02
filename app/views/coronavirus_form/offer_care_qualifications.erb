@@ -16,7 +16,7 @@
   heading: t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.title"),
   hint_text: t('coronavirus_form.questions.offer_care_qualifications.offer_care_type.hint'),
   is_page_heading: true,
-  id: "offer_care_qualifications.offer_care_type",
+  id: "offer_care_qualifications_offer_care_type",
   name: "offer_care_type[]",
   error: error_items("offer_care_type"),
   items: t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options").map do |_, item|
@@ -32,7 +32,7 @@
   <%= render "govuk_publishing_components/components/checkboxes", {
     heading: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.title'),
     hint_text: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.hint'),
-    id: "offer_care_qualifications.care_qualifications",
+    id: "offer_care_qualifications_care_qualifications",
     name: "offer_care_qualifications[]",
     error: error_items("offer_care_qualifications"),
     items: [
