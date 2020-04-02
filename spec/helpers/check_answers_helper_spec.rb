@@ -68,6 +68,42 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
   end
 
+  describe "#transport_type" do
+    it "adds a query string to the link for each item" do
+      helper.transport_type.each do |item|
+        expect(item[:edit][:href]).to include("?change-answer")
+      end
+    end
+  end
+
+  describe "#transport_type_info" do
+    it "concates transport type and description" do
+      session["transport_type"] = [
+        I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
+        I18n.t("coronavirus_form.questions.transport_type.options.moving_goods.label"),
+        I18n.t("coronavirus_form.questions.transport_type.options.other.label"),
+      ]
+
+      session["transport_description"] = "Transport description"
+
+      expected_answer = "#{I18n.t('coronavirus_form.questions.transport_type.options.moving_people.label')}, " \
+                          "#{I18n.t('coronavirus_form.questions.transport_type.options.moving_goods.label')}, and " \
+                          "#{I18n.t('coronavirus_form.questions.transport_type.options.other.label')}<br>" \
+                          "#{session['transport_description']}"
+
+      expect(helper.transport_type_info).to eq(expected_answer)
+    end
+
+    it "only concatenates the fields that have a value" do
+      session["transport_type"] = [
+        I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
+      ]
+
+      expected_answer = "#{I18n.t('coronavirus_form.questions.transport_type.options.moving_people.label')}<br>"
+      expect(helper.transport_type_info).to eq(expected_answer)
+    end
+  end
+
   describe "#concat_answer" do
     context "contact_details" do
       let(:question) { "contact_details" }

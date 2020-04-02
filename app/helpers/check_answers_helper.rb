@@ -87,17 +87,21 @@ module CheckAnswersHelper
   end
 
   def transport_type
-    answer = []
-    answer << Array(session["transport_type"]).flatten.to_sentence
-    answer << session["transport_description"]
-
     [{
       field: t("coronavirus_form.questions.transport_type.title"),
-      value: sanitize(answer.join("<br>")),
+      value: sanitize(transport_type_info),
       edit: {
         href: "transport-type?change-answer",
       },
     }]
+  end
+
+  def transport_type_info
+    answer = []
+    answer << Array(session["transport_type"]).flatten.to_sentence
+    answer << session["transport_description"]
+
+    answer.join("<br>")
   end
 
   def offer_care_qualifications
