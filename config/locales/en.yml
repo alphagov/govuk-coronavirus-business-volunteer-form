@@ -185,6 +185,14 @@ en:
               label: "Alcohol hand gel"
             gowns:
               label: "Gowns"
+            face_fit_test_kit:
+              label: "Face fit test kit"
+            face_fit_test_solution:
+              label: "Face fit test solution"
+            swabs:
+              label: "Swabs"
+            general_purpose_detergent:
+              label: "General purpose detergent"
             other:
               label: "Something else"
           custom_select_error: "Select a type of equipment, or ‘something else’"
