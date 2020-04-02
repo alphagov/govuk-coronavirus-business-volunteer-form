@@ -104,6 +104,14 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
   end
 
+  describe "#offer_care_qualifications" do
+    it "adds a query string to the link for each item" do
+      helper.offer_care_qualifications.each do |item|
+        expect(item[:edit][:href]).to include("?change-answer")
+      end
+    end
+  end
+
   describe "#concat_answer" do
     context "contact_details" do
       let(:question) { "contact_details" }
