@@ -1,6 +1,23 @@
 require "spec_helper"
 
 RSpec.describe CheckAnswersHelper, type: :helper do
+  describe "#product_details" do
+    let(:products) do
+      [{
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+        ),
+        "product_name" => "Product name",
+      }]
+    end
+
+    it "adds a link to edit each item" do
+      helper.product_details(products).each do |product|
+        expect(product[:edit][:href]).to include(product_details_url(product_id: product["product_id"]))
+      end
+    end
+  end
+
   describe "#product_info" do
     it "concatenates product information with a line break" do
       product = {
