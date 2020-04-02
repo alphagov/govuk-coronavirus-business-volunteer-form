@@ -162,6 +162,7 @@ private
       concatenated_answer << "Company number: #{answer['company_number']}" if answer["company_number"]
       concatenated_answer << "Company size number: #{answer['company_size']}" if answer["company_size"]
       concatenated_answer << "Company location: #{answer['company_location']}" if answer["company_location"]
+      concatenated_answer << "Company postcode: #{answer['company_postcode']}" if answer["company_postcode"]
       joiner = "<br>"
     elsif question.eql?("support_address")
       concatenated_answer = answer.values.compact

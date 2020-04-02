@@ -379,6 +379,9 @@ en:
           options:
             united_kingdom:
               label: "United Kingdom"
+              input:
+                label: "Postcode"
+                custom_error: "Enter a UK postcode"
             european_union:
               label: "European Union"
             rest_of_world:

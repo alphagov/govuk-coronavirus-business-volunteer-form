@@ -64,6 +64,17 @@
       value:  item[:label],
       text:  item[:label],
       checked: session.dig("business_details", "company_location") == item[:label],
+      conditional: item[:label] != t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label") ? nil :
+        render("govuk_publishing_components/components/input", {
+          label: {
+            text: t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.input.label"),
+          },
+          id: "company_postcode",
+          name: "company_postcode",
+          error_message: error_items("company_postcode"),
+          value: session.dig("business_details", "company_postcode"),
+          width: 10
+        })
     }
   end
 } %>
