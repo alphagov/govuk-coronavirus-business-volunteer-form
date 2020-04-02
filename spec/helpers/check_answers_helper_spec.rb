@@ -1,6 +1,37 @@
 require "spec_helper"
 
 RSpec.describe CheckAnswersHelper, type: :helper do
+  describe "#items" do
+    it "adds a link to edit each item" do
+      helper.items.each do |item|
+        expect(item[:edit][:href]).to include("?change-answer")
+      end
+    end
+
+    it "has an entry for each regular question" do
+      questions.each do |question|
+        unless question.in? %w(medical_equipment_type product_details)
+          expect(helper.items.pluck(:field)).to include(I18n.t("coronavirus_form.questions.#{question}.title"))
+        end
+      end
+    end
+
+    it "includes an entry for product_details" do
+      session["product_details"] = [{
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+        ),
+        "product_name" => "Product name",
+      }]
+
+      questions.each do |question|
+        if question == "product_details"
+          expect(helper.items.pluck(:field)).to include(a_string_matching(/#{session["product_details"].first["product_name"]}/))
+        end
+      end
+    end
+  end
+
   describe "#product_details" do
     let(:products) do
       [{
