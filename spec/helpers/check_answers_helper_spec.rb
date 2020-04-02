@@ -16,6 +16,12 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         expect(product[:edit][:href]).to include(product_details_url(product_id: product["product_id"]))
       end
     end
+
+    it "adds a link to delete each item" do
+      helper.product_details(products).each do |product|
+        expect(product[:delete][:href]).to include("/product-details/#{product['product_id']}/delete")
+      end
+    end
   end
 
   describe "#product_info" do
