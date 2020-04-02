@@ -158,13 +158,15 @@ RSpec.describe CheckAnswersHelper, type: :helper do
           "company_number" => rand(10),
           "company_size" => 1000,
           "company_location" => "UK",
+          "company_postcode" => "E1 8QS",
         }
 
         expected_answer =
           "Company name: #{answer['company_name']}<br>" \
             "Company number: #{answer['company_number']}<br>" \
             "Company size number: #{answer['company_size']}<br>" \
-            "Company location: #{answer['company_location']}"
+            "Company location: #{answer['company_location']}<br>" \
+            "Company postcode: #{answer['company_postcode']}"
 
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
