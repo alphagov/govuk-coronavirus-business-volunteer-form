@@ -93,7 +93,7 @@ Rails.application.configure do
     redis = JSON.parse(ENV["VCAP_SERVICES"]).to_h.fetch("redis", [])
     instance = redis.first
     config.cache_store = :redis_cache_store, { url: instance.dig("credentials", "uri") }
-    config.session_store :cache_store, expires_in: 2.hours, key: "_sessions_store"
+    config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
   end
 
   # Inserts middleware to perform automatic connection switching.
