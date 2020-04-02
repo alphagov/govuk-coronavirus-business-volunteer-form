@@ -25,10 +25,21 @@ class CoronavirusForm::BusinessDetailsController < ApplicationController
 private
 
   def validate_fields(business_details)
-    missing_fields = validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS)
-    company_size_validation = validate_radio_field("#{controller_name}.company_size", radio: business_details["company_size"])
-    company_location_validation = validate_radio_field("#{controller_name}.company_location", radio: business_details["company_location"])
-    missing_fields + company_size_validation + company_location_validation
+    errors = []
+
+    errors << validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS)
+    errors << validate_radio_field("#{controller_name}.company_size", radio: business_details["company_size"])
+    errors << validate_radio_field("#{controller_name}.company_location", radio: business_details["company_location"])
+
+    errors << if @business_details["company_location"] == I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label") &&
+        @business_details["company_postcode"].blank?
+                { field: "company_postcode",
+                  text: t("coronavirus_form.questions.#{controller_name}.company_location.options.united_kingdom.input.custom_error") }
+              elsif @business_details["company_location"] == I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label")
+                validate_postcode("company_postcode", @business_details["company_postcode"])
+              end
+
+    errors.compact.flatten
   end
 
   def sanitized_business_details(params)
@@ -37,6 +48,7 @@ private
       "company_number" => strip_tags(params[:company_number]).presence,
       "company_size" => strip_tags(params[:company_size]).presence,
       "company_location" => strip_tags(params[:company_location]).presence,
+      "company_postcode" => strip_tags(params[:company_postcode]).presence,
     }
   end
 

@@ -29,6 +29,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
         company_number: "1234",
         company_size: "under_50_people",
         company_location: "united_kingdom",
+        company_postcode: "AB1 1AA",
       }
     end
 
@@ -65,6 +66,52 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
 
     it "validates company location option is chosen" do
       post :submit, params: { company_location: "" }
+
+      expect(response).to render_template(current_template)
+    end
+
+    it "does not validate postcode is provided if company location is not UK" do
+      post :submit, params: { company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.european_union.label") }
+
+      expect(response).to render_template(current_template)
+    end
+
+    it "validates postcode is provided if company location is UK" do
+      post :submit, params: { company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label") }
+
+      expect(response).to render_template(current_template)
+    end
+
+    it "redirects to next step when a valid postcode is provided" do
+      valid_postcodes = [
+      "AA9A 9AA",
+      "A9A 9AA",
+      "A9 9AA",
+      "A99 9AA",
+      "AA9 9AA",
+      "AA99 9AA",
+      "BFPO 1",
+      "BFPO 9",
+    ]
+
+      valid_postcodes.each do |postcode|
+        params[:postcode] = postcode
+        post :submit, params: params
+
+        post :submit, params: {
+          company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
+          company_postcode: postcode,
+        }
+
+        expect(response).to render_template(current_template)
+      end
+    end
+
+    it "does not redirect to next step when postcode is invalid" do
+      post :submit, params: {
+        company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
+        company_postcode: "AAA1 1AA",
+      }
 
       expect(response).to render_template(current_template)
     end
