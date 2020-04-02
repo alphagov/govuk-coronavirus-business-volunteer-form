@@ -93,5 +93,8 @@ Rails.application.routes.draw do
 
     # Other page - Accessibility statement
     get "/accessibility-statement", to: "accessibility_statement#show"
+
+    # Other page - Session expired notice
+    get "/session-expired", to: "session_expired#show"
   end
 end

@@ -79,6 +79,11 @@ en:
     heading: "Now send the form"
     confirmation: "By submitting this form you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
     submit: "Accept and send"
+  session_expired:
+    title: Your session has ended due to inactivity
+    body_text: |
+      <p class="govuk-body">Your session has ended because you have not done anything for 4 hours. You'll have to start again.</p>
+      <p class="govuk-body">We do this for your security. We've deleted all the details you entered to protect your data.</p>
   coronavirus_form:
     errors:
       heading: "There is a problem"

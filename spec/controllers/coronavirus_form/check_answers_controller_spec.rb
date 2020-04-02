@@ -3,6 +3,8 @@
 require "spec_helper"
 
 RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
+  include_examples "session expiry"
+
   let(:current_template) { "coronavirus_form/check_answers" }
 
   describe "GET show" do
