@@ -30,6 +30,14 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         end
       end
     end
+
+    it "doesn't include questions that the user has skipped" do
+      questions.each do |question|
+        if question.in? CheckAnswersHelper::SKIPPABLE_QUESTIONS
+          expect(helper.items.pluck(:field)).to_not include(I18n.t("coronavirus_form.questions.#{question}.title"))
+        end
+      end
+    end
   end
 
   describe "#product_details" do

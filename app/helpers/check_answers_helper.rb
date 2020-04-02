@@ -1,10 +1,21 @@
 module CheckAnswersHelper
+  SKIPPABLE_QUESTIONS = %w(
+    are_you_a_manufacturer
+    medical_equipment_type
+    product_details
+    hotel_rooms_number
+    transport_type
+    offer_space_type
+    offer_care_qualifications
+  ).freeze
+
   def items
     questions.map { |question|
       # We have answers as strings and hashes. The hashes need a little more
       # work to make them readable.
 
       next if question.eql?("medical_equipment_type")
+      next if skip_question?(question)
 
       if question.eql?("product_details")
         next product_details(session[question])
@@ -35,6 +46,10 @@ module CheckAnswersHelper
         },
       }]
     }.compact.flatten
+  end
+
+  def skip_question?(question)
+    question.in?(SKIPPABLE_QUESTIONS) && session[question].blank?
   end
 
   def additional_product_index
