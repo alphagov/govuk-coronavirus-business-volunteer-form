@@ -17,17 +17,9 @@ module CheckAnswersHelper
       next if question.eql?("medical_equipment_type")
       next if skip_question?(question)
 
-      if question.eql?("product_details")
-        next product_details(session[question])
-      end
-
-      if question.eql?("transport_type")
-        next transport_type
-      end
-
-      if question.eql?("offer_care_qualifications")
-        next offer_care_qualifications
-      end
+      next product_details(session[question]) if question.eql?("product_details")
+      next transport_type if question.eql?("transport_type")
+      next offer_care_qualifications if question.eql?("offer_care_qualifications")
 
       value = case session[question]
               when Hash
