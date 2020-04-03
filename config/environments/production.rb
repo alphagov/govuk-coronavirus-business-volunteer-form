@@ -7,6 +7,7 @@ Rails.application.configure do
   config.hosts = [
     "coronavirus-business-volunteers.service.gov.uk",
     "d2uxybyx2btt89.cloudfront.net",
+    "govuk-coronavirus-business-volunteer-form-prod.cloudapps.digital",
     "govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital",
   ]
 
