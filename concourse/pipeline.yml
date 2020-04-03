@@ -91,9 +91,12 @@ jobs:
           CF_STARTUP_TIMEOUT: 5 # minutes
           REQUIRE_BASIC_AUTH: "true"
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
+          AWS_ACCESS_KEY_ID: ((aws-access-key-id))
+          AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
           SECRET_KEY_BASE: ((secret-key-base-staging))
           HOSTNAME: govuk-coronavirus-business-volunteer-form-stg
           SENTRY_DSN: https://((sentry-dsn))
+          AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-staging
 
   - name: smoke-test-staging
     plan:
@@ -124,9 +127,12 @@ jobs:
           CF_STARTUP_TIMEOUT: 15 # minutes
           REQUIRE_BASIC_AUTH:
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
+          AWS_ACCESS_KEY_ID: ((aws-access-key-id-prod))
+          AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key-prod))
           SECRET_KEY_BASE: ((secret-key-base-prod))
           HOSTNAME: govuk-coronavirus-business-volunteer-form-prod
           SENTRY_DSN: https://((sentry-dsn))
+          AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-prod
 
   - name: smoke-test-prod
     plan:
@@ -153,3 +159,4 @@ jobs:
         params:
           CF_SPACE: production
           SENTRY_DSN: https://((sentry-dsn))
+
