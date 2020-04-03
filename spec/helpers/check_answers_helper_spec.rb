@@ -16,6 +16,17 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     }
   end
 
+  let(:products) do
+    {
+      "product_details" => [{
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+        ),
+        "product_name" => "Product name",
+      }],
+    }
+  end
+
   describe "#items" do
     it "adds a link to edit each item" do
       helper.items.each do |item|
@@ -34,12 +45,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
 
     it "includes an entry for product_details" do
-      session["product_details"] = [{
-        "medical_equipment_type" => I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        "product_name" => "Product name",
-      }]
+      session.merge!(products)
 
       questions.each do |question|
         if question == "product_details"
@@ -66,23 +72,18 @@ RSpec.describe CheckAnswersHelper, type: :helper do
   end
 
   describe "#product_details" do
-    let(:products) do
-      [{
-        "medical_equipment_type" => I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        "product_name" => "Product name",
-      }]
+    before do
+      session.merge!(products)
     end
 
     it "adds a link to edit each item" do
-      helper.product_details(products).each do |product|
+      helper.product_details.each do |product|
         expect(product[:edit][:href]).to include(product_details_url(product_id: product["product_id"]))
       end
     end
 
     it "adds a link to delete each item" do
-      helper.product_details(products).each do |product|
+      helper.product_details.each do |product|
         expect(product[:delete][:href]).to include("/product-details/#{product['product_id']}/delete")
       end
     end
