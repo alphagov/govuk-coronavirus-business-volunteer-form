@@ -10,4 +10,8 @@ inherit_mode:
 Metrics/BlockLength:
   Exclude:
     - config/routes.rb
-    - config/environments/production.rb
+    - config/**/*.rb
+
+Style/WordArray:
+  Exclude:
+    - config/**/*.rb
