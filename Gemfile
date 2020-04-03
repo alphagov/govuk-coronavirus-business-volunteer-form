@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 source "https://rubygems.org"
 
-gem "aws-sdk-s3", "~> 1.61.1"
+gem "aws-sdk-s3", "~> 1.61.2"
 gem "bootsnap", "~> 1"
 gem "govuk_app_config", "~> 2.1.1"
 gem "govuk_publishing_components", "~> 21.38.0"
