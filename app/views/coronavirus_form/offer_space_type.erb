@@ -56,7 +56,7 @@
         checked: session.fetch(:offer_space_type, []).include?(t('coronavirus_form.questions.offer_space_type.options.other.label')),
         conditional: render("govuk_publishing_components/components/input", {
           label: {
-            text: t('coronavirus_form.questions.offer_space_type.options.office_space.description.label'),
+            text: t('coronavirus_form.questions.offer_space_type.options.other.description.label'),
           },
           id: "offer_space_type_other",
           name: "offer_space_type_other",
