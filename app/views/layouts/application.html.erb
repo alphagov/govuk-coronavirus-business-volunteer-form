@@ -13,6 +13,11 @@
     <%= yield :meta_tags %>
   </head>
   <body class="govuk-template__body">
+    <%= render "govuk_publishing_components/components/cookie_banner", {
+      text: sanitize(t("cookies.banner.text")),
+      cookie_preferences_href: cookies_path,
+    } %>
+
     <script>
       document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
@@ -37,6 +42,10 @@
             text: t("privacy_page.title")
           },
           {
+            href: "/cookies",
+            text: t("cookies.title")
+          },
+          {
             href: "/accessibility-statement",
             text: t("accessibility_statement.title")
           },
@@ -44,13 +53,5 @@
       }
     } %>
     <%= javascript_include_tag "application" %>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43115970-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-43115970-1');
-    </script>
   </body>
 </html>

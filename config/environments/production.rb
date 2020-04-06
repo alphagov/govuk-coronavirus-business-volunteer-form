@@ -100,8 +100,11 @@ Rails.application.configure do
     redis = JSON.parse(ENV["VCAP_SERVICES"]).to_h.fetch("redis", [])
     instance = redis.first
     config.cache_store = :redis_cache_store, { url: instance.dig("credentials", "uri") }
+    # If you change the expiry here, you should also change it on the privacy policy.
     config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
   end
+
+  config.analytics_tracking_id = ENV["GA_VIEW_ID"]
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
