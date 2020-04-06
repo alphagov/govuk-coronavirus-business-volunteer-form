@@ -1,7 +1,6 @@
 module CheckAnswersHelper
   SKIPPABLE_QUESTIONS = %w(
     are_you_a_manufacturer
-    medical_equipment_type
     product_details
     hotel_rooms_number
     transport_type
@@ -14,7 +13,6 @@ module CheckAnswersHelper
       # We have answers as strings and hashes. The hashes need a little more
       # work to make them readable.
 
-      next if question.eql?("medical_equipment_type")
       next if skip_question?(question)
 
       next product_details if question.eql?("product_details")
@@ -41,6 +39,8 @@ module CheckAnswersHelper
   end
 
   def skip_question?(question)
+    return true if question.eql?("medical_equipment_type")
+
     question.in?(SKIPPABLE_QUESTIONS) && session[question].blank?
   end
 
