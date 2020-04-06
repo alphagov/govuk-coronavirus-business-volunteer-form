@@ -22,7 +22,7 @@
   },
   hint: t('coronavirus_form.questions.offer_other_support.hint'),
   name: "offer_other_support",
-  value: session[:offer_other_support]
+  value: @form_responses[:offer_other_support]
 } %>
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
 <% end %>

@@ -23,7 +23,7 @@
     {
       value: item[:label],
       label: item[:label],
-      checked: session.fetch(:offer_care_type, []).include?(item[:label]),
+      checked: @form_responses.fetch(:offer_care_type, []).include?(item[:label]),
     }
   end
 }
@@ -39,12 +39,12 @@
       {
         value: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label'),
         label: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label'),
-        checked: session.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label')),
+        checked: @form_responses.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label')),
       },
       {
         value: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label'),
         label: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label'),
-        checked: session.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label')),
+        checked: @form_responses.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label')),
         conditional: render("govuk_publishing_components/components/textarea", {
           label: {
             text: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.input.label'),
@@ -52,7 +52,7 @@
           id: "offer_care_qualifications_type",
           name: "offer_care_qualifications_type",
           error_message: error_items("offer_care_qualifications_type"),
-          value: session[:offer_care_qualifications_type],
+          value: @form_responses[:offer_care_qualifications_type],
         })
       }
     ]
@@ -64,7 +64,7 @@
       {
         value: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.no_qualification.label'),
         label: t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.no_qualification.label'),
-        checked: session.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.no_qualification.label')),
+        checked: @form_responses.fetch(:offer_care_qualifications, []).include?(t('coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.no_qualification.label')),
       },
     ]
   } %>

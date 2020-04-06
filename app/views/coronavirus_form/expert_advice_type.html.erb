@@ -23,37 +23,37 @@
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.medical.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.medical.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.medical.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.medical.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.engineering.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.engineering.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.engineering.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.engineering.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.construction.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.construction.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.project_management.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.project_management.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.project_management.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.project_management.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.it.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.it.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.it.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.it.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.manufacturing.label")),
         },
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.other.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.other.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.other.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.other.label")),
           conditional: render("govuk_publishing_components/components/textarea", {
             label: {
               text: t("coronavirus_form.questions.expert_advice_type.options.other.input.label"),
@@ -61,7 +61,7 @@
             id: "expert_advice_type_other",
             name: "expert_advice_type_other",
             error_message: error_items("expert_advice_type_other"),
-            value: session[:expert_advice_type_other],
+            value: @form_responses[:expert_advice_type_other],
           })
         },
       ]
@@ -73,7 +73,7 @@
         {
           value: t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label"),
           label: t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label"),
-          checked: session.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")),
+          checked: @form_responses.fetch(:expert_advice_type, []).include?(t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")),
         },
       ],
     }%>

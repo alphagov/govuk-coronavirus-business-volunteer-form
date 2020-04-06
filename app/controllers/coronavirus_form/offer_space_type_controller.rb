@@ -8,34 +8,46 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
 
   def submit
     offer_space_type = Array(params[:offer_space_type]).map { |item| strip_tags(item).presence }.compact
-    session[:offer_space_type] = offer_space_type
-    session[:offer_space_type_other] = description(:other, offer_space_type)
-    session[:warehouse_space_description] = description(:warehouse_space, offer_space_type)
-    session[:office_space_description] = description(:office_space, offer_space_type)
-    session[:general_space_description] = strip_tags(params[:general_space_description]).presence
+    @form_responses = {
+      offer_space_type: offer_space_type,
+      offer_space_type_other: description(:other, offer_space_type),
+      warehouse_space_description: description(:warehouse_space, offer_space_type),
+      office_space_description: description(:office_space, offer_space_type),
+      general_space_description: strip_tags(params[:general_space_description]).presence,
+    }
 
-    invalid_fields = validate_fields(offer_space_type)
+    invalid_fields = validate_fields
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path
     elsif session["check_answers_seen"]
+      update_session_store
       redirect_to check_your_answers_url
     else
+      update_session_store
       redirect_to expert_advice_type_url
     end
   end
 
 private
 
-  def validate_fields(offer_space_type)
+  def update_session_store
+    session[:offer_space_type] = @form_responses[:offer_space_type]
+    session[:offer_space_type_other] = @form_responses[:offer_space_type_other]
+    session[:warehouse_space_description] = @form_responses[:warehouse_space_description]
+    session[:office_space_description] = @form_responses[:office_space_description]
+    session[:general_space_description] = @form_responses[:general_space_description]
+  end
+
+  def validate_fields
     [
       validate_field_response_length(controller_name, TEXT_FIELDS),
-      validate_checkbox_field(controller_name, values: offer_space_type, allowed_values: ALLOWED_VALUES),
+      validate_checkbox_field(controller_name, values: @form_responses[:offer_space_type], allowed_values: ALLOWED_VALUES),
       validate_mandatory_text_fields(controller_name, TEXT_FIELDS),
-      validate_description_fields(offer_space_type),
-      validate_descriptions_response_length(offer_space_type),
+      validate_description_fields(@form_responses[:offer_space_type]),
+      validate_descriptions_response_length(@form_responses[:offer_space_type]),
     ].flatten.compact
   end
 
@@ -50,7 +62,7 @@ private
 
   def overlong_descriptions
     filter_options do |_field_id, option|
-      val = session[option.dig(:description, :id)]
+      val = @form_responses[option.dig(:description, :id).to_sym]
       val.present? && val.length > 1000
     end
   end
@@ -71,7 +83,7 @@ private
   def missing_descriptions(selected_options)
     filter_options do |field_id, option|
       description_id = option.dig(:description, :id).to_sym
-      selected_field?(field_id, selected_options) && session[description_id].blank?
+      selected_field?(field_id, selected_options) && @form_responses[description_id].blank?
     end
   end
 

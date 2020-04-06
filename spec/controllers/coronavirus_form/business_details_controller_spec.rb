@@ -38,7 +38,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
     it "sets session variables" do
       post :submit, params: params
 
-      expect(session[:business_details]).to eq params.stringify_keys
+      expect(session[:business_details]).to eq params
     end
 
     it "redirects to next step" do

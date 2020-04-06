@@ -101,8 +101,8 @@ module CheckAnswersHelper
 
   def transport_type_info
     answer = []
-    answer << Array(session["transport_type"]).flatten.to_sentence
-    answer << session["transport_description"]
+    answer << Array(session[:transport_type]).flatten.to_sentence
+    answer << session[:transport_description]
 
     answer.join("<br>")
   end
@@ -110,13 +110,13 @@ module CheckAnswersHelper
   def offer_care_qualifications
     [{
       field: t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.title"),
-      value: sanitize(Array(session["offer_care_type"]).flatten.to_sentence),
+      value: sanitize(Array(session[:offer_care_type]).flatten.to_sentence),
       edit: {
         href: "offer-care-qualifications?change-answer",
       },
     }, {
       field: t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.title"),
-      value: sanitize(Array(session["offer_care_qualifications"]).flatten.to_sentence),
+      value: sanitize(Array(session[:offer_care_qualifications]).flatten.to_sentence),
       edit: {
         href: "offer-care-qualifications?change-answer",
       },

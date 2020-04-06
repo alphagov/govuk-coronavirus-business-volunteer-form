@@ -2,25 +2,33 @@
 
 class CoronavirusForm::OfferSpaceController < ApplicationController
   def submit
-    offer_space = strip_tags(params[:offer_space]).presence
-    session[:offer_space] = offer_space
+    @form_responses = {
+      offer_space: strip_tags(params[:offer_space]).presence,
+    }
 
-    invalid_fields = validate_radio_field(controller_name, radio: offer_space)
+    invalid_fields = validate_radio_field(controller_name, radio: @form_responses[:offer_space])
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path
-    elsif offer_space.eql? "Yes"
+    elsif @form_responses[:offer_space].eql? "Yes"
+      update_session_store
       redirect_to offer_space_type_url
     elsif session["check_answers_seen"]
+      update_session_store
       redirect_to check_your_answers_url
     else
+      update_session_store
       redirect_to expert_advice_type_url
     end
   end
 
 private
+
+  def update_session_store
+    session[:offer_space] = @form_responses[:offer_space]
+  end
 
   def previous_path
     offer_transport_url
