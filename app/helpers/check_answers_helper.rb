@@ -1,22 +1,23 @@
 module CheckAnswersHelper
+  SKIPPABLE_QUESTIONS = %w(
+    are_you_a_manufacturer
+    product_details
+    hotel_rooms_number
+    transport_type
+    offer_space_type
+    offer_care_qualifications
+  ).freeze
+
   def items
     questions.map { |question|
       # We have answers as strings and hashes. The hashes need a little more
       # work to make them readable.
 
-      next if question.eql?("medical_equipment_type")
+      next if skip_question?(question)
 
-      if question.eql?("product_details")
-        next product_details(session[question])
-      end
-
-      if question.eql?("transport_type")
-        next transport_type
-      end
-
-      if question.eql?("offer_care_qualifications")
-        next offer_care_qualifications
-      end
+      next product_details if question.eql?("product_details")
+      next transport_type if question.eql?("transport_type")
+      next offer_care_qualifications if question.eql?("offer_care_qualifications")
 
       value = case session[question]
               when Hash
@@ -37,6 +38,12 @@ module CheckAnswersHelper
     }.compact.flatten
   end
 
+  def skip_question?(question)
+    return true if question.eql?("medical_equipment_type")
+
+    question.in?(SKIPPABLE_QUESTIONS) && session[question].blank?
+  end
+
   def additional_product_index
     items.index { |item| item[:field] === t("coronavirus_form.questions.additional_product.title") }
   end
@@ -49,7 +56,8 @@ module CheckAnswersHelper
     items.select.with_index { |_, index| index > additional_product_index }
   end
 
-  def product_details(products)
+  def product_details
+    products = session["product_details"]
     return unless products && products.any?
 
     products.map do |product|

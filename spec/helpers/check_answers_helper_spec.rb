@@ -1,6 +1,32 @@
 require "spec_helper"
 
 RSpec.describe CheckAnswersHelper, type: :helper do
+  let(:answers_to_skippable_questions) do
+    {
+      "are_you_a_manufacturer" => [
+        I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label"),
+      ],
+      "additional_product" => I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
+      "hotel_rooms_number" => "100",
+      "transport_type" => [
+        I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
+      ],
+      "offer_space_type" => I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
+      "offer_care_qualifications" => I18n.t("coronavirus_form.questions.offer_care_qualifications.options.adult_care.label"),
+    }
+  end
+
+  let(:products) do
+    {
+      "product_details" => [{
+        "medical_equipment_type" => I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
+        ),
+        "product_name" => "Product name",
+      }],
+    }
+  end
+
   describe "#items" do
     it "adds a link to edit each item" do
       helper.items.each do |item|
@@ -9,6 +35,8 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
 
     it "has an entry for each regular question" do
+      session.merge!(answers_to_skippable_questions)
+
       questions.each do |question|
         unless question.in? %w(medical_equipment_type product_details)
           expect(helper.items.pluck(:field)).to include(I18n.t("coronavirus_form.questions.#{question}.title"))
@@ -17,12 +45,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
 
     it "includes an entry for product_details" do
-      session["product_details"] = [{
-        "medical_equipment_type" => I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        "product_name" => "Product name",
-      }]
+      session.merge!(products)
 
       questions.each do |question|
         if question == "product_details"
@@ -30,26 +53,37 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         end
       end
     end
+
+    it "doesn't include questions that the user has skipped" do
+      questions.each do |question|
+        if question.in? CheckAnswersHelper::SKIPPABLE_QUESTIONS
+          expect(helper.items.pluck(:field)).to_not include(I18n.t("coronavirus_form.questions.#{question}.title"))
+        end
+      end
+    end
+  end
+
+  describe "#additional_product_index" do
+    it "finds the index of the additional_product question" do
+      session.merge!(answers_to_skippable_questions)
+
+      expect(helper.additional_product_index).to eq(2)
+    end
   end
 
   describe "#product_details" do
-    let(:products) do
-      [{
-        "medical_equipment_type" => I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        "product_name" => "Product name",
-      }]
+    before do
+      session.merge!(products)
     end
 
     it "adds a link to edit each item" do
-      helper.product_details(products).each do |product|
+      helper.product_details.each do |product|
         expect(product[:edit][:href]).to include(product_details_url(product_id: product["product_id"]))
       end
     end
 
     it "adds a link to delete each item" do
-      helper.product_details(products).each do |product|
+      helper.product_details.each do |product|
         expect(product[:delete][:href]).to include("/product-details/#{product['product_id']}/delete")
       end
     end
