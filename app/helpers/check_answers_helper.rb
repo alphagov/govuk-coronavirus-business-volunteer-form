@@ -19,14 +19,7 @@ module CheckAnswersHelper
       next transport_type if question.eql?("transport_type")
       next offer_care_qualifications if question.eql?("offer_care_qualifications")
 
-      value = case session[question]
-              when Hash
-                concat_answer(session[question], question)
-              when Array
-                session[question].flatten.to_sentence
-              else
-                session[question]
-              end
+      value = concat_answer(session[question], question)
 
       [{
         field: t("coronavirus_form.questions.#{question}.title"),
@@ -129,6 +122,10 @@ module CheckAnswersHelper
   end
 
   def concat_answer(answer, question)
+    return unless answer
+    return answer if answer.is_a?(String)
+    return answer.flatten.to_sentence if answer.is_a?(Array)
+
     concatenated_answer = []
     joiner = " "
 
