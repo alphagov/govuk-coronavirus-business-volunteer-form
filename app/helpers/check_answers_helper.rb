@@ -9,7 +9,7 @@ module CheckAnswersHelper
   ).freeze
 
   def items
-    questions.map { |question|
+    items = questions.map do |question|
       # We have answers as strings and hashes. The hashes need a little more
       # work to make them readable.
 
@@ -28,7 +28,9 @@ module CheckAnswersHelper
           href: "#{question.dasherize}?change-answer",
         },
       }]
-    }.compact.flatten
+    end
+
+    items.compact.flatten
   end
 
   def skip_question?(question)
