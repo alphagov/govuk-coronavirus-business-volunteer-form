@@ -53,7 +53,7 @@ jobs:
         file: govuk-coronavirus-business-volunteer-form/concourse/tasks/deploy-to-govuk-paas.yml
         params:
           CF_SPACE: staging
-          INSTANCES: 5
+          INSTANCES: 2
           CF_STARTUP_TIMEOUT: 5 # minutes
           REQUIRE_BASIC_AUTH: "true"
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
@@ -82,7 +82,7 @@ jobs:
         file: govuk-coronavirus-business-volunteer-form/concourse/tasks/deploy-to-govuk-paas.yml
         params:
           CF_SPACE: production
-          INSTANCES: 30
+          INSTANCES: 10
           CF_STARTUP_TIMEOUT: 15 # minutes
           REQUIRE_BASIC_AUTH:
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
