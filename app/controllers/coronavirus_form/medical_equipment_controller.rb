@@ -26,8 +26,6 @@ class CoronavirusForm::MedicalEquipmentController < ApplicationController
     elsif @form_responses[:medical_equipment] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
       update_session_store
       redirect_to hotel_rooms_url
-    else
-      render controller_path
     end
   end
 
