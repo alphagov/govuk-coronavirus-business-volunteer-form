@@ -2,27 +2,36 @@
 
 class CoronavirusForm::AdditionalProductController < ApplicationController
   def submit
-    additional_product = strip_tags(params[:additional_product]).presence
+    @form_responses = {
+      additional_product: strip_tags(params[:additional_product]).presence,
+    }
 
     invalid_fields = validate_radio_field(
       controller_name,
-      radio: additional_product,
+      radio: @form_responses[:additional_product],
     )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path
-    elsif additional_product == I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
+    elsif @form_responses[:additional_product] == I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
+      update_session_store
       redirect_to medical_equipment_type_url
     elsif session["check_answers_seen"]
+      update_session_store
       redirect_to check_your_answers_url
     else
+      update_session_store
       redirect_to hotel_rooms_url
     end
   end
 
 private
+
+  def update_session_store
+    session[:additional_product] = @form_responses[:additional_product]
+  end
 
   def previous_path
     session["product_details"] ||= []

@@ -10,21 +10,21 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   let(:product_id) { SecureRandom.uuid }
   let(:params) do
     {
-      "product_id" => product_id,
-      "product_name" => "Defibrillator",
-      "product_quantity" => "100",
-      "product_cost" => "£10.99",
-      "certification_details" => "CE",
-      "product_location" => "United Kingdom",
-      "product_postcode" => "SW1A 2AA",
-      "product_url" => nil,
-      "lead_time" => "2",
+      product_id: product_id,
+      product_name: "Defibrillator",
+      product_quantity: "100",
+      product_cost: "£10.99",
+      certification_details: "CE",
+      product_location: "United Kingdom",
+      product_postcode: "SW1A 2AA",
+      product_url: nil,
+      lead_time: "2",
     }
   end
 
   describe "GET show" do
     it "renders the form when first question answered" do
-      session["medical_equipment"] = "Yes"
+      session[:medical_equipment] = "Yes"
       get :show, params: { product_id: product_id }
       expect(response).to render_template(current_template)
     end
@@ -41,15 +41,15 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       let(:product_id) { SecureRandom.uuid }
       let(:product) {
         params.merge(
-          "product_id" => product_id,
-          "product_name" => "My product",
+          product_id: product_id,
+          product_name: "My product",
         )
       }
       before :each do
         session["medical_equipment"] = "Yes"
         session[session_key] = [
           product,
-          params.merge("product_id" => SecureRandom.uuid),
+          params.merge(product_id: SecureRandom.uuid),
         ]
       end
 
@@ -78,10 +78,10 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
   describe "GET destroy" do
     let(:product_1) do
-      params.merge("product_id" => product_id)
+      params.merge(product_id: product_id)
     end
     let(:product_2) do
-      params.merge("product_id" => SecureRandom.uuid)
+      params.merge(product_id: SecureRandom.uuid)
     end
     before :each do
       session[session_key] = [product_1, product_2]
@@ -100,9 +100,9 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   describe "POST submit" do
     before :each do
       session[session_key] = [{
-        "product_id" => product_id,
-        "medical_equipment_type" => I18n.t(
-          "coronavirus_form.medical_equipment_type.options.number_ppe.label",
+        product_id: product_id,
+        medical_equipment_type: I18n.t(
+          "coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label",
         ),
       }]
     end
@@ -113,20 +113,20 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       uuid_regex = /\A[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\Z/i.freeze
 
       expect(session[session_key].last).to include params
-      expect(session[session_key].last["product_id"]).to match uuid_regex
+      expect(session[session_key].last[:product_id]).to match uuid_regex
     end
 
     context "there are existing products" do
       let(:product_id) { SecureRandom.uuid }
       let(:product) {
         params.merge(
-          "product_id" => product_id,
-          "product_name" => "My product",
-          "equipment_type" => nil,
+          product_id: product_id,
+          product_name: "My product",
+          equipment_type: nil,
         )
       }
       let(:product_2) {
-        params.merge("product_id" => SecureRandom.uuid, "equipment_type" => nil)
+        params.merge(product_id: SecureRandom.uuid, equipment_type: nil)
       }
 
       before :each do
@@ -134,7 +134,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       context "when editing an existing product" do
-        let(:new_product) { product.merge("product_name" => "New name") }
+        let(:new_product) { product.merge(product_name: "New name") }
         it "edits the existing the existing product" do
           post :submit, params: new_product
           expect(session[session_key]).to contain_exactly(new_product, product_2)
@@ -144,7 +144,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
       context "when adding a new product" do
         let(:new_product) {
-          product.except("product_id").merge("product_name" => "New product")
+          product.except(:product_id).merge(product_name: "New product")
         }
         it "edits the existing the existing product" do
           post :submit, params: new_product
@@ -165,8 +165,8 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
     context "when there are not existing products" do
       before :each do
         session[:product_details] = [{
-          "product_id" => product_id,
-          "medical_equipment_type" => "Some field",
+          product_id: product_id,
+          medical_equipment_type: "Some field",
         }]
       end
 
@@ -178,22 +178,22 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
       described_class::REQUIRED_FIELDS.each do |field|
         it "requires that key #{field} be provided" do
-          post :submit, params: params.except(field)
+          post :submit, params: params.except(field.to_sym)
 
           expect(response).to render_template(current_template)
         end
       end
 
       it "requires that product postcode be provided only if product is in UK" do
-        post :submit, params: params.merge("product_postcode" => nil)
+        post :submit, params: params.merge(product_postcode: nil)
         expect(response).to render_template(current_template)
 
-        post :submit, params: params.merge("product_postcode" => "SW1A 2AA")
+        post :submit, params: params.merge(product_postcode: "SW1A 2AA")
         expect(response).to redirect_to(additional_product_path)
       end
 
       it "validates valid text is provided" do
-        post :submit, params: params.merge({ "product_postcode": "<script></script>" })
+        post :submit, params: params.merge({ product_postcode: "<script></script>" })
 
         expect(response).to render_template(current_template)
       end
@@ -202,8 +202,8 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
     context "when the user has selected PPE" do
       before :each do
         session[session_key] = [{
-          "product_id" => product_id,
-          "medical_equipment_type" => I18n.t(
+          product_id: product_id,
+          medical_equipment_type: I18n.t(
             "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
           ),
         }]
@@ -216,15 +216,15 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       it "redirects to next step if we're given the equipment type" do
-        post :submit, params: params.merge("equipment_type" => "Gloves")
+        post :submit, params: params.merge(equipment_type: "Gloves")
 
         expect(response).to redirect_to(additional_product_path)
       end
 
       it "saves equipment type when given" do
-        post :submit, params: params.merge("equipment_type" => "Gloves")
+        post :submit, params: params.merge(equipment_type: "Gloves")
 
-        expect(session[session_key].first["equipment_type"]).to eq "Gloves"
+        expect(session[session_key].first[:equipment_type]).to eq "Gloves"
       end
     end
 

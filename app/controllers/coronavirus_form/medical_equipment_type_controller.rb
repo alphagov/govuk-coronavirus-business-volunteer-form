@@ -16,8 +16,8 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
     invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
       validate_radio_field(
         controller_name,
-        radio: @product["medical_equipment_type"],
-        other: @product["medical_equipment_type_other"],
+        radio: @product[:medical_equipment_type],
+        other: @product[:medical_equipment_type_other],
       )
 
     if invalid_fields.any?
@@ -26,7 +26,7 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
       render controller_path
     else
       add_product_to_session(@product)
-      redirect_to product_details_url(product_id: @product["product_id"])
+      redirect_to product_details_url(product_id: @product[:product_id])
     end
   end
 
@@ -42,9 +42,9 @@ private
 
   def sanitized_product(params)
     {
-      "product_id" => strip_tags(params[:product_id]).presence || SecureRandom.uuid,
-      "medical_equipment_type" => strip_tags(params[:medical_equipment_type]).presence,
-      "medical_equipment_type_other" => strip_tags(params[:medical_equipment_type_other]).presence,
+      product_id: strip_tags(params[:product_id]).presence || SecureRandom.uuid,
+      medical_equipment_type: strip_tags(params[:medical_equipment_type]).presence,
+      medical_equipment_type_other: strip_tags(params[:medical_equipment_type_other]).presence,
     }
   end
 end

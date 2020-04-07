@@ -35,10 +35,10 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
     end
     let(:contact_details) do
       {
-        "contact_name" => "John",
-        "role" => "CEO",
-        "phone_number" => "0118 999 881 999 119 7253",
-        "email" => "john@example.org",
+        contact_name: "John",
+        role: "CEO",
+        phone_number: "0118 999 881 999 119 7253",
+        email: "john@example.org",
       }
     end
 
@@ -69,7 +69,7 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
     it "does not require role" do
       post :submit, params: params.except("role")
 
-      expect(session[session_key]).to eq contact_details.merge("role" => nil)
+      expect(session[session_key]).to eq contact_details.merge(role: nil)
       expect(response).to redirect_to(check_your_answers_path)
     end
 

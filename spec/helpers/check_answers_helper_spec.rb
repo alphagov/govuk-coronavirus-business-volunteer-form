@@ -3,26 +3,26 @@ require "spec_helper"
 RSpec.describe CheckAnswersHelper, type: :helper do
   let(:answers_to_skippable_questions) do
     {
-      "are_you_a_manufacturer" => [
+      are_you_a_manufacturer: [
         I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label"),
       ],
-      "additional_product" => I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
-      "hotel_rooms_number" => "100",
-      "transport_type" => [
+      additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
+      hotel_rooms_number: "100",
+      transport_type: [
         I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
       ],
-      "offer_space_type" => I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
-      "offer_care_qualifications" => I18n.t("coronavirus_form.questions.offer_care_qualifications.options.adult_care.label"),
+      offer_space_type: I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
+      offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.options.adult_care.label"),
     }
   end
 
   let(:products) do
     {
-      "product_details" => [{
-        "medical_equipment_type" => I18n.t(
+      product_details: [{
+        medical_equipment_type: I18n.t(
           "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
         ),
-        "product_name" => "Product name",
+        product_name: "Product name",
       }],
     }
   end
@@ -84,7 +84,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
     it "adds a link to delete each item" do
       helper.product_details.each do |product|
-        expect(product[:delete][:href]).to include("/product-details/#{product['product_id']}/delete")
+        expect(product[:delete][:href]).to include("/product-details/#{product[:product_id]}/delete")
       end
     end
   end
@@ -92,43 +92,43 @@ RSpec.describe CheckAnswersHelper, type: :helper do
   describe "#product_info" do
     it "concatenates product information with a line break" do
       product = {
-        "medical_equipment_type" => I18n.t(
+        medical_equipment_type: I18n.t(
           "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
         ),
-        "product_name" => "Product name",
-        "equipment_type" => "Equipment type",
-        "product_quantity" => 100,
-        "product_cost" => 5,
-        "certification_details" => "Certification",
-        "product_location" => "UK",
-        "product_postcode" => "E1 8QS",
-        "product_url" => "https://www.example.com",
-        "lead_time" => 5,
+        product_name: "Product name",
+        equipment_type: "Equipment type",
+        product_quantity: 100,
+        product_cost: 5,
+        certification_details: "Certification",
+        product_location: "UK",
+        product_postcode: "E1 8QS",
+        product_url: "https://www.example.com",
+        lead_time: 5,
       }
 
-      expected_answer = "Type: #{product['medical_equipment_type']}<br>" \
-                          "Product: #{product['product_name']}<br>" \
-                          "Equipment type: #{product['equipment_type']}<br>" \
-                          "Quantity: #{product['product_quantity']}<br>" \
-                          "Cost: #{product['product_cost']}<br>" \
-                          "Certification details: #{product['certification_details']}<br>" \
-                          "Location: #{product['product_location']}<br>" \
-                          "Postcode: #{product['product_postcode']}<br>" \
-                          "URL: #{product['product_url']}<br>" \
-                          "Lead time: #{product['lead_time']}"
+      expected_answer = "Type: #{product[:medical_equipment_type]}<br>" \
+                          "Product: #{product[:product_name]}<br>" \
+                          "Equipment type: #{product[:equipment_type]}<br>" \
+                          "Quantity: #{product[:product_quantity]}<br>" \
+                          "Cost: #{product[:product_cost]}<br>" \
+                          "Certification details: #{product[:certification_details]}<br>" \
+                          "Location: #{product[:product_location]}<br>" \
+                          "Postcode: #{product[:product_postcode]}<br>" \
+                          "URL: #{product[:product_url]}<br>" \
+                          "Lead time: #{product[:lead_time]}"
 
       expect(helper.product_info(product)).to eq(expected_answer)
     end
 
     it "only concatenates the fields that have a value" do
       product = {
-        "medical_equipment_type" => I18n.t(
+        medical_equipment_type: I18n.t(
           "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
         ),
-        "product_name" => "Product name",
+        product_name: "Product name",
       }
 
-      expected_answer = "Type: #{product['medical_equipment_type']}<br>Product: #{product['product_name']}"
+      expected_answer = "Type: #{product[:medical_equipment_type]}<br>Product: #{product[:product_name]}"
       expect(helper.product_info(product)).to eq(expected_answer)
     end
   end
@@ -183,17 +183,17 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
       it "concatenates contact_details with a line break" do
         answer = {
-          "contact_name" => "Snow White",
-          "role" => "COO",
-          "phone_number" => "012101234567",
-          "email" => "me@example.com",
+          contact_name: "Snow White",
+          role: "COO",
+          phone_number: "012101234567",
+          email: "me@example.com",
         }
 
         expected_answer =
-          "Name: #{answer['contact_name']}<br>" \
-            "Role: #{answer['role']}<br>" \
-            "Phone number: #{answer['phone_number']}<br>" \
-            "Email: #{answer['email']}"
+          "Name: #{answer[:contact_name]}<br>" \
+            "Role: #{answer[:role]}<br>" \
+            "Phone number: #{answer[:phone_number]}<br>" \
+            "Email: #{answer[:email]}"
 
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
@@ -206,10 +206,10 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
       it "only concatenates the fields that have a value" do
         answer = {
-          "email" => "me@example.com",
+          email: "me@example.com",
         }
 
-        expected_answer = "Email: #{answer['email']}"
+        expected_answer = "Email: #{answer[:email]}"
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
     end
@@ -219,19 +219,19 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
       it "concatenates business_details with a line break" do
         answer = {
-          "company_name" => "Snow White Inc",
-          "company_number" => rand(10),
-          "company_size" => 1000,
-          "company_location" => "UK",
-          "company_postcode" => "E1 8QS",
+          company_name: "Snow White Inc",
+          company_number: rand(10),
+          company_size: 1000,
+          company_location: "UK",
+          company_postcode: "E1 8QS",
         }
 
         expected_answer =
-          "Company name: #{answer['company_name']}<br>" \
-            "Company number: #{answer['company_number']}<br>" \
-            "Company size number: #{answer['company_size']}<br>" \
-            "Company location: #{answer['company_location']}<br>" \
-            "Company postcode: #{answer['company_postcode']}"
+          "Company name: #{answer[:company_name]}<br>" \
+            "Company number: #{answer[:company_number]}<br>" \
+            "Company size number: #{answer[:company_size]}<br>" \
+            "Company location: #{answer[:company_location]}<br>" \
+            "Company postcode: #{answer[:company_postcode]}"
 
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
@@ -244,10 +244,10 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
       it "only concatenates the fields that have a value" do
         answer = {
-          "company_name" => "Snow White Inc",
+          company_name: "Snow White Inc",
         }
 
-        expected_answer = "Company name: #{answer['company_name']}"
+        expected_answer = "Company name: #{answer[:company_name]}"
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
     end
@@ -257,9 +257,9 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
       it "concates other hash questions" do
         answer = {
-          "one" => "One",
-          "two" => "Two",
-          "three" => "Three",
+          one: "One",
+          two: "Two",
+          three: "Three",
         }
 
         expected_answer = "One Two Three"

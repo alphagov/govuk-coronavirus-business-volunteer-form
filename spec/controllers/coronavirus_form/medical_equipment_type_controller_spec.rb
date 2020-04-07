@@ -31,7 +31,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     it "sets session variables" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(session[session_key][0]["medical_equipment_type"]).to eq selected
+      expect(session[session_key][0][:medical_equipment_type]).to eq selected
     end
 
     it "redirects to next step" do
@@ -73,8 +73,8 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
           action: :show,
           params: { product_id: "abcd1234" },
         )
-        expect(session[session_key][0]["medical_equipment_type"]).to eq "Other"
-        expect(session[session_key][0]["medical_equipment_type_other"]).to eq "Demo text"
+        expect(session[session_key][0][:medical_equipment_type]).to eq "Other"
+        expect(session[session_key][0][:medical_equipment_type_other]).to eq "Demo text"
       end
     end
 

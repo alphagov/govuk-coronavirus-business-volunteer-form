@@ -23,7 +23,7 @@
   id: "hotel_rooms_number",
   name: "hotel_rooms_number",
   width: 10,
-  value: session[:hotel_rooms_number],
+  value: @form_responses[:hotel_rooms_number],
   error_message: error_items("hotel_rooms_number")
 } %>
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>

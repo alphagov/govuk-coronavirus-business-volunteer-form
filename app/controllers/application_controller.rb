@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def show
+    @form_responses = session.to_hash.with_indifferent_access
     render controller_path
   end
 

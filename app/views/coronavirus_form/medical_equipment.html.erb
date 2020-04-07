@@ -22,7 +22,7 @@
     {
       value: item[:label],
       text: item[:label],
-      checked: session[:medical_equipment] == item[:label],
+      checked: @form_responses[:medical_equipment] == item[:label],
     }
   end
 } %>

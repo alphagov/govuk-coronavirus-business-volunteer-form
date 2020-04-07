@@ -24,7 +24,7 @@
     {
       value:  item[:label],
       label:  item[:label],
-      checked: session.fetch(:transport_type, []).include?(item[:label]),
+      checked: @form_responses.fetch(:transport_type, []).include?(item[:label]),
     }
   end
 } %>
@@ -35,7 +35,7 @@
   },
   name: "transport_description",
   error_message: error_items("transport_description"),
-  value: session[:transport_description]
+  value: @form_responses[:transport_description]
 } %>
 
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>

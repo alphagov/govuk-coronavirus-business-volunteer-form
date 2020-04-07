@@ -22,12 +22,12 @@
     {
       value: t('coronavirus_form.questions.additional_product.options.option_yes.label'),
       text: t('coronavirus_form.questions.additional_product.options.option_yes.label'),
-      checked: session[:additional_product] == t('coronavirus_form.questions.additional_product.options.option_yes.label'),
+      checked: @form_responses[:additional_product] == t('coronavirus_form.questions.additional_product.options.option_yes.label'),
     },
     {
       value: t('coronavirus_form.questions.additional_product.options.option_no.label'),
       text: t('coronavirus_form.questions.additional_product.options.option_no.label'),
-      checked: session[:additional_product] == t('coronavirus_form.questions.additional_product.options.option_no.label'),
+      checked: @form_responses[:additional_product] == t('coronavirus_form.questions.additional_product.options.option_no.label'),
     },
   ]
 } %>

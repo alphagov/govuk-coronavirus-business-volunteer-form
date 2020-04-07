@@ -5,14 +5,14 @@ class CoronavirusForm::TransportTypeController < ApplicationController
   TEXT_FIELDS = %w(transport_description).freeze
 
   def submit
-    transport_type = Array(params[:transport_type]).map { |item| strip_tags(item).presence }.compact
-
-    session[:transport_type] = transport_type
-    session[:transport_description] = params[:transport_description]
+    @form_responses = {
+      transport_type: Array(params[:transport_type]).map { |item| strip_tags(item).presence }.compact,
+      transport_description: params[:transport_description],
+    }
 
     invalid_fields = validate_checkbox_field(
       controller_name,
-      values: transport_type,
+      values: @form_responses[:transport_type],
       allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
                       ) +
       validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS) +
@@ -23,13 +23,20 @@ class CoronavirusForm::TransportTypeController < ApplicationController
       log_validation_error(invalid_fields)
       render controller_path
     elsif session["check_answers_seen"]
+      update_session_store
       redirect_to check_your_answers_url
     else
+      update_session_store
       redirect_to offer_space_url
     end
   end
 
 private
+
+  def update_session_store
+    session[:transport_type] = @form_responses[:transport_type]
+    session[:transport_description] = @form_responses[:transport_description]
+  end
 
   def previous_path
     offer_transport_url

@@ -4,44 +4,44 @@ class CoronavirusForm::ContactDetailsController < ApplicationController
   REQUIRED_FIELDS = %w(contact_name phone_number).freeze
   TEXT_FIELDS = %w(contact_name role phone_number email).freeze
 
-  def show
-    session[:contact_details] ||= {}
-    super
-  end
-
   def submit
-    session[:contact_details] ||= {}
-    session[:contact_details]["contact_name"] = strip_tags(params[:contact_name]).presence
-    session[:contact_details]["role"] = strip_tags(params[:role]).presence
-    session[:contact_details]["phone_number"] = strip_tags(params[:phone_number]).presence
-    session[:contact_details]["email"] = strip_tags(params[:email]).presence
+    @form_responses = {
+      contact_details: {
+        contact_name: strip_tags(params[:contact_name]).presence,
+        role: strip_tags(params[:role]).presence,
+        phone_number: strip_tags(params[:phone_number]).presence,
+        email: strip_tags(params[:email]).presence,
+      },
+    }
 
-    invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
-      validate_fields(session[:contact_details])
+    invalid_fields = validate_fields
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path
     else
+      session[:contact_details] = @form_responses[:contact_details]
       redirect_to check_your_answers_url
     end
   end
 
 private
 
-  def validate_fields(contact_details)
-    missing_fields = validate_missing_fields(contact_details)
-    email_validation = validate_email_address("email", contact_details["email"])
-    missing_fields + email_validation
+  def validate_fields
+    [
+      validate_field_response_length(controller_name, TEXT_FIELDS),
+      validate_missing_fields,
+      validate_email_address("email", @form_responses.dig(:contact_details, :email)),
+    ].flatten.compact
   end
 
-  def validate_missing_fields(product)
+  def validate_missing_fields
     REQUIRED_FIELDS.each_with_object([]) do |field, invalid_fields|
-      next if product[field].present?
+      next if @form_responses[:contact_details][field.to_sym].present?
 
       invalid_fields << {
-        field: field.to_s,
+        field: field,
         text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
                 default: t("coronavirus_form.errors.missing_mandatory_text_field",
                            field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),

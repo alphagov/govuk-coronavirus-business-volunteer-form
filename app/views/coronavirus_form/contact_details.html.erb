@@ -25,7 +25,7 @@
   id: "contact_name",
   name: "contact_name",
   error_message: error_items("contact_name"),
-  value: session[:contact_details]["contact_name"],
+  value: @form_responses.dig(:contact_details, :contact_name),
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -33,7 +33,7 @@
   },
   name: "role",
   error_message: error_items('role'),
-  value: session[:contact_details]["role"],
+  value: @form_responses.dig(:contact_details, :role),
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -42,7 +42,7 @@
   id: "phone_number",
   name: "phone_number",
   error_message: error_items('phone_number'),
-  value: session[:contact_details]["phone_number"],
+  value: @form_responses.dig(:contact_details, :phone_number),
 } %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -51,7 +51,7 @@
   id: "email",
   name: "email",
   error_message: error_items('email'),
-  value: session[:contact_details]["email"],
+  value: @form_responses.dig(:contact_details, :email),
   type: "email"
 } %>
 
