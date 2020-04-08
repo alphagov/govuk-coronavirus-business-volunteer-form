@@ -44,6 +44,36 @@ You'll then need to specify the `DATABASE_URL` environment variable before the b
     brew install redis
     brew services start redis
 
+### Running Sidekiq
+
+We're using [Sidekiq][], a redis-backed queue, which plays nicely with ActiveJob
+and ActionMailer, to send emails.
+
+In staging and production, we run instances of the application as workers,
+to process the email queue.
+
+#### Locally
+
+Sidekiq will start automatically when you run `foreman start`, but you can
+also run it alone with `bundle exec sidekiq`.
+
+#### Sending emails locally
+
+You'll need to pass a GOV.UK Notify API key as an environment variable
+`NOTIFY_API_KEY`, and change the delivery method in [development.rb][]:
+
+```ruby
+config.action_mailer.delivery_method = :notify
+```
+
+You'll also need to set a `GOVUK_NOTIFY_TEMPLATE_ID`, which might involve
+creating a template in Notify if your Notify service doesn't have one.
+
+The template should have a Message of `((body))` only.
+
+[Sidekiq]: https://github.com/mperham/sidekiq
+[development.rb]: config/environments/development.rb
+
 ### Running the application (Postgres will need to be running)
 
     foreman start
@@ -51,7 +81,6 @@ You'll then need to specify the `DATABASE_URL` environment variable before the b
 ### Running the tests
 
     bundle exec rake
-
 
 ## Deployment pipeline
 
