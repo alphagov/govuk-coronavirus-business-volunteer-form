@@ -14,15 +14,18 @@
   "novalidate": "true"
 ) do %>
 
-<%= render "govuk_publishing_components/components/textarea", {
-  label: {
-    is_page_heading: true,
-    heading_size: "xl",
-    text: t('coronavirus_form.questions.offer_other_support.title')
-  },
-  hint: t('coronavirus_form.questions.offer_other_support.hint'),
-  name: "offer_other_support",
-  value: @form_responses[:offer_other_support]
-} %>
+  <%= render "govuk_publishing_components/components/character_count", {
+    textarea: {
+      label: {
+        is_page_heading: true,
+        heading_size: "xl",
+        text: t('coronavirus_form.questions.offer_other_support.title')
+      },
+      hint: t('coronavirus_form.questions.offer_other_support.hint'),
+      name: "offer_other_support",
+      value: @form_responses[:offer_other_support]
+    },
+    maxlength: 1000
+  } %>
 <%= render "govuk_publishing_components/components/button", text: "Continue", margin_bottom: true %>
 <% end %>
