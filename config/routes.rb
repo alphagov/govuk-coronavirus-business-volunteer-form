@@ -25,7 +25,10 @@ Rails.application.routes.draw do
     get "/product-details/:id/delete", to: "product_details#destroy"
     post "/product-details", to: "product_details#submit"
 
-    # Question 1.4: Can you offer another product?
+    # Question 1.4: Testing equipment
+    get "/testing-equipment", to: "testing_equipment#show"
+
+    # Question 1.5: Can you offer another product?
     get "/additional-product", to: "additional_product#show"
     post "/additional-product", to: "additional_product#submit"
 

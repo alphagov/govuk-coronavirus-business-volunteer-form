@@ -24,6 +24,9 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path
+    elsif selected_testing_equipment?
+      add_product_to_session(@product)
+      redirect_to testing_equipment_url
     else
       add_product_to_session(@product)
       redirect_to product_details_url(product_id: @product[:product_id])
@@ -34,6 +37,12 @@ private
 
   def selected_other?(medical_equipment_type)
     medical_equipment_type == I18n.t("coronavirus_form.questions.#{controller_name}.options.other.label")
+  end
+
+  def selected_testing_equipment?
+    @product[:medical_equipment_type] == I18n.t(
+      "coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label",
+    )
   end
 
   def previous_path
