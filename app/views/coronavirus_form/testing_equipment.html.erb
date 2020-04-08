@@ -1,0 +1,25 @@
+<% content_for :title do %><%= t('coronavirus_form.testing_equipment.title') %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.testing_equipment.title') %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= render "govuk_publishing_components/components/title", {
+  title: t('coronavirus_form.testing_equipment.title'),
+  margin_top: 0
+} %>
+
+<p class="govuk-body govuk-!-margin-bottom-8">
+  <a class="govuk-link" href="<%= t('coronavirus_form.testing_equipment.external_link') %>" target="_blank">
+    <%= t('coronavirus_form.testing_equipment.link.label') %>
+  </a>
+</p>
+
+<%= render "govuk_publishing_components/components/button", {
+  text: t('coronavirus_form.testing_equipment.button.label'),
+  href: additional_product_url,
+  margin_bottom: true
+} %>

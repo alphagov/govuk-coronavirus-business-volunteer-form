@@ -99,6 +99,13 @@ en:
       date_order: "The end date must be after the start date"
       email_format: "Enter an email address in the correct format, like name@example.com"
       postcode_format: "Enter a real postcode"
+    testing_equipment:
+      title: "Testing equipment"
+      button:
+        label: "Continue offering other services"
+      link:
+        label: "Offer testing equipment (opens in a new tab)"
+      external_link: "https://www.gov.uk/guidance/help-the-government-increase-coronavirus-covid-19-testing-capacity"
     questions:
       medical_equipment:
         title: "Can you offer medical equipment?"
