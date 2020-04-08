@@ -42,4 +42,8 @@ Rails.application.configure do
 
   config.cache_store = :redis_cache_store
   config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
+
+  # Use test delivery method instead of sending emails to Notify.
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_options = { from: "test@example.org" }
 end

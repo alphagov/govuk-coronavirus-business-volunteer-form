@@ -76,6 +76,26 @@ en:
             - - text: _gid
               - text: This helps us count how many people visit the service by tracking if you’ve visited before
               - text: 3 years
+  emails:
+    thank_you:
+      subject: You offered coronavirus support from your business
+      body_text: |
+        You told us that your business might be able to help with the response to coronavirus (COVID-19). Thank you.
+
+        If your help is needed you’ll be contacted as soon as possible. You do not need to do anything else.
+
+        If you want to offer more products or services, answer the questions again with details of the new products or services:
+
+        https://www.gov.uk/coronavirus-support-from-business
+
+        Thanks,
+        Coronavirus Business Volunteering Team
+
+        -----
+
+        Do not reply to this email - it is an automatic message from an unmonitored account.
+
+        For the latest information, visit https://www.gov.uk/coronavirus
   privacy_page:
     title: "Privacy"
     body_text: |
