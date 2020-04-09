@@ -39,4 +39,5 @@ group :development, :test do
   gem "rspec-rails", "~> 4.0.0"
   gem "rubocop-govuk"
   gem "scss_lint-govuk", "~> 0"
+  gem "selenium-webdriver"
 end
