@@ -14,8 +14,28 @@
   </head>
   <body class="govuk-template__body">
     <%= render "govuk_publishing_components/components/cookie_banner", {
-      text: sanitize(t("cookies.banner.text")),
+      title: t("cookies.banner.title"),
+      text: t("cookies.banner.text"),
+      confirmation_message: sanitize(t("cookies.banner.confirmation_message")),
       cookie_preferences_href: cookies_path,
+      services_cookies: {
+        yes: {
+          text: "Yes",
+          data_attributes: {
+            "track-category": "cookieBanner"
+          }
+        },
+        no: {
+          text: "No",
+          data_attributes: {
+            "track-category": "cookieBanner"
+          }
+        },
+        cookie_preferences: {
+          text: "How we use cookies",
+          href: cookies_path
+        }
+      }
     } %>
 
     <script>

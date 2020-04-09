@@ -23,7 +23,9 @@ en:
   cookies:
     title: Cookies
     banner:
-      text: "We use <a href='/cookies' class='govuk-link'>cookies to collect information</a> about how you use this service. We use this information to make the website work as well as possible."
+      title: "Can we store analytics cookies on your device?"
+      text: "Analytics cookies help us understand how our website is being used."
+      confirmation_message: "You’ve accepted all cookies. You can <a class='govuk-link' href='/cookies'>change your cookie settings</a> at any time."
     settings_page:
       intro_html: |
         This service puts small files (known as 'cookies') onto your computer.
