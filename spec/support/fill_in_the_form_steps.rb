@@ -41,6 +41,22 @@ module FillInTheFormSteps
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
+  def and_can_offer_testing_equipment
+    choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label")
+    click_on "Continue"
+  end
+
+  def then_they_see_the_external_testing_equipment_link
+    link = I18n.t("coronavirus_form.testing_equipment.external_link")
+    expect(page.body).to have_content(I18n.t("coronavirus_form.testing_equipment.link.label"))
+    expect(page.body).to have_selector(:css, "a[href='#{link}']")
+  end
+
+  def and_can_navigate_back_to_offer_another_product
+    click_on I18n.t("coronavirus_form.testing_equipment.button.label")
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
+  end
+
   def and_has_other_medical_equipment_available
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
     choose I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
@@ -94,7 +110,7 @@ module FillInTheFormSteps
     choose I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.offer_space_type.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_space_type.title"))
     check I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label")
     fill_in "warehouse_space_description", with: "1000"
     check I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label")
