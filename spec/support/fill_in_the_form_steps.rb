@@ -2,7 +2,7 @@
 
 module FillInTheFormSteps
   def given_a_business_during_the_covid_19_pandemic
-    visit "/medical-equipment"
+    visit medical_equipment_path
   end
 
   def that_can_offer_medical_equipment

@@ -24,25 +24,25 @@ RSpec.feature "Fill in the form" do
   end
 
   scenario "Ensure we can perform a healthcheck" do
-    visit "/healthcheck"
+    visit healthcheck_path
 
     expect(page).to have_content("OK")
   end
 
   scenario "Ensure the privacy notice page is visible" do
-    visit "/privacy"
+    visit privacy_path
 
     expect(page).to have_content("Privacy")
   end
 
   scenario "Ensure the accessibility statement page is visible" do
-    visit "/accessibility-statement"
+    visit accessibility_statement_path
 
     expect(page).to have_content("Accessibility statement")
   end
 
   scenario "Ensure the session expired page is visible" do
-    visit "/session-expired"
+    visit session_expired_path
 
     expect(page).to have_content("Your session has ended due to inactivity")
   end
