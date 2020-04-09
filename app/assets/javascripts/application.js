@@ -6,3 +6,4 @@
 //= require cookies
 window.CookieSettings.start()
 window.GOVUK.analyticsInit()
+window.GOVUKFrontend.initAll()
