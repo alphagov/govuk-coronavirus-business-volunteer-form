@@ -37,6 +37,18 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
       )
     end
 
+    it "sends an email" do
+      ActiveJob::Base.queue_adapter = :test
+      session[:contact_details] = {
+        contact_name: "Harry Potter",
+        email: "harry@example.org",
+      }
+      expect {
+        post :submit
+      }.to have_enqueued_mail(CoronavirusFormMailer, :thank_you)
+        .with(a_hash_including(name: "Harry Potter"), "harry@example.org").on_queue("mailers")
+    end
+
     it "resets session" do
       post :submit
       expect(session.to_hash).to eq({})
