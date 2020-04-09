@@ -22,6 +22,8 @@ params:
   GA_VIEW_ID: UA-43115970-1
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
+  GOVUK_NOTIFY_TEMPLATE_ID:
+  NOTIFY_API_KEY:
 run:
   dir: src
   path: sh
@@ -50,6 +52,8 @@ run:
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
       cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
       cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
+      cf set-env govuk-coronavirus-business-volunteer-form GOVUK_NOTIFY_TEMPLATE_ID "$GOVUK_NOTIFY_TEMPLATE_ID"
+      cf set-env govuk-coronavirus-business-volunteer-form NOTIFY_API_KEY "$NOTIFY_API_KEY"
 
       cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
       cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname "$HOSTNAME"
