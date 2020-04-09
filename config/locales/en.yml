@@ -177,7 +177,7 @@ en:
         hint: "Give details for one product at a time"
         options:
           number_ppe:
-            label: "Personal protection equipment"
+            label: "Personal protection equipment, for example masks, detergent and waste bags"
           number_testing_equipment:
             label: "Testing equipment"
           other:
