@@ -22,7 +22,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", "~> 2.13.0"
+  gem "capybara", "~> 3.32.1"
   gem "simplecov", "~> 0.16"
   gem "therubyracer", "~> 0.12"
 end
