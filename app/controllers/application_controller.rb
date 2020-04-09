@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, with: :session_expired
 
   before_action :check_first_question_answered, only: :show
+  before_action :set_session_history, only: :show
 
   if ENV["REQUIRE_BASIC_AUTH"]
     http_basic_authenticate_with(
@@ -26,6 +27,13 @@ class ApplicationController < ActionController::Base
 private
 
   helper_method :previous_path
+
+  def set_session_history
+    if session[:current_path] != request.path
+      session[:previous_path] = session[:current_path]
+    end
+    session[:current_path] = request.path
+  end
 
   def session_expired
     reset_session

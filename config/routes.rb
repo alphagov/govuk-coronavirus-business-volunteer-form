@@ -91,6 +91,9 @@ Rails.application.routes.draw do
     # Final page
     get "/thank-you", to: "thank_you#show"
 
+    # Other page - Cookie preferences
+    get "/cookies", to: "cookies#show"
+
     # Other page - Privacy notice
     get "/privacy", to: "privacy#show"
 

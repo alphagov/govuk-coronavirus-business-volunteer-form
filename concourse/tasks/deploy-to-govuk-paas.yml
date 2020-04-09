@@ -19,6 +19,7 @@ params:
   HOSTNAME:
   INSTANCES:
   BASIC_AUTH_PASSWORD:
+  GA_VIEW_ID: UA-43115970-1
 run:
   dir: src
   path: sh
@@ -42,6 +43,7 @@ run:
       cf set-env govuk-coronavirus-business-volunteer-form BASIC_AUTH_PASSWORD "$BASIC_AUTH_PASSWORD"
       cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN"
       cf set-env govuk-coronavirus-business-volunteer-form SENTRY_CURRENT_ENV "$CF_SPACE"
+      cf set-env govuk-coronavirus-business-volunteer-form GA_VIEW_ID "$GA_VIEW_ID"
 
       cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
       cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname "$HOSTNAME"
