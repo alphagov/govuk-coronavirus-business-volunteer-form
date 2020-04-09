@@ -85,6 +85,7 @@ en:
       <p class="govuk-body">Your session has ended because you have not done anything for 4 hours. You'll have to start again.</p>
       <p class="govuk-body">We do this for your security. We've deleted all the details you entered to protect your data.</p>
   coronavirus_form:
+    submit_and_next: "Continue"
     errors:
       heading: "There is a problem"
       radio_field: "Select %{field}"
