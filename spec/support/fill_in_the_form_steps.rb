@@ -6,25 +6,29 @@ module FillInTheFormSteps
   end
 
   def that_can_offer_medical_equipment
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment.title"))
-    choose I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.medical_equipment.title"))
+    within find(".govuk-main-wrapper") do
+      choose I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
+      click_on I18n.t("coronavirus_form.submit_and_next")
+    end
   end
 
   def and_is_a_manufacturer_a_distributor_and_agent
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.are_you_a_manufacturer.title"))
-    check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label")
-    check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.distributor.label")
-    check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.agent.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.are_you_a_manufacturer.title"))
+    within find(".govuk-main-wrapper") do
+      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label")
+      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.distributor.label")
+      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.agent.label")
+      click_on I18n.t("coronavirus_form.submit_and_next")
+    end
   end
 
   def and_has_personal_protection_equipment_available
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
     choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.product_details.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.product_details.title"))
     fill_in "product_name", with: "Testing"
     choose I18n.t("coronavirus_form.questions.product_details.equipment_type.options.iir_face_masks.label")
     fill_in "product_quantity", with: "500"
@@ -38,11 +42,11 @@ module FillInTheFormSteps
   end
 
   def and_has_other_medical_equipment_available
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
     choose I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
     choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.other.label")
     fill_in "medical_equipment_type_other", with: "Some text about medical equipment"
     click_on I18n.t("coronavirus_form.submit_and_next")
@@ -57,27 +61,27 @@ module FillInTheFormSteps
     fill_in "lead_time", with: "10"
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
     choose I18n.t("coronavirus_form.questions.additional_product.options.option_no.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
   def and_can_offer_hotel_rooms
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.hotel_rooms.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.hotel_rooms.title"))
     choose I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_all_uses.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.hotel_rooms_number.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.hotel_rooms_number.title"))
     fill_in "hotel_rooms_number", with: "500"
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
   def and_can_offer_transport_or_logistics
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.offer_transport.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_transport.title"))
     choose I18n.t("coronavirus_form.questions.offer_transport.options.option_yes.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.transport_type.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.transport_type.title"))
     check I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label")
     check I18n.t("coronavirus_form.questions.transport_type.options.moving_goods.label")
     check I18n.t("coronavirus_form.questions.transport_type.options.other.label")
@@ -86,7 +90,7 @@ module FillInTheFormSteps
   end
 
   def and_can_offer_space
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.offer_space.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_space.title"))
     choose I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
@@ -102,7 +106,7 @@ module FillInTheFormSteps
   end
 
   def and_can_offer_all_types_of_expertise
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.expert_advice_type.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.expert_advice_type.title"))
     check I18n.t("coronavirus_form.questions.expert_advice_type.options.medical.label")
     check I18n.t("coronavirus_form.questions.expert_advice_type.options.engineering.label")
     check I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label")
@@ -115,11 +119,11 @@ module FillInTheFormSteps
   end
 
   def and_can_offer_all_kinds_of_social_and_child_care
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.offer_care.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_care.title"))
     choose I18n.t("coronavirus_form.questions.offer_care.options.option_yes.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.offer_care_qualifications.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_care_qualifications.title"))
     check I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label")
     check I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.child_care.label")
     check I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label")
@@ -127,13 +131,13 @@ module FillInTheFormSteps
     fill_in "offer_care_qualifications_type", with: "Testing"
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.offer_other_support.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_other_support.title"))
     fill_in "offer_other_support", with: "Testing"
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
   def and_offers_these_across_the_uk
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.location.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.location.title"))
     check I18n.t("coronavirus_form.questions.location.options.east_of_england.label")
     check I18n.t("coronavirus_form.questions.location.options.east_midlands.label")
     check I18n.t("coronavirus_form.questions.location.options.west_midland.label")
@@ -150,7 +154,7 @@ module FillInTheFormSteps
   end
 
   def and_has_given_their_business_details
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.business_details.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.business_details.title"))
     fill_in "company_name", with: "Government Digital Service"
     fill_in "company_number", with: "020 3451 9000"
     choose I18n.t("coronavirus_form.questions.business_details.company_size.options.under_50_people.label")
@@ -160,7 +164,7 @@ module FillInTheFormSteps
   end
 
   def and_has_supplied_a_contact
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.contact_details.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.contact_details.title"))
     fill_in "contact_name", with: "John Doe"
     fill_in "role", with: "CEO"
     fill_in "phone_number", with: "020 1234 5678"
@@ -169,11 +173,11 @@ module FillInTheFormSteps
   end
 
   def and_has_accepted_the_terms_and_conditions
-    expect(page).to have_content(I18n.t("check_your_answers.title"))
+    expect(page.body).to have_content(I18n.t("check_your_answers.title"))
     click_on I18n.t("check_your_answers.submit")
   end
 
   def then_they_are_thanked
-    expect(page).to have_content(I18n.t("coronavirus_form.thank_you.title"))
+    expect(page.body).to have_content(I18n.t("coronavirus_form.thank_you.title"))
   end
 end

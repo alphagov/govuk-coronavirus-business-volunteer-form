@@ -3,6 +3,7 @@
 require "byebug"
 require "simplecov"
 require "capybara/rspec"
+require "capybara/apparition"
 
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../config/environment", __dir__)
@@ -10,6 +11,8 @@ require "rspec/rails"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 SimpleCov.start
+
+Capybara.javascript_driver = :apparition
 
 RSpec.configure do |config|
   config.expose_dsl_globally = false

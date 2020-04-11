@@ -1,0 +1,14 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: ((readonly_private_ecr_repo_url))
+    tag: govuk-coronavirus-business-volunteer-form-feature-tests
+params:
+  TEST_URL:
+inputs:
+  - name: govuk-coronavirus-business-volunteer-form
+run:
+  path: rails
+  dir: govuk-coronavirus-business-volunteer-form
+  args: ['bundle exec rake spec:features']
