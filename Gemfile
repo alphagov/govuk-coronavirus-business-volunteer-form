@@ -33,7 +33,7 @@ group :development, :test do
   gem "binding_of_caller", "~> 0.8.0"
   gem "byebug", "~> 11"
   gem "foreman", "~> 0.87.1"
-  gem "pry", "~> 0.13.0"
+  gem "pry", "~> 0.13.1"
   gem "pry-rails", "~> 0.3.9"
   gem "rails-controller-testing", "~> 1.0"
   gem "rspec-rails", "~> 4.0.0"
