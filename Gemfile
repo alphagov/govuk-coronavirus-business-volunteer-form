@@ -23,8 +23,8 @@ end
 
 group :test do
   gem "capybara", "~> 3.32.1"
+  gem "mini_racer", "~> 0.2"
   gem "simplecov", "~> 0.16"
-  gem "therubyracer", "~> 0.12"
 end
 
 group :development, :test do
