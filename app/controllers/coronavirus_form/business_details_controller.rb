@@ -55,7 +55,7 @@ private
       company_number: strip_tags(params[:company_number]).presence,
       company_size: strip_tags(params[:company_size]).presence,
       company_location: strip_tags(params[:company_location]).presence,
-      company_postcode: strip_tags(params[:company_postcode]).presence,
+      company_postcode: strip_tags(params[:company_postcode]&.gsub(/[[:space:]]+/, "")).presence,
     }
   end
 
