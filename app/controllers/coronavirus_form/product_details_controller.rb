@@ -96,7 +96,7 @@ private
       product_cost: strip_tags(params[:product_cost]).presence,
       certification_details: strip_tags(params[:certification_details]).presence,
       product_location: strip_tags(params[:product_location]).presence,
-      product_postcode: strip_tags(params[:product_postcode]).presence,
+      product_postcode: strip_tags(params[:product_postcode]&.gsub(/[[:space:]]+/, "")).presence,
       product_url: strip_tags(params[:product_url]).presence,
       lead_time: strip_tags(params[:lead_time]).presence,
     }
