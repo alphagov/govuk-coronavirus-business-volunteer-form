@@ -229,7 +229,7 @@ en:
         product_quantity:
           label: "Quantity of this product"
           hint: "Approximate amount, for example 10, 500, 10000."
-          custom_error: "Enter the quantity of the product"
+          custom_error: "Enter the approximate total number of items, do not include words or symbols"
         product_cost:
           label: "Cost per item, in pounds"
           hint: "For example, 23.99. Enter 0 if you will donate it."
