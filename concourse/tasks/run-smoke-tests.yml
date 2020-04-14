@@ -11,4 +11,4 @@ inputs:
 run:
   path: bundle
   dir: govuk-coronavirus-business-volunteer-form
-  args: ['exec rake spec:features']
+  args: ['exec', 'rake', 'spec:features']
