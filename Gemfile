@@ -22,9 +22,12 @@ group :development do
 end
 
 group :test do
+  gem "apparition", "~> 0.5.0", require: false
   gem "capybara", "~> 3.32.1"
   gem "mini_racer", "~> 0.2"
+  gem "selenium-webdriver"
   gem "simplecov", "~> 0.16"
+  gem "webdrivers"
 end
 
 group :development, :test do
