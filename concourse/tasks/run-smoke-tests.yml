@@ -6,9 +6,10 @@ image_resource:
     tag: govuk-coronavirus-business-volunteer-form-feature-tests
 params:
   TEST_URL:
+  RAILS_ENV: smoke_test
 inputs:
   - name: govuk-coronavirus-business-volunteer-form
 run:
   path: bundle
   dir: govuk-coronavirus-business-volunteer-form
-  args: ['exec', 'rake', 'spec:features']
+  args: ['exec', 'rspec', 'spec/features']

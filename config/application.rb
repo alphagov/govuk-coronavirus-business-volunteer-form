@@ -6,7 +6,8 @@ require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
-require "active_record/railtie"
+# Disables ActiveRecord for smoke tests
+require "active_record/railtie" unless ENV["RAILS_ENV"] == "smoke_test"
 # require "active_storage/engine"
 require "action_controller/railtie"
 # require "action_mailer/railtie"
