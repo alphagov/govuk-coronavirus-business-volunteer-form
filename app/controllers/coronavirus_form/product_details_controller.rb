@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ProductDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w(product_name product_quantity product_cost certification_details lead_time).freeze
+  REQUIRED_FIELDS = %w(product_name product_cost certification_details lead_time).freeze
   TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
 
   def show
@@ -56,6 +56,7 @@ private
       selected_ppe? ? validate_radio_field("#{controller_name}.equipment_type", radio: @product[:equipment_type]) : [],
       validate_radio_field("#{controller_name}.product_location", radio: @product[:product_location]),
       validate_product_postcode,
+      validate_product_quantity,
     ].compact.flatten
   end
 
@@ -87,12 +88,26 @@ private
     end
   end
 
+  def validate_product_quantity
+    quantity = @product[:product_quantity]
+    error_response = {
+      field: "product_quantity",
+      text: t("coronavirus_form.questions.#{controller_name}.product_quantity.custom_error"),
+    }
+
+    return if Integer(quantity) && Integer(quantity).positive?
+
+    error_response
+  rescue TypeError, ArgumentError
+    error_response
+  end
+
   def sanitized_product(params)
     {
       product_id: strip_tags(params[:product_id]).presence || SecureRandom.uuid,
       equipment_type: strip_tags(params[:equipment_type]).presence,
       product_name: strip_tags(params[:product_name]).presence,
-      product_quantity: strip_tags(params[:product_quantity]).presence,
+      product_quantity: strip_tags(params[:product_quantity]&.gsub(",", "")&.strip).presence,
       product_cost: strip_tags(params[:product_cost]).presence,
       certification_details: strip_tags(params[:certification_details]).presence,
       product_location: strip_tags(params[:product_location]).presence,

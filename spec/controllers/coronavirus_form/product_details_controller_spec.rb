@@ -203,6 +203,27 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         expect(response).to render_template(current_template)
       end
+
+      context "product_quantity" do
+        before do
+          params.merge!(equipment_type: "Gloves")
+        end
+
+        it "errors if the user doesn't provide a product_quantity" do
+          post :submit, params: params.except(:product_quantity)
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the user enters an invalid product quantity" do
+          post :submit, params: params.merge(product_quantity: "Ten")
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the product quantity is below zero" do
+          post :submit, params: params.merge(product_quantity: "-10")
+          expect(response).to render_template(current_template)
+        end
+      end
     end
 
     context "when the user has selected PPE" do
