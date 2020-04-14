@@ -31,7 +31,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
         company_number: "1234",
         company_size: "under_50_people",
         company_location: "united_kingdom",
-        company_postcode: "AB1 1AA",
+        company_postcode: "AB11AA",
       }
     end
 
@@ -39,6 +39,12 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
       post :submit, params: params
 
       expect(session[:business_details]).to eq params
+    end
+
+    it "removes extra whitespace from the postcode" do
+      post :submit, params: params.merge(company_postcode: "AB1 1AA")
+
+      expect(session[:business_details][:company_postcode]).to eq "AB11AA"
     end
 
     it "redirects to next step" do
