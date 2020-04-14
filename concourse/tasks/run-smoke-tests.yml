@@ -9,6 +9,6 @@ params:
 inputs:
   - name: govuk-coronavirus-business-volunteer-form
 run:
-  path: rails
+  path: bundle
   dir: govuk-coronavirus-business-volunteer-form
-  args: ['bundle exec rake spec:features']
+  args: ['exec rake spec:features']
