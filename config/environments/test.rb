@@ -40,6 +40,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.analytics_tracking_id = "12345"
 
-  config.cache_store = :redis_cache_store
+  config.cache_store = :memory_store
   config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
 end
