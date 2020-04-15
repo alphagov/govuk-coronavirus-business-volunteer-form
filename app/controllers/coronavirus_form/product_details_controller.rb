@@ -81,55 +81,44 @@ private
     required.each_with_object([]) do |field, invalid_fields|
       next if @product[field.to_sym].present?
 
-      invalid_fields << {
-        field: field,
-        text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
-                default: t("coronavirus_form.errors.missing_mandatory_text_field",
-                           field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
-      }
+      invalid_fields << error_response(field)
     end
   end
 
   def validate_product_quantity
-    quantity = @product[:product_quantity]
-    error_response = {
-      field: "product_quantity",
-      text: t("coronavirus_form.questions.#{controller_name}.product_quantity.custom_error"),
-    }
+    field = "product_quantity"
+    return error_response(field) unless @product[field.to_sym]
 
-    return if Integer(quantity) && Integer(quantity).positive?
+    quantity = Integer(@product[field.to_sym])
+    return if quantity && quantity.positive?
 
-    error_response
-  rescue TypeError, ArgumentError
-    error_response
+    error_response(field)
+  rescue ArgumentError
+    error_response(field)
   end
 
   def validate_product_cost
-    cost = @product[:product_cost]
-    error_response = {
-      field: "product_cost",
-      text: t("coronavirus_form.questions.#{controller_name}.product_cost.custom_error"),
-    }
+    field = "product_cost"
+    return error_response(field) unless @product[field.to_sym]
 
-    return if Float(cost) && (Float(cost).positive? || Float(cost).zero?)
+    cost = Float(@product[field.to_sym])
+    return if cost && (cost.positive? || cost.zero?)
 
-    error_response
-  rescue TypeError, ArgumentError
-    error_response
+    error_response(field)
+  rescue ArgumentError
+    error_response(field)
   end
 
   def validate_lead_time
-    days = @product[:lead_time]
-    error_response = {
-      field: "lead_time",
-      text: t("coronavirus_form.questions.#{controller_name}.lead_time.custom_error"),
-    }
+    field = "lead_time"
+    return error_response(field) unless @product[field.to_sym]
 
-    return if Integer(days) && (Integer(days).positive? || Integer(days).zero?)
+    days = Integer(@product[field.to_sym])
+    return if days && (days.positive? || days.zero?)
 
-    error_response
-  rescue TypeError, ArgumentError
-    error_response
+    error_response(field)
+  rescue ArgumentError
+    error_response(field)
   end
 
   def sanitized_product(params)
@@ -144,6 +133,15 @@ private
       product_postcode: strip_tags(params[:product_postcode]&.gsub(/[[:space:]]+/, "")).presence,
       product_url: strip_tags(params[:product_url]).presence,
       lead_time: strip_tags(params[:lead_time]&.gsub(/[,a-zA-Z]/, "")&.strip).presence,
+    }
+  end
+
+  def error_response(field)
+    {
+      field: field,
+      text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
+              default: t("coronavirus_form.errors.missing_mandatory_text_field",
+                         field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
     }
   end
 
