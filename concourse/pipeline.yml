@@ -141,7 +141,7 @@ jobs:
       - task: run-smoke-tests
         file: govuk-coronavirus-business-volunteer-form/concourse/tasks/run-smoke-tests.yml
         params:
-          TEST_URL: 'https://coronavirus-business-volunteers.service.gov.uk/medical-equipment'
+          TEST_URL: 'https://coronavirus-business-volunteers.service.gov.uk'
 
   - name: export-form-responses-periodically
     plan:
