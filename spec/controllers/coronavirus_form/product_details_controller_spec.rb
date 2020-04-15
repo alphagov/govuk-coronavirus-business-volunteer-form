@@ -260,6 +260,37 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
           expect(session[:product_details].first[:product_cost]).to eq("10.99")
         end
       end
+
+      context "lead_time" do
+        before do
+          params.merge!(equipment_type: "Gloves")
+        end
+
+        it "errors if the user doesn't provide a lead_time" do
+          post :submit, params: params.except(:lead_time)
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the user enters an invalid lead_time" do
+          post :submit, params: params.merge(lead_time: "Ten days")
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the lead_time is below zero" do
+          post :submit, params: params.merge(lead_time: "-10")
+          expect(response).to render_template(current_template)
+        end
+
+        it "allows the lead_time to be zero" do
+          post :submit, params: params.merge(lead_time: "0")
+          expect(response).to redirect_to(additional_product_path)
+        end
+
+        it "removes words from lead_time" do
+          post :submit, params: params.merge(lead_time: "10 days")
+          expect(session[:product_details].first[:lead_time]).to eq("10")
+        end
+      end
     end
 
     context "when the user has selected PPE" do

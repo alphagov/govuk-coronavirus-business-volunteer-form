@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ProductDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w(product_name certification_details lead_time).freeze
+  REQUIRED_FIELDS = %w(product_name certification_details).freeze
   TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
 
   def show
@@ -58,6 +58,7 @@ private
       validate_product_postcode,
       validate_product_quantity,
       validate_product_cost,
+      validate_lead_time,
     ].compact.flatten
   end
 
@@ -117,6 +118,20 @@ private
     error_response
   end
 
+  def validate_lead_time
+    days = @product[:lead_time]
+    error_response = {
+      field: "lead_time",
+      text: t("coronavirus_form.questions.#{controller_name}.lead_time.custom_error"),
+    }
+
+    return if Integer(days) && (Integer(days).positive? || Integer(days).zero?)
+
+    error_response
+  rescue TypeError, ArgumentError
+    error_response
+  end
+
   def sanitized_product(params)
     {
       product_id: strip_tags(params[:product_id]).presence || SecureRandom.uuid,
@@ -128,7 +143,7 @@ private
       product_location: strip_tags(params[:product_location]).presence,
       product_postcode: strip_tags(params[:product_postcode]&.gsub(/[[:space:]]+/, "")).presence,
       product_url: strip_tags(params[:product_url]).presence,
-      lead_time: strip_tags(params[:lead_time]).presence,
+      lead_time: strip_tags(params[:lead_time]&.gsub(/[,a-zA-Z]/, "")&.strip).presence,
     }
   end
 
