@@ -255,7 +255,7 @@ en:
           label: "URL of product specification document (optional)"
         lead_time:
           label: "Lead time in days"
-          custom_error: "Enter a number"
+          custom_error: "Enter the approximate lead time in days, do not include words or symbols. If the product is available now, enter 0"
         equipment_type:
           label: "What type of equipment is it?"
           options:
