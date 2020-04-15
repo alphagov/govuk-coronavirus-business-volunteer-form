@@ -4,8 +4,10 @@ ruby File.read(".ruby-version").strip
 
 source "https://rubygems.org"
 
+gem "asset_sync", "~> 2.11.0"
 gem "aws-sdk-s3", "~> 1.61.2"
 gem "bootsnap", "~> 1"
+gem "fog-aws", "~> 3.6.2"
 gem "govuk_app_config", "~> 2.1.1"
 gem "govuk_publishing_components", "~> 21.41.1"
 gem "lograge"
