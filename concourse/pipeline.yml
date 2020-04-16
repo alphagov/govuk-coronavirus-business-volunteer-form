@@ -97,6 +97,8 @@ jobs:
           HOSTNAME: govuk-coronavirus-business-volunteer-form-stg
           SENTRY_DSN: https://((sentry-dsn))
           AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-staging
+          GOVUK_NOTIFY_TEMPLATE_ID: b9661b65-805c-4290-9428-2495f3427964
+          NOTIFY_API_KEY: ((notify-api-key-stg))
 
   - name: smoke-test-staging
     plan:
@@ -133,6 +135,8 @@ jobs:
           HOSTNAME: govuk-coronavirus-business-volunteer-form-prod
           SENTRY_DSN: https://((sentry-dsn))
           AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-prod
+          GOVUK_NOTIFY_TEMPLATE_ID: 94e7f169-6c10-487f-b9d2-4d03fc162a1e
+          NOTIFY_API_KEY: ((notify-api-key-prod))
 
   - name: smoke-test-prod
     plan:
@@ -159,4 +163,3 @@ jobs:
         params:
           CF_SPACE: production
           SENTRY_DSN: https://((sentry-dsn))
-

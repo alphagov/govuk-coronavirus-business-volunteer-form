@@ -99,9 +99,18 @@ Rails.application.configure do
   if ENV["VCAP_SERVICES"].present?
     redis = JSON.parse(ENV["VCAP_SERVICES"]).to_h.fetch("redis", [])
     instance = redis.first
-    config.cache_store = :redis_cache_store, { url: instance.dig("credentials", "uri") }
+    redis_url = instance.dig("credentials", "uri")
+    config.cache_store = :redis_cache_store, { url: redis_url }
     # If you change the expiry here, you should also change it on the privacy policy.
     config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
+
+    Sidekiq.configure_server do |config|
+      config.redis = { url: redis_url }
+    end
+
+    Sidekiq.configure_client do |config|
+      config.redis = { url: redis_url }
+    end
   end
 
   config.analytics_tracking_id = ENV["GA_VIEW_ID"]
@@ -128,4 +137,6 @@ Rails.application.configure do
   #   ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context =
   #   ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.delivery_method = :notify
 end
