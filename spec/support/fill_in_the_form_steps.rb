@@ -181,10 +181,10 @@ module FillInTheFormSteps
 
   def and_has_supplied_a_contact
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.contact_details.title"))
-    fill_in "contact_name", with: "John Doe"
-    fill_in "role", with: "CEO"
-    fill_in "phone_number", with: "020 1234 5678"
-    fill_in "email", with: "john.doe@gds.org"
+    fill_in "contact_name", with: "Test Please Ignore"
+    fill_in "role", with: "Test Please Ignore"
+    fill_in "phone_number", with: "07000000000"
+    fill_in "email", with: "coronavirus-services-smoke-tests@digital.cabinet-office.gov.uk"
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
