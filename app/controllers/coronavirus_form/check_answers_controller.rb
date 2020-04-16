@@ -12,8 +12,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
     session[:reference_number] = submission_reference
     FormResponse.create(form_response: session)
 
-    mailer = CoronavirusFormMailer.with(name: session.dig(:contact_details, :contact_name))
-    mailer.thank_you(session.dig(:contact_details, :email)).deliver_later
+    send_confirmation_email
 
     reset_session
 
@@ -21,6 +20,19 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   end
 
 private
+
+  def send_confirmation_email
+    mailer = CoronavirusFormMailer.with(name: session.dig(:contact_details, :contact_name))
+    mailer.thank_you(user_email).deliver_later
+  end
+
+  def user_email
+    if ENV["PAAS_ENV"] == "staging"
+      Rails.application.config.courtesy_copy_email
+    else
+      session.dig(:contact_details, :email)
+    end
+  end
 
   def reference_number
     timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%S")
