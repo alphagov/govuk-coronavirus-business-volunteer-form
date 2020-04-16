@@ -33,7 +33,7 @@ Then set up your local database
 
 Then set up your Docker database
 
-    DATABASE_URL="postgres://user:password@localhost:5432/coronavirus_form_development" rails db:setup
+    DATABASE_URL="postgres://user:password@localhost:5432/coronavirus_business_volunteer_form_development" rails db:setup
 
 You'll then need to specify the `DATABASE_URL` environment variable before the below tasks.
 
