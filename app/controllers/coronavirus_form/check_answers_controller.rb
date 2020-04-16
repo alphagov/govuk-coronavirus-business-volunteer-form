@@ -12,6 +12,9 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
     session[:reference_number] = submission_reference
     FormResponse.create(form_response: session)
 
+    mailer = CoronavirusFormMailer.with(name: session.dig(:contact_details, :contact_name))
+    mailer.thank_you(session.dig(:contact_details, :email)).deliver_later
+
     reset_session
 
     redirect_to thank_you_url(reference_number: submission_reference)
