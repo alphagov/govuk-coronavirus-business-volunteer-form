@@ -18,6 +18,7 @@ params:
   CF_SPACE:
   HOSTNAME:
   INSTANCES:
+  WORKER_INSTANCES:
   BASIC_AUTH_PASSWORD:
   GA_VIEW_ID: UA-43115970-1
   AWS_ACCESS_KEY_ID:
@@ -39,7 +40,8 @@ run:
       cf v3-apply-manifest -f manifest.yml
       cf set-env govuk-coronavirus-business-volunteer-form CF_STARTUP_TIMEOUT "$CF_STARTUP_TIMEOUT"
 
-      cf scale -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
+      cf v3-scale --process web -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
+      cf v3-scale --process worker -i "$WORKER_INSTANCES" govuk-coronavirus-business-volunteer-form
 
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ASSETS_BUCKET_NAME "$AWS_ASSETS_BUCKET_NAME"
       if [[ "${REQUIRE_BASIC_AUTH:-}" = "true" ]]; then
