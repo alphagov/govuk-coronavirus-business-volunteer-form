@@ -245,6 +245,11 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
           expect(response).to render_template(current_template)
         end
 
+        it "errors if the product_cost has more than two decimal places" do
+          post :submit, params: params.merge(product_cost: "10.99999")
+          expect(response).to render_template(current_template)
+        end
+
         it "allows the product_cost to be zero" do
           post :submit, params: params.merge(product_cost: "0")
           expect(response).to redirect_to(additional_product_path)

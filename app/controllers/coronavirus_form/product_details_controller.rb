@@ -3,6 +3,7 @@
 class CoronavirusForm::ProductDetailsController < ApplicationController
   REQUIRED_FIELDS = %w(product_name certification_details).freeze
   TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
+  VALID_FLOAT = /^\d+\.?\d{0,2}$/.freeze
 
   def show
     session[:product_details] ||= []
@@ -102,7 +103,7 @@ private
     return error_response(field) unless @product[field.to_sym]
 
     cost = Float(@product[field.to_sym])
-    return if cost && (cost.positive? || cost.zero?)
+    return if cost && (cost.positive? || cost.zero?) && @product[field.to_sym].match?(VALID_FLOAT)
 
     error_response(field)
   rescue ArgumentError
