@@ -2,7 +2,7 @@ en:
   accessibility_statement:
     title: Accessibility statement
     body_text: |
-      <p class="govuk-body">This accessibility statement applies to the service on GOV.UK to get coronavirus support as an extremely vulnerable person.</p>
+      <p class="govuk-body">This accessibility statement applies to the service on GOV.UK to volunteer business support.</p>
       <p class="govuk-body">This website is run by the Government Digital Service. It is designed to be used by as many people as possible. The text should be clear and simple to understand. You should be able to:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>zoom in up to 300% without problems</li>
