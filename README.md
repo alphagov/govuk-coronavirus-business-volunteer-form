@@ -1,6 +1,6 @@
 ![Run tests](https://github.com/alphagov/govuk-coronavirus-business-volunteer-form/workflows/Run%20tests/badge.svg)
 
-# CoronavirusForm
+# GOV.UK Coronavirus Business Volunteer Form
 
 This is an application for submitting a form.
 
