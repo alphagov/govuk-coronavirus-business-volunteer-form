@@ -40,6 +40,8 @@ module CoronavirusForm
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    config.courtesy_copy_email = "coronavirus-services-smoke-tests@digital.cabinet-office.gov.uk"
+
     config.active_job.queue_adapter = :sidekiq
 
     config.courtesy_copy_email = "coronavirus-services-smoke-tests@digital.cabinet-office.gov.uk"

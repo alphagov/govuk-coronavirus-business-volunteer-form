@@ -10,7 +10,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
     submission_reference = reference_number
 
     session[:reference_number] = submission_reference
-    FormResponse.create(form_response: session)
+    FormResponse.create(form_response: session) unless smoke_tester?
 
     send_confirmation_email
 
@@ -32,6 +32,11 @@ private
     else
       session.dig(:contact_details, :email)
     end
+  end
+
+  def smoke_tester?
+    email = session.dig(:contact_details, :email)
+    email.present? && email == Rails.application.config.courtesy_copy_email
   end
 
   def reference_number
