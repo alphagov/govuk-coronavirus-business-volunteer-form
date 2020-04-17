@@ -63,5 +63,14 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
         params: { reference_number: "abc" },
       })
     end
+
+    it "doesn't create a FormResponse if the user is the smoke tester" do
+      session[:contact_details] = { email: Rails.application.config.courtesy_copy_email }
+      session["medical_equipment"] = "Yes"
+
+      expect {
+        post :submit
+      }.to_not(change { FormResponse.count })
+    end
   end
 end
