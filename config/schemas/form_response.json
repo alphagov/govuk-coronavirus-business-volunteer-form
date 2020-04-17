@@ -1,0 +1,329 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "medical_equipment",
+    "hotel_rooms",
+    "offer_transport",
+    "offer_space",
+    "expert_advice_type",
+    "offer_care",
+    "offer_other_support",
+    "business_details",
+    "contact_details"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "medical_equipment": {
+      "$ref": "#/definitions/yes_no"
+    },
+    "are_you_a_manufacturer": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Manufacturer",
+          "Distributor",
+          "Agent",
+          "Individual"
+        ]
+      }
+    },
+    "product_details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "medical_equipment_type",
+          "product_id"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "medical_equipment_type": {
+            "type": "string",
+            "enum": [
+              "Personal protective equipment, for example masks, detergent and waste bags",
+              "Testing equipment",
+              "Other"
+            ]
+          },
+          "medical_equipment_type_other": {
+            "type": ["string", "null"]
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "product_quantity": {
+            "$ref": "#/definitions/whole_number"
+          },
+          "product_cost": {
+            "type": "string",
+            "pattern": "^[0-9]*\.?[0-9]{0,2}$"
+          },
+          "certification_details": {
+            "type": "string"
+          },
+          "product_location": {
+            "type": "string",
+            "enum": [
+              "United Kingdom",
+              "European Union",
+              "Rest of world"
+            ]
+          },
+          "product_postcode": {
+            "$ref": "#/definitions/postcode"
+          },
+          "product_url": {
+            "type": ["string", "null"]
+          },
+          "lead_time": {
+            "$ref": "#/definitions/whole_number"
+          },
+          "equipment_type": {
+            "type": ["string", "null"],
+            "enum": [
+              "FFP3 respirators",
+              "FFP2 respirators",
+              "Aprons",
+              "Gloves",
+              "Type IIR face masks",
+              "Safety glasses or visors",
+              "Alcohol hand gel",
+              "Gowns",
+              "Face fit test kit",
+              "Face fit test solution",
+              "Swabs",
+              "General purpose detergent",
+              "Body Bags",
+              "Cleaning Equipment",
+              "Clinical Waste Bags",
+              "Something else",
+              null
+            ]
+          }
+        }
+      }
+    },
+    "hotel_rooms": {
+      "type": "string",
+      "enum": [
+        "Yes – for people to stay in",
+        "Yes – for any use",
+        "No"
+      ]
+    },
+    "hotel_rooms_number": {
+      "type": "string"
+    },
+    "transport_type" :{
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Moving people",
+          "Moving goods",
+          "Other"
+        ]
+      }
+    },
+    "transport_description": {
+      "type": "string"
+    },
+    "offer_transport": {
+      "$ref": "#/definitions/yes_no"
+    },
+    "offer_space": {
+      "$ref": "#/definitions/yes_no"
+    },
+    "offer_space_type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Warehouse space",
+          "Office space",
+          "Other"
+        ]
+      }
+    },
+    "warehouse_space_description": {
+      "type": ["string", "null"]
+    },
+    "office_space_description": {
+      "type": ["string", "null"]
+    },
+    "offer_space_type_other": {
+      "type": ["string", "null"]
+    },
+    "general_space_description": {
+      "type": ["string", "null"]
+    },
+    "expert_advice_type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Medical",
+          "Engineering",
+          "Construction",
+          "Project management or procurement",
+          "IT services",
+          "Manufacturing",
+          "Other",
+          "I cannot offer expertise"
+        ]
+      }
+
+    },
+    "expert_advice_type_other": {
+      "type": ["string", "null"]
+    },
+    "offer_care": {
+      "$ref": "#/definitions/yes_no"
+    },
+    "offer_care_type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Care for adults",
+          "Care for children"
+        ]
+      }
+    },
+    "offer_care_qualifications": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DBS check",
+          "Nursing or other healthcare qualification",
+          "I do not have a qualification"
+        ]
+      }
+    },
+    "offer_care_qualifications_type": {
+      "type": ["string", "null"]
+    },
+    "offer_other_support": {
+      "type": "string"
+    },
+    "location": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "East of England",
+          "East Midlands",
+          "West Midlands",
+          "London",
+          "North East",
+          "North West",
+          "South East",
+          "South West",
+          "Yorkshire and the Humber",
+          "Northern Ireland",
+          "Scotland",
+          "Wales"
+        ]
+      }
+    },
+    "business_details": {
+      "type": "object",
+      "required": [
+        "company_name",
+        "company_size",
+        "company_location"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "company_name": {
+          "type": "string"
+        },
+        "company_number": {
+          "type": ["string", "null"]
+        },
+        "company_size": {
+          "type": "string",
+          "enum": [
+            "Under 50 people",
+            "50 to 250 people",
+            "More than 250 people"
+          ]
+        },
+        "company_location": {
+          "type": "string",
+          "enum": [
+            "United Kingdom",
+            "European Union",
+            "Rest of world"
+          ]
+        },
+        "company_postcode": {
+          "$ref": "#/definitions/postcode"
+        }
+      }
+    },
+    "contact_details": {
+      "type": "object",
+      "required": [
+        "contact_name",
+        "phone_number",
+        "email"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "contact_name": {
+          "type": "string"
+        },
+        "role": {
+          "type": ["string", "null"]
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "pattern": "[@]{1}"
+        }
+      }
+    },
+    "reference_number": {
+      "type": "string"
+    },
+    "check_answers_seen": {
+      "type": "boolean"
+    },
+    "_csrf_token": {
+      "type": "string"
+    },
+    "current_path": {
+      "type": "string"
+    },
+    "previous_path": {
+      "type": "string"
+    },
+    "additional_product": {
+      "$ref": "#/definitions/yes_no"
+    }
+  },
+  "definitions": {
+    "yes_no": {
+      "type": "string",
+      "enum": ["Yes", "No"]
+    },
+    "postcode": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Za-z0-9 ]{4,}$"
+    },
+    "whole_number": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    }
+  }
+}
