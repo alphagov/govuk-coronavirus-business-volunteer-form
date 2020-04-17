@@ -184,7 +184,7 @@ module FillInTheFormSteps
     fill_in "contact_name", with: "Test Please Ignore"
     fill_in "role", with: "Test Please Ignore"
     fill_in "phone_number", with: "07000000000"
-    fill_in "email", with: "coronavirus-services-smoke-tests@digital.cabinet-office.gov.uk"
+    fill_in "email", with: Rails.application.config.courtesy_copy_email
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
