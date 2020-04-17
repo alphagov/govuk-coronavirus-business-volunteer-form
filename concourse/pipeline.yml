@@ -5,39 +5,23 @@ resource_types:
     source:
       repository: nulldriver/cf-cli-resource
 
-  - name: travis
-    type: docker-image
-    source:
-      repository: rbakergds/travis-resource
-      tag: latest
-
 resources:
-  - name: govuk-coronavirus-business-volunteer-form
+  - name: git-master
     type: git
     icon: github-circle
     source:
       uri: https://github.com/alphagov/govuk-coronavirus-business-volunteer-form
       branch: master
 
-  - name: govuk-coronavirus-business-volunteer-form-travis-build
-    type: travis
-    icon: sync
-    source:
-      repository: alphagov/govuk-coronavirus-business-volunteer-form
-      travis-token: ((travis-api-token))
-      branch: master
-      pro: true
-
-  - name: govuk-coronavirus-business-volunteer-form-feature-tests
-    type: git
+  - name: git-master-gems-dockerfile
     icon: github-circle
+    type: git
     source:
       uri: https://github.com/alphagov/govuk-coronavirus-business-volunteer-form
       branch: master
       paths:
+        - concourse/Dockerfile
         - Gemfile*
-        - .ruby-version
-        - spec/
 
   - name: every-six-hours
     type: time
@@ -49,42 +33,77 @@ resources:
     source:
       interval: 24h
 
-  - name: feature-tests-image
+  - name: tests-image
     type: docker-image
     icon: docker
     source:
       repository: ((readonly_private_ecr_repo_url))
-      tag: govuk-coronavirus-business-volunteer-form-feature-tests
+      tag: govuk-coronavirus-business-volunteer-tests-image
 
 jobs:
   - name: update-pipeline
     plan:
-      - get: govuk-coronavirus-business-volunteer-form
+      - get: git-master
         trigger: true
       - set_pipeline: govuk-corona-business-volunteer-form
-        file: govuk-coronavirus-business-volunteer-form/concourse/pipeline.yml
+        file: git-master/concourse/pipeline.yml
 
-  - name: build-feature-tests-image
+  - name: build-tests-image
     serial: true
+    build_logs_to_retain: 100
     plan:
       - get: every-day
         trigger: true
-      - get: govuk-coronavirus-business-volunteer-form-feature-tests
+      - get: git-master-gems-dockerfile
         trigger: true
-      - put: feature-tests-image
+      - put: tests-image
         params:
-          build: govuk-coronavirus-business-volunteer-form-feature-tests
-          dockerfile: govuk-coronavirus-business-volunteer-form-feature-tests/spec/Dockerfile
+          build: git-master-gems-dockerfile
+          dockerfile: git-master-gems-dockerfile/concourse/Dockerfile
+
+  - name: run-quality-checks
+    serial: true
+    plan:
+      - get: tests-image
+        passed:
+          - build-tests-image
+        trigger: true
+      - get: git-master
+        trigger: true
+      - task: run-tests-task
+        image: tests-image
+        config:
+          inputs:
+            - name: git-master
+          outputs:
+            - name: committer-details
+          platform: linux
+          run:
+            dir: git-master
+            path: bash
+            args:
+              - -c
+              - |
+                set -eu
+                service postgresql start
+                su - postgres -c "psql -c \"create role root with createdb login password 'password';\""
+                service redis-server start
+                export TEST_DATABASE_URL="postgres://root:password@localhost:5432/coronavirus_business_volunteer_form_test"
+                export RAILS_ENV=test
+                bundle install
+                bundle exec rails db:setup
+                bundle exec rails db:migrate
+                bundle exec rake
 
   - name: deploy-to-staging
     serial: true
     plan:
-      - get: govuk-coronavirus-business-volunteer-form-travis-build
+      - get: git-master
         trigger: true
-      - get: govuk-coronavirus-business-volunteer-form
+        passed: [run-quality-checks]
       - task: deploy-to-paas
         config:
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/deploy-to-govuk-paas.yml
+        file: git-master/concourse/tasks/deploy-to-govuk-paas.yml
         params:
           CF_SPACE: staging
           INSTANCES: 2
@@ -103,27 +122,30 @@ jobs:
 
   - name: smoke-test-staging
     plan:
-      - get: govuk-coronavirus-business-volunteer-form
+      - get: git-master
         trigger: true
         passed: [deploy-to-staging]
+      - get: tests-image
+        passed:
+          - build-tests-image
       - task: smoke-test
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/smoke-test.yml
+        file: git-master/concourse/tasks/smoke-test.yml
         params:
           URL: 'https://govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital/medical-equipment'
           MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
       - task: run-smoke-tests
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/run-smoke-tests.yml
+        file: git-master/concourse/tasks/run-smoke-tests.yml
         params:
           TEST_URL: 'https://gds:((basic-auth-password))@govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital'
 
   - name: deploy-to-prod
     serial: true
     plan:
-      - get: govuk-coronavirus-business-volunteer-form
+      - get: git-master
         trigger: true
         passed: [smoke-test-staging]
       - task: deploy-to-paas
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/deploy-to-govuk-paas.yml
+        file: git-master/concourse/tasks/deploy-to-govuk-paas.yml
         params:
           CF_SPACE: production
           INSTANCES: 10
@@ -142,26 +164,26 @@ jobs:
 
   - name: smoke-test-prod
     plan:
-      - get: govuk-coronavirus-business-volunteer-form
+      - get: git-master
         trigger: true
         passed: [deploy-to-prod]
       - task: smoke-test
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/smoke-test.yml
+        file: git-master/concourse/tasks/smoke-test.yml
         params:
           URL: 'https://coronavirus-business-volunteers.service.gov.uk/medical-equipment'
           MESSAGE: "Checks that the application deployed to production is not serving HTTP error codes"
       - task: run-smoke-tests
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/run-smoke-tests.yml
+        file: git-master/concourse/tasks/run-smoke-tests.yml
         params:
           TEST_URL: 'https://coronavirus-business-volunteers.service.gov.uk'
 
   - name: export-form-responses-periodically
     plan:
-      - get: govuk-coronavirus-business-volunteer-form
+      - get: git-master
       - get: every-six-hours
         trigger: true
       - task: export-form-responses
-        file: govuk-coronavirus-business-volunteer-form/concourse/tasks/export-form-responses.yml
+        file: git-master/concourse/tasks/export-form-responses.yml
         params:
           CF_SPACE: production
           SENTRY_DSN: https://((sentry-dsn))

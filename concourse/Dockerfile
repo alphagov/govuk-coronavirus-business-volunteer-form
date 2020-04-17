@@ -1,13 +1,13 @@
 #========================================================================================
 # This Dockerfile creates a container image which contains Ruby,
-# Google Chrome and Postgres, as well as the application source and bundled dependencies.
+# Google Chrome, Redis and Postgres, as well as the application source and bundled dependencies.
 #
 # This is needed for running the feature tests in a container environment like Concourse.
 #========================================================================================
 FROM ruby:2.6.5-buster
 
 # Updates all debian dependencies
-# Adds google chrome to software sources, install chrome, install postgres
+# Adds google chrome to software sources, install chrome, install postgres and redis
 # clear up lists behind ourselves
 RUN apt-get update --fix-missing && apt-get -y upgrade \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
