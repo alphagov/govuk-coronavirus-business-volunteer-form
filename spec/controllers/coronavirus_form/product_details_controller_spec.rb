@@ -13,7 +13,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       product_id: product_id,
       product_name: "Defibrillator",
       product_quantity: "100",
-      product_cost: "£10.99",
+      product_cost: "10.99",
       certification_details: "CE",
       product_location: "United Kingdom",
       product_postcode: "SW1A2AA",
@@ -202,6 +202,99 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         post :submit, params: params.merge({ product_postcode: "<script></script>" })
 
         expect(response).to render_template(current_template)
+      end
+
+      context "product_quantity" do
+        before do
+          params.merge!(equipment_type: "Gloves")
+        end
+
+        it "errors if the user doesn't provide a product_quantity" do
+          post :submit, params: params.except(:product_quantity)
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the user enters an invalid product quantity" do
+          post :submit, params: params.merge(product_quantity: "Ten")
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the product quantity is below zero" do
+          post :submit, params: params.merge(product_quantity: "-10")
+          expect(response).to render_template(current_template)
+        end
+      end
+
+      context "product_cost" do
+        before do
+          params.merge!(equipment_type: "Gloves")
+        end
+
+        it "errors if the user doesn't provide a product_cost" do
+          post :submit, params: params.except(:product_cost)
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the user enters an invalid product_cost" do
+          post :submit, params: params.merge(product_cost: "Ten pounds")
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the product_cost is below zero" do
+          post :submit, params: params.merge(product_cost: "-10")
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the product_cost has more than two decimal places" do
+          post :submit, params: params.merge(product_cost: "10.99999")
+          expect(response).to render_template(current_template)
+        end
+
+        it "allows the product_cost to be zero" do
+          post :submit, params: params.merge(product_cost: "0")
+          expect(response).to redirect_to(additional_product_path)
+        end
+
+        it "removes £ from product_cost" do
+          post :submit, params: params.merge(product_cost: "£10.99")
+          expect(session[:product_details].first[:product_cost]).to eq("10.99")
+        end
+
+        it "removes words from product_cost" do
+          post :submit, params: params.merge(product_cost: "10.99 GBP")
+          expect(session[:product_details].first[:product_cost]).to eq("10.99")
+        end
+      end
+
+      context "lead_time" do
+        before do
+          params.merge!(equipment_type: "Gloves")
+        end
+
+        it "errors if the user doesn't provide a lead_time" do
+          post :submit, params: params.except(:lead_time)
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the user enters an invalid lead_time" do
+          post :submit, params: params.merge(lead_time: "Ten days")
+          expect(response).to render_template(current_template)
+        end
+
+        it "errors if the lead_time is below zero" do
+          post :submit, params: params.merge(lead_time: "-10")
+          expect(response).to render_template(current_template)
+        end
+
+        it "allows the lead_time to be zero" do
+          post :submit, params: params.merge(lead_time: "0")
+          expect(response).to redirect_to(additional_product_path)
+        end
+
+        it "removes words from lead_time" do
+          post :submit, params: params.merge(lead_time: "10 days")
+          expect(session[:product_details].first[:lead_time]).to eq("10")
+        end
       end
     end
 

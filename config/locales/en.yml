@@ -229,11 +229,11 @@ en:
         product_quantity:
           label: "Quantity of this product"
           hint: "Approximate amount, for example 10, 500, 10000."
-          custom_error: "Enter the quantity of the product"
+          custom_error: "Enter the approximate total number of items, do not include words or symbols"
         product_cost:
           label: "Cost per item, in pounds"
           hint: "For example, 23.99. Enter 0 if you will donate it."
-          custom_error: "Enter a cost, like 23.99, or 0 if you will donate it. Do not put the £ symbol."
+          custom_error: "Enter the cost per item in pounds, do not include words or symbols. If you are giving it for free, enter 0"
         certification_details:
           label: "Certification details"
           hint: "For example, CE marking or EN standards."
@@ -255,7 +255,7 @@ en:
           label: "URL of product specification document (optional)"
         lead_time:
           label: "Lead time in days"
-          custom_error: "Enter a number"
+          custom_error: "Enter the approximate lead time in days, do not include words or symbols. If the product is available now, enter 0"
         equipment_type:
           label: "What type of equipment is it?"
           options:

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ProductDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w(product_name product_quantity product_cost certification_details lead_time).freeze
+  REQUIRED_FIELDS = %w(product_name certification_details).freeze
   TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
+  VALID_FLOAT = /^\d+\.?\d{0,2}$/.freeze
 
   def show
     session[:product_details] ||= []
@@ -56,6 +57,9 @@ private
       selected_ppe? ? validate_radio_field("#{controller_name}.equipment_type", radio: @product[:equipment_type]) : [],
       validate_radio_field("#{controller_name}.product_location", radio: @product[:product_location]),
       validate_product_postcode,
+      validate_product_quantity,
+      validate_product_cost,
+      validate_lead_time,
     ].compact.flatten
   end
 
@@ -78,13 +82,44 @@ private
     required.each_with_object([]) do |field, invalid_fields|
       next if @product[field.to_sym].present?
 
-      invalid_fields << {
-        field: field,
-        text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
-                default: t("coronavirus_form.errors.missing_mandatory_text_field",
-                           field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
-      }
+      invalid_fields << error_response(field)
     end
+  end
+
+  def validate_product_quantity
+    field = "product_quantity"
+    return error_response(field) unless @product[field.to_sym]
+
+    quantity = Integer(@product[field.to_sym])
+    return if quantity && quantity.positive?
+
+    error_response(field)
+  rescue ArgumentError
+    error_response(field)
+  end
+
+  def validate_product_cost
+    field = "product_cost"
+    return error_response(field) unless @product[field.to_sym]
+
+    cost = Float(@product[field.to_sym])
+    return if cost && (cost.positive? || cost.zero?) && @product[field.to_sym].match?(VALID_FLOAT)
+
+    error_response(field)
+  rescue ArgumentError
+    error_response(field)
+  end
+
+  def validate_lead_time
+    field = "lead_time"
+    return error_response(field) unless @product[field.to_sym]
+
+    days = Integer(@product[field.to_sym])
+    return if days && (days.positive? || days.zero?)
+
+    error_response(field)
+  rescue ArgumentError
+    error_response(field)
   end
 
   def sanitized_product(params)
@@ -92,13 +127,22 @@ private
       product_id: strip_tags(params[:product_id]).presence || SecureRandom.uuid,
       equipment_type: strip_tags(params[:equipment_type]).presence,
       product_name: strip_tags(params[:product_name]).presence,
-      product_quantity: strip_tags(params[:product_quantity]).presence,
-      product_cost: strip_tags(params[:product_cost]).presence,
+      product_quantity: strip_tags(params[:product_quantity]&.gsub(",", "")&.strip).presence,
+      product_cost: strip_tags(params[:product_cost]&.gsub(/[,£a-zA-Z]/, "")&.strip).presence,
       certification_details: strip_tags(params[:certification_details]).presence,
       product_location: strip_tags(params[:product_location]).presence,
       product_postcode: strip_tags(params[:product_postcode]&.gsub(/[[:space:]]+/, "")).presence,
       product_url: strip_tags(params[:product_url]).presence,
-      lead_time: strip_tags(params[:lead_time]).presence,
+      lead_time: strip_tags(params[:lead_time]&.gsub(/[,a-zA-Z]/, "")&.strip).presence,
+    }
+  end
+
+  def error_response(field)
+    {
+      field: field,
+      text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
+              default: t("coronavirus_form.errors.missing_mandatory_text_field",
+                         field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
     }
   end
 
