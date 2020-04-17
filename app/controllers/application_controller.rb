@@ -9,15 +9,15 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :session_expired
 
-  before_action :check_first_question_answered, only: :show
-  before_action :set_session_history, only: :show
-
   if ENV["REQUIRE_BASIC_AUTH"]
     http_basic_authenticate_with(
       name: ENV.fetch("BASIC_AUTH_USERNAME"),
       password: ENV.fetch("BASIC_AUTH_PASSWORD"),
     )
   end
+
+  before_action :check_first_question_answered, only: :show
+  before_action :set_session_history, only: :show
 
   def show
     @form_responses = session.to_hash.with_indifferent_access
