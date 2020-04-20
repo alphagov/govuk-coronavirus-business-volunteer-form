@@ -22,7 +22,12 @@ RSpec.describe CoronavirusForm::AreYouAManufacturerController, type: :controller
   end
 
   describe "POST submit" do
-    let(:selected) { %w[Distributor Manufacturer] }
+    let(:selected) do
+      [
+        I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.distributor.label"),
+        I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label"),
+      ]
+    end
 
     it "sets session variables" do
       post :submit, params: { are_you_a_manufacturer: selected }
