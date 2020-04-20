@@ -122,18 +122,19 @@ jobs:
 
   - name: smoke-test-staging
     plan:
-      - get: git-master
-        trigger: true
-        passed: [deploy-to-staging]
       - get: tests-image
         passed:
           - build-tests-image
+      - get: git-master
+        trigger: true
+        passed: [deploy-to-staging]
       - task: smoke-test
         file: git-master/concourse/tasks/smoke-test.yml
         params:
           URL: 'https://govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital/medical-equipment'
           MESSAGE: "Checks that the application deployed to staging is not serving HTTP error codes"
       - task: run-smoke-tests
+        image: tests-image
         file: git-master/concourse/tasks/run-smoke-tests.yml
         params:
           TEST_URL: 'https://gds:((basic-auth-password))@govuk-coronavirus-business-volunteer-form-stg.cloudapps.digital'
@@ -173,6 +174,7 @@ jobs:
           URL: 'https://coronavirus-business-volunteers.service.gov.uk/medical-equipment'
           MESSAGE: "Checks that the application deployed to production is not serving HTTP error codes"
       - task: run-smoke-tests
+        image: tests-image
         file: git-master/concourse/tasks/run-smoke-tests.yml
         params:
           TEST_URL: 'https://coronavirus-business-volunteers.service.gov.uk'
