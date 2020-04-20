@@ -23,7 +23,7 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
-      render controller_path
+      render controller_path, status: :unprocessable_entity
     elsif selected_testing_equipment?
       add_product_to_session(@product)
       redirect_to testing_equipment_url

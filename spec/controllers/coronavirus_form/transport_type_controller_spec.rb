@@ -64,12 +64,14 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
     it "validates any option is chosen" do
       post :submit, params: { transport_type: [] }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
     it "validates a valid option is chosen" do
       post :submit, params: { transport_type: ["<script></script", "invalid option", "Medical equipment"] }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -79,7 +81,7 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
         transport_type: selected,
       transport_description: "",
 }
-
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
   end

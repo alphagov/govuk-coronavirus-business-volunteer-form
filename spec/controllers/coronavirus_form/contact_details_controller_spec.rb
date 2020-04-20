@@ -77,6 +77,7 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
       it "requires that key #{field} be provided" do
         post :submit, params: params.except(field)
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end
@@ -86,6 +87,7 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end
@@ -93,6 +95,7 @@ RSpec.describe CoronavirusForm::ContactDetailsController, type: :controller do
     it "validates email address is valid" do
       post :submit, params: params.merge("email" => "blah blah not an email")
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
   end

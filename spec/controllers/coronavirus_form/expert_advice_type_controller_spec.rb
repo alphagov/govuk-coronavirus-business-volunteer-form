@@ -43,6 +43,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
     it "validates any option is chosen" do
       post :submit, params: { expert_advice_type: [] }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -50,6 +51,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
       it "validates the Other option description is provided" do
         post :submit, params: { expert_advice_type: %w[Other] }
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
@@ -70,6 +72,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
         expert_advice_type: ["<script></script", "invalid option"],
       }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -78,6 +81,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
         expert_advice_type: ["<script></script", "invalid option"] + selected,
       }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -88,6 +92,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end

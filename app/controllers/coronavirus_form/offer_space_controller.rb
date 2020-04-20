@@ -11,7 +11,7 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
-      render controller_path
+      render controller_path, status: :unprocessable_entity
     elsif @form_responses[:offer_space].eql? "Yes"
       update_session_store
       redirect_to offer_space_type_url

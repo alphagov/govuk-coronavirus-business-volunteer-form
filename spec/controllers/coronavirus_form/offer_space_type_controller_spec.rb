@@ -58,6 +58,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
       it "validates the Other option description is provided" do
         post :submit, params: { offer_space_type: ["Other", "Office space"] }
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
@@ -94,6 +95,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
         context "when the corresponding description field #{description_id} is not provided" do
           it "won't accept the input" do
             post :submit, params: params.except(description_id)
+            expect(response).to have_http_status(:unprocessable_entity)
             expect(response).to render_template(current_template)
           end
         end
@@ -103,12 +105,14 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
     it "validates any option is chosen" do
       post :submit, params: { offer_space: "" }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
     it "validates a valid option is chosen" do
       post :submit, params: { offer_space: "<script></script>" }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -124,6 +128,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end

@@ -14,7 +14,7 @@ class CoronavirusForm::HotelRoomsController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
-      render controller_path
+      render controller_path, status: :unprocessable_entity
     elsif @form_responses[:hotel_rooms] == I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_staying_in.label") ||
         @form_responses[:hotel_rooms] == I18n.t("coronavirus_form.questions.hotel_rooms.options.yes_all_uses.label")
       update_session_store

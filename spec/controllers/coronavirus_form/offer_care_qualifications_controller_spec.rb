@@ -61,6 +61,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
         offer_care_type: [],
         offer_care_qualifications: selected_qualification,
       }
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -69,6 +70,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
         offer_care_type: selected_type,
         offer_care_qualifications: [],
       }
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -78,7 +80,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
           offer_care_type: selected_type,
           offer_care_qualifications: ["DBS check", "Nursing or other healthcare qualification"],
         }
-
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
@@ -100,7 +102,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
         offer_care_type: ["<script></script", "invalid option", "DBS check"],
         offer_care_qualifications: selected_qualification,
       }
-
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -109,7 +111,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
         offer_care_type: selected_type,
         offer_care_qualifications: ["<script></script", "invalid option", "DBS check"],
       }
-
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -123,6 +125,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end

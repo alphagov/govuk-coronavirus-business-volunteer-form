@@ -47,6 +47,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     it "validates any option is chosen" do
       post :submit, params: { medical_equipment_type: nil }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -59,6 +60,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       it "validates the Other option description is provided" do
         post :submit, params: { medical_equipment_type: "Other" }
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
@@ -83,6 +85,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
         medical_equipment_type: "<script></script",
       }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -92,6 +95,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end

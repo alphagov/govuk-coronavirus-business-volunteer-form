@@ -42,6 +42,7 @@ RSpec.describe CoronavirusForm::HotelRoomsNumberController, type: :controller do
     it "validates a value is entered" do
       post :submit, params: { hotel_rooms_number: "" }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
   end

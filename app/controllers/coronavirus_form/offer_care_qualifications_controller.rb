@@ -27,7 +27,7 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
-      render controller_path
+      render controller_path, status: :unprocessable_entity
     elsif session["check_answers_seen"]
       update_session_store
       redirect_to check_your_answers_url

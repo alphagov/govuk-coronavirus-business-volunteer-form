@@ -65,6 +65,7 @@ RSpec.describe CoronavirusForm::OfferOtherSupportController, type: :controller d
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end

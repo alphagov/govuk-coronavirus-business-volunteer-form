@@ -52,12 +52,14 @@ RSpec.describe CoronavirusForm::AdditionalProductController, type: :controller d
     it "validates any option is chosen" do
       post :submit, params: { additional_product: "" }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
     it "validates a valid option is chosen" do
       post :submit, params: { additional_product: "<script></script>" }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
   end
