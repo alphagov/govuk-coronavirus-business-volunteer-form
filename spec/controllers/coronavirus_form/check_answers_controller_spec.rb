@@ -9,17 +9,14 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
 
   describe "GET show" do
     it "renders the form when first question answered" do
-      session["medical_equipment"] = "Yes"
+      session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
       get :show
       expect(response).to render_template(current_template)
     end
 
     it "redirects to first question when first question not answered" do
       get :show
-      expect(response).to redirect_to({
-        controller: "medical_equipment",
-        action: "show",
-      })
+      expect(response).to redirect_to(medical_equipment_path)
     end
   end
 
@@ -57,16 +54,12 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
     it "redirects to thank you if sucessfully creates record" do
       post :submit
 
-      expect(response).to redirect_to({
-        controller: "thank_you",
-        action: "show",
-        params: { reference_number: "abc" },
-      })
+      expect(response).to redirect_to(thank_you_path(reference_number: "abc"))
     end
 
     it "doesn't create a FormResponse if the user is the smoke tester" do
       session[:contact_details] = { email: Rails.application.config.courtesy_copy_email }
-      session["medical_equipment"] = "Yes"
+      session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
 
       expect {
         post :submit
