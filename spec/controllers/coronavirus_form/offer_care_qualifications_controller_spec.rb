@@ -23,8 +23,8 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
   end
 
   describe "POST submit" do
-    let(:selected_type) { ["Care for adults"] }
-    let(:selected_qualification) { ["DBS check"] }
+    let(:selected_type) { [I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label")] }
+    let(:selected_qualification) { [I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label")] }
 
     it "sets session variables" do
       post :submit, params: {
@@ -73,7 +73,10 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
       it "validates the Nursing or other healthcare qualification option description is provided" do
         post :submit, params: {
           offer_care_type: selected_type,
-          offer_care_qualifications: ["DBS check", "Nursing or other healthcare qualification"],
+          offer_care_qualifications: [
+            I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+            I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
+          ],
         }
 
         expect(response).to render_template(current_template)
@@ -82,19 +85,29 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
       it "adds the details to the session" do
         post :submit, params: {
           offer_care_type: selected_type,
-          offer_care_qualifications: ["DBS check", "Nursing or other healthcare qualification"],
+          offer_care_qualifications: [
+            I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+            I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
+          ],
         offer_care_qualifications_type: "Registered Nurse",
       }
 
         expect(response).to redirect_to(offer_other_support_path)
-        expect(session[session_key_qualifcation]).to eq ["DBS check", "Nursing or other healthcare qualification"]
+        expect(session[session_key_qualifcation]).to eq [
+          I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+          I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
+        ]
         expect(session[:offer_care_qualifications_type]).to eq "Registered Nurse"
       end
     end
 
     it "validates a valid care type is chosen" do
       post :submit, params: {
-        offer_care_type: ["<script></script", "invalid option", "DBS check"],
+        offer_care_type: [
+          "<script></script",
+          "invalid option",
+          I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+        ],
         offer_care_qualifications: selected_qualification,
       }
 
@@ -104,7 +117,11 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
     it "validates a valid qualification is chosen" do
       post :submit, params: {
         offer_care_type: selected_type,
-        offer_care_qualifications: ["<script></script", "invalid option", "DBS check"],
+        offer_care_qualifications: [
+          "<script></script",
+          "invalid option",
+          I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+        ],
       }
 
       expect(response).to render_template(current_template)
@@ -114,7 +131,10 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
       it "validates that #{field} is 1000 or fewer characters" do
         params = {
           offer_care_type: selected_type,
-          offer_care_qualifications: ["DBS check", "Nursing or other healthcare qualification"],
+          offer_care_qualifications: [
+            I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+            I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
+          ],
           offer_care_qualifications_type: "Registered Nurse",
         }
         params[field] = SecureRandom.hex(1001)
