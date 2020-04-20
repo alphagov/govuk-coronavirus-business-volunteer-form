@@ -31,10 +31,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
     it "redirects to first question when first question not answered" do
       get :show
-      expect(response).to redirect_to({
-        controller: "medical_equipment",
-        action: "show",
-      })
+      expect(response).to redirect_to(medical_equipment_path)
     end
 
     context "when there are existing products" do
