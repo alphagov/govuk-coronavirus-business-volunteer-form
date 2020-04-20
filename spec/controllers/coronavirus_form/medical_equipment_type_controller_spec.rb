@@ -12,7 +12,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
 
   describe "GET show" do
     it "renders the form when first question answered" do
-      session["medical_equipment"] = "Yes"
+      session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
       get :show
       expect(response).to render_template(current_template)
     end

@@ -24,7 +24,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
   describe "GET show" do
     it "renders the form when first question answered" do
-      session[:medical_equipment] = "Yes"
+      session[:medical_equipment] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
       get :show, params: { product_id: product_id }
       expect(response).to render_template(current_template)
     end
@@ -43,7 +43,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         )
       }
       before :each do
-        session["medical_equipment"] = "Yes"
+        session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
         session[session_key] = [
           product,
           params.merge(product_id: SecureRandom.uuid),
