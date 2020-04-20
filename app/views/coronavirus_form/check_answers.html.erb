@@ -46,5 +46,7 @@
 ) do %>
   <%= render "govuk_publishing_components/components/button",
     text: t("check_your_answers.submit"),
+    "module": "govuk-button",
+    "prevent-double-click": "true",
     margin_bottom: true %>
 <% end %>
