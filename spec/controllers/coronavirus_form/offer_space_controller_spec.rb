@@ -33,25 +33,25 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
     end
 
     it "redirects to next step for a 'No' response" do
-      post :submit, params: { offer_space: "No" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_no.label") }
       expect(response).to redirect_to(expert_advice_type_path)
     end
 
     it "redirects to next step for a 'Yes' response" do
-      post :submit, params: { offer_space: "Yes" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label") }
       expect(response).to redirect_to(offer_space_type_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      post :submit, params: { offer_space: "No" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_no.label") }
 
       expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "redirects to check your answers if answer is Yes regardless of check your answers state" do
       session[:check_answers_seen] = true
-      post :submit, params: { offer_space: "Yes" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label") }
 
       expect(response).to redirect_to(offer_space_type_path)
     end
