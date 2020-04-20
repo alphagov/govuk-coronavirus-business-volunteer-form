@@ -48,18 +48,18 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
 
     context "when Other option is selected" do
       it "validates the Other option description is provided" do
-        post :submit, params: { expert_advice_type: %w[Other] }
+        post :submit, params: { expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.other.label")] }
 
         expect(response).to render_template(current_template)
       end
 
       it "adds the other option description to the session" do
         post :submit, params: {
-          expert_advice_type: %w[Other] + selected,
+          expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.other.label")] + selected,
           expert_advice_type_other: "Demo text",
         }
 
-        expect(session[session_key]).to eq %w[Other] + selected
+        expect(session[session_key]).to eq [I18n.t("coronavirus_form.questions.expert_advice_type.options.other.label")] + selected
         expect(session[:expert_advice_type_other]).to eq "Demo text"
         expect(response).to redirect_to(offer_care_path)
       end
