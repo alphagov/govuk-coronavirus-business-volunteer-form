@@ -22,16 +22,27 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
   end
 
   describe "POST submit" do
-    let(:selected) { ["Warehouse space", "Office space"] }
+    let(:selected) do
+      [
+        I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
+        I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+      ]
+    end
+
     let(:params) do
       {
-        offer_space_type: ["Warehouse space", "Office space", "Other"],
+        offer_space_type: [
+          I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
+          I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+          I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
+        ],
         warehouse_space_description: "200msq",
         offer_space_type_other: "500sqm",
         office_space_description: "400msq",
         general_space_description: "I have extra space of 1000msq",
       }
     end
+
     it "sets session variables" do
       post :submit, params: params
 
@@ -53,19 +64,28 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
 
     context "when Other option is selected" do
       it "validates the Other option description is provided" do
-        post :submit, params: { offer_space_type: ["Other", "Office space"] }
+        post :submit, params: { offer_space_type: [
+          I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
+          I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+        ] }
 
         expect(response).to render_template(current_template)
       end
 
       it "adds the other option description to the session" do
         post :submit, params: params.merge(
-          offer_space_type: ["Other", "Office space"],
+          offer_space_type: [
+            I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
+            I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+          ],
           offer_space_type_other: "A really big garden.",
         )
 
         expect(response).to redirect_to(expert_advice_type_path)
-        expect(session[session_key]).to eq ["Other", "Office space"]
+        expect(session[session_key]).to eq [
+          I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
+          I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+        ]
         expect(session[:offer_space_type_other]).to eq "A really big garden."
       end
     end
