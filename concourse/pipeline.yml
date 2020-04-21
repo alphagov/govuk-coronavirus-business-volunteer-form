@@ -168,6 +168,9 @@ jobs:
       - get: git-master
         trigger: true
         passed: [deploy-to-prod]
+      - get: tests-image
+        passed:
+          - build-tests-image
       - task: smoke-test
         file: git-master/concourse/tasks/smoke-test.yml
         params:
