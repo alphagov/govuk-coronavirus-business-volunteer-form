@@ -60,18 +60,21 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
     it "validates company name is entered" do
       post :submit, params: params.merge(company_name: "")
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
     it "validates company size option is chosen" do
       post :submit, params: params.merge(company_size: "")
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
     it "validates company location option is chosen" do
       post :submit, params: params.merge(company_location: "")
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -88,6 +91,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
         company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
       ).except(:company_postcode)
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -119,6 +123,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
         company_postcode: "AAA1 1AA",
       )
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -127,6 +132,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end

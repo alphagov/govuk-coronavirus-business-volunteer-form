@@ -51,6 +51,7 @@ RSpec.describe CoronavirusForm::AreYouAManufacturerController, type: :controller
     it "validates any option is chosen" do
       post :submit, params: { are_you_a_manufacturer: [] }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
@@ -63,6 +64,7 @@ RSpec.describe CoronavirusForm::AreYouAManufacturerController, type: :controller
         ],
       }
 
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
   end

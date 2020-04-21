@@ -177,12 +177,14 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         it "requires that key #{field} be provided" do
           post :submit, params: params.except(field.to_sym)
 
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
       end
 
       it "requires that product postcode be provided only if product is in UK" do
         post :submit, params: params.merge(product_postcode: nil)
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
 
         post :submit, params: params.merge(product_postcode: "SW1A2AA")
@@ -198,6 +200,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       it "validates valid text is provided" do
         post :submit, params: params.merge({ product_postcode: "<script></script>" })
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
@@ -208,16 +211,19 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         it "errors if the user doesn't provide a product_quantity" do
           post :submit, params: params.except(:product_quantity)
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the user enters an invalid product quantity" do
           post :submit, params: params.merge(product_quantity: "Ten")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the product quantity is below zero" do
           post :submit, params: params.merge(product_quantity: "-10")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
       end
@@ -229,21 +235,25 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         it "errors if the user doesn't provide a product_cost" do
           post :submit, params: params.except(:product_cost)
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the user enters an invalid product_cost" do
           post :submit, params: params.merge(product_cost: "Ten pounds")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the product_cost is below zero" do
           post :submit, params: params.merge(product_cost: "-10")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the product_cost has more than two decimal places" do
           post :submit, params: params.merge(product_cost: "10.99999")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
@@ -270,16 +280,19 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         it "errors if the user doesn't provide a lead_time" do
           post :submit, params: params.except(:lead_time)
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the user enters an invalid lead_time" do
           post :submit, params: params.merge(lead_time: "Ten days")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
         it "errors if the lead_time is below zero" do
           post :submit, params: params.merge(lead_time: "-10")
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(current_template)
         end
 
@@ -308,6 +321,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       it "errors if the user has selected has not told us the equipment type" do
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
@@ -329,6 +343,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params
 
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
     end
