@@ -12,17 +12,14 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
 
   describe "GET show" do
     it "renders the form when first question answered" do
-      session["medical_equipment"] = "Yes"
+      session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
       get :show
       expect(response).to render_template(current_template)
     end
 
     it "redirects to first question when first question not answered" do
       get :show
-      expect(response).to redirect_to({
-        controller: "medical_equipment",
-        action: "show",
-      })
+      expect(response).to redirect_to(medical_equipment_path)
     end
   end
 
@@ -37,11 +34,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     it "redirects to next step" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to(
-        controller: "coronavirus_form/product_details",
-        action: :show,
-        params: { product_id: "abcd1234" },
-      )
+      expect(response).to redirect_to(product_details_path(product_id: "abcd1234"))
     end
 
     it "validates any option is chosen" do
@@ -70,11 +63,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
           medical_equipment_type_other: "Demo text",
         }
 
-        expect(response).to redirect_to(
-          controller: "coronavirus_form/product_details",
-          action: :show,
-          params: { product_id: "abcd1234" },
-        )
+        expect(response).to redirect_to(product_details_path(product_id: "abcd1234"))
         expect(session[session_key][0][:medical_equipment_type]).to eq "Other"
         expect(session[session_key][0][:medical_equipment_type_other]).to eq "Demo text"
       end

@@ -43,7 +43,7 @@ module FillInTheFormSteps
 
   def and_can_offer_testing_equipment
     choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label")
-    click_on "Continue"
+    click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
   def then_they_see_the_external_testing_equipment_link

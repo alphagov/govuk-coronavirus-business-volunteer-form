@@ -5,7 +5,7 @@ RSpec.describe CoronavirusFormMailer, type: :mailer do
     let(:params) { { name: "Harry Potter" } }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("You offered coronavirus support from your business")
+      expect(mail.subject).to eq(I18n.t("emails.thank_you.subject"))
       expect(mail.to).to eq([to_address])
       expect(mail.from).to eq(["test@example.org"])
     end

@@ -10,17 +10,14 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
 
   describe "GET show" do
     it "renders the form when first question answered" do
-      session["medical_equipment"] = "Yes"
+      session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
       get :show
       expect(response).to render_template(current_template)
     end
 
     it "redirects to first question when first question not answered" do
       get :show
-      expect(response).to redirect_to({
-        controller: "medical_equipment",
-        action: "show",
-      })
+      expect(response).to redirect_to(medical_equipment_path)
     end
   end
 
@@ -36,25 +33,25 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
     end
 
     it "redirects to next step for a 'No' response" do
-      post :submit, params: { offer_space: "No" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_no.label") }
       expect(response).to redirect_to(expert_advice_type_path)
     end
 
     it "redirects to next step for a 'Yes' response" do
-      post :submit, params: { offer_space: "Yes" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label") }
       expect(response).to redirect_to(offer_space_type_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      post :submit, params: { offer_space: "No" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_no.label") }
 
       expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "redirects to check your answers if answer is Yes regardless of check your answers state" do
       session[:check_answers_seen] = true
-      post :submit, params: { offer_space: "Yes" }
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label") }
 
       expect(response).to redirect_to(offer_space_type_path)
     end

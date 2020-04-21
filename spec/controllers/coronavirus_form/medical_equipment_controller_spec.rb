@@ -17,26 +17,26 @@ RSpec.describe CoronavirusForm::MedicalEquipmentController, type: :controller do
 
   describe "POST submit" do
     it "sets session variables" do
-      post :submit, params: { medical_equipment: "Yes" }
+      post :submit, params: { medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label") }
 
-      expect(session[session_key]).to eq "Yes"
+      expect(session[session_key]).to eq I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
     end
 
     it "redirects to next step for yes response" do
-      post :submit, params: { medical_equipment: "Yes" }
+      post :submit, params: { medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label") }
 
       expect(response).to redirect_to(are_you_a_manufacturer_path)
     end
 
     it "redirects to next sub-question for no response" do
-      post :submit, params: { medical_equipment: "No" }
+      post :submit, params: { medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options.option_no.label") }
 
       expect(response).to redirect_to(hotel_rooms_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      post :submit, params: { medical_equipment: "Yes" }
+      post :submit, params: { medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label") }
 
       expect(response).to redirect_to(check_your_answers_path)
     end
