@@ -36,7 +36,7 @@ end
 
 group :development, :test do
   gem "awesome_print", "~> 1.8"
-  gem "better_errors", "~> 2.6"
+  gem "better_errors", "~> 2.7"
   gem "binding_of_caller", "~> 0.8.0"
   gem "byebug", "~> 11"
   gem "foreman", "~> 0.87.1"
