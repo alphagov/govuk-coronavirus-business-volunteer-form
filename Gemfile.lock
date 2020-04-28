@@ -220,6 +220,7 @@ GEM
       ast (~> 2.4.0)
     pg (1.2.3)
     plek (3.0.0)
+    prometheus-client (1.0.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -355,6 +356,10 @@ GEM
       rack (~> 2.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
+    sidekiq_prometheus (1.1.0)
+      prometheus-client (~> 1.0)
+      rack
+      sidekiq (> 5.1)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -427,6 +432,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven (~> 3.0)
   sidekiq (~> 6.0)
+  sidekiq_prometheus (~> 1.1)
   simplecov (~> 0.16)
   uglifier (~> 4.2)
   webdrivers

@@ -47,3 +47,5 @@ group :development, :test do
   gem "rubocop-govuk"
   gem "scss_lint-govuk", "~> 0"
 end
+
+gem "sidekiq_prometheus", "~> 1.1"
