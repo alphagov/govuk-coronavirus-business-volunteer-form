@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::BusinessDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w(company_name).freeze
-  TEXT_FIELDS = %w(company_name company_number).freeze
+  REQUIRED_FIELDS = %w[company_name].freeze
+  TEXT_FIELDS = %w[company_name company_number].freeze
 
   def submit
     @form_responses = {

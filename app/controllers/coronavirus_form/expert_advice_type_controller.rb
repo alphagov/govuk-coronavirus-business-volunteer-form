@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
-  TEXT_FIELDS = %w(expert_advice_type_other).freeze
+  TEXT_FIELDS = %w[expert_advice_type_other].freeze
 
   def submit
     @form_responses = {

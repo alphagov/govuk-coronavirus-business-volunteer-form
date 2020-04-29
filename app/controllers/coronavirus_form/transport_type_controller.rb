@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::TransportTypeController < ApplicationController
-  REQUIRED_FIELDS = %w(transport_description).freeze
-  TEXT_FIELDS = %w(transport_description).freeze
+  REQUIRED_FIELDS = %w[transport_description].freeze
+  TEXT_FIELDS = %w[transport_description].freeze
 
   def submit
     @form_responses = {
@@ -14,7 +14,7 @@ class CoronavirusForm::TransportTypeController < ApplicationController
       controller_name,
       values: @form_responses[:transport_type],
       allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
-                      ) +
+    ) +
       validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS) +
       validate_field_response_length(controller_name, TEXT_FIELDS)
 

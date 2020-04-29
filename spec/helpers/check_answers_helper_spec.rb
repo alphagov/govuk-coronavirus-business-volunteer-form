@@ -38,7 +38,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       session.merge!(answers_to_skippable_questions)
 
       questions.each do |question|
-        unless question.in? %w(medical_equipment_type product_details)
+        unless question.in? %w[medical_equipment_type product_details]
           expect(helper.items.pluck(:field)).to include(I18n.t("coronavirus_form.questions.#{question}.title"))
         end
       end

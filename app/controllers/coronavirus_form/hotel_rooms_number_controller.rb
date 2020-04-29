@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::HotelRoomsNumberController < ApplicationController
-  REQUIRED_FIELDS = %w(hotel_rooms_number).freeze
+  REQUIRED_FIELDS = %w[hotel_rooms_number].freeze
 
   def submit
     @form_responses = {

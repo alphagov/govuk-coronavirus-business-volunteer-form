@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ContactDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w(contact_name phone_number).freeze
-  TEXT_FIELDS = %w(contact_name role phone_number email).freeze
+  REQUIRED_FIELDS = %w[contact_name phone_number].freeze
+  TEXT_FIELDS = %w[contact_name role phone_number email].freeze
 
   def submit
     @form_responses = {

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::OfferCareQualificationsController < ApplicationController
-  TEXT_FIELDS = %w(offer_care_qualifications_type).freeze
+  TEXT_FIELDS = %w[offer_care_qualifications_type].freeze
 
   def submit
     @form_responses = {

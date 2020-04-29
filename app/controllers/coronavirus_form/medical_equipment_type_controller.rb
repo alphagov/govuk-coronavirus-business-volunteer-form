@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
-  TEXT_FIELDS = %w(medical_equipment_type_other).freeze
+  TEXT_FIELDS = %w[medical_equipment_type_other].freeze
 
   def show
     session[:product_details] ||= []
