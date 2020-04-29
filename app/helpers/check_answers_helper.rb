@@ -1,12 +1,12 @@
 module CheckAnswersHelper
-  SKIPPABLE_QUESTIONS = %w(
+  SKIPPABLE_QUESTIONS = %w[
     are_you_a_manufacturer
     product_details
     hotel_rooms_number
     transport_type
     offer_space_type
     offer_care_qualifications
-  ).freeze
+  ].freeze
 
   def items
     items = questions.map do |question|

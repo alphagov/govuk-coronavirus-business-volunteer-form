@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::ProductDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w(product_name certification_details).freeze
-  TEXT_FIELDS = %w(product_name product_quantity product_cost certification_details product_postcode product_url lead_time).freeze
+  REQUIRED_FIELDS = %w[product_name certification_details].freeze
+  TEXT_FIELDS = %w[product_name product_quantity product_cost certification_details product_postcode product_url lead_time].freeze
   VALID_FLOAT = /^\d+\.?\d{0,2}$/.freeze
 
   def show
