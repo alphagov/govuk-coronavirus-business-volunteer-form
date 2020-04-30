@@ -11,7 +11,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   def submit
     FormResponse.create(form_response: session) unless smoke_tester?
 
-    send_confirmation_email
+    send_confirmation_email if session.dig(:contact_details, :email).present?
 
     ref_number = session[:reference_number]
     reset_session
