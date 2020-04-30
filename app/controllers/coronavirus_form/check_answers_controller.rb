@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::CheckAnswersController < ApplicationController
+  include SchemaHelper
+
   before_action :set_reference_number
 
   def show
@@ -9,6 +11,14 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   end
 
   def submit
+    validation_errors = validate_against_form_response_schema(session.to_h)
+    if validation_errors.any?
+      GovukError.notify(
+        FormResponseInvalidError.new,
+        extra: { validation_errors: validation_errors },
+      )
+    end
+
     FormResponse.create(form_response: session) unless smoke_tester?
 
     send_confirmation_email if session.dig(:contact_details, :email).present?
