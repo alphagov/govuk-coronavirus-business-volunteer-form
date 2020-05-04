@@ -276,18 +276,10 @@ en:
               label: "Face fit test kit"
             face_fit_test_solution:
               label: "Face fit test solution"
-            swabs:
-              label: "Swabs"
             general_purpose_detergent:
               label: "General purpose detergent"
-            body_bags:
-              label: Body Bags
             cleaning_equipment:
               label: Cleaning Equipment
-            clinical_waste_bags:
-              label: Clinical Waste Bags
-            other:
-              label: "Something else"
           custom_select_error: "Select a type of equipment, or ‘something else’"
       additional_product:
         title: "Can you offer another product?"
