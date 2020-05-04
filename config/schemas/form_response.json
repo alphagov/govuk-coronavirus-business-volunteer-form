@@ -80,7 +80,7 @@
             "$ref": "#/definitions/whole_number"
           },
           "equipment_type": {
-            "type": ["string", "null"],
+            "type": ["string"],
             "enum": [
               "FFP3 respirators",
               "FFP2 respirators",
@@ -92,13 +92,8 @@
               "Gowns",
               "Face fit test kit",
               "Face fit test solution",
-              "Swabs",
               "General purpose detergent",
-              "Body Bags",
-              "Cleaning Equipment",
-              "Clinical Waste Bags",
-              "Something else",
-              null
+              "Cleaning Equipment"
             ]
           }
         }
