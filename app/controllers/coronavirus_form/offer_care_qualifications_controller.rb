@@ -10,19 +10,7 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
       offer_care_qualifications_type: strip_tags(params[:offer_care_qualifications_type]).presence,
     }
 
-    invalid_fields = validate_field_response_length("#{controller_name}.care_qualifcations", TEXT_FIELDS) +
-      validate_checkbox_field(
-        "#{controller_name}.offer_care_type",
-        values: @form_responses[:offer_care_type],
-        allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.offer_care_type.options").map { |_, item| item.dig(:label) },
-      ) +
-      validate_checkbox_field(
-        "#{controller_name}.care_qualifications",
-        values: @form_responses[:offer_care_qualifications],
-        allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.care_qualifications.options").map { |_, item| item.dig(:label) },
-        other: @form_responses[:offer_care_qualifications_type],
-        other_field: "nursing_or_healthcare_qualification",
-      )
+    invalid_fields = validate_fields
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
@@ -38,6 +26,48 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
   end
 
 private
+
+  def validate_fields
+    [
+      validate_field_response_length("#{controller_name}.care_qualifcations", TEXT_FIELDS),
+      validate_missing_offer_care_type_fields,
+      validate_missing_offer_care_qualifications_fields,
+      validate_selecting_of_offer_care_qualifications_fields,
+    ].flatten.compact
+  end
+
+  def validate_missing_offer_care_type_fields
+    validate_checkbox_field(
+      "#{controller_name}.offer_care_type",
+      values: @form_responses[:offer_care_type],
+      allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.offer_care_type.options").map { |_, item| item.dig(:label) },
+    )
+  end
+
+  def validate_missing_offer_care_qualifications_fields
+    validate_checkbox_field(
+      "#{controller_name}.care_qualifications",
+      values: @form_responses[:offer_care_qualifications],
+      allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.care_qualifications.options").map { |_, item| item.dig(:label) },
+      other: @form_responses[:offer_care_qualifications_type],
+      other_field: "nursing_or_healthcare_qualification",
+    )
+  end
+
+  def validate_selecting_of_offer_care_qualifications_fields
+    validate_qualification_or_not("#{controller_name}.care_qualifications", values: @form_responses[:offer_care_qualifications])
+  end
+
+  def validate_qualification_or_not(page, values:)
+    if values.length > 1 && values.include?(t("coronavirus_form.questions.#{page}.options.no_qualification.label"))
+      [{ field: page.to_s.sub(".", "_"),
+         text: t(
+           "coronavirus_form.questions.#{page}.custom_select_error_qualification_or_not",
+         ) }]
+    else
+      []
+    end
+  end
 
   def update_session_store
     session[:offer_care_type] = @form_responses[:offer_care_type]
