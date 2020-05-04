@@ -42,12 +42,8 @@
             "type": "string",
             "enum": [
               "Personal protective equipment, for example masks, detergent and waste bags",
-              "Testing equipment",
-              "Other"
+              "Testing equipment"
             ]
-          },
-          "medical_equipment_type_other": {
-            "type": ["string", "null"]
           },
           "product_id": {
             "type": "string",
