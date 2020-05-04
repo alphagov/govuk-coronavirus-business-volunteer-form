@@ -36,14 +36,6 @@ class CoronavirusForm::ProductDetailsController < ApplicationController
 
 private
 
-  helper_method :selected_ppe?
-
-  def selected_ppe?
-    @product[:medical_equipment_type] == I18n.t(
-      "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-    )
-  end
-
   def selected_made_in_uk?
     @product[:product_location] == I18n.t(
       "coronavirus_form.questions.product_details.product_location.options.option_uk.label",
@@ -54,7 +46,7 @@ private
     [
       validate_field_response_length(controller_name, TEXT_FIELDS),
       validate_missing_fields,
-      selected_ppe? ? validate_radio_field("#{controller_name}.equipment_type", radio: @product[:equipment_type]) : [],
+      validate_radio_field("#{controller_name}.equipment_type", radio: @product[:equipment_type]),
       validate_radio_field("#{controller_name}.product_location", radio: @product[:product_location]),
       validate_product_postcode,
       validate_product_quantity,

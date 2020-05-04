@@ -204,14 +204,7 @@ en:
             label: "Personal protective equipment, for example masks, detergent and waste bags"
           number_testing_equipment:
             label: "Testing equipment"
-          other:
-            label: "Other"
-            input:
-              label: "Give a summary of the type of equipment – you can give more details later"
         custom_select_error: "Select the type of medical equipment you can offer"
-        custom_enter_error: "Enter a description of the type of equipment"
-        medical_equipment_type_other:
-          custom_length_error: "Description of the equipment must be 1000 characters or fewer"
       are_you_a_manufacturer:
         title: "What kind of business are you?"
         hint: "Select the best ways to describe your work"
