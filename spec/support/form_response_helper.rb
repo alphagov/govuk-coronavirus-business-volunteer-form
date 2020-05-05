@@ -37,12 +37,10 @@ module FormResponseHelper
         {
           product_id: SecureRandom.uuid,
           medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
-          medical_equipment_type_other: nil,
         },
         {
           product_id: SecureRandom.uuid,
           medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
-          medical_equipment_type_other: nil,
         },
         {
           lead_time: "12",
@@ -56,12 +54,6 @@ module FormResponseHelper
           product_quantity: "10000",
           certification_details: "None",
           medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
-          medical_equipment_type_other: nil,
-        },
-        {
-          product_id: SecureRandom.uuid,
-          medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.other.label"),
-          medical_equipment_type_other: "A description of other types of medical equipment",
         },
       ],
       are_you_a_manufacturer: I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options").map { |_, item| item[:label] },

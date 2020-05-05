@@ -49,26 +49,6 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
       expect(session[session_key]).to eq []
     end
 
-    context "when Other option is selected" do
-      it "validates the Other option description is provided" do
-        post :submit, params: { medical_equipment_type: "Other" }
-
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response).to render_template(current_template)
-      end
-
-      it "adds the other option description to the session" do
-        post :submit, params: {
-          medical_equipment_type: "Other",
-          medical_equipment_type_other: "Demo text",
-        }
-
-        expect(response).to redirect_to(product_details_path(product_id: "abcd1234"))
-        expect(session[session_key][0][:medical_equipment_type]).to eq "Other"
-        expect(session[session_key][0][:medical_equipment_type_other]).to eq "Demo text"
-      end
-    end
-
     it "validates a valid option is chosen" do
       post :submit, params: {
         medical_equipment_type: "<script></script",
@@ -76,17 +56,6 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
-    end
-
-    described_class::TEXT_FIELDS.each do |field|
-      it "validates that #{field} is 1000 or fewer characters" do
-        params = { medical_equipment_type: selected }
-        params[field] = SecureRandom.hex(1001)
-        post :submit, params: params
-
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response).to render_template(current_template)
-      end
     end
   end
 end

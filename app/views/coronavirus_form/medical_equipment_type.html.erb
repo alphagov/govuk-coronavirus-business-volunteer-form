@@ -30,19 +30,6 @@
       text: t('coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label'),
       checked: @product["medical_equipment_type"] == t('coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label'),
     },
-    {
-      value: t('coronavirus_form.questions.medical_equipment_type.options.other.label'),
-      text: t('coronavirus_form.questions.medical_equipment_type.options.other.label'),
-      checked: @product["medical_equipment_type"] == t('coronavirus_form.questions.medical_equipment_type.options.other.label'),
-      conditional: render("govuk_publishing_components/components/textarea", {
-        label: {
-          text: t('coronavirus_form.questions.medical_equipment_type.options.other.input.label'),
-        },
-        id: "medical_equipment_type_other",
-        name: "medical_equipment_type_other",
-        value: @product["medical_equipment_type_other"]
-      })
-    },
   ]
 } %>
 <%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>

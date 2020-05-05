@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
-  TEXT_FIELDS = %w[medical_equipment_type_other].freeze
-
   def show
     session[:product_details] ||= []
     @product = find_product(params["product_id"], session[:product_details])
@@ -13,12 +11,10 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
     session[:product_details] ||= []
     @product = sanitized_product(params)
 
-    invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
-      validate_radio_field(
-        controller_name,
-        radio: @product[:medical_equipment_type],
-        other: @product[:medical_equipment_type_other],
-      )
+    invalid_fields = validate_radio_field(
+      controller_name,
+      radio: @product[:medical_equipment_type],
+    )
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
@@ -35,10 +31,6 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
 
 private
 
-  def selected_other?(medical_equipment_type)
-    medical_equipment_type == I18n.t("coronavirus_form.questions.#{controller_name}.options.other.label")
-  end
-
   def selected_testing_equipment?
     @product[:medical_equipment_type] == I18n.t(
       "coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label",
@@ -53,7 +45,6 @@ private
     {
       product_id: strip_tags(params[:product_id]).presence || SecureRandom.uuid,
       medical_equipment_type: strip_tags(params[:medical_equipment_type]).presence,
-      medical_equipment_type_other: strip_tags(params[:medical_equipment_type_other]).presence,
     }
   end
 end

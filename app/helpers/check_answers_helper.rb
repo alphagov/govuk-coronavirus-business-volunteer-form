@@ -71,11 +71,7 @@ module CheckAnswersHelper
 
   def product_info(product)
     prod = []
-    prod << if product["medical_equipment_type_other"]
-              "Type: #{product[:medical_equipment_type]} (#{product['medical_equipment_type_other']})"
-            else
-              "Type: #{product[:medical_equipment_type]}"
-            end
+    prod << "Type: #{product[:medical_equipment_type]}"
     prod << "Product: #{product[:product_name]}" if product[:product_name]
     prod << "Equipment type: #{product[:equipment_type]}" if product[:equipment_type]
     prod << "Quantity: #{product[:product_quantity]}" if product[:product_quantity]

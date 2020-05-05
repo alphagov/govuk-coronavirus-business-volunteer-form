@@ -46,6 +46,12 @@ module FillInTheFormSteps
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
+  def and_has_no_more_testing_equipment_to_offer
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
+    choose I18n.t("coronavirus_form.questions.additional_product.options.option_no.label")
+    click_on I18n.t("coronavirus_form.submit_and_next")
+  end
+
   def then_they_see_the_external_testing_equipment_link
     link = I18n.t("coronavirus_form.testing_equipment.external_link")
     expect(page.body).to have_content(I18n.t("coronavirus_form.testing_equipment.link.label"))
@@ -55,31 +61,6 @@ module FillInTheFormSteps
   def and_can_navigate_back_to_offer_another_product
     click_on I18n.t("coronavirus_form.testing_equipment.button.label")
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
-  end
-
-  def and_has_other_medical_equipment_available
-    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
-    choose I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
-
-    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
-    choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.other.label")
-    fill_in "medical_equipment_type_other", with: "Some text about medical equipment"
-    click_on I18n.t("coronavirus_form.submit_and_next")
-
-    fill_in "product_name", with: "Testing"
-    fill_in "product_quantity", with: "500"
-    fill_in "product_cost", with: "0"
-    fill_in "certification_details", with: "CE marking"
-    choose I18n.t("coronavirus_form.questions.product_details.product_location.options.option_uk.label")
-    fill_in "product_postcode", with: "E1 8QS"
-    fill_in "product_url", with: "https://example.com"
-    fill_in "lead_time", with: "10"
-    click_on I18n.t("coronavirus_form.submit_and_next")
-
-    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
-    choose I18n.t("coronavirus_form.questions.additional_product.options.option_no.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
   def and_can_offer_hotel_rooms

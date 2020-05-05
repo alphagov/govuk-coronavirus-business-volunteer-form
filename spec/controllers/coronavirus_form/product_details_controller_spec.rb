@@ -11,7 +11,8 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
   let(:params) do
     {
       product_id: product_id,
-      product_name: "Defibrillator",
+      product_name: "Hand sanitizer",
+      equipment_type: I18n.t("coronavirus_form.questions.product_details.equipment_type.options.hand_gel.label"),
       product_quantity: "100",
       product_cost: "10.99",
       certification_details: "CE",
@@ -119,11 +120,10 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
         params.merge(
           product_id: product_id,
           product_name: "My product",
-          equipment_type: nil,
         )
       }
       let(:product_2) {
-        params.merge(product_id: SecureRandom.uuid, equipment_type: nil)
+        params.merge(product_id: SecureRandom.uuid)
       }
 
       before :each do
@@ -205,10 +205,6 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       context "product_quantity" do
-        before do
-          params.merge!(equipment_type: "Gloves")
-        end
-
         it "errors if the user doesn't provide a product_quantity" do
           post :submit, params: params.except(:product_quantity)
           expect(response).to have_http_status(:unprocessable_entity)
@@ -229,10 +225,6 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       context "product_cost" do
-        before do
-          params.merge!(equipment_type: "Gloves")
-        end
-
         it "errors if the user doesn't provide a product_cost" do
           post :submit, params: params.except(:product_cost)
           expect(response).to have_http_status(:unprocessable_entity)
@@ -274,10 +266,6 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       context "lead_time" do
-        before do
-          params.merge!(equipment_type: "Gloves")
-        end
-
         it "errors if the user doesn't provide a lead_time" do
           post :submit, params: params.except(:lead_time)
           expect(response).to have_http_status(:unprocessable_entity)
@@ -319,14 +307,14 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       it "errors if the user has selected has not told us the equipment type" do
-        post :submit, params: params
+        post :submit, params: params.except(:equipment_type)
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
       it "redirects to next step if we're given the equipment type" do
-        post :submit, params: params.merge(equipment_type: "Gloves")
+        post :submit, params: params
 
         expect(response).to redirect_to(additional_product_path)
       end
