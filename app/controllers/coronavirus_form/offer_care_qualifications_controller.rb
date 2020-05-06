@@ -8,6 +8,7 @@ class CoronavirusForm::OfferCareQualificationsController < ApplicationController
       offer_care_type: Array(params[:offer_care_type]).map { |item| strip_tags(item).presence }.compact,
       offer_care_qualifications: Array(params[:offer_care_qualifications]).map { |item| strip_tags(item).presence }.compact,
       offer_care_qualifications_type: strip_tags(params[:offer_care_qualifications_type]).presence,
+      care_cost: strip_tags(params[:care_cost]).presence,
     }
 
     invalid_fields = validate_fields
@@ -33,6 +34,7 @@ private
       validate_missing_offer_care_type_fields,
       validate_missing_offer_care_qualifications_fields,
       validate_selecting_of_offer_care_qualifications_fields,
+      validate_charge_field("care_cost", @form_responses[:care_cost]),
     ].flatten.compact
   end
 
@@ -73,6 +75,7 @@ private
     session[:offer_care_type] = @form_responses[:offer_care_type]
     session[:offer_care_qualifications] = @form_responses[:offer_care_qualifications]
     session[:offer_care_qualifications_type] = @form_responses[:offer_care_qualifications_type]
+    session[:care_cost] = @form_responses[:care_cost]
   end
 
   def previous_path

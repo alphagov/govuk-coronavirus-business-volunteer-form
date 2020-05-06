@@ -206,6 +206,9 @@
     "offer_care_qualifications_type": {
       "type": ["string", "null"]
     },
+    "care_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "offer_other_support": {
       "type": "string"
     },

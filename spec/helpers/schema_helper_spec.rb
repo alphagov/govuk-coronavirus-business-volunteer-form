@@ -208,6 +208,18 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
+    describe "care_cost" do
+      it "allows care_cost to be blank" do
+        data = valid_data.except(:care_cost)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when care_cost has an unexpected value" do
+        data = valid_data.merge(care_cost: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("care_cost")
+      end
+    end
+
     describe "offer_other_support" do
       it "allows offer_other_support to be blank" do
         data = valid_data.except(:offer_other_support)

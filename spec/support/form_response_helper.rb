@@ -21,6 +21,7 @@ module FormResponseHelper
       offer_care_type: I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options").map { |_, item| item[:label] },
       offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options").map { |_, item| item[:label] },
       offer_care_qualifications_type: "Nursing degree",
+      care_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_other_support: "All the support, all the time!",
       business_details: {
         company_name: "Mandalore Inc.",
