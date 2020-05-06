@@ -510,6 +510,16 @@ en:
         email:
           label: "Email of main contact"
           custom_error: "Enter an email address in the correct format, like name@example.com"
+      how_much_charge:
+        title: "How much would you charge?"
+        options:
+          nothing:
+            label: "Nothing, it would be a donation"
+          reduced:
+            label: "A reduced price"
+          standard:
+            label: "A standard price"
+        custom_select_error: "Select if it would be a donation, a reduced price, or standard price"
     thank_you:
       title: "Thank you for offering support"
       description: |

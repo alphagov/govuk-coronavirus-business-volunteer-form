@@ -124,6 +124,9 @@
     "transport_description": {
       "type": "string"
     },
+    "transport_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "offer_transport": {
       "$ref": "#/definitions/yes_no"
     },
@@ -314,6 +317,14 @@
     "whole_number": {
       "type": "string",
       "pattern": "^[0-9]+$"
+    },
+    "how_much_charge": {
+      "type": "string",
+      "enum": [
+        "Nothing, it would be a donation",
+        "A reduced price",
+        "A standard price"
+      ]
     }
   }
 }

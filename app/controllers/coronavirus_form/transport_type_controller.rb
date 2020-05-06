@@ -8,6 +8,7 @@ class CoronavirusForm::TransportTypeController < ApplicationController
     @form_responses = {
       transport_type: Array(params[:transport_type]).map { |item| strip_tags(item).presence }.compact,
       transport_description: params[:transport_description],
+      transport_cost: strip_tags(params[:transport_cost]).presence,
     }
 
     invalid_fields = validate_checkbox_field(
@@ -36,6 +37,7 @@ private
   def update_session_store
     session[:transport_type] = @form_responses[:transport_type]
     session[:transport_description] = @form_responses[:transport_description]
+    session[:transport_cost] = @form_responses[:transport_cost]
   end
 
   def previous_path

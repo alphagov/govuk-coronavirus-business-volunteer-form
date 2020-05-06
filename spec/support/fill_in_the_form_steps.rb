@@ -83,6 +83,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.transport_type.options.moving_goods.label")
     check I18n.t("coronavirus_form.questions.transport_type.options.other.label")
     fill_in "transport_description", with: "Testing"
+    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 

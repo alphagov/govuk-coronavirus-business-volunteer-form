@@ -7,6 +7,7 @@ module FormResponseHelper
       offer_transport: I18n.t("coronavirus_form.questions.offer_transport.options").map { |_, item| item[:label] }.sample,
       transport_type: I18n.t("coronavirus_form.questions.transport_type.options").map { |_, item| item[:label] },
       transport_description: "10 trucks",
+      transport_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_space: I18n.t("coronavirus_form.questions.offer_space.options").map { |_, item| item[:label] }.sample,
       offer_space_type: I18n.t("coronavirus_form.questions.offer_space_type.options").map { |_, item| item[:label] },
       warehouse_space_description: "5000",
