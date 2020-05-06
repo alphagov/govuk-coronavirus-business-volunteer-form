@@ -144,6 +144,9 @@
         ]
       }
     },
+    "space_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "warehouse_space_description": {
       "type": ["string", "null"]
     },

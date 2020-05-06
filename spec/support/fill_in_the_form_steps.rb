@@ -100,6 +100,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.offer_space_type.options.other.label")
     fill_in "offer_space_type_other", with: "1000"
     fill_in "general_space_description", with: "Testing"
+    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 

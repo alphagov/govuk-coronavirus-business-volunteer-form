@@ -134,6 +134,18 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
+    describe "space_cost" do
+      it "allows space_cost to be blank" do
+        data = valid_data.except(:space_cost)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when space_cost has an unexpected value" do
+        data = valid_data.merge(space_cost: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("space_cost")
+      end
+    end
+
     describe "expert_advice_type" do
       it "returns a list of errors when offer_space is missing" do
         data = valid_data.except(:expert_advice_type)

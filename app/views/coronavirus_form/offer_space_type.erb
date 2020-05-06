@@ -76,5 +76,8 @@
     error_message: error_items("general_space_description"),
     value: @form_responses[:general_space_description]
   } %>
+
+  <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "space_cost" } %>
+
   <%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>
 <% end %>

@@ -14,6 +14,7 @@ class CoronavirusForm::OfferSpaceTypeController < ApplicationController
       warehouse_space_description: description(:warehouse_space, offer_space_type),
       office_space_description: description(:office_space, offer_space_type),
       general_space_description: strip_tags(params[:general_space_description]).presence,
+      space_cost: strip_tags(params[:space_cost]).presence,
     }
 
     invalid_fields = validate_fields
@@ -39,6 +40,7 @@ private
     session[:warehouse_space_description] = @form_responses[:warehouse_space_description]
     session[:office_space_description] = @form_responses[:office_space_description]
     session[:general_space_description] = @form_responses[:general_space_description]
+    session[:space_cost] = @form_responses[:space_cost]
   end
 
   def validate_fields
@@ -48,6 +50,7 @@ private
       validate_mandatory_text_fields(controller_name, TEXT_FIELDS),
       validate_description_fields(@form_responses[:offer_space_type]),
       validate_descriptions_response_length(@form_responses[:offer_space_type]),
+      validate_charge_field("space_cost", @form_responses[:space_cost]),
     ].flatten.compact
   end
 

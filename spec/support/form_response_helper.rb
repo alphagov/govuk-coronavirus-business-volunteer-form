@@ -14,6 +14,7 @@ module FormResponseHelper
       office_space_description: "6000",
       general_space_description: "Multiple units.",
       offer_space_type_other: "10000",
+      space_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       expert_advice_type: I18n.t("coronavirus_form.questions.expert_advice_type.options").map { |_, item| item[:label] },
       expert_advice_type_other: "Life coach",
       offer_care: I18n.t("coronavirus_form.questions.offer_care.options").map { |_, item| item[:label] }.sample,
