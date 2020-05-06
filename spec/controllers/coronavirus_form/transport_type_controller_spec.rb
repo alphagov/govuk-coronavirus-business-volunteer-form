@@ -33,7 +33,7 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
       post :submit, params: {
         transport_type: selected,
         transport_description: description,
-    }
+      }
 
       expect(session[session_key]).to eq selected
       expect(session[session_key_text]).to eq description
@@ -53,7 +53,7 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
       post :submit, params: {
         transport_type: selected,
         transport_description: description,
-}
+      }
 
       expect(response).to redirect_to("/check-your-answers")
     end
@@ -77,7 +77,7 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
       post :submit, params: {
         transport_type: selected,
         transport_description: "",
-}
+      }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end

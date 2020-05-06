@@ -92,7 +92,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
             I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
           ],
           offer_care_qualifications_type: "Registered Nurse",
-      }
+        }
 
         expect(response).to redirect_to(offer_other_support_path)
         expect(session[session_key_qualifcation]).to eq [

@@ -97,15 +97,15 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
 
     it "redirects to next step when a valid postcode is provided" do
       valid_postcodes = [
-      "AA9A 9AA",
-      "A9A 9AA",
-      "A9 9AA",
-      "A99 9AA",
-      "AA9 9AA",
-      "AA99 9AA",
-      "BFPO 1",
-      "BFPO 9",
-    ]
+        "AA9A 9AA",
+        "A9A 9AA",
+        "A9 9AA",
+        "A99 9AA",
+        "AA9 9AA",
+        "AA99 9AA",
+        "BFPO 1",
+        "BFPO 9",
+      ]
 
       valid_postcodes.each do |postcode|
         post :submit, params: params.merge(
