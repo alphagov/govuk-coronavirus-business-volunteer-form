@@ -18,7 +18,7 @@ class CoronavirusForm::AccommodationController < ApplicationController
     elsif @form_responses[:accommodation] == I18n.t("coronavirus_form.questions.accommodation.options.yes_staying_in.label") ||
         @form_responses[:accommodation] == I18n.t("coronavirus_form.questions.accommodation.options.yes_all_uses.label")
       update_session_store
-      redirect_to hotel_rooms_number_url
+      redirect_to rooms_number_url
     elsif session["check_answers_seen"]
       update_session_store
       redirect_to check_your_answers_url

@@ -32,14 +32,14 @@ RSpec.describe CoronavirusForm::AccommodationController, type: :controller do
       expect(session[session_key]).to eq selected
     end
 
-    it "redirects to hotel room numbers for a yes stay in response" do
+    it "redirects to room numbers for a yes stay in response" do
       post :submit, params: { accommodation: I18n.t("coronavirus_form.questions.accommodation.options.yes_staying_in.label") }
-      expect(response).to redirect_to(hotel_rooms_number_path)
+      expect(response).to redirect_to(rooms_number_path)
     end
 
-    it "redirects to hotel room numbers for a yes all uses response" do
+    it "redirects to room numbers for a yes all uses response" do
       post :submit, params: { accommodation: I18n.t("coronavirus_form.questions.accommodation.options.yes_all_uses.label") }
-      expect(response).to redirect_to(hotel_rooms_number_path)
+      expect(response).to redirect_to(rooms_number_path)
     end
 
     it "redirects to transport for a no response" do

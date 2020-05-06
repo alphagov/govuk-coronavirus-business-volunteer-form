@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class CoronavirusForm::HotelRoomsNumberController < ApplicationController
-  REQUIRED_FIELDS = %w[hotel_rooms_number].freeze
+class CoronavirusForm::RoomsNumberController < ApplicationController
+  REQUIRED_FIELDS = %w[rooms_number].freeze
 
   def submit
     @form_responses = {
-      hotel_rooms_number: strip_tags(params[:hotel_rooms_number]).presence,
+      rooms_number: strip_tags(params[:rooms_number]).presence,
     }
 
     invalid_fields = validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS)
@@ -25,7 +25,7 @@ class CoronavirusForm::HotelRoomsNumberController < ApplicationController
 private
 
   def update_session_store
-    session[:hotel_rooms_number] = @form_responses[:hotel_rooms_number]
+    session[:rooms_number] = @form_responses[:rooms_number]
   end
 
   def previous_path

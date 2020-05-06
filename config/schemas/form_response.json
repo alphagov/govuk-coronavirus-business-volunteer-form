@@ -107,7 +107,7 @@
         "No"
       ]
     },
-    "hotel_rooms_number": {
+    "rooms_number": {
       "type": "string"
     },
     "transport_type" :{

@@ -68,8 +68,8 @@ module FillInTheFormSteps
     choose I18n.t("coronavirus_form.questions.accommodation.options.yes_all_uses.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.hotel_rooms_number.title"))
-    fill_in "hotel_rooms_number", with: "500"
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.rooms_number.title"))
+    fill_in "rooms_number", with: "500"
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 

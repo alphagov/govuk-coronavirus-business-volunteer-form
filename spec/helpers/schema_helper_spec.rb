@@ -32,9 +32,9 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
-    describe "hotel_rooms_number" do
-      it "allows hotel_rooms_number to be blank" do
-        data = valid_data.except(:hotel_rooms_number)
+    describe "rooms_number" do
+      it "allows rooms_number to be blank" do
+        data = valid_data.except(:rooms_number)
         expect(validate_against_form_response_schema(data)).to be_empty
       end
     end
