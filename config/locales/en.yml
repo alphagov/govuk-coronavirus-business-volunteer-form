@@ -302,7 +302,7 @@ en:
             label: "No"
         custom_select_error: "Select yes if you can offer accommodation"
       hotel_rooms_number:
-        title: "How many hotel rooms can you offer?"
+        title: "How many rooms can you offer?"
         hint: "Approximate amount, for example 10, 500, 10000."
         hotel_rooms_number:
           custom_error: "Enter the approximate amount of rooms you think you can offer"
