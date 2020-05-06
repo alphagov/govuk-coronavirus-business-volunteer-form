@@ -17,7 +17,8 @@ class CoronavirusForm::TransportTypeController < ApplicationController
       allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
     ) +
       validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS) +
-      validate_field_response_length(controller_name, TEXT_FIELDS)
+      validate_field_response_length(controller_name, TEXT_FIELDS) +
+      validate_charge_field("transport_cost", @form_responses[:transport_cost])
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

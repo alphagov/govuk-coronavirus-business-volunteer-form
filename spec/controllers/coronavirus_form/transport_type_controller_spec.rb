@@ -104,5 +104,17 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
+
+    it "validates a transport cost option is chosen" do
+      post :submit,
+           params: {
+             transport_type: selected,
+             transport_description: description,
+             transport_cost: [],
+           }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
   end
 end

@@ -93,4 +93,15 @@ module FieldValidationHelper
       [{ field: field.to_s.sub(".", "_"), text: t("coronavirus_form.errors.postcode_format") }]
     end
   end
+
+  def validate_charge_field(field, value)
+    if value.blank?
+      return [{
+        field: field,
+        text: t("coronavirus_form.questions.how_much_charge.custom_select_error"),
+      }]
+    end
+
+    []
+  end
 end
