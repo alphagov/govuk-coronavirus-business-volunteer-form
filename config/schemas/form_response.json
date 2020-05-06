@@ -110,6 +110,9 @@
     "rooms_number": {
       "type": "string"
     },
+    "accommodation_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "transport_type" :{
       "type": "array",
       "items": {

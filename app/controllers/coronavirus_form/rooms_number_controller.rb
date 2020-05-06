@@ -6,9 +6,11 @@ class CoronavirusForm::RoomsNumberController < ApplicationController
   def submit
     @form_responses = {
       rooms_number: strip_tags(params[:rooms_number]).presence,
+      accommodation_cost: strip_tags(params[:accommodation_cost]).presence,
     }
 
-    invalid_fields = validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS)
+    invalid_fields = validate_mandatory_text_fields(controller_name, REQUIRED_FIELDS) +
+      validate_charge_field("accommodation_cost", @form_responses[:accommodation_cost])
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
@@ -26,6 +28,7 @@ private
 
   def update_session_store
     session[:rooms_number] = @form_responses[:rooms_number]
+    session[:accommodation_cost] = @form_responses[:accommodation_cost]
   end
 
   def previous_path

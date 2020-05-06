@@ -39,6 +39,18 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
+    describe "accommodation_cost" do
+      it "allows accommodation_cost to be blank" do
+        data = valid_data.except(:accommodation_cost)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when accommodation_cost has an unexpected value" do
+        data = valid_data.merge(accommodation_cost: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("accommodation_cost")
+      end
+    end
+
     describe "offer_transport" do
       it "returns a list of errors when offer_transport is missing" do
         data = valid_data.except(:offer_transport)

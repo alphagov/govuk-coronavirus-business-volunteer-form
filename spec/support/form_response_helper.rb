@@ -4,6 +4,7 @@ module FormResponseHelper
       medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options").map { |_, item| item[:label] }.sample,
       accommodation: I18n.t("coronavirus_form.questions.accommodation.options").map { |_, item| item[:label] }.sample,
       rooms_number: "40",
+      accommodation_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_transport: I18n.t("coronavirus_form.questions.offer_transport.options").map { |_, item| item[:label] }.sample,
       transport_type: I18n.t("coronavirus_form.questions.transport_type.options").map { |_, item| item[:label] },
       transport_description: "10 trucks",
