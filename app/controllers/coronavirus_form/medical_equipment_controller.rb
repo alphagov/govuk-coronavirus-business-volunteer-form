@@ -25,7 +25,7 @@ class CoronavirusForm::MedicalEquipmentController < ApplicationController
       redirect_to are_you_a_manufacturer_url
     elsif @form_responses[:medical_equipment] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
       update_session_store
-      redirect_to hotel_rooms_url
+      redirect_to accommodation_url
     end
   end
 

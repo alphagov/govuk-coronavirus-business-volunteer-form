@@ -33,8 +33,8 @@ Rails.application.routes.draw do
     post "/additional-product", to: "additional_product#submit"
 
     # Question 2.0: Can you offer accommodation?
-    get "/hotel-rooms", to: "hotel_rooms#show"
-    post "/hotel-rooms", to: "hotel_rooms#submit"
+    get "/accommodation", to: "accommodation#show"
+    post "/accommodation", to: "accommodation#submit"
 
     # Question 2.1: How many hotel rooms can you offer?
     get "/hotel-rooms-number", to: "hotel_rooms_number#show"

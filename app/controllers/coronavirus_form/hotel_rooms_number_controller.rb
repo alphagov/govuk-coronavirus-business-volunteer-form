@@ -29,6 +29,6 @@ private
   end
 
   def previous_path
-    hotel_rooms_path
+    accommodation_path
   end
 end

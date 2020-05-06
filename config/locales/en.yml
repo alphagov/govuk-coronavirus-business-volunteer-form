@@ -291,7 +291,7 @@ en:
           option_no:
             label: "No"
         custom_select_error: "Select if you can offer another product"
-      hotel_rooms:
+      accommodation:
         title: "Can you offer accommodation?"
         options:
           yes_staying_in:

@@ -3,7 +3,7 @@
   "type": "object",
   "required": [
     "medical_equipment",
-    "hotel_rooms",
+    "accommodation",
     "offer_transport",
     "offer_space",
     "expert_advice_type",
@@ -99,7 +99,7 @@
         }
       }
     },
-    "hotel_rooms": {
+    "accommodation": {
       "type": "string",
       "enum": [
         "Yes – for people to stay in",
