@@ -38,18 +38,7 @@
   value: @form_responses[:transport_description]
 } %>
 
-<%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.questions.how_much_charge.title'),
-  name: "transport_cost",
-  error_message: error_items('transport_cost'),
-  items: t('coronavirus_form.questions.how_much_charge.options').map do |_, item|
-    {
-      value: item[:label],
-      text: item[:label],
-      checked: @form_responses[:transport_cost] == item[:label],
-    }
-  end
-} %>
+<%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "transport_cost" } %>
 
 <%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>
 <% end %>

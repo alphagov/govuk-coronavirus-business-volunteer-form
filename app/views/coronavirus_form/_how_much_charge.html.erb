@@ -1,0 +1,12 @@
+<%= render "govuk_publishing_components/components/radio", {
+  heading: t('coronavirus_form.questions.how_much_charge.title'),
+  name: cost_field,
+  error_message: error_items(cost_field),
+  items: t('coronavirus_form.questions.how_much_charge.options').map do |_, item|
+    {
+      value: item[:label],
+      text: item[:label],
+      checked: @form_responses[cost_field.to_sym] == item[:label],
+    }
+  end
+} %>
