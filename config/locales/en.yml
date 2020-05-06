@@ -198,7 +198,7 @@ en:
         custom_select_error: "Select if you have medical equipment to offer"
       medical_equipment_type:
         title: "Tell us about the medical equipment you can offer"
-        hint: "Give details for one product at a time"
+        hint: "Give details for one product at a time."
         options:
           number_ppe:
             label: "Personal protective equipment, for example masks, detergent and waste bags"
@@ -207,7 +207,7 @@ en:
         custom_select_error: "Select the type of medical equipment you can offer"
       are_you_a_manufacturer:
         title: "What kind of business are you?"
-        hint: "Select the best ways to describe your work"
+        hint: "Select the best ways to describe your work."
         options:
           manufacturer:
             label: "Manufacturer"
@@ -314,7 +314,7 @@ en:
         custom_select_error: "Select if you can offer transport or logistics"
       transport_type:
         title: "What kind of services can you offer?"
-        hint: "Select all that apply"
+        hint: "Select all that apply."
         options:
           moving_people:
             label: "Moving people"
@@ -338,7 +338,7 @@ en:
         custom_select_error: "Select if you can offer space"
       offer_space_type:
         title: "What kind of space can you offer?"
-        hint: "Select all that apply"
+        hint: "Select all that apply."
         options:
           warehouse_space:
             label: "Warehouse space"
@@ -368,7 +368,7 @@ en:
         custom_select_error: Select the kind of space you can offer
       expert_advice_type:
         title: "What kind of expertise can you offer?"
-        hint: "Select the types of support you can offer"
+        hint: "Select the types of support you can offer."
         or: "Or"
         options:
           medical:
@@ -415,15 +415,15 @@ en:
           custom_select_error: "Select if you can offer care for adults or children"
         care_qualifications:
           title: "What qualifications or certificates do you have?"
-          hint: "Select the qualifications that you or people in your business have"
+          hint: "Select the qualifications that you or people in your business have."
           options:
             dbs_check:
               label: "DBS check"
             nursing_or_healthcare_qualification:
               label: "Nursing or other healthcare qualification"
               input:
-                label: "Give a description"
-              error_message: "Give a description of your qualification"
+                label: "Type of qualification"
+              error_message: "Enter the type of qualification that you or people in your business have"
             no_qualification:
               label: "I do not have a qualification"
           or: "Or"
@@ -433,12 +433,12 @@ en:
             custom_length_error: "Description of your qualification must be 1000 characters or fewer"
       offer_other_support:
           title: "Can you offer any other kind of support?"
-          hint: "Give a description"
+          hint: "Give a description."
           offer_other_support:
             custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
       location:
         title: "Where can you offer your services?"
-        hint: "If your service is available anywhere, please select all the regions."
+        hint: "If your service is available anywhere, select all the regions."
         options:
           east_of_england:
             label: "East of England"
