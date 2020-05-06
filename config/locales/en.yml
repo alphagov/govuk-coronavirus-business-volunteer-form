@@ -292,7 +292,7 @@ en:
             label: "No"
         custom_select_error: "Select if you can offer another product"
       hotel_rooms:
-        title: "Can you offer hotel rooms?"
+        title: "Can you offer accommodation?"
         options:
           yes_staying_in:
             label: "Yes – for people to stay in"
@@ -300,7 +300,7 @@ en:
             label: "Yes – for any use"
           no_option:
             label: "No"
-        custom_select_error: "Select if you can offer hotel rooms"
+        custom_select_error: "Select yes if you can offer accommodation"
       hotel_rooms_number:
         title: "How many hotel rooms can you offer?"
         hint: "Approximate amount, for example 10, 500, 10000."
