@@ -464,8 +464,8 @@ en:
       offer_staff_charge:
         title: "How much would you charge for staff?"
       expert_advice_type:
-        title: "What kind of expertise can you offer?"
-        hint: "Select the types of support you can offer."
+        title: "What kind of services or expertise can you offer?"
+        hint: "Select all that apply."
         or: "Or"
         options:
           medical:
@@ -484,7 +484,7 @@ en:
             label: "Other"
             input:
               label: "Give a description"
-            error_message: "Enter the best way to describe the type of expertise you have"
+            error_message: "Select the best way to describe the services or expertise you can offer"
           no_expertise:
             label: "I cannot offer expertise"
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
