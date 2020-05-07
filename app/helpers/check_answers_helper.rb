@@ -12,6 +12,8 @@ module CheckAnswersHelper
     care_cost
     offer_staff_type
     offer_staff_charge
+    construction_services
+    construction_services_other
   ].freeze
 
   def items
