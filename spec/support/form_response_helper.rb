@@ -32,6 +32,8 @@ module FormResponseHelper
       offer_staff_charge: I18n.t("coronavirus_form.questions.offer_staff_type.offer_staff_charge.options").map { |_, item| item[:label] }.sample,
       expert_advice_type: I18n.t("coronavirus_form.questions.expert_advice_type.options").map { |_, item| item[:label] },
       expert_advice_type_other: "Life coach",
+      construction_services: I18n.t("coronavirus_form.questions.construction_services.options").map { |_, item| item[:label] },
+      construction_services_other: "Build all the things",
       offer_care: I18n.t("coronavirus_form.questions.offer_care.options").map { |_, item| item[:label] }.sample,
       offer_care_type: I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options").map { |_, item| item[:label] },
       offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options").map { |_, item| item[:label] },

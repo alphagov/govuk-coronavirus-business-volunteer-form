@@ -69,9 +69,12 @@ Rails.application.routes.draw do
     post "/offer-staff-type", to: "offer_staff_type#submit"
 
     # Question 6.0: What kind of expertise can you offer?
-    # Question 5.0: What kind of services an expertise can you offer?
     get "/expert-advice-type", to: "expert_advice_type#show"
     post "/expert-advice-type", to: "expert_advice_type#submit"
+
+    # Question 6.1: What kind of construction services can you offer?
+    get "/construction-services", to: "construction_services#show"
+    post "/construction-services", to: "construction_services#submit"
 
     # Question 7.0: Can you offer social care or childcare?
     get "/offer-care", to: "offer_care#show"

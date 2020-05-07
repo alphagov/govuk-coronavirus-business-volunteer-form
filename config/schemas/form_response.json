@@ -237,9 +237,24 @@
           "I cannot offer expertise"
         ]
       }
-
     },
     "expert_advice_type_other": {
+      "type": ["string", "null"]
+    },
+    "construction_services": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Building materials",
+          "Building maintenance",
+          "Constructing temporary buildings",
+          "Construction work",
+          "Other"
+        ]
+      }
+    },
+    "construction_services_other": {
       "type": ["string", "null"]
     },
     "offer_care": {
