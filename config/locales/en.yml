@@ -374,6 +374,14 @@ en:
         custom_select_error: Select the kind of space you can offer
       space_cost:
         title: "How much would you charge for the space?"
+      offer_staff:
+        title: "Can you offer staff?"
+        options:
+          option_yes:
+            label: "Yes"
+          option_no:
+            label: "No"
+        custom_select_error: "Select yes if you can offer staff"
       expert_advice_type:
         title: "What kind of expertise can you offer?"
         hint: "Select the types of support you can offer."

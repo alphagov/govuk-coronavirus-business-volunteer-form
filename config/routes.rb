@@ -60,31 +60,35 @@ Rails.application.routes.draw do
     get "/offer-space-type", to: "offer_space_type#show"
     post "/offer-space-type", to: "offer_space_type#submit"
 
-    # Question 5.0: What kind of expertise can you offer?
+    # Question 5.0: Can you offer staff?
+    get "/offer-staff", to: "offer_staff#show"
+    post "/offer-staff", to: "offer_staff#submit"
+
+    # Question 6.0: What kind of expertise can you offer?
     get "/expert-advice-type", to: "expert_advice_type#show"
     post "/expert-advice-type", to: "expert_advice_type#submit"
 
-    # Question 6.0: Can you offer social care or childcare?
+    # Question 7.0: Can you offer social care or childcare?
     get "/offer-care", to: "offer_care#show"
     post "/offer-care", to: "offer_care#submit"
 
-    # Question 6.1: What kind of care can you offer?
+    # Question 7.1: What kind of care can you offer?
     get "/offer-care-qualifications", to: "offer_care_qualifications#show"
     post "/offer-care-qualifications", to: "offer_care_qualifications#submit"
 
-    # Question 7.0: Can you offer any other kind of support?
+    # Question 8.0: Can you offer any other kind of support?
     get "/offer-other-support", to: "offer_other_support#show"
     post "/offer-other-support", to: "offer_other_support#submit"
 
-    # Question 8.0: Where can you offer your services?
+    # Question 9.0: Where can you offer your services?
     get "/location", to: "location#show"
     post "/location", to: "location#submit"
 
-    # Question 9.0: Your business details
+    # Question 10.0: Your business details
     get "/business-details", to: "business_details#show"
     post "/business-details", to: "business_details#submit"
 
-    # Question 10.0: Contact details
+    # Question 11.0: Contact details
     get "/contact-details", to: "contact_details#show"
     post "/contact-details", to: "contact_details#submit"
 

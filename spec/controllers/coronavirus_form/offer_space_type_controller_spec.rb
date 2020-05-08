@@ -53,7 +53,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
     it "redirects to next step" do
       post :submit, params: params
 
-      expect(response).to redirect_to(expert_advice_type_path)
+      expect(response).to redirect_to(offer_staff_path)
     end
 
     it "redirects to check your answers if check your answers already seen" do
@@ -85,7 +85,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
                offer_space_type_other: "A really big garden.",
              )
 
-        expect(response).to redirect_to(expert_advice_type_path)
+        expect(response).to redirect_to(offer_staff_path)
         expect(session[session_key]).to eq [
           I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
           I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
@@ -108,7 +108,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
           end
           it "doesn't require the description field #{description_id}" do
             post :submit, params: acceptable_params
-            expect(response).to redirect_to(expert_advice_type_path)
+            expect(response).to redirect_to(offer_staff_path)
           end
         end
 
