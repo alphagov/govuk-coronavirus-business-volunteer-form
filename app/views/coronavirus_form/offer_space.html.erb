@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.questions.offer_space.title') %><% end %>
+<% content_for :title do %><%= t("coronavirus_form.questions.offer_space.title") %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.questions.offer_space.title') %>" />
+  <meta name="description" content="<%= t("coronavirus_form.questions.offer_space.title") %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -14,12 +14,12 @@
   "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.questions.offer_space.title'),
-  hint: t('coronavirus_form.questions.offer_space.hint'),
+  heading: t("coronavirus_form.questions.offer_space.title"),
+  hint: t("coronavirus_form.questions.offer_space.hint"),
   is_page_heading: true,
   name: "offer_space",
   error_message: error_items('offer_space'),
-  items: t('coronavirus_form.questions.offer_space.options').map do |_, item|
+  items: t("coronavirus_form.questions.offer_space.options").map do |_, item|
     {
       value: item[:label],
       text: item[:label],
