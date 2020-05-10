@@ -382,6 +382,87 @@ en:
           option_no:
             label: "No"
         custom_select_error: "Select yes if you can offer staff"
+      offer_staff_type:
+        title: "What kind of staff can you offer?"
+        offer_staff_type:
+          title: "What kind of staff can you offer?"
+          hint: "Select all that apply."
+          custom_select_error: "Select the type of staff you can offer, or other staff"
+          options:
+            cleaners:
+              label: "Cleaners"
+              description:
+                id: cleaners_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            developers:
+              label: "Developers"
+              description:
+                id: developers_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            medical_staff:
+              label: "Medical staff"
+              description:
+                id: medical_staff_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            office_staff:
+              label: "Office staff"
+              description:
+                id: office_staff_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            security_staff:
+              label: "Security staff"
+              description:
+                id: security_staff_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            trainers:
+              label: "Trainers or coaches"
+              description:
+                id: trainers_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            translators:
+              label: "Translators"
+              description:
+                id: translators_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+            other_staff:
+              label: "Other staff"
+              description:
+                id: other_staff_number
+                label: "Approximate number of people"
+                hint: "For example, 10, 20, 100."
+                error_message: Enter the approximate number of people you can offer
+                custom_length_error: "Description of staff you can offer must be 1000 characters or fewer"
+        offer_staff_description:
+          label: "Give a description of the type of staff (optional)"
+          hint: "For example, whether they would be available to work full time."
+          custom_error: "Enter a description"
+          custom_length_error: "Description of staff must be 1000 characters or fewer"
+        offer_staff_charge:
+          title: "How much would you charge?"
+          options:
+            nothing:
+              label: "Nothing, it would be a donation"
+            reduced_price:
+              label: "A reduced price"
+            standard_price:
+              label: "A standard price"
+          custom_select_error: "Select how much you would charge"
+      offer_staff_charge:
+        title: "How much would you charge for staff?"
       expert_advice_type:
         title: "What kind of expertise can you offer?"
         hint: "Select the types of support you can offer."

@@ -14,7 +14,7 @@ class CoronavirusForm::OfferStaffController < ApplicationController
       render controller_path, status: :unprocessable_entity
     elsif @form_responses[:offer_staff].eql? I18n.t("coronavirus_form.questions.#{controller_name}.options.option_yes.label")
       update_session_store
-      redirect_to expert_advice_type_url
+      redirect_to offer_staff_type_url
     elsif session["check_answers_seen"]
       update_session_store
       redirect_to check_your_answers_url

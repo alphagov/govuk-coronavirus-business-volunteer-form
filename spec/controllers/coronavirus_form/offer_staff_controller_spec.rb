@@ -39,7 +39,7 @@ RSpec.describe CoronavirusForm::OfferStaffController, type: :controller do
 
     it "redirects to next step for a 'Yes' response" do
       post :submit, params: { offer_staff: I18n.t("coronavirus_form.questions.offer_staff.options.option_yes.label") }
-      expect(response).to redirect_to(expert_advice_type_path)
+      expect(response).to redirect_to(offer_staff_type_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
@@ -53,7 +53,7 @@ RSpec.describe CoronavirusForm::OfferStaffController, type: :controller do
       session[:check_answers_seen] = true
       post :submit, params: { offer_staff: I18n.t("coronavirus_form.questions.offer_staff.options.option_yes.label") }
 
-      expect(response).to redirect_to(expert_advice_type_path)
+      expect(response).to redirect_to(offer_staff_type_path)
     end
 
     it "validates any option is chosen" do

@@ -10,6 +10,8 @@ module CheckAnswersHelper
     space_cost
     offer_care_qualifications
     care_cost
+    offer_staff_type
+    offer_staff_charge
   ].freeze
 
   def items
@@ -22,6 +24,8 @@ module CheckAnswersHelper
       next product_details if question.eql?("product_details")
       next transport_type if question.eql?("transport_type")
       next offer_care_qualifications if question.eql?("offer_care_qualifications")
+      next offer_staff_type if question.eql?("offer_staff_type")
+      next how_much_charge(question, "offer_staff_type") if question.eql?("offer_staff_charge")
       next how_much_charge(question, "transport_type") if question.eql?("transport_cost")
       next how_much_charge(question, "offer_care_qualifications") if question.eql?("care_cost")
       next how_much_charge(question, "rooms_number") if question.eql?("accommodation_cost")
@@ -136,6 +140,23 @@ module CheckAnswersHelper
         href: "#{parent_question.dasherize}?change-answer",
       },
     }]
+  end
+
+  def offer_staff_type
+    [{
+      field: t("coronavirus_form.questions.offer_staff_type.title"),
+      value: sanitize(Array(session[:offer_staff_type]).flatten.to_sentence),
+      edit: {
+        href: "offer-staff-type?change-answer",
+      },
+    },
+     {
+       field: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.label"),
+       value: sanitize(session[:offer_staff_description]),
+       edit: {
+         href: "offer-staff-type?change-answer",
+       },
+     }]
   end
 
   def concat_answer(answer, question)

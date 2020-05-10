@@ -64,6 +64,10 @@ Rails.application.routes.draw do
     get "/offer-staff", to: "offer_staff#show"
     post "/offer-staff", to: "offer_staff#submit"
 
+    # Question 5.1: What kind of staff can you offer?
+    get "/offer-staff-type", to: "offer_staff_type#show"
+    post "/offer-staff-type", to: "offer_staff_type#submit"
+
     # Question 6.0: What kind of expertise can you offer?
     get "/expert-advice-type", to: "expert_advice_type#show"
     post "/expert-advice-type", to: "expert_advice_type#submit"
