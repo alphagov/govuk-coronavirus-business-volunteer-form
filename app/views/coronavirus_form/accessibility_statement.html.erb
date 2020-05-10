@@ -1,4 +1,4 @@
-<% content_for :title do %><%= t('accessibility_statement.title') %><% end %>
+<% content_for :title do %><%= t("accessibility_statement.title") %><% end %>
 
 <% content_for :back_link do %>
   <%= render "govuk_publishing_components/components/back_link", { href: "/" } %>
@@ -9,4 +9,4 @@
   margin_top: 0
 } %>
 
-<%= sanitize(t('accessibility_statement.body_text')) %>
+<%= sanitize(t("accessibility_statement.body_text")) %>

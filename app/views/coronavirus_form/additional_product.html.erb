@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.questions.additional_product.title') %><% end %>
+<% content_for :title do %><%= t("coronavirus_form.questions.additional_product.title") %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.questions.additional_product.title') %>" />
+  <meta name="description" content="<%= t("coronavirus_form.questions.additional_product.title") %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -14,20 +14,20 @@
   "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.questions.additional_product.title'),
+  heading: t("coronavirus_form.questions.additional_product.title"),
   is_page_heading: true,
   name: "additional_product",
   error_message: error_items('additional_product'),
   items: [
     {
-      value: t('coronavirus_form.questions.additional_product.options.option_yes.label'),
-      text: t('coronavirus_form.questions.additional_product.options.option_yes.label'),
-      checked: @form_responses[:additional_product] == t('coronavirus_form.questions.additional_product.options.option_yes.label'),
+      value: t("coronavirus_form.questions.additional_product.options.option_yes.label"),
+      text: t("coronavirus_form.questions.additional_product.options.option_yes.label"),
+      checked: @form_responses[:additional_product] == t("coronavirus_form.questions.additional_product.options.option_yes.label"),
     },
     {
-      value: t('coronavirus_form.questions.additional_product.options.option_no.label'),
-      text: t('coronavirus_form.questions.additional_product.options.option_no.label'),
-      checked: @form_responses[:additional_product] == t('coronavirus_form.questions.additional_product.options.option_no.label'),
+      value: t("coronavirus_form.questions.additional_product.options.option_no.label"),
+      text: t("coronavirus_form.questions.additional_product.options.option_no.label"),
+      checked: @form_responses[:additional_product] == t("coronavirus_form.questions.additional_product.options.option_no.label"),
     },
   ]
 } %>

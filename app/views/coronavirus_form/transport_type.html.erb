@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.questions.transport_type.title') %><% end %>
+<% content_for :title do %><%= t("coronavirus_form.questions.transport_type.title") %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.questions.transport_type.title') %>" />
+  <meta name="description" content="<%= t("coronavirus_form.questions.transport_type.title") %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -15,12 +15,12 @@
 ) do %>
 
 <%= render "govuk_publishing_components/components/checkboxes", {
-  heading: t('coronavirus_form.questions.transport_type.title'),
-  hint_text: t('coronavirus_form.questions.transport_type.hint'),
+  heading: t("coronavirus_form.questions.transport_type.title"),
+  hint_text: t("coronavirus_form.questions.transport_type.hint"),
   is_page_heading: true,
   name: "transport_type[]",
   error: error_items('transport_type'),
-  items: t('coronavirus_form.questions.transport_type.options').map do |_, item|
+  items: t("coronavirus_form.questions.transport_type.options").map do |_, item|
     {
       value:  item[:label],
       label:  item[:label],

@@ -1,6 +1,6 @@
-<% content_for :title do %><%= t('coronavirus_form.questions.are_you_a_manufacturer.title') %><% end %>
+<% content_for :title do %><%= t("coronavirus_form.questions.are_you_a_manufacturer.title") %><% end %>
 <% content_for :meta_tags do %>
-  <meta name="description" content="<%= t('coronavirus_form.questions.are_you_a_manufacturer.title') %>" />
+  <meta name="description" content="<%= t("coronavirus_form.questions.are_you_a_manufacturer.title") %>" />
 <% end %>
 
 <% content_for :back_link do %>
@@ -14,12 +14,12 @@
   "novalidate": "true"
 ) do %>
 <%= render "govuk_publishing_components/components/checkboxes", {
-  heading: t('coronavirus_form.questions.are_you_a_manufacturer.title'),
-  hint_text: t('coronavirus_form.questions.are_you_a_manufacturer.hint'),
+  heading: t("coronavirus_form.questions.are_you_a_manufacturer.title"),
+  hint_text: t("coronavirus_form.questions.are_you_a_manufacturer.hint"),
   is_page_heading: true,
   name: "are_you_a_manufacturer[]",
   error: error_items('are_you_a_manufacturer'),
-  items: t('coronavirus_form.questions.are_you_a_manufacturer.options').map do |_, item|
+  items: t("coronavirus_form.questions.are_you_a_manufacturer.options").map do |_, item|
     {
       value:  item[:label],
       label:  item[:label],

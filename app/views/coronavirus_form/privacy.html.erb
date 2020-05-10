@@ -1,4 +1,4 @@
-<% content_for :title do %><%= t('privacy_page.title') %><% end %>
+<% content_for :title do %><%= t("privacy_page.title") %><% end %>
 
 <% content_for :back_link do %>
   <%= render "govuk_publishing_components/components/back_link", { href: "/" } %>
@@ -9,4 +9,4 @@
   margin_top: 0
 } %>
 
-<%= sanitize(t('privacy_page.body_text')) %>
+<%= sanitize(t("privacy_page.body_text")) %>
