@@ -32,7 +32,7 @@ module FieldValidationHelper
 
   def validate_radio_field(page, radio:, other: false)
     if radio.blank?
-      return [{ field: page.to_s,
+      return [{ field: page.to_s.sub(".", "_"),
                 text: t(
                   "coronavirus_form.questions.#{page}.custom_select_error",
                   default: t("coronavirus_form.errors.radio_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
