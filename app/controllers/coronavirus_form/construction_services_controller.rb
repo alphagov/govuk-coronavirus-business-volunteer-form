@@ -25,7 +25,7 @@ class CoronavirusForm::ConstructionServicesController < ApplicationController
       redirect_to check_your_answers_url
     else
       update_session_store
-      redirect_to offer_care_url
+      redirect_to polymorphic_url(next_page)
     end
   end
 
@@ -38,5 +38,11 @@ private
 
   def previous_path
     expert_advice_type_url
+  end
+
+  def next_page
+    return "it_services" if session[:expert_advice_type]&.include?(I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"))
+
+    "offer_care"
   end
 end
