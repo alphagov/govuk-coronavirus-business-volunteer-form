@@ -11,6 +11,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       transport_type: [
         I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
       ],
+      transport_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_space_type: I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
       offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label"),
     }

@@ -4,6 +4,7 @@ module CheckAnswersHelper
     product_details
     rooms_number
     transport_type
+    transport_cost
     offer_space_type
     offer_care_qualifications
   ].freeze

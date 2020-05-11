@@ -329,6 +329,8 @@ en:
           label: "Give a description, for example how many vehicles you can offer"
           custom_error: "Enter a description"
           custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
+      transport_cost:
+        title: "How much would you charge for the transport or logistics services?"
       offer_space:
         title: "Can you offer space?"
         hint: "For example, offices or warehouses, for medical use or storage."
