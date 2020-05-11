@@ -257,6 +257,23 @@
     "construction_services_other": {
       "type": ["string", "null"]
     },
+    "it_services": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Broadband or wifi",
+          "Laptops, desktops, or other computer equipment",
+          "Mobile phones",
+          "Video conferencing",
+          "Virtual office tools",
+          "Other"
+        ]
+      }
+    },
+    "it_services_other": {
+      "type": ["string", "null"]
+    },
     "offer_care": {
       "$ref": "#/definitions/yes_no"
     },
