@@ -6,6 +6,7 @@ module CheckAnswersHelper
     transport_type
     transport_cost
     offer_space_type
+    space_cost
     offer_care_qualifications
   ].freeze
 

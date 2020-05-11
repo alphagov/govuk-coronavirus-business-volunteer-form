@@ -370,6 +370,8 @@ en:
           custom_error: Enter a description
           custom_length_error: Description of space must be 1000 characters or fewer
         custom_select_error: Select the kind of space you can offer
+      space_cost:
+        title: "How much would you charge for the space?"
       expert_advice_type:
         title: "What kind of expertise can you offer?"
         hint: "Select the types of support you can offer."
