@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get "/medical-equipment-type", to: "medical_equipment_type#show"
     post "/medical-equipment-type", to: "medical_equipment_type#submit"
 
-    # Question 1.3: Tell us about the product you’re offering
+    # Question 1.3: Tell us about the product you're offering
     get "/product-details", to: "product_details#show"
     get "/product-details/:id/delete", to: "product_details#destroy"
     post "/product-details", to: "product_details#submit"
