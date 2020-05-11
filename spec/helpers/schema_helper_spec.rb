@@ -20,21 +20,21 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
-    describe "hotel_rooms" do
-      it "returns a list of errors when hotel_rooms is missing" do
-        data = valid_data.except(:hotel_rooms)
-        expect(validate_against_form_response_schema(data).first).to include("hotel_rooms")
+    describe "accommodation" do
+      it "returns a list of errors when accommodation is missing" do
+        data = valid_data.except(:accommodation)
+        expect(validate_against_form_response_schema(data).first).to include("accommodation")
       end
 
-      it "returns a list of errors when hotel_rooms has an unexpected value" do
-        data = valid_data.merge(hotel_rooms: "Foo")
-        expect(validate_against_form_response_schema(data).first).to include("hotel_rooms")
+      it "returns a list of errors when accommodation has an unexpected value" do
+        data = valid_data.merge(accommodation: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("accommodation")
       end
     end
 
-    describe "hotel_rooms_number" do
-      it "allows hotel_rooms_number to be blank" do
-        data = valid_data.except(:hotel_rooms_number)
+    describe "rooms_number" do
+      it "allows rooms_number to be blank" do
+        data = valid_data.except(:rooms_number)
         expect(validate_against_form_response_schema(data)).to be_empty
       end
     end

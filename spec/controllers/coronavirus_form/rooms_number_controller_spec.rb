@@ -2,11 +2,11 @@
 
 require "spec_helper"
 
-RSpec.describe CoronavirusForm::HotelRoomsNumberController, type: :controller do
+RSpec.describe CoronavirusForm::RoomsNumberController, type: :controller do
   include_examples "session expiry"
 
-  let(:current_template) { "coronavirus_form/hotel_rooms_number" }
-  let(:session_key) { :hotel_rooms_number }
+  let(:current_template) { "coronavirus_form/rooms_number" }
+  let(:session_key) { :rooms_number }
 
   describe "GET show" do
     it "renders the form when first question answered" do
@@ -25,19 +25,19 @@ RSpec.describe CoronavirusForm::HotelRoomsNumberController, type: :controller do
     let(:selected) { "100" }
 
     it "sets session variables" do
-      post :submit, params: { hotel_rooms_number: selected }
+      post :submit, params: { rooms_number: selected }
       expect(session[session_key]).to eq selected
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      post :submit, params: { hotel_rooms_number: selected }
+      post :submit, params: { rooms_number: selected }
 
       expect(response).to redirect_to(check_your_answers_path)
     end
 
     it "validates a value is entered" do
-      post :submit, params: { hotel_rooms_number: "" }
+      post :submit, params: { rooms_number: "" }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

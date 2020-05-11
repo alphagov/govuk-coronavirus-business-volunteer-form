@@ -23,7 +23,7 @@ class CoronavirusForm::AdditionalProductController < ApplicationController
       redirect_to check_your_answers_url
     else
       update_session_store
-      redirect_to hotel_rooms_url
+      redirect_to accommodation_url
     end
   end
 

@@ -2,8 +2,8 @@ module FormResponseHelper
   def valid_data
     {
       medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options").map { |_, item| item[:label] }.sample,
-      hotel_rooms: I18n.t("coronavirus_form.questions.hotel_rooms.options").map { |_, item| item[:label] }.sample,
-      hotel_rooms_number: "40",
+      accommodation: I18n.t("coronavirus_form.questions.accommodation.options").map { |_, item| item[:label] }.sample,
+      rooms_number: "40",
       offer_transport: I18n.t("coronavirus_form.questions.offer_transport.options").map { |_, item| item[:label] }.sample,
       transport_type: I18n.t("coronavirus_form.questions.transport_type.options").map { |_, item| item[:label] },
       transport_description: "10 trucks",

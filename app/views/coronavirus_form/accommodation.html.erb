@@ -1,0 +1,30 @@
+<% content_for :title do %><%= t('coronavirus_form.questions.accommodation.title') %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.questions.accommodation.title') %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-business-accommodation",
+  "data-question-key": "accommodation",
+  "id": "accommodation",
+  "novalidate": "true"
+) do %>
+<%= render "govuk_publishing_components/components/radio", {
+  heading: t('coronavirus_form.questions.accommodation.title'),
+  is_page_heading: true,
+  name: "accommodation",
+  error_message: error_items('accommodation'),
+  items: t('coronavirus_form.questions.accommodation.options').map do |_, item|
+    {
+      value: item[:label],
+      text: item[:label],
+      checked: @form_responses[:accommodation] == item[:label],
+    }
+  end
+} %>
+<%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>
+<% end %>

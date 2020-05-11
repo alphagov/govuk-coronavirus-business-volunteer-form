@@ -7,7 +7,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label"),
       ],
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
-      hotel_rooms_number: "100",
+      rooms_number: "100",
       transport_type: [
         I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
       ],

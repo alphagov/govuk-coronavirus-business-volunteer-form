@@ -2,7 +2,7 @@ module CheckAnswersHelper
   SKIPPABLE_QUESTIONS = %w[
     are_you_a_manufacturer
     product_details
-    hotel_rooms_number
+    rooms_number
     transport_type
     offer_space_type
     offer_care_qualifications

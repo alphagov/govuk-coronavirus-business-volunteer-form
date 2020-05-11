@@ -29,7 +29,7 @@ RSpec.describe CoronavirusForm::AdditionalProductController, type: :controller d
     it "redirects to next sub-question for no response" do
       post :submit, params: { additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label") }
 
-      expect(response).to redirect_to(hotel_rooms_path)
+      expect(response).to redirect_to(accommodation_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
