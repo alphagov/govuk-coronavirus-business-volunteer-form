@@ -131,6 +131,29 @@ module FillInTheFormSteps
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
+  def and_can_offer_construction_services
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.construction_services.title"))
+    check I18n.t("coronavirus_form.questions.construction_services.options.building_materials.label")
+    check I18n.t("coronavirus_form.questions.construction_services.options.building_maintenance.label")
+    check I18n.t("coronavirus_form.questions.construction_services.options.temporary_buildings.label")
+    check I18n.t("coronavirus_form.questions.construction_services.options.construction_work.label")
+    check I18n.t("coronavirus_form.questions.construction_services.options.other.label")
+    fill_in "construction_services_other", with: "Testing"
+    click_on I18n.t("coronavirus_form.submit_and_next")
+  end
+
+  def and_can_offer_it_services
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.it_services.title"))
+    check I18n.t("coronavirus_form.questions.it_services.options.broadband.label")
+    check I18n.t("coronavirus_form.questions.it_services.options.equipment.label")
+    check I18n.t("coronavirus_form.questions.it_services.options.mobile_phones.label")
+    check I18n.t("coronavirus_form.questions.it_services.options.video_conferencing.label")
+    check I18n.t("coronavirus_form.questions.it_services.options.virtual_tools.label")
+    check I18n.t("coronavirus_form.questions.it_services.options.other.label")
+    fill_in "it_services_other", with: "Testing"
+    click_on I18n.t("coronavirus_form.submit_and_next")
+  end
+
   def and_can_offer_all_kinds_of_social_and_child_care
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_care.title"))
     choose I18n.t("coronavirus_form.questions.offer_care.options.option_yes.label")
