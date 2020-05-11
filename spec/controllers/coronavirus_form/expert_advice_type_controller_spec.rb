@@ -27,10 +27,36 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
       expect(session[session_key]).to eq selected
     end
 
-    it "redirects to next step" do
-      post :submit, params: { expert_advice_type: selected }
+    describe "#next_page" do
+      it "redirects to construction_services path if construction has been selected" do
+        post :submit, params: { expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label")] }
 
-      expect(response).to redirect_to(offer_care_path)
+        expect(response).to redirect_to(construction_services_path)
+      end
+
+      it "redirects to construction_services path if both construction and IT have been selected" do
+        post :submit,
+             params: {
+               expert_advice_type: [
+                 I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+                 I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+               ],
+             }
+
+        expect(response).to redirect_to(construction_services_path)
+      end
+
+      it "redirects to it_services path if IT has been selected but construction has not" do
+        post :submit, params: { expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label")] }
+
+        expect(response).to redirect_to(it_services_path)
+      end
+
+      it "redirects to offer_care path if neither construction or IT has been selected" do
+        post :submit, params: { expert_advice_type: selected }
+
+        expect(response).to redirect_to(offer_care_path)
+      end
     end
 
     it "redirects to check your answers if check your answers already seen" do
