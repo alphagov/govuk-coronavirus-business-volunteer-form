@@ -37,6 +37,14 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
       expect(response).to redirect_to(expert_advice_type_path)
     end
 
+    it "clears previously entered space cost for a 'No' response" do
+      session[:space_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
+      post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_no.label") }
+
+      expect(session[:space_cost]).to be nil
+    end
+
     it "redirects to next step for a 'Yes' response" do
       post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label") }
       expect(response).to redirect_to(offer_space_type_path)
