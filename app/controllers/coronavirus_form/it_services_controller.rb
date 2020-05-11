@@ -37,6 +37,10 @@ private
   end
 
   def previous_path
-    expert_advice_type_url
+    if session[:expert_advice_type]&.include?(I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"))
+      construction_services_path
+    else
+      expert_advice_type_path
+    end
   end
 end
