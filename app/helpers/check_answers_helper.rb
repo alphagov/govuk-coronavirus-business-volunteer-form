@@ -40,7 +40,7 @@ module CheckAnswersHelper
   end
 
   def additional_product_index
-    items.index { |item| item[:field] === t("coronavirus_form.questions.additional_product.title") }
+    items.index { |item| item[:field] == t("coronavirus_form.questions.additional_product.title") }
   end
 
   def items_part_1

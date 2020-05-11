@@ -37,12 +37,12 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
     context "when there are existing products" do
       let(:product_id) { SecureRandom.uuid }
-      let(:product) {
+      let(:product) do
         params.merge(
           product_id: product_id,
           product_name: "My product",
         )
-      }
+      end
       before :each do
         session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
         session[session_key] = [
@@ -116,15 +116,15 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
     context "there are existing products" do
       let(:product_id) { SecureRandom.uuid }
-      let(:product) {
+      let(:product) do
         params.merge(
           product_id: product_id,
           product_name: "My product",
         )
-      }
-      let(:product_2) {
+      end
+      let(:product_2) do
         params.merge(product_id: SecureRandom.uuid)
-      }
+      end
 
       before :each do
         session[session_key] = [product, product_2]
@@ -140,9 +140,9 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       end
 
       context "when adding a new product" do
-        let(:new_product) {
+        let(:new_product) do
           product.except(:product_id).merge(product_name: "New product")
-        }
+        end
         it "edits the existing the existing product" do
           post :submit, params: new_product
           expect(session[session_key]).to include(product, product_2)
