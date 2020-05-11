@@ -315,7 +315,7 @@ en:
             label: "No"
         custom_select_error: "Select if you can offer transport or logistics"
       transport_type:
-        title: "What kind of transport or logisitcs services can you offer?"
+        title: "What kind of transport or logistics services can you offer?"
         hint: "Select all that apply."
         options:
           moving_people:
