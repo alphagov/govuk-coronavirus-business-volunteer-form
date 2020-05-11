@@ -509,6 +509,27 @@ en:
         hint: "For example, the amount of work you can do."
         construction_services_other:
           custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+      it_services:
+        title: What kind of IT services can you offer?
+        hint: "Select the types of services you can offer."
+        options:
+          broadband:
+            label: "Broadband or wifi"
+          equipment:
+            label: "Laptops, desktops, or other computer equipment"
+          mobile_phones:
+            label: "Mobile phones"
+          video_conferencing:
+            label: "Video conferencing"
+          virtual_tools:
+            label: "Virtual office tools"
+          other:
+            label: "Other"
+      it_services_other:
+        title: "Give a description of the type of IT services (optional)"
+        hint: "For example, the amount of services you can offer."
+        it_services_other:
+          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
       offer_care:
         title: "Can you offer social care or childcare?"
         hint: "For example, nursing or assistance to other people."
