@@ -96,13 +96,13 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
         description_id = option.dig(:description, :id).to_sym
 
         context "when the option #{option_id} is not provided" do
-          let(:acceptable_params) {
+          let(:acceptable_params) do
             params.merge(
-              offer_space_type: params[:offer_space_type].reject { |type|
+              offer_space_type: params[:offer_space_type].reject do |type|
                 type == option.dig(:label)
-              },
+              end,
             ).except(description_id)
-          }
+          end
           it "doesn't require the description field #{description_id}" do
             post :submit, params: acceptable_params
             expect(response).to redirect_to(expert_advice_type_path)
