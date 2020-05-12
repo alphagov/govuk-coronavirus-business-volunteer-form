@@ -47,6 +47,14 @@ RSpec.describe CoronavirusForm::AccommodationController, type: :controller do
       expect(response).to redirect_to(offer_transport_path)
     end
 
+    it "clears previously entered care cost for a 'No' response" do
+      session[:accommodation_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
+      post :submit, params: { accommodation: I18n.t("coronavirus_form.questions.accommodation.options.no_option.label") }
+
+      expect(session[:accommodation_cost]).to be nil
+    end
+
     it "redirects to check your answers if check your answers previously seen and answer is no" do
       session[:check_answers_seen] = true
       post :submit, params: { accommodation: I18n.t("coronavirus_form.questions.accommodation.options.no_option.label") }
