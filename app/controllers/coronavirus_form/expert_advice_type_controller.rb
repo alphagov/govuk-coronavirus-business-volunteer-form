@@ -21,9 +21,6 @@ class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path, status: :unprocessable_entity
-    elsif session["check_answers_seen"]
-      update_session_store
-      redirect_to check_your_answers_url
     else
       update_session_store
       redirect_to polymorphic_url(next_page)
@@ -60,9 +57,24 @@ private
   end
 
   def next_page
-    return "construction_services" if session[:expert_advice_type].include?(I18n.t("coronavirus_form.questions.#{controller_name}.options.construction.label"))
-    return "it_services" if session[:expert_advice_type].include?(I18n.t("coronavirus_form.questions.#{controller_name}.options.it.label"))
+    return "construction_services" if construction_services?
+    return "it_services" if it_services?
+    return "check_your_answers" if session["check_answers_seen"]
 
     "offer_care"
+  end
+
+  def construction_services?
+    session[:construction_services].blank? &&
+      session[:expert_advice_type]&.include?(
+        I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+      )
+  end
+
+  def it_services?
+    session[:it_services].blank? &&
+      session[:expert_advice_type]&.include?(
+        I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+      )
   end
 end
