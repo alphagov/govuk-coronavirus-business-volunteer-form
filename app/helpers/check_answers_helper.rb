@@ -8,6 +8,7 @@ module CheckAnswersHelper
     offer_space_type
     space_cost
     offer_care_qualifications
+    care_cost
   ].freeze
 
   def items

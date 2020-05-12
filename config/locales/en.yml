@@ -437,6 +437,8 @@ en:
           custom_select_error_qualification_or_not: "You cannot select a qualification as well as ’I do not have a qualification’"
           offer_care_qualifications_type:
             custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+      care_cost:
+        title: "How much would you charge for the social care or childcare?"
       offer_other_support:
           title: "Can you offer any other kind of support?"
           hint: "Give a description."
