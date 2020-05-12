@@ -26,6 +26,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       construction_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       it_services: I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] },
       it_services_other: "Supply all the things",
+      it_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
     }
   end
 

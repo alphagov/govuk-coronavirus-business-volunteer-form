@@ -17,6 +17,7 @@ module CheckAnswersHelper
     construction_cost
     it_services
     it_services_other
+    it_cost
   ].freeze
 
   def items
@@ -32,6 +33,7 @@ module CheckAnswersHelper
       next offer_staff_type if question.eql?("offer_staff_type")
       next how_much_charge(question, "offer_staff_type") if question.eql?("offer_staff_charge")
       next how_much_charge(question, "construction_services") if question.eql?("construction_cost")
+      next how_much_charge(question, "it_services") if question.eql?("it_cost")
       next how_much_charge(question, "transport_type") if question.eql?("transport_cost")
       next how_much_charge(question, "offer_care_qualifications") if question.eql?("care_cost")
       next how_much_charge(question, "rooms_number") if question.eql?("accommodation_cost")
