@@ -41,6 +41,12 @@ private
       session[:construction_services_other] = nil
       session[:construction_cost] = nil
     end
+
+    unless @form_responses[:expert_advice_type].include?(I18n.t("coronavirus_form.questions.#{controller_name}.options.it.label"))
+      session[:it_services] = nil
+      session[:it_services_other] = nil
+      session[:it_cost] = nil
+    end
   end
 
   def selected_other?

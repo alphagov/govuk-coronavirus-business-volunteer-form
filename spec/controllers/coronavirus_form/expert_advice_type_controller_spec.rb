@@ -71,6 +71,18 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
       expect(session[:construction_cost]).to be nil
     end
 
+    it "clears previously entered it_cost if construction is no longer selected" do
+      session[:it_services] = I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] }.sample
+      session[:it_services_other] = "Foo"
+      session[:it_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
+      post :submit, params: { expert_advice_type: selected }
+
+      expect(session[:it_services]).to be nil
+      expect(session[:it_services_other]).to be nil
+      expect(session[:it_cost]).to be nil
+    end
+
     it "redirects to check your answers if check your answers already seen" do
       session[:check_answers_seen] = true
       post :submit, params: { expert_advice_type: selected }
