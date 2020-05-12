@@ -35,6 +35,12 @@ private
   def update_session_store
     session[:expert_advice_type] = @form_responses[:expert_advice_type]
     session[:expert_advice_type_other] = @form_responses[:expert_advice_type_other]
+
+    unless @form_responses[:expert_advice_type].include?(I18n.t("coronavirus_form.questions.#{controller_name}.options.construction.label"))
+      session[:construction_services] = nil
+      session[:construction_services_other] = nil
+      session[:construction_cost] = nil
+    end
   end
 
   def selected_other?
