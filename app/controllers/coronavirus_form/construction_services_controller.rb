@@ -6,6 +6,7 @@ class CoronavirusForm::ConstructionServicesController < ApplicationController
   def submit
     @form_responses = {
       construction_services: Array(params[:construction_services]).map { |item| strip_tags(item).presence }.compact,
+      construction_cost: strip_tags(params[:construction_cost]).presence,
     }
     @form_responses[:construction_services_other] = strip_tags(params[:construction_services_other]).presence
 
@@ -14,7 +15,8 @@ class CoronavirusForm::ConstructionServicesController < ApplicationController
         controller_name,
         values: @form_responses[:construction_services],
         allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
-      )
+      ) +
+      validate_charge_field("construction_cost", @form_responses[:construction_cost])
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields
@@ -34,6 +36,7 @@ private
   def update_session_store
     session[:construction_services] = @form_responses[:construction_services]
     session[:construction_services_other] = @form_responses[:construction_services_other]
+    session[:construction_cost] = @form_responses[:construction_cost]
   end
 
   def previous_path

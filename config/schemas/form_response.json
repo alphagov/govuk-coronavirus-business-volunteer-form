@@ -257,6 +257,9 @@
     "construction_services_other": {
       "type": ["string", "null"]
     },
+    "construction_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "it_services": {
       "type": "array",
       "items": {
