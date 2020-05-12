@@ -306,6 +306,8 @@ en:
         hint: "Approximate amount, for example 10, 500, 10000."
         rooms_number:
           custom_error: "Enter the approximate amount of rooms you think you can offer"
+      accommodation_cost:
+        title: "How much would you charge for the accommodation?"
       offer_transport:
         title: "Can you offer transport or logistics?"
         options:

@@ -8,6 +8,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       ],
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
       rooms_number: "100",
+      accommodation_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       transport_type: [
         I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
       ],

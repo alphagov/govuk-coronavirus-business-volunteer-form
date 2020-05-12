@@ -3,6 +3,7 @@ module CheckAnswersHelper
     are_you_a_manufacturer
     product_details
     rooms_number
+    accommodation_cost
     transport_type
     transport_cost
     offer_space_type
