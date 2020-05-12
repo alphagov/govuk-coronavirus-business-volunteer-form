@@ -152,6 +152,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.it_services.options.virtual_tools.label")
     check I18n.t("coronavirus_form.questions.it_services.options.other.label")
     fill_in "it_services_other", with: "Testing"
+    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 

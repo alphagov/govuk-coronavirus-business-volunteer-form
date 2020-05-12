@@ -277,6 +277,9 @@
     "it_services_other": {
       "type": ["string", "null"]
     },
+    "it_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "offer_care": {
       "$ref": "#/definitions/yes_no"
     },
