@@ -282,9 +282,9 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
   end
 
-  describe "#how_much_charge" do
+  describe "#link_to_parent_page" do
     it "links the user back to the page the question appeared on" do
-      helper.how_much_charge("question", "parent_question") do |item|
+      helper.link_to_parent_page("question", "parent_question") do |item|
         expect(item[:edit][:href]).to include("parent-question?change-answer")
       end
     end

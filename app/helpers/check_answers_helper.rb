@@ -31,13 +31,13 @@ module CheckAnswersHelper
       next transport_type if question.eql?("transport_type")
       next offer_care_qualifications if question.eql?("offer_care_qualifications")
       next offer_staff_type if question.eql?("offer_staff_type")
-      next how_much_charge(question, "offer_staff_type") if question.eql?("offer_staff_charge")
-      next how_much_charge(question, "construction_services") if question.eql?("construction_cost")
-      next how_much_charge(question, "it_services") if question.eql?("it_cost")
-      next how_much_charge(question, "transport_type") if question.eql?("transport_cost")
-      next how_much_charge(question, "offer_care_qualifications") if question.eql?("care_cost")
-      next how_much_charge(question, "rooms_number") if question.eql?("accommodation_cost")
-      next how_much_charge(question, "offer_space_type") if question.eql?("space_cost")
+      next link_to_parent_page(question, "offer_staff_type") if question.eql?("offer_staff_charge")
+      next link_to_parent_page(question, "construction_services") if question.eql?("construction_cost")
+      next link_to_parent_page(question, "it_services") if question.eql?("it_cost")
+      next link_to_parent_page(question, "transport_type") if question.eql?("transport_cost")
+      next link_to_parent_page(question, "offer_care_qualifications") if question.eql?("care_cost")
+      next link_to_parent_page(question, "rooms_number") if question.eql?("accommodation_cost")
+      next link_to_parent_page(question, "offer_space_type") if question.eql?("space_cost")
 
       value = concat_answer(session[question], question)
 
@@ -140,7 +140,7 @@ module CheckAnswersHelper
      }]
   end
 
-  def how_much_charge(question, parent_question)
+  def link_to_parent_page(question, parent_question)
     [{
       field: t("coronavirus_form.questions.#{question}.title"),
       value: sanitize(concat_answer(session[question.to_sym], question)),
