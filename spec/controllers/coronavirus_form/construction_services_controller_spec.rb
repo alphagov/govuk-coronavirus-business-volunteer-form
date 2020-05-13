@@ -59,17 +59,44 @@ RSpec.describe CoronavirusForm::ConstructionServicesController, type: :controlle
 
         expect(response).to redirect_to(offer_care_path)
       end
-    end
 
-    it "redirects to check your answers if check your answers already seen" do
-      session[:check_answers_seen] = true
-      post :submit,
-           params: {
-             construction_services: selected,
-             construction_cost: cost,
-           }
+      it "redirects to check your answers if check your answers already seen" do
+        session[:check_answers_seen] = true
+        post :submit,
+             params: {
+               construction_services: selected,
+               construction_cost: cost,
+             }
 
-      expect(response).to redirect_to(check_your_answers_path)
+        expect(response).to redirect_to(check_your_answers_path)
+      end
+
+      it "redirects to check your answers if user has already answered the IT services question" do
+        session[:check_answers_seen] = true
+        session[:expert_advice_type] = [I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label")]
+        session[:it_services] = [I18n.t("coronavirus_form.questions.it_services.options.broadband.label")]
+
+        post :submit,
+             params: {
+               construction_services: selected,
+               construction_cost: cost,
+             }
+
+        expect(response).to redirect_to(check_your_answers_path)
+      end
+
+      it "redirects to it_services_path user has not answered the IT questions but check your answers has been seen" do
+        session[:check_answers_seen] = true
+        session[:expert_advice_type] = [I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label")]
+
+        post :submit,
+             params: {
+               construction_services: selected,
+               construction_cost: cost,
+             }
+
+        expect(response).to redirect_to(it_services_path)
+      end
     end
 
     it "validates any construction services option is chosen" do
