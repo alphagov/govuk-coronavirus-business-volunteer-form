@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   scope module: "coronavirus_form" do
     first_question = "/medical-equipment"
 
+    get "/start", to: redirect(first_question)
+
     # Question 1.0: Can you offer medical equipment?
     get "/medical-equipment", to: "medical_equipment#show"
     post "/medical-equipment", to: "medical_equipment#submit"
