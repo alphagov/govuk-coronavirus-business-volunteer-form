@@ -8,11 +8,15 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       ],
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
       rooms_number: "100",
+      accommodation_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       transport_type: [
         I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
       ],
+      transport_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_space_type: I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
+      space_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label"),
+      care_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
     }
   end
 
@@ -264,6 +268,14 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
         expected_answer = "One Two Three"
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
+      end
+    end
+  end
+
+  describe "#how_much_charge" do
+    it "links the user back to the page the question appeared on" do
+      helper.how_much_charge("question", "parent_question") do |item|
+        expect(item[:edit][:href]).to include("parent-question?change-answer")
       end
     end
   end

@@ -40,6 +40,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
         offer_space_type_other: "500sqm",
         office_space_description: "400msq",
         general_space_description: "I have extra space of 1000msq",
+        space_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
       }
     end
 
@@ -121,15 +122,22 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
       end
     end
 
-    it "validates any option is chosen" do
+    it "validates any space type option is chosen" do
       post :submit, params: { offer_space: "" }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
-    it "validates a valid option is chosen" do
+    it "validates a valid space type option is chosen" do
       post :submit, params: { offer_space: "<script></script>" }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
+    it "validates a space cost option is chosen" do
+      post :submit, params: params.except(:space_cost)
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

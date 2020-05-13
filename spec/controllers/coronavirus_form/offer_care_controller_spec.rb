@@ -54,6 +54,14 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
       expect(response).to redirect_to(offer_other_support_path)
     end
 
+    it "clears previously entered care cost for a 'No' response" do
+      session[:care_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
+      post :submit, params: { offer_care: selected_no }
+
+      expect(session[:care_cost]).to be nil
+    end
+
     it "validates any option is chosen" do
       post :submit, params: { offer_care: "" }
 

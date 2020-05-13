@@ -31,6 +31,10 @@ private
 
   def update_session_store
     session[:offer_care] = @form_responses[:offer_care]
+
+    if @form_responses[:offer_care] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
+      session[:care_cost] = nil
+    end
   end
 
   def previous_path

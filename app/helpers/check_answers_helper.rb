@@ -3,9 +3,13 @@ module CheckAnswersHelper
     are_you_a_manufacturer
     product_details
     rooms_number
+    accommodation_cost
     transport_type
+    transport_cost
     offer_space_type
+    space_cost
     offer_care_qualifications
+    care_cost
   ].freeze
 
   def items
@@ -18,6 +22,10 @@ module CheckAnswersHelper
       next product_details if question.eql?("product_details")
       next transport_type if question.eql?("transport_type")
       next offer_care_qualifications if question.eql?("offer_care_qualifications")
+      next how_much_charge(question, "transport_type") if question.eql?("transport_cost")
+      next how_much_charge(question, "offer_care_qualifications") if question.eql?("care_cost")
+      next how_much_charge(question, "rooms_number") if question.eql?("accommodation_cost")
+      next how_much_charge(question, "offer_space_type") if question.eql?("space_cost")
 
       value = concat_answer(session[question], question)
 
@@ -118,6 +126,16 @@ module CheckAnswersHelper
          href: "offer-care-qualifications?change-answer",
        },
      }]
+  end
+
+  def how_much_charge(question, parent_question)
+    [{
+      field: t("coronavirus_form.questions.#{question}.title"),
+      value: sanitize(concat_answer(session[question.to_sym], question)),
+      edit: {
+        href: "#{parent_question.dasherize}?change-answer",
+      },
+    }]
   end
 
   def concat_answer(answer, question)

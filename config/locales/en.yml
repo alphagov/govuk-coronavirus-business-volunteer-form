@@ -306,6 +306,8 @@ en:
         hint: "Approximate amount, for example 10, 500, 10000."
         rooms_number:
           custom_error: "Enter the approximate amount of rooms you think you can offer"
+      accommodation_cost:
+        title: "How much would you charge for the accommodation?"
       offer_transport:
         title: "Can you offer transport or logistics?"
         options:
@@ -329,6 +331,8 @@ en:
           label: "Give a description, for example how many vehicles you can offer"
           custom_error: "Enter a description"
           custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
+      transport_cost:
+        title: "How much would you charge for the transport or logistics services?"
       offer_space:
         title: "Can you offer space?"
         hint: "For example, offices or warehouses, for medical use or storage."
@@ -368,6 +372,8 @@ en:
           custom_error: Enter a description
           custom_length_error: Description of space must be 1000 characters or fewer
         custom_select_error: Select the kind of space you can offer
+      space_cost:
+        title: "How much would you charge for the space?"
       expert_advice_type:
         title: "What kind of expertise can you offer?"
         hint: "Select the types of support you can offer."
@@ -433,6 +439,8 @@ en:
           custom_select_error_qualification_or_not: "You cannot select a qualification as well as ’I do not have a qualification’"
           offer_care_qualifications_type:
             custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+      care_cost:
+        title: "How much would you charge for the social care or childcare?"
       offer_other_support:
           title: "Can you offer any other kind of support?"
           hint: "Give a description."
@@ -510,6 +518,16 @@ en:
         email:
           label: "Email of main contact"
           custom_error: "Enter an email address in the correct format, like name@example.com"
+      how_much_charge:
+        title: "How much would you charge?"
+        options:
+          nothing:
+            label: "Nothing, it would be a donation"
+          reduced:
+            label: "A reduced price"
+          standard:
+            label: "A standard price"
+        custom_select_error: "Select if it would be a donation, a reduced price, or standard price"
     thank_you:
       title: "Thank you for offering support"
       description: |

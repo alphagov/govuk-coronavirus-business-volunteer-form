@@ -8,6 +8,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
   let(:current_template) { "coronavirus_form/offer_care_qualifications" }
   let(:session_key_type) { :offer_care_type }
   let(:session_key_qualifcation) { :offer_care_qualifications }
+  let(:session_key_cost) { :care_cost }
 
   describe "GET show" do
     it "renders the form when first question answered" do
@@ -25,16 +26,19 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
   describe "POST submit" do
     let(:selected_type) { [I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label")] }
     let(:selected_qualification) { [I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label")] }
+    let(:selected_care_cost) { I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample }
 
     it "sets session variables" do
       post :submit,
            params: {
              offer_care_type: selected_type,
              offer_care_qualifications: selected_qualification,
+             care_cost: selected_care_cost,
            }
 
       expect(session[session_key_type]).to eq selected_type
       expect(session[session_key_qualifcation]).to eq selected_qualification
+      expect(session[session_key_cost]).to eq selected_care_cost
     end
 
     it "redirects to next step" do
@@ -42,6 +46,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
            params: {
              offer_care_type: selected_type,
              offer_care_qualifications: selected_qualification,
+             care_cost: selected_care_cost,
            }
       expect(response).to redirect_to(offer_other_support_path)
     end
@@ -52,6 +57,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
            params: {
              offer_care_type: selected_type,
              offer_care_qualifications: selected_qualification,
+             care_cost: selected_care_cost,
            }
       expect(response).to redirect_to(check_your_answers_path)
     end
@@ -61,6 +67,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
            params: {
              offer_care_type: [],
              offer_care_qualifications: selected_qualification,
+             care_cost: selected_care_cost,
            }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
@@ -71,6 +78,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
            params: {
              offer_care_type: selected_type,
              offer_care_qualifications: [],
+             care_cost: selected_care_cost,
            }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
@@ -85,6 +93,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
                  I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
                  I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
                ],
+               care_cost: selected_care_cost,
              }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
@@ -99,6 +108,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
                  I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
                ],
                offer_care_qualifications_type: "Registered Nurse",
+               care_cost: selected_care_cost,
              }
 
         expect(response).to redirect_to(offer_other_support_path)
@@ -119,6 +129,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
                I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
              ],
              offer_care_qualifications: selected_qualification,
+             care_cost: selected_care_cost,
            }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
@@ -133,7 +144,19 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
                "invalid option",
                I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
              ],
+             care_cost: selected_care_cost,
            }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
+    it "validates a care cost option is chosen" do
+      post :submit,
+           params: {
+             offer_care_type: selected_type,
+             offer_care_qualifications: selected_qualification,
+           }
+
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
@@ -147,6 +170,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
             I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label"),
           ],
           offer_care_qualifications_type: "Registered Nurse",
+          care_cost: selected_care_cost,
         }
         params[field] = SecureRandom.hex(1001)
         post :submit, params: params

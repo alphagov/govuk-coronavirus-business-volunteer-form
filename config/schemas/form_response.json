@@ -110,6 +110,9 @@
     "rooms_number": {
       "type": "string"
     },
+    "accommodation_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
     "transport_type" :{
       "type": "array",
       "items": {
@@ -123,6 +126,9 @@
     },
     "transport_description": {
       "type": "string"
+    },
+    "transport_cost": {
+      "$ref": "#/definitions/how_much_charge"
     },
     "offer_transport": {
       "$ref": "#/definitions/yes_no"
@@ -140,6 +146,9 @@
           "Other"
         ]
       }
+    },
+    "space_cost": {
+      "$ref": "#/definitions/how_much_charge"
     },
     "warehouse_space_description": {
       "type": ["string", "null"]
@@ -199,6 +208,9 @@
     },
     "offer_care_qualifications_type": {
       "type": ["string", "null"]
+    },
+    "care_cost": {
+      "$ref": "#/definitions/how_much_charge"
     },
     "offer_other_support": {
       "type": "string"
@@ -314,6 +326,14 @@
     "whole_number": {
       "type": "string",
       "pattern": "^[0-9]+$"
+    },
+    "how_much_charge": {
+      "type": "string",
+      "enum": [
+        "Nothing, it would be a donation",
+        "A reduced price",
+        "A standard price"
+      ]
     }
   }
 }

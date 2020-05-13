@@ -40,6 +40,14 @@ RSpec.describe CoronavirusForm::OfferTransportController, type: :controller do
       expect(response).to redirect_to(offer_space_path)
     end
 
+    it "clears previously entered transport cost for a NO response" do
+      session[:transport_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
+      post :submit, params: { offer_transport: selected_no }
+
+      expect(session[:transport_cost]).to be nil
+    end
+
     it "redirects to check your answers if answer = NO and check your answers previously seen" do
       session[:check_answers_seen] = true
       post :submit, params: { offer_transport: selected_no }
