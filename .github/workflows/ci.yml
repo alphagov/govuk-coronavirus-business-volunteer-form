@@ -1,10 +1,7 @@
-name: Run tests
-
 on: [push, pull_request]
 
 jobs:
   container-jobs:
-    name: Pre-merge checks
     runs-on: ubuntu-latest
 
     services:
@@ -21,30 +18,23 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: ruby/setup-ruby@v1
-
-    - name: Install PostgreSQL 11 client
-      run: sudo apt-get -yqq install libpq-dev
-
     - uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+        key: bundle-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: bundle
 
-    - name: Build App
+    - run: sudo apt-get -yqq install libpq-dev
+    - run: |
+        bundle install --jobs 4 --retry 3 --deployment
+        bundle exec rake db:create
+        bundle exec rake db:migrate
       env:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
         DB_USERNAME: postgres
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
-        bundle exec rake db:create
-        bundle exec rake db:migrate
-
-    - name: Run Tests
+    - run: bundle exec rake
       env:
         PGHOST: localhost
         PGUSER: postgres
@@ -52,5 +42,3 @@ jobs:
         DB_USERNAME: postgres
         REDIS_HOST: redis
         REDIS_PORT: ${{ job.services.redis.ports[6379] }}
-      run: |
-        bundle exec rake
