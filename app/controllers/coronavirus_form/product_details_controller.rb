@@ -132,9 +132,13 @@ private
   def error_response(field)
     {
       field: field,
-      text: t("coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
-              default: t("coronavirus_form.errors.missing_mandatory_text_field",
-                         field: t("coronavirus_form.questions.#{controller_name}.#{field}.label")).humanize),
+      text: t(
+        "coronavirus_form.questions.#{controller_name}.#{field}.custom_error",
+        default: t(
+          "coronavirus_form.errors.missing_mandatory_text_field",
+          field: t("coronavirus_form.questions.#{controller_name}.#{field}.label"),
+        ).humanize,
+      ),
     }
   end
 

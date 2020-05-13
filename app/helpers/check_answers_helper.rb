@@ -110,13 +110,14 @@ module CheckAnswersHelper
       edit: {
         href: "offer-care-qualifications?change-answer",
       },
-    }, {
-      field: t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.title"),
-      value: sanitize(Array(session[:offer_care_qualifications]).flatten.to_sentence),
-      edit: {
-        href: "offer-care-qualifications?change-answer",
-      },
-    }]
+    },
+     {
+       field: t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.title"),
+       value: sanitize(Array(session[:offer_care_qualifications]).flatten.to_sentence),
+       edit: {
+         href: "offer-care-qualifications?change-answer",
+       },
+     }]
   end
 
   def concat_answer(answer, question)
