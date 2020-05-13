@@ -44,6 +44,6 @@ private
   end
 
   def previous_path
-    offer_space_url
+    offer_staff_url
   end
 end

@@ -1,0 +1,30 @@
+<% content_for :title do %><%= t('coronavirus_form.questions.offer_staff.title') %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t('coronavirus_form.questions.offer_staff.title') %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-business-offer-space",
+  "data-question-key": "offer_staff",
+  "id": "offer_staff",
+  "novalidate": "true"
+) do %>
+<%= render "govuk_publishing_components/components/radio", {
+  heading: t("coronavirus_form.questions.offer_staff.title"),
+  is_page_heading: true,
+  name: "offer_staff",
+  error_message: error_items("offer_staff"),
+  items: t("coronavirus_form.questions.offer_staff.options").map do |_, item|
+    {
+      value: item[:label],
+      text: item[:label],
+      checked: @form_responses[:offer_staff] == item[:label],
+    }
+  end
+} %>
+<%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>
+<% end %>

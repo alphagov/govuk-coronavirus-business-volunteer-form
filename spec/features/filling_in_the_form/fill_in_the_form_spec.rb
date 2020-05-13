@@ -15,6 +15,7 @@ RSpec.feature "fill in the business volunteer form" do
       and_can_offer_accommodation
       and_can_offer_transport_or_logistics
       and_can_offer_space
+      and_can_offer_staff
       and_can_offer_all_types_of_expertise
       and_can_offer_all_kinds_of_social_and_child_care
       and_offers_these_across_the_uk

@@ -6,6 +6,7 @@
     "accommodation",
     "offer_transport",
     "offer_space",
+    "offer_staff",
     "expert_advice_type",
     "offer_care",
     "business_details",
@@ -161,6 +162,65 @@
     },
     "general_space_description": {
       "type": ["string", "null"]
+    },
+    "offer_staff": {
+      "$ref": "#/definitions/yes_no"
+    },
+    "offer_staff_type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Cleaners",
+          "Developers",
+          "Medical staff",
+          "Office staff",
+          "Security staff",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff"
+        ]
+      }
+    },
+    "offer_staff_number": {
+      "additionalProperties": false,
+      "properties": {
+        "cleaners_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "developers_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "medical_staff_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "office_staff_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "security_staff_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "trainers_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "translators_number": {
+          "$ref": "#/definitions/whole_number"
+        },
+        "other_staff_number": {
+          "$ref": "#/definitions/whole_number"
+        }
+      }
+    },
+    "offer_staff_description": {
+      "type": ["string", "null"]
+    },
+    "offer_staff_charge": {
+      "type": ["string"],
+      "enum": [
+        "Nothing, it would be a donation",
+        "A reduced price",
+        "A standard price"
+      ]
     },
     "expert_advice_type": {
       "type": "array",

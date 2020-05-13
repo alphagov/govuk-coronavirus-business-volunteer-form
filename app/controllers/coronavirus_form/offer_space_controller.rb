@@ -20,7 +20,7 @@ class CoronavirusForm::OfferSpaceController < ApplicationController
       redirect_to check_your_answers_url
     else
       update_session_store
-      redirect_to expert_advice_type_url
+      redirect_to offer_staff_url
     end
   end
 

@@ -105,6 +105,19 @@ module FillInTheFormSteps
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
+  def and_can_offer_staff
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_staff.title"))
+    choose I18n.t("coronavirus_form.questions.offer_staff.options.option_yes.label")
+    click_on I18n.t("coronavirus_form.submit_and_next")
+
+    expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_staff_type.title"))
+    check I18n.t("coronavirus_form.questions.offer_staff_type.offer_staff_type.options.cleaners.label")
+    fill_in "cleaners_number", with: "1000"
+    fill_in "offer_staff_description", with: "Testing"
+    choose I18n.t("coronavirus_form.questions.offer_staff_type.offer_staff_charge.options.nothing.label")
+    click_on I18n.t("coronavirus_form.submit_and_next")
+  end
+
   def and_can_offer_all_types_of_expertise
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.expert_advice_type.title"))
     check I18n.t("coronavirus_form.questions.expert_advice_type.options.medical.label")

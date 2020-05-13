@@ -158,6 +158,49 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
+    describe "offer_staff" do
+      it "returns a list of errors when offer_staff is missing" do
+        data = valid_data.except(:offer_staff)
+        expect(validate_against_form_response_schema(data).first).to include("offer_staff")
+      end
+
+      it "returns a list of errors when offer_staff has an unexpected value" do
+        data = valid_data.merge(offer_staff: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("offer_staff")
+      end
+    end
+
+    describe "offer_staff_type" do
+      it "allows offer_staff_type to be blank" do
+        data = valid_data.except(:offer_staff_type)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when offer_staff_type has an unexpected value" do
+        data = valid_data.merge(offer_staff_type: %w[Foo])
+        expect(validate_against_form_response_schema(data).first).to include("offer_staff_type")
+      end
+    end
+
+    describe "offer_staff_description" do
+      it "allows offer_staff_description to be blank" do
+        data = valid_data.except(:offer_staff_description)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+    end
+
+    describe "offer_staff_charge" do
+      it "allows offer_staff_charge to be blank" do
+        data = valid_data.except(:offer_staff_charge)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when offer_staff_charge has an unexpected value" do
+        data = valid_data.merge(offer_staff_charge: %w[Foo])
+        expect(validate_against_form_response_schema(data).first).to include("offer_staff_charge")
+      end
+    end
+
     describe "expert_advice_type" do
       it "returns a list of errors when offer_space is missing" do
         data = valid_data.except(:expert_advice_type)

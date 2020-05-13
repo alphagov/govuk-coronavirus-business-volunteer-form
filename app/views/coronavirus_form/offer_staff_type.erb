@@ -1,0 +1,58 @@
+<% content_for :title do %><%= t("coronavirus_form.questions.offer_staff_type.title") %><% end %>
+<% content_for :meta_tags do %>
+  <meta name="description" content="<%= t("coronavirus_form.questions.offer_staff_type.title") %>" />
+<% end %>
+
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+<% end %>
+
+<%= form_tag({},
+  "data-module": "track-coronavirus-form-business-offer-space-type",
+  "data-question-key": "offer_staff_type",
+  "id": "offer_staff_type",
+  "novalidate": "true"
+) do %>
+  <%= render "govuk_publishing_components/components/checkboxes", {
+    heading: t("coronavirus_form.questions.offer_staff_type.title"),
+    hint_text: t("coronavirus_form.questions.offer_staff_type.offer_staff_type.hint"),
+    is_page_heading: true,
+    name: "offer_staff_type[]",
+    error: error_items("offer_staff_type_offer_staff_type"),
+    id: "offer_staff_type_offer_staff_type",
+    items: t("coronavirus_form.questions.offer_staff_type.offer_staff_type.options").map do |_, option|
+      {
+        value: option[:label],
+        label: option[:label],
+        checked: @form_responses.fetch(:offer_staff_type, []).include?(option[:label]),
+        conditional: render("govuk_publishing_components/components/input", {
+          label: {
+            text: option[:description][:label],
+          },
+          hint: option[:description][:hint],
+          id: option[:description][:id],
+          name: option[:description][:id],
+          error_message: error_items(option[:description][:id]),
+          value: @form_responses.dig(:offer_staff_number, option[:description][:id].to_sym),
+          width: 10,
+        })
+      }
+    end
+  } %>
+
+  <%= render "govuk_publishing_components/components/textarea", {
+    label: {
+      text: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.label"),
+      heading_size: "m",
+    },
+    name: "offer_staff_description",
+    hint: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.hint"),
+    id: "offer_staff_type_offer_staff_description",
+    error_message: error_items("offer_staff_type_offer_staff_description"),
+    value: @form_responses[:offer_staff_description]
+  } %>
+
+  <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "offer_staff_charge" } %>
+
+  <%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>
+<% end %>
