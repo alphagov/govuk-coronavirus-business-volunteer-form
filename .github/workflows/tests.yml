@@ -28,9 +28,8 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+        key: bundle-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: bundle
 
     - name: Build App
       env:
@@ -39,8 +38,7 @@ jobs:
         RAILS_ENV: test
         DB_USERNAME: postgres
       run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundle install --jobs 4 --retry 3 --deployment
         bundle exec rake db:create
         bundle exec rake db:migrate
 
