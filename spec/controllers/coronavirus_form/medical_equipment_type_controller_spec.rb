@@ -50,9 +50,10 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     end
 
     it "validates a valid option is chosen" do
-      post :submit, params: {
-        medical_equipment_type: "<script></script",
-      }
+      post :submit,
+           params: {
+             medical_equipment_type: "<script></script",
+           }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

@@ -56,10 +56,11 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
       end
 
       it "adds the other option description to the session" do
-        post :submit, params: {
-          expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.other.label")] + selected,
-          expert_advice_type_other: "Demo text",
-        }
+        post :submit,
+             params: {
+               expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.other.label")] + selected,
+               expert_advice_type_other: "Demo text",
+             }
 
         expect(session[session_key]).to eq [I18n.t("coronavirus_form.questions.expert_advice_type.options.other.label")] + selected
         expect(session[:expert_advice_type_other]).to eq "Demo text"
@@ -68,18 +69,20 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
     end
 
     it "validates a valid option is chosen" do
-      post :submit, params: {
-        expert_advice_type: ["<script></script", "invalid option"],
-      }
+      post :submit,
+           params: {
+             expert_advice_type: ["<script></script", "invalid option"],
+           }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
 
     it "validates only valid options are chosen" do
-      post :submit, params: {
-        expert_advice_type: ["<script></script", "invalid option"] + selected,
-      }
+      post :submit,
+           params: {
+             expert_advice_type: ["<script></script", "invalid option"] + selected,
+           }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

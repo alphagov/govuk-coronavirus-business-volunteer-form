@@ -64,23 +64,25 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
 
     context "when Other option is selected" do
       it "validates the Other option description is provided" do
-        post :submit, params: { offer_space_type: [
-          I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
-          I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
-        ] }
+        post :submit,
+             params: { offer_space_type: [
+               I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
+               I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+             ] }
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(current_template)
       end
 
       it "adds the other option description to the session" do
-        post :submit, params: params.merge(
-          offer_space_type: [
-            I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
-            I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
-          ],
-          offer_space_type_other: "A really big garden.",
-        )
+        post :submit,
+             params: params.merge(
+               offer_space_type: [
+                 I18n.t("coronavirus_form.questions.offer_space_type.options.other.label"),
+                 I18n.t("coronavirus_form.questions.offer_space_type.options.office_space.label"),
+               ],
+               offer_space_type_other: "A really big garden.",
+             )
 
         expect(response).to redirect_to(expert_advice_type_path)
         expect(session[session_key]).to eq [

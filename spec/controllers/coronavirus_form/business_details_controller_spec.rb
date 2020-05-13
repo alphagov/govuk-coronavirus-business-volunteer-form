@@ -79,17 +79,19 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
     end
 
     it "does not require postcode is provided if company location is not UK" do
-      post :submit, params: params.merge(
-        company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.european_union.label"),
-      ).except(:company_postcode)
+      post :submit,
+           params: params.merge(
+             company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.european_union.label"),
+           ).except(:company_postcode)
 
       expect(response).to redirect_to(contact_details_path)
     end
 
     it "validates postcode is provided if company location is UK" do
-      post :submit, params: params.merge(
-        company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
-      ).except(:company_postcode)
+      post :submit,
+           params: params.merge(
+             company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
+           ).except(:company_postcode)
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
@@ -108,20 +110,22 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
       ]
 
       valid_postcodes.each do |postcode|
-        post :submit, params: params.merge(
-          company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
-          company_postcode: postcode,
-        )
+        post :submit,
+             params: params.merge(
+               company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
+               company_postcode: postcode,
+             )
 
         expect(response).to redirect_to(contact_details_path)
       end
     end
 
     it "does not redirect to next step when postcode is invalid" do
-      post :submit, params: params.merge(
-        company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
-        company_postcode: "AAA1 1AA",
-      )
+      post :submit,
+           params: params.merge(
+             company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),
+             company_postcode: "AAA1 1AA",
+           )
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

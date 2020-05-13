@@ -56,13 +56,14 @@ RSpec.describe CoronavirusForm::AreYouAManufacturerController, type: :controller
     end
 
     it "validates a valid option is chosen" do
-      post :submit, params: {
-        are_you_a_manufacturer: [
-          "<script></script",
-          "invalid option",
-          "Medical equipment",
-        ],
-      }
+      post :submit,
+           params: {
+             are_you_a_manufacturer: [
+               "<script></script",
+               "invalid option",
+               "Medical equipment",
+             ],
+           }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

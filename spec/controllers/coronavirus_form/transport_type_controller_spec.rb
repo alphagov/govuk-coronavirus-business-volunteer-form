@@ -30,30 +30,33 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
     let(:description) { "Something" }
 
     it "sets session variables" do
-      post :submit, params: {
-        transport_type: selected,
-        transport_description: description,
-      }
+      post :submit,
+           params: {
+             transport_type: selected,
+             transport_description: description,
+           }
 
       expect(session[session_key]).to eq selected
       expect(session[session_key_text]).to eq description
     end
 
     it "redirects to next step" do
-      post :submit, params: {
-        transport_type: selected,
-        transport_description: description,
-      }
+      post :submit,
+           params: {
+             transport_type: selected,
+             transport_description: description,
+           }
 
       expect(response).to redirect_to(offer_space_path)
     end
 
     it "redirects to check your answers if check your answers previously seen" do
       session[:check_answers_seen] = true
-      post :submit, params: {
-        transport_type: selected,
-        transport_description: description,
-      }
+      post :submit,
+           params: {
+             transport_type: selected,
+             transport_description: description,
+           }
 
       expect(response).to redirect_to("/check-your-answers")
     end
@@ -74,10 +77,11 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
 
     it "validates a description is entered" do
       session[:check_answers_seen] = true
-      post :submit, params: {
-        transport_type: selected,
-        transport_description: "",
-      }
+      post :submit,
+           params: {
+             transport_type: selected,
+             transport_description: "",
+           }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
     end
