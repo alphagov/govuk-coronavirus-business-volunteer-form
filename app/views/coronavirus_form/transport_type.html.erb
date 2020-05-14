@@ -31,7 +31,8 @@
 
 <%= render "govuk_publishing_components/components/textarea", {
   label: {
-    text: t("coronavirus_form.questions.transport_type.transport_description.label")
+    text: t("coronavirus_form.questions.transport_type.transport_description.label"),
+    heading_size: "m"
   },
   name: "transport_description",
   error_message: error_items("transport_description"),
