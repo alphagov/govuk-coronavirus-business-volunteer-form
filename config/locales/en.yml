@@ -368,7 +368,8 @@ en:
               custom_length_error: "Description of other space must be 1000 characters or fewer"
               error_message: Enter the approximate total size of the spaces, in square feet
         general_space_description:
-          label: Give a description, for example whether you have one space, or multiple units
+          label: "Give a description of the space (optional)"
+          hint: "For example whether you have one space, or multiple units."
           custom_error: Enter a description
           custom_length_error: Description of space must be 1000 characters or fewer
         custom_select_error: Select the kind of space you can offer
