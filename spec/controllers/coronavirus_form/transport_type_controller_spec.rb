@@ -93,18 +93,6 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
       expect(response).to render_template(current_template)
     end
 
-    it "validates a description is entered" do
-      session[:check_answers_seen] = true
-      post :submit,
-           params: {
-             transport_type: selected,
-             transport_description: "",
-             transport_cost: cost,
-           }
-      expect(response).to have_http_status(:unprocessable_entity)
-      expect(response).to render_template(current_template)
-    end
-
     it "validates a transport cost option is chosen" do
       post :submit,
            params: {
