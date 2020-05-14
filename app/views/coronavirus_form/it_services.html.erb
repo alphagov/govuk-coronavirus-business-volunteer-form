@@ -1,0 +1,43 @@
+<% content_for :title do %><%= t("coronavirus_form.questions.it_services.title") %><% end %>
+    <% content_for :meta_tags do %>
+      <meta name="description" content="<%= t("coronavirus_form.questions.it_services.title") %>" />
+    <% end %>
+
+    <% content_for :back_link do %>
+      <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
+    <% end %>
+
+    <%= form_tag({},
+      "data-module": "track-coronavirus-form-business-it-services",
+      "data-question-key": "it_services",
+      "id": "it_services",
+      "novalidate": "true"
+    ) do %>
+    <%= render "govuk_publishing_components/components/checkboxes", {
+      heading: t("coronavirus_form.questions.it_services.title"),
+      hint_text: t("coronavirus_form.questions.it_services.hint"),
+      is_page_heading: true,
+      name: "it_services[]",
+      error: error_items("it_services"),
+      items: t("coronavirus_form.questions.it_services.options").map do |option, _|
+        {
+          value: t("coronavirus_form.questions.it_services.options.#{option}.label"),
+          label: t("coronavirus_form.questions.it_services.options.#{option}.label"),
+          checked: @form_responses.fetch(:it_services, []).include?(t("coronavirus_form.questions.it_services.options.#{option}.label")),
+        }
+      end
+    } %>
+
+    <%= render "govuk_publishing_components/components/textarea", {
+      label: {
+        text: t("coronavirus_form.questions.it_services_other.title"),
+        bold: true
+      },
+      name: "it_services_other",
+      value: @form_responses[:it_services_other]
+    } %>
+
+    <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "it_cost" } %>
+
+    <%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>
+    <% end %>

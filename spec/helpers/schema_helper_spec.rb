@@ -220,6 +220,68 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
+    describe "construction_services" do
+      it "allows construction_services to be blank" do
+        data = valid_data.except(:construction_services)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when construction_services has an unexpected value" do
+        data = valid_data.merge(construction_services: %w[Foo])
+        expect(validate_against_form_response_schema(data).first).to include("construction_services")
+      end
+    end
+
+    describe "construction_services_other" do
+      it "allows construction_services_other to be blank" do
+        data = valid_data.except(:construction_services_other)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+    end
+
+    describe "construction_cost" do
+      it "allows construction_cost to be blank" do
+        data = valid_data.except(:construction_cost)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when construction_cost has an unexpected value" do
+        data = valid_data.merge(construction_cost: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("construction_cost")
+      end
+    end
+
+    describe "it_services" do
+      it "allows it_services to be blank" do
+        data = valid_data.except(:it_services)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when it_services has an unexpected value" do
+        data = valid_data.merge(it_services: %w[Foo])
+        expect(validate_against_form_response_schema(data).first).to include("it_services")
+      end
+    end
+
+    describe "it_services_other" do
+      it "allows it_services_other to be blank" do
+        data = valid_data.except(:it_services_other)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+    end
+
+    describe "it_cost" do
+      it "allows it_cost to be blank" do
+        data = valid_data.except(:it_cost)
+        expect(validate_against_form_response_schema(data)).to be_empty
+      end
+
+      it "returns a list of errors when it_cost has an unexpected value" do
+        data = valid_data.merge(it_cost: "Foo")
+        expect(validate_against_form_response_schema(data).first).to include("it_cost")
+      end
+    end
+
     describe "offer_care" do
       it "returns a list of errors when offer_space is missing" do
         data = valid_data.except(:offer_care)

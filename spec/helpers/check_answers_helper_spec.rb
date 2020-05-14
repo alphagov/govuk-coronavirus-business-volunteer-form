@@ -21,6 +21,12 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         I18n.t("coronavirus_form.questions.offer_staff_type.offer_staff_type.options.developers.label"),
       ],
       offer_staff_charge: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      construction_services: I18n.t("coronavirus_form.questions.construction_services.options").map { |_, item| item[:label] },
+      construction_services_other: "Build all the things",
+      construction_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      it_services: I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] },
+      it_services_other: "Supply all the things",
+      it_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
     }
   end
 
@@ -276,9 +282,9 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     end
   end
 
-  describe "#how_much_charge" do
+  describe "#link_to_parent_page" do
     it "links the user back to the page the question appeared on" do
-      helper.how_much_charge("question", "parent_question") do |item|
+      helper.link_to_parent_page("question", "parent_question") do |item|
         expect(item[:edit][:href]).to include("parent-question?change-answer")
       end
     end

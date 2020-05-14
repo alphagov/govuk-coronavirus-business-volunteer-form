@@ -27,17 +27,108 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
       expect(session[session_key]).to eq selected
     end
 
-    it "redirects to next step" do
-      post :submit, params: { expert_advice_type: selected }
+    describe "#next_page" do
+      it "redirects to construction_services path if construction has been selected" do
+        post :submit, params: { expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label")] }
 
-      expect(response).to redirect_to(offer_care_path)
+        expect(response).to redirect_to(construction_services_path)
+      end
+
+      it "redirects to construction_services path if both construction and IT have been selected" do
+        post :submit,
+             params: {
+               expert_advice_type: [
+                 I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+                 I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+               ],
+             }
+
+        expect(response).to redirect_to(construction_services_path)
+      end
+
+      it "redirects to it_services path if IT has been selected but construction has not" do
+        post :submit, params: { expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label")] }
+
+        expect(response).to redirect_to(it_services_path)
+      end
+
+      it "redirects to offer_care path if neither construction or IT has been selected" do
+        post :submit, params: { expert_advice_type: selected }
+
+        expect(response).to redirect_to(offer_care_path)
+      end
+
+      it "redirects to check your answers if check your answers already seen" do
+        session[:check_answers_seen] = true
+        post :submit, params: { expert_advice_type: selected }
+
+        expect(response).to redirect_to(check_your_answers_path)
+      end
+
+      context "user changes answer to expert_advice_type" do
+        before do
+          session[:check_answers_seen] = true
+        end
+
+        it "asks IT services questions if the construction questions have already been answered" do
+          session[:expert_advice_type] = [I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label")]
+          session[:construction_services] = [I18n.t("coronavirus_form.questions.construction_services.options.building_materials.label")]
+
+          post :submit,
+               params: {
+                 expert_advice_type: [
+                   I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+                   I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+                 ],
+               }
+
+          expect(response).to redirect_to(it_services_path)
+        end
+
+        it "redirects to check your answers if the construction and IT services questions have already been answered" do
+          session[:expert_advice_type] = [
+            I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+            I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+          ]
+          session[:construction_services] = [I18n.t("coronavirus_form.questions.construction_services.options.building_materials.label")]
+          session[:it_services] = [I18n.t("coronavirus_form.questions.it_services.options.broadband.label")]
+
+          post :submit,
+               params: {
+                 expert_advice_type: [
+                   I18n.t("coronavirus_form.questions.expert_advice_type.options.medical.label"),
+                   I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+                   I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+                 ],
+               }
+
+          expect(response).to redirect_to(check_your_answers_path)
+        end
+      end
     end
 
-    it "redirects to check your answers if check your answers already seen" do
-      session[:check_answers_seen] = true
+    it "clears previously entered construction data if construction is no longer selected" do
+      session[:construction_services] = I18n.t("coronavirus_form.questions.construction_services.options").map { |_, item| item[:label] }.sample
+      session[:construction_services_other] = "Foo"
+      session[:construction_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
       post :submit, params: { expert_advice_type: selected }
 
-      expect(response).to redirect_to(check_your_answers_path)
+      expect(session[:construction_services]).to be nil
+      expect(session[:construction_services_other]).to be nil
+      expect(session[:construction_cost]).to be nil
+    end
+
+    it "clears previously entered it_cost if construction is no longer selected" do
+      session[:it_services] = I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] }.sample
+      session[:it_services_other] = "Foo"
+      session[:it_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+
+      post :submit, params: { expert_advice_type: selected }
+
+      expect(session[:it_services]).to be nil
+      expect(session[:it_services_other]).to be nil
+      expect(session[:it_cost]).to be nil
     end
 
     it "validates any option is chosen" do

@@ -21,12 +21,9 @@ class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
       flash.now[:validation] = invalid_fields
       log_validation_error(invalid_fields)
       render controller_path, status: :unprocessable_entity
-    elsif session["check_answers_seen"]
-      update_session_store
-      redirect_to check_your_answers_url
     else
       update_session_store
-      redirect_to offer_care_url
+      redirect_to polymorphic_url(next_page)
     end
   end
 
@@ -35,6 +32,18 @@ private
   def update_session_store
     session[:expert_advice_type] = @form_responses[:expert_advice_type]
     session[:expert_advice_type_other] = @form_responses[:expert_advice_type_other]
+
+    unless @form_responses[:expert_advice_type].include?(I18n.t("coronavirus_form.questions.#{controller_name}.options.construction.label"))
+      session[:construction_services] = nil
+      session[:construction_services_other] = nil
+      session[:construction_cost] = nil
+    end
+
+    unless @form_responses[:expert_advice_type].include?(I18n.t("coronavirus_form.questions.#{controller_name}.options.it.label"))
+      session[:it_services] = nil
+      session[:it_services_other] = nil
+      session[:it_cost] = nil
+    end
   end
 
   def selected_other?
@@ -45,5 +54,27 @@ private
 
   def previous_path
     offer_staff_url
+  end
+
+  def next_page
+    return "construction_services" if construction_services?
+    return "it_services" if it_services?
+    return "check_your_answers" if session["check_answers_seen"]
+
+    "offer_care"
+  end
+
+  def construction_services?
+    session[:construction_services].blank? &&
+      session[:expert_advice_type]&.include?(
+        I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"),
+      )
+  end
+
+  def it_services?
+    session[:it_services].blank? &&
+      session[:expert_advice_type]&.include?(
+        I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"),
+      )
   end
 end

@@ -464,8 +464,8 @@ en:
       offer_staff_charge:
         title: "How much would you charge for staff?"
       expert_advice_type:
-        title: "What kind of expertise can you offer?"
-        hint: "Select the types of support you can offer."
+        title: "What kind of services or expertise can you offer?"
+        hint: "Select all that apply."
         or: "Or"
         options:
           medical:
@@ -484,12 +484,56 @@ en:
             label: "Other"
             input:
               label: "Give a description"
-            error_message: "Enter the best way to describe the type of expertise you have"
+            error_message: "Select the best way to describe the services or expertise you can offer"
           no_expertise:
             label: "I cannot offer expertise"
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
         expert_advice_type_other:
           custom_length_error: "Description of your expertise must be 1000 characters or fewer"
+      construction_services:
+        title: "What kind of construction services can you offer?"
+        hint: "Select the types of services you can offer."
+        options:
+          building_materials:
+            label: "Building materials"
+          building_maintenance:
+            label: "Building maintenance"
+          temporary_buildings:
+            label: "Constructing temporary buildings"
+          construction_work:
+            label: "Construction work"
+          other:
+            label: "Other"
+      construction_services_other:
+        title: "Give a description of the type of construction services (optional)"
+        hint: "For example, the amount of work you can do."
+        construction_services_other:
+          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+      construction_cost:
+        title: "How much would you charge for the construction services?"
+      it_services:
+        title: What kind of IT services can you offer?
+        hint: "Select the types of services you can offer."
+        options:
+          broadband:
+            label: "Broadband or wifi"
+          equipment:
+            label: "Laptops, desktops, or other computer equipment"
+          mobile_phones:
+            label: "Mobile phones"
+          video_conferencing:
+            label: "Video conferencing"
+          virtual_tools:
+            label: "Virtual office tools"
+          other:
+            label: "Other"
+      it_services_other:
+        title: "Give a description of the type of IT services (optional)"
+        hint: "For example, the amount of services you can offer."
+        it_services_other:
+          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+      it_cost:
+        title: "How much would you charge for the IT services?"
       offer_care:
         title: "Can you offer social care or childcare?"
         hint: "For example, nursing or assistance to other people."

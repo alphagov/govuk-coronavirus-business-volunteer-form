@@ -237,10 +237,48 @@
           "I cannot offer expertise"
         ]
       }
-
     },
     "expert_advice_type_other": {
       "type": ["string", "null"]
+    },
+    "construction_services": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Building materials",
+          "Building maintenance",
+          "Constructing temporary buildings",
+          "Construction work",
+          "Other"
+        ]
+      }
+    },
+    "construction_services_other": {
+      "type": ["string", "null"]
+    },
+    "construction_cost": {
+      "$ref": "#/definitions/how_much_charge"
+    },
+    "it_services": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Broadband or wifi",
+          "Laptops, desktops, or other computer equipment",
+          "Mobile phones",
+          "Video conferencing",
+          "Virtual office tools",
+          "Other"
+        ]
+      }
+    },
+    "it_services_other": {
+      "type": ["string", "null"]
+    },
+    "it_cost": {
+      "$ref": "#/definitions/how_much_charge"
     },
     "offer_care": {
       "$ref": "#/definitions/yes_no"
