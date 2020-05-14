@@ -27,6 +27,20 @@
   error_message: error_items("rooms_number")
 } %>
 
+<%= render "govuk_publishing_components/components/character_count", {
+  textarea: {
+    label: {
+      text: t("coronavirus_form.questions.rooms_number.accommodation_description.label"),
+      heading_size: "m"
+    },
+    hint: t("coronavirus_form.questions.rooms_number.accommodation_description.hint"),
+    name: "accommodation_description",
+    error_message: error_items("accommodation_description"),
+    value: @form_responses[:accommodation_description]
+  },
+  maxlength: 1000
+} %>
+
 <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "accommodation_cost" } %>
 
 <%= render "govuk_publishing_components/components/button", text: t("coronavirus_form.submit_and_next"), margin_bottom: true %>

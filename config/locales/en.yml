@@ -306,6 +306,11 @@ en:
         hint: "Approximate amount, for example 10, 500, 10000."
         rooms_number:
           custom_error: "Enter the approximate amount of rooms you think you can offer"
+        accommodation_description:
+          label: "Give a description of the rooms (optional)"
+          hint: "For example whether they’re in one location, or in different places."
+          custom_error: "Enter a description"
+          custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
       accommodation_cost:
         title: "How much would you charge for the accommodation?"
       offer_transport:
