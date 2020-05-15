@@ -29,13 +29,18 @@
   end
 } %>
 
-<%= render "govuk_publishing_components/components/textarea", {
-  label: {
-    text: t("coronavirus_form.questions.transport_type.transport_description.label")
+<%= render "govuk_publishing_components/components/character_count", {
+  textarea: {
+    label: {
+      text: t("coronavirus_form.questions.transport_type.transport_description.label"),
+      heading_size: "m"
+    },
+    hint: t("coronavirus_form.questions.transport_type.transport_description.hint"),
+    name: "transport_description",
+    error_message: error_items("transport_description"),
+    value: @form_responses[:transport_description]
   },
-  name: "transport_description",
-  error_message: error_items("transport_description"),
-  value: @form_responses[:transport_description]
+  maxlength: 1000
 } %>
 
 <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "transport_cost" } %>

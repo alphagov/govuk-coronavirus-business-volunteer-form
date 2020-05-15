@@ -111,6 +111,9 @@
     "rooms_number": {
       "type": "string"
     },
+    "accommodation_description": {
+      "type": "string"
+    },
     "accommodation_cost": {
       "$ref": "#/definitions/how_much_charge"
     },

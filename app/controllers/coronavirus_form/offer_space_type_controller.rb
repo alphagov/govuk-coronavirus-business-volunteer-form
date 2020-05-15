@@ -47,7 +47,6 @@ private
     [
       validate_field_response_length(controller_name, TEXT_FIELDS),
       validate_checkbox_field(controller_name, values: @form_responses[:offer_space_type], allowed_values: ALLOWED_VALUES),
-      validate_mandatory_text_fields(controller_name, TEXT_FIELDS),
       validate_description_fields(@form_responses[:offer_space_type]),
       validate_descriptions_response_length(@form_responses[:offer_space_type]),
       validate_charge_field("space_cost", @form_responses[:space_cost]),

@@ -25,15 +25,18 @@ RSpec.describe CoronavirusForm::RoomsNumberController, type: :controller do
     let(:cost) do
       I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
     end
+    let(:description) { "Hotel rooms" }
 
     it "sets session variables" do
       post :submit,
            params: {
              rooms_number: selected,
              accommodation_cost: cost,
+             accommodation_description: description,
            }
       expect(session[:rooms_number]).to eq selected
       expect(session[:accommodation_cost]).to eq cost
+      expect(session[:accommodation_description]).to eq description
     end
 
     it "redirects to check your answers if check your answers previously seen" do
@@ -66,6 +69,21 @@ RSpec.describe CoronavirusForm::RoomsNumberController, type: :controller do
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)
+    end
+
+    described_class::TEXT_FIELDS.each do |field|
+      it "validates that #{field} is 1000 or fewer characters" do
+        params = {
+          rooms_number: selected,
+          accommodation_cost: cost,
+          accommodation_description: description,
+        }
+        params[field] = SecureRandom.hex(1001)
+        post :submit, params: params
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to render_template(current_template)
+      end
     end
   end
 end
