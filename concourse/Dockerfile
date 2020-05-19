@@ -4,7 +4,7 @@
 #
 # This is needed for running the feature tests in a container environment like Concourse.
 #========================================================================================
-FROM ruby:2.6.5-buster
+FROM ruby:2.6.6-buster
 
 # Updates all debian dependencies
 # Adds google chrome to software sources, install chrome, install postgres and redis
