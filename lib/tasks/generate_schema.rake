@@ -6,7 +6,15 @@ def replace_meta_enums json
       if value.size > 1
         throw ArgumentError("A meta enum should have a length of one. Found: #{value}")
       end
-      json["enum"] = I18n.t(value.first.split(":", 2).last).map { |_, option| option[:label] }
+      begin
+        enum_values = I18n.t(value.first.split(":", 2).last).map { |_, option| option[:label] }
+      rescue NoMethodError
+        throw "Could not map key '#{value.first}' to yml structure"
+      end
+      if enum_values.any? { |v| v.class != String }
+        throw "Expected all option labels to be strings, Obtained: '#{enum_values}' for #{value.first}"
+      end
+      json["enum"] = enum_values
     elsif value.class == Hash
       replace_meta_enums value
     elsif value.class == Array
