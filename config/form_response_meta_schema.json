@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "This is a meta-schema.",
+  "description": "This meta-schema, it is used to generate the form response schema. refer to the readme for details",
   "type": "object",
   "required": [
     "medical_equipment",
