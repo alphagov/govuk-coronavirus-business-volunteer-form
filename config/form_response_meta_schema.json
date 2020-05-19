@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "This is a meta-schema.",
   "type": "object",
   "required": [
     "medical_equipment",
@@ -20,12 +21,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "Manufacturer",
-          "Distributor",
-          "Agent",
-          "Individual"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.are_you_a_manufacturer.options" ]
       }
     },
     "product_details": {
@@ -40,10 +36,7 @@
         "properties": {
           "medical_equipment_type": {
             "type": "string",
-            "enum": [
-              "Personal protective equipment, for example masks, detergent and waste bags",
-              "Testing equipment"
-            ]
+            "enum": [ "meta_i18n_enum:coronavirus_form.questions.medical_equipment_type.options" ]
           },
           "product_id": {
             "type": "string",
@@ -57,18 +50,14 @@
           },
           "product_cost": {
             "type": "string",
-            "pattern": "^[0-9]*\.?[0-9]{0,2}$"
+            "pattern": "^[0-9]*\\.?[0-9]{0,2}$"
           },
           "certification_details": {
             "type": "string"
           },
           "product_location": {
             "type": "string",
-            "enum": [
-              "United Kingdom",
-              "European Union",
-              "Rest of world"
-            ]
+            "enum": [ "meta_i18n_enum:coronavirus_form.questions.product_details.product_location.options" ]
           },
           "product_postcode": {
             "$ref": "#/definitions/postcode"
@@ -81,31 +70,14 @@
           },
           "equipment_type": {
             "type": ["string"],
-            "enum": [
-              "FFP3 respirators",
-              "FFP2 respirators",
-              "Aprons",
-              "Gloves",
-              "Type IIR face masks",
-              "Safety glasses or visors",
-              "Alcohol hand gel",
-              "Gowns",
-              "Face fit test kit",
-              "Face fit test solution",
-              "General purpose detergent",
-              "Cleaning Equipment"
-            ]
+            "enum": [ "meta_i18n_enum:coronavirus_form.questions.product_details.equipment_type.options" ]
           }
         }
       }
     },
     "accommodation": {
       "type": "string",
-      "enum": [
-        "Yes – for people to stay in",
-        "Yes – for any use",
-        "No"
-      ]
+      "enum": [ "meta_i18n_enum:coronavirus_form.questions.accommodation.options" ]
     },
     "rooms_number": {
       "type": "string"
@@ -114,11 +86,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "Moving people",
-          "Moving goods",
-          "Other"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.transport_type.options" ]
       }
     },
     "transport_description": {
@@ -134,11 +102,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "Warehouse space",
-          "Office space",
-          "Other"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.offer_space_type.options" ]
       }
     },
     "warehouse_space_description": {
@@ -157,16 +121,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "Medical",
-          "Engineering",
-          "Construction",
-          "Project management or procurement",
-          "IT services",
-          "Manufacturing",
-          "Other",
-          "I cannot offer expertise"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.expert_advice_type.options" ]
       }
 
     },
@@ -180,21 +135,14 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "Care for adults",
-          "Care for children"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.offer_care_qualifications.offer_care_type.options" ]
       }
     },
     "offer_care_qualifications": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "DBS check",
-          "Nursing or other healthcare qualification",
-          "I do not have a qualification"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.offer_care_qualifications.care_qualifications.options" ]
       }
     },
     "offer_care_qualifications_type": {
@@ -207,20 +155,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "East of England",
-          "East Midlands",
-          "West Midlands",
-          "London",
-          "North East",
-          "North West",
-          "South East",
-          "South West",
-          "Yorkshire and the Humber",
-          "Northern Ireland",
-          "Scotland",
-          "Wales"
-        ]
+        "enum": [ "meta_i18n_enum:coronavirus_form.questions.location.options" ]
       }
     },
     "business_details": {
@@ -240,19 +175,11 @@
         },
         "company_size": {
           "type": "string",
-          "enum": [
-            "Under 50 people",
-            "50 to 250 people",
-            "More than 250 people"
-          ]
+          "enum": [ "meta_i18n_enum:coronavirus_form.questions.business_details.company_size.options" ]
         },
         "company_location": {
           "type": "string",
-          "enum": [
-            "United Kingdom",
-            "European Union",
-            "Rest of world"
-          ]
+          "enum": [ "meta_i18n_enum:coronavirus_form.questions.business_details.company_location.options" ]
         },
         "company_postcode": {
           "$ref": "#/definitions/postcode"
