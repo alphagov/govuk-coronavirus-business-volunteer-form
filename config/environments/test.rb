@@ -41,7 +41,7 @@ Rails.application.configure do
   config.analytics_tracking_id = "12345"
 
   config.cache_store = :redis_cache_store
-  config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
+  config.session_store :cache_store, expire_after: 4.hours, key: "_sessions_store"
 
   # Use test delivery method instead of sending emails to Notify.
   config.action_mailer.delivery_method = :test

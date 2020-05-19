@@ -104,7 +104,7 @@ Rails.application.configure do
     redis_url = instance.dig("credentials", "uri")
     config.cache_store = :redis_cache_store, { url: redis_url }
     # If you change the expiry here, you should also change it on the privacy policy.
-    config.session_store :cache_store, expires_in: 4.hours, key: "_sessions_store"
+    config.session_store :cache_store, expire_after: 4.hours, key: "_sessions_store"
 
     Sidekiq.configure_server do |config|
       config.redis = { url: redis_url }
