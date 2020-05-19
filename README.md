@@ -82,6 +82,56 @@ The template should have a Message of `((body))` only.
 
     bundle exec rake
 
+### Updating the form response schema
+
+The form response schema is automatically generated from the meta-schema and
+the `en.yml` locale file whenever rake is invoked. i.e when the server is started, 
+or the tests are ran.  
+
+The generated file appears at 
+
+    config/schemas/form_response.json
+
+If you want to generate it manually you can run:
+
+    bundle exec rake generate-schema
+
+If you want to edit the schema, edit the meta-schema file
+
+    config/form_response_metaschema.json
+
+This json file is almost identical to a json schema, the only difference is
+that it goes through a processing step that replaces any enums with the prefix
+`meta_i18n_enum:` with values found in `config/locales/en.yml`.
+
+#### Example
+
+Specifying an enum like so:
+
+    "enum" [
+        "meta_i18n_enum:department.options"
+    ]
+
+Will result in the processing step looking at `department.options` in `en.yml`
+path, and adding each of the labels of the options to the enum. i.e When the
+above enum is processed together with an `en.yml` file with the following
+structure:
+
+    department:
+        options:
+          medical:
+            label: "Medical"
+          engineering:
+            label: "Engineering"
+
+The enum in the schema will look like the following:
+
+    "enum" [
+        "Medical",
+        "Engineering",
+    ]
+
+
 ## Deployment pipeline
 
 Every commit to master is deployed to GOV.UK PaaS by
