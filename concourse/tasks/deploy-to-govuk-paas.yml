@@ -25,6 +25,9 @@ params:
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
+  AWS_ASSETS_BUCKET_NAME:
+  AWS_ERROR_PAGES_BUCKET_NAME:
+  AWS_REGION: eu-west-2
   GOVUK_NOTIFY_TEMPLATE_ID:
   NOTIFY_API_KEY:
 run:
@@ -46,6 +49,8 @@ run:
       cf v3-scale --process worker -i "$WORKER_INSTANCES" govuk-coronavirus-business-volunteer-form
 
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ASSETS_BUCKET_NAME "$AWS_ASSETS_BUCKET_NAME"
+      cf set-env govuk-coronavirus-business-volunteer-form AWS_ERROR_PAGES_BUCKET_NAME "$AWS_ERROR_PAGES_BUCKET_NAME"
+      cf set-env govuk-coronavirus-business-volunteer-form AWS_REGION "$AWS_REGION"
       if [[ "${REQUIRE_BASIC_AUTH:-}" = "true" ]]; then
         cf set-env govuk-coronavirus-business-volunteer-form REQUIRE_BASIC_AUTH "$REQUIRE_BASIC_AUTH"
       fi
