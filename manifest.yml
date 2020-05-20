@@ -10,6 +10,7 @@ applications:
   - splunk-ssl-drain
   - govuk-coronavirus-business-volunteer-form-redis
   - govuk-coronavirus-business-volunteer-form-s3
+  - prometheus-service-broker
   env:
     GOVUK_APP_DOMAIN: cloudapps.digital
     GOVUK_WEBSITE_ROOT: www.gov.uk

@@ -59,3 +59,8 @@ run:
       cf set-env govuk-coronavirus-business-volunteer-form PAAS_ENV "$CF_SPACE"
       cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
       cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname "$HOSTNAME"
+
+      cf map-route govuk-coronavirus-business-volunteer-form coronavirus-business-volunteers.service.gov.uk --path metrics
+      cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname govuk-coronavirus-business-volunteer-form-prod --path metrics
+      cf bind-route-service coronavirus-business-volunteers.service.gov.uk re-ip-whitelist-service --path metrics
+      cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname govuk-coronavirus-business-volunteer-form-prod --path metrics

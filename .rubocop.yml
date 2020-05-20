@@ -15,3 +15,7 @@ Metrics/BlockLength:
 Style/WordArray:
   Exclude:
     - config/**/*.rb
+
+Rails/HttpPositionalArguments:
+  Exclude:
+      - spec/requests/**/*
