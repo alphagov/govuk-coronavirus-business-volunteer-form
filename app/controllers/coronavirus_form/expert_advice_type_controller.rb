@@ -15,6 +15,8 @@ class CoronavirusForm::ExpertAdviceTypeController < ApplicationController
         values: @form_responses[:expert_advice_type],
         allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
         other: @form_responses[:expert_advice_type_other],
+        exclusive: selected_exclusive?,
+        exclusive_values: exclusive_values,
       )
 
     if invalid_fields.any?
@@ -50,6 +52,14 @@ private
     @form_responses[:expert_advice_type].include?(
       I18n.t("coronavirus_form.questions.#{controller_name}.options.other.label"),
     )
+  end
+
+  def selected_exclusive?
+    @form_responses[:expert_advice_type].include?(exclusive_values.first)
+  end
+
+  def exclusive_values
+    I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) if item.dig(:exclusive) == true }.compact
   end
 
   def previous_path

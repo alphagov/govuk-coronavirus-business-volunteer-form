@@ -150,6 +150,20 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
       expect(response).to render_template(current_template)
     end
 
+    it "validates only the exclusive option is selected" do
+      post :submit,
+           params: {
+             offer_care_type: selected_type,
+             offer_care_qualifications: [
+               I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label"),
+               I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.no_qualification.label"),
+             ],
+             care_cost: selected_care_cost,
+           }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
     it "validates a care cost option is chosen" do
       post :submit,
            params: {

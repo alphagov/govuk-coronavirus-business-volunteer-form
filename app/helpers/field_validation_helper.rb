@@ -50,7 +50,7 @@ module FieldValidationHelper
     []
   end
 
-  def validate_checkbox_field(page, values:, allowed_values:, other: false, other_field: "other")
+  def validate_checkbox_field(page, values:, allowed_values:, other: false, other_field: "other", exclusive: false, exclusive_values: [])
     if values.blank? || values.empty?
       return [{ field: page.to_s.sub(".", "_"),
                 text: t(
@@ -72,6 +72,14 @@ module FieldValidationHelper
                 text: t(
                   "coronavirus_form.questions.#{page}.options.#{other_field}.error_message",
                   default: t("coronavirus_form.errors.missing_mandatory_text_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
+                ) }]
+    end
+
+    if exclusive && (values - exclusive_values).any?
+      return [{ field: page.to_s.sub(".", "_"),
+                text: t(
+                  "coronavirus_form.questions.#{page}.exclusive_select_error",
+                  default: t("coronavirus_form.errors.checkbox_field", field: t("coronavirus_form.questions.#{page}.title")).humanize,
                 ) }]
     end
 
