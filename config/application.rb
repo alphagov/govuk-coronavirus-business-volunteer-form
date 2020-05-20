@@ -37,6 +37,12 @@ module CoronavirusForm
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.eager_load_paths << Rails.root.join("lib")
+    config.autoload_paths << Rails.root.join("lib")
+
+    # By default don't upload error pages to S3
+    config.upload_error_pages_to_s3 = ENV["UPLOAD_ERROR_PAGES_TO_S3"] || false
+
     # Don't generate system test files.
     config.generators.system_tests = nil
 
