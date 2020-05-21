@@ -58,13 +58,13 @@ private
   def validate_description_fields(selected_options)
     errors = []
     filter_options.each do |field, label|
-      if selected_options.include?(label) && @form_responses.dig(:offer_staff_number, field.to_sym).blank?
-        field_name = field.gsub("_number", "")
-        errors << {
-          field: field,
-          text: t("coronavirus_form.questions.#{controller_name}.offer_staff_type.options.#{field_name}.description.error_message"),
-        }
-      end
+      next unless selected_options.include?(label) && @form_responses.dig(:offer_staff_number, field.to_sym).blank?
+
+      field_name = field.gsub("_number", "")
+      errors << {
+        field: field,
+        text: t("coronavirus_form.questions.#{controller_name}.offer_staff_type.options.#{field_name}.description.error_message"),
+      }
     end
     errors
   end
