@@ -2,7 +2,7 @@ module ProductHelper
   def add_product_to_session(product)
     session[:product_details] ||= []
     products = products_except(product.with_indifferent_access[:product_id])
-    session[:product_details] = products << product
+    session[:product_details] = products << format_product(product)
   end
 
   def find_product(product_id, products)
@@ -22,5 +22,19 @@ module ProductHelper
     session.to_h.with_indifferent_access[:product_details].reject do |prod|
       prod[:product_id] == product_id
     end
+  end
+
+  def format_product(product)
+    product[:product_quantity] = safe_integer_cast(product[:product_quantity])
+    product[:lead_time] = safe_integer_cast(product[:lead_time])
+    product
+  end
+
+private
+
+  def safe_integer_cast(number)
+    Integer(number)
+  rescue ArgumentError, TypeError
+    nil
   end
 end

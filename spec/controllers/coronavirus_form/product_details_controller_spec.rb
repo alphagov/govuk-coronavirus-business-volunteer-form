@@ -13,13 +13,13 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
       product_id: product_id,
       product_name: "Hand sanitizer",
       equipment_type: I18n.t("coronavirus_form.questions.product_details.equipment_type.options.hand_gel.label"),
-      product_quantity: "100",
+      product_quantity: 100,
       product_cost: "10.99",
       certification_details: "CE",
       product_location: "United Kingdom",
       product_postcode: "SW1A2AA",
       product_url: nil,
-      lead_time: "2",
+      lead_time: 2,
     }
   end
 
@@ -291,7 +291,7 @@ RSpec.describe CoronavirusForm::ProductDetailsController, type: :controller do
 
         it "removes words from lead_time" do
           post :submit, params: params.merge(lead_time: "10 days")
-          expect(session[:product_details].first[:lead_time]).to eq("10")
+          expect(session[:product_details].first[:lead_time]).to eq(10)
         end
       end
     end

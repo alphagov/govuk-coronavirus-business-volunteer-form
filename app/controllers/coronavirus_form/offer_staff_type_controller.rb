@@ -38,9 +38,13 @@ private
 
   def update_session_store
     session[:offer_staff_type] = @form_responses[:offer_staff_type]
-    session[:offer_staff_number] = @form_responses[:offer_staff_number]
+    session[:offer_staff_number] = formatted_staff_numbers(@form_responses[:offer_staff_number])
     session[:offer_staff_description] = @form_responses[:offer_staff_description]
     session[:offer_staff_charge] = @form_responses[:offer_staff_charge]
+  end
+
+  def formatted_staff_numbers(staff_numbers)
+    staff_numbers.map { |k, v| [k, v.to_i] }.to_h
   end
 
   def validate_fields
@@ -58,7 +62,7 @@ private
   def validate_description_fields(selected_options)
     errors = []
     filter_options.each do |field, label|
-      next unless selected_options.include?(label) && @form_responses.dig(:offer_staff_number, field.to_sym).blank?
+      next unless selected_options.include?(label) && !valid_integer(@form_responses.dig(:offer_staff_number, field.to_sym))
 
       field_name = field.gsub("_number", "")
       errors << {
@@ -69,9 +73,13 @@ private
     errors
   end
 
+  def valid_integer(input_string)
+    /^[0-9]+$/.match input_string
+  end
+
   def description(field, checkboxes)
     if selected_field?(field.to_s.gsub("_number", ""), checkboxes)
-      strip_tags(params[field]).presence
+      strip_tags(params[field])&.gsub(",", "")&.presence
     else
       ""
     end
