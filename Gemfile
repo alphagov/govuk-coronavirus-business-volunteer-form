@@ -5,7 +5,7 @@ ruby File.read(".ruby-version").strip
 source "https://rubygems.org"
 
 gem "asset_sync", "~> 2.11.0"
-gem "aws-sdk-s3", "~> 1.65.0"
+gem "aws-sdk-s3", "~> 1.66.0"
 gem "bootsnap", "~> 1"
 gem "fog-aws", "~> 3.6.4"
 gem "govuk_app_config", "~> 2.2.0"
