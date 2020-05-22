@@ -56,6 +56,8 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.analytics_tracking_id = "12345"
+
+  config.analytics_cross_domain_id = "54321"
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 

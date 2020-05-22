@@ -117,6 +117,8 @@ Rails.application.configure do
 
   config.analytics_tracking_id = ENV["GA_VIEW_ID"]
 
+  config.analytics_cross_domain_id = ENV["GA_CROSS_DOMAIN_ID"]
+
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
