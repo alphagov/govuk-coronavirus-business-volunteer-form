@@ -21,6 +21,8 @@ params:
   WORKER_INSTANCES:
   BASIC_AUTH_PASSWORD:
   GA_VIEW_ID: UA-43115970-1
+  GA_CROSS_DOMAIN_ID: UA-145652997-7
+
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   GOVUK_NOTIFY_TEMPLATE_ID:
@@ -51,6 +53,7 @@ run:
       cf set-env govuk-coronavirus-business-volunteer-form SENTRY_DSN "$SENTRY_DSN"
       cf set-env govuk-coronavirus-business-volunteer-form SENTRY_CURRENT_ENV "$CF_SPACE"
       cf set-env govuk-coronavirus-business-volunteer-form GA_VIEW_ID "$GA_VIEW_ID"
+      cf set-env govuk-coronavirus-business-volunteer-form GA_CROSS_DOMAIN_ID "$GA_CROSS_DOMAIN_ID"
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ACCESS_KEY_ID "$AWS_ACCESS_KEY_ID"
       cf set-env govuk-coronavirus-business-volunteer-form AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
       cf set-env govuk-coronavirus-business-volunteer-form SECRET_KEY_BASE "$SECRET_KEY_BASE"
