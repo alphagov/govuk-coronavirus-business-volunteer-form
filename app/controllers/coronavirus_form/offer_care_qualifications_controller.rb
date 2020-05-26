@@ -60,7 +60,11 @@ private
   def update_session_store
     session[:offer_care_type] = @form_responses[:offer_care_type]
     session[:offer_care_qualifications] = @form_responses[:offer_care_qualifications]
-    session[:offer_care_qualifications_type] = @form_responses[:offer_care_qualifications_type]
+
+    session[:offer_care_qualifications_type] = if @form_responses[:offer_care_qualifications].include?(I18n.t("coronavirus_form.questions.#{controller_name}.care_qualifications.options.nursing_or_healthcare_qualification.label"))
+                                                 @form_responses[:offer_care_qualifications_type]
+                                               end
+
     session[:care_cost] = @form_responses[:care_cost]
   end
 

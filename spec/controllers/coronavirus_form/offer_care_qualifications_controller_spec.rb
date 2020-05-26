@@ -118,6 +118,22 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
         ]
         expect(session[:offer_care_qualifications_type]).to eq "Registered Nurse"
       end
+
+      it "clears previously entered 'Type of qualification' data if 'Nursing or other healthcare qualification' is no longer selected" do
+        session[:offer_care_type] = selected_type
+        session[:offer_care_qualifications] = [I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label")]
+        session[:offer_care_qualifications_type] = "Registered Nurse"
+        session[:care_cost] = selected_care_cost
+
+        post :submit, params: {
+          offer_care_type: selected_type,
+          offer_care_qualifications: [I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label")],
+          offer_care_qualifications_type: "Registered Nurse",
+          care_cost: selected_care_cost,
+        }
+
+        expect(session[:offer_care_qualifications_type]).to be nil
+      end
     end
 
     it "validates a valid care type is chosen" do
