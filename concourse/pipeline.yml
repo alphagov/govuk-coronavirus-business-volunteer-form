@@ -130,6 +130,17 @@ jobs:
           AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-staging
           GOVUK_NOTIFY_TEMPLATE_ID: b9661b65-805c-4290-9428-2495f3427964
           NOTIFY_API_KEY: ((notify-api-key-stg))
+        on_failure:
+          put: govuk-coronavirus-services-tech-slack
+          params:
+            channel: '#govuk-corona-services-tech'
+            username: 'Concourse (Business Volunteering Service)'
+            icon_emoji: ':concourse:'
+            silent: true
+            text: |
+              :kaboom:
+              Deploy to staging for the Business Volunteering service has failed
+              Failed build: http://cd.gds-reliability.engineering/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
 
   - name: smoke-test-staging
     plan:
@@ -184,6 +195,17 @@ jobs:
           AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-prod
           GOVUK_NOTIFY_TEMPLATE_ID: 94e7f169-6c10-487f-b9d2-4d03fc162a1e
           NOTIFY_API_KEY: ((notify-api-key-prod))
+        on_failure:
+          put: govuk-coronavirus-services-tech-slack
+          params:
+            channel: '#govuk-corona-services-tech'
+            username: 'Concourse (Business Volunteering Service)'
+            icon_emoji: ':concourse:'
+            silent: true
+            text: |
+              :kaboom:
+              Deploy to production for the Business Volunteering service has failed
+              Failed build: http://cd.gds-reliability.engineering/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
 
   - name: smoke-test-prod
     plan:
