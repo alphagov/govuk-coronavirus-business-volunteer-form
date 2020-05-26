@@ -231,6 +231,7 @@ en:
         product_cost:
           label: "Cost per item, in pounds"
           hint: "For example, 23.99. Enter 0 if you will donate it."
+          prefix: "£"
           custom_error: "Enter the cost per item in pounds, do not include words or symbols. If you are giving it for free, enter 0"
         certification_details:
           label: "Certification details"
