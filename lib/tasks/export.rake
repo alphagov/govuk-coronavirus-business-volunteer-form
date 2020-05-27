@@ -3,7 +3,7 @@ require "aws-sdk-s3"
 namespace :export do
   desc "Exports all form responses for a specific date in JSON format"
   task :form_responses, [:date] => [:environment] do |_, args|
-    args.with_defaults(date: Date.yesterday.to_s)
+    args.with_defaults(date: Time.zone.today.to_s)
 
     responses = FormResponse.where(created_at: Date.parse(args.date).all_day)
     puts responses.to_json
