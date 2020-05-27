@@ -585,29 +585,24 @@ RSpec.describe SchemaHelper, type: :helper do
         expect(validate_against_form_response_schema(data)).to be_empty
       end
 
-      it "allows check_answers_seen to be stored" do
+      it "does not allow check_answers_seen to be stored" do
         data = valid_data.merge(check_answers_seen: true)
-        expect(validate_against_form_response_schema(data)).to be_empty
-      end
-
-      it "returns a list of errors when check_answers_seen has an invalid value" do
-        data = valid_data.merge(check_answers_seen: "Foo")
         expect(validate_against_form_response_schema(data).first).to include("check_answers_seen")
       end
 
-      it "allows a _csrf_token to be stored" do
+      it "does not allow a _csrf_token to be stored" do
         data = valid_data.merge(_csrf_token: "abc")
-        expect(validate_against_form_response_schema(data)).to be_empty
+        expect(validate_against_form_response_schema(data).first).to include("_csrf_token")
       end
 
-      it "allows the current_path to be stored" do
+      it "does not allow the current_path to be stored" do
         data = valid_data.merge(current_path: "/foo")
-        expect(validate_against_form_response_schema(data)).to be_empty
+        expect(validate_against_form_response_schema(data).first).to include("current_path")
       end
 
-      it "allows the previous_path to be stored" do
+      it "does not allow the previous_path to be stored" do
         data = valid_data.merge(previous_path: "/foo")
-        expect(validate_against_form_response_schema(data)).to be_empty
+        expect(validate_against_form_response_schema(data).first).to include("previous_path")
       end
     end
   end

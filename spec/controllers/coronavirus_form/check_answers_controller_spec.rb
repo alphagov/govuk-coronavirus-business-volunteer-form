@@ -4,6 +4,7 @@ require "spec_helper"
 
 RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
   include FormResponseHelper
+  include SchemaHelper
   include_examples "session expiry"
 
   let(:current_template) { "coronavirus_form/check_answers" }
@@ -27,12 +28,39 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
     end
 
     it "saves the form response to the database" do
-      session["attribute"] = "key"
+      data = valid_data
+      session.merge!(data)
       post :submit
 
-      expect(FormResponse.first.form_response).to eq(
-        [%w[attribute key], %w[reference_number abc]],
-      )
+      expected_data = data.deep_stringify_keys.merge("reference_number" => "abc")
+      expect(FormResponse.first.form_response).to eq(expected_data)
+    end
+
+    context "when unwanted fields are present in the session" do
+      it "excludes those fields from the FormResponse" do
+        data = valid_data
+        session.merge!(data)
+        session["_csrf_token"] = "1234"
+        session["current_path"] = "/current"
+        session["previous_path"] = "/previous"
+        session["check_answers_seen"] = true
+        session["session_id"] = "12345"
+        post :submit
+
+        expected_data = data.deep_stringify_keys.merge("reference_number" => "abc")
+        expect(FormResponse.first.form_response).to eq(expected_data)
+        expect(validate_against_form_response_schema(FormResponse.first.form_response)).to be_empty
+      end
+    end
+
+    it "provides the data in an expected exportable format" do
+      data = valid_data
+      session.merge!(data)
+      post :submit
+
+      expect(validate_against_form_response_schema(FormResponse.last.form_response)).to be_empty
+
+      expect(JSON.parse(FormResponse.last.form_response.to_json).to_h).to eq(data.merge("reference_number" => "abc").deep_stringify_keys)
     end
 
     it "sends an email" do

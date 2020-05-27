@@ -82,7 +82,6 @@ module FormResponseHelper
       ],
       are_you_a_manufacturer: I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options").map { |_, item| item[:label] },
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options").map { |_, item| item[:label] }.sample,
-      check_answers_seen: true,
       location: I18n.t("coronavirus_form.questions.location.options").map { |_, item| item[:label] },
     }
   end

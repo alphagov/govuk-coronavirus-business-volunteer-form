@@ -399,18 +399,6 @@
     "reference_number": {
       "type": "string"
     },
-    "check_answers_seen": {
-      "type": "boolean"
-    },
-    "_csrf_token": {
-      "type": "string"
-    },
-    "current_path": {
-      "type": "string"
-    },
-    "previous_path": {
-      "type": "string"
-    },
     "additional_product": {
       "$ref": "#/definitions/yes_no"
     }

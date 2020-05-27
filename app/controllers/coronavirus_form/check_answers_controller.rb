@@ -11,7 +11,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   end
 
   def submit
-    validation_errors = validate_against_form_response_schema(session.to_h)
+    validation_errors = validate_against_form_response_schema(parsed_session)
     if validation_errors.any?
       GovukError.notify(
         FormResponseInvalidError.new,
@@ -19,7 +19,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
       )
     end
 
-    FormResponse.create(form_response: session) unless smoke_tester?
+    FormResponse.create(form_response: parsed_session) unless smoke_tester?
 
     send_confirmation_email if session.dig(:contact_details, :email).present?
 
@@ -30,6 +30,10 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
   end
 
 private
+
+  def parsed_session
+    session.to_h.with_indifferent_access.except(:session_id, :_csrf_token, :current_path, :previous_path, :check_answers_seen)
+  end
 
   def set_reference_number
     session[:reference_number] ||= reference_number
