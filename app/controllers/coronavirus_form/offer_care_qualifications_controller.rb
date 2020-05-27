@@ -33,7 +33,6 @@ private
       validate_field_response_length("#{controller_name}.care_qualifcations", TEXT_FIELDS),
       validate_missing_offer_care_type_fields,
       validate_missing_offer_care_qualifications_fields,
-      validate_selecting_of_offer_care_qualifications_fields,
       validate_charge_field("care_cost", @form_responses[:care_cost]),
     ].flatten.compact
   end
@@ -53,29 +52,28 @@ private
       allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.care_qualifications.options").map { |_, item| item.dig(:label) },
       other: @form_responses[:offer_care_qualifications_type],
       other_field: "nursing_or_healthcare_qualification",
+      exclusive: selected_exclusive?,
+      exclusive_values: exclusive_values,
     )
-  end
-
-  def validate_selecting_of_offer_care_qualifications_fields
-    validate_qualification_or_not("#{controller_name}.care_qualifications", values: @form_responses[:offer_care_qualifications])
-  end
-
-  def validate_qualification_or_not(page, values:)
-    if values.length > 1 && values.include?(t("coronavirus_form.questions.#{page}.options.no_qualification.label"))
-      [{ field: page.to_s.sub(".", "_"),
-         text: t(
-           "coronavirus_form.questions.#{page}.custom_select_error_qualification_or_not",
-         ) }]
-    else
-      []
-    end
   end
 
   def update_session_store
     session[:offer_care_type] = @form_responses[:offer_care_type]
     session[:offer_care_qualifications] = @form_responses[:offer_care_qualifications]
-    session[:offer_care_qualifications_type] = @form_responses[:offer_care_qualifications_type]
+
+    session[:offer_care_qualifications_type] = if @form_responses[:offer_care_qualifications].include?(I18n.t("coronavirus_form.questions.#{controller_name}.care_qualifications.options.nursing_or_healthcare_qualification.label"))
+                                                 @form_responses[:offer_care_qualifications_type]
+                                               end
+
     session[:care_cost] = @form_responses[:care_cost]
+  end
+
+  def selected_exclusive?
+    @form_responses[:offer_care_qualifications].include?(exclusive_values.first)
+  end
+
+  def exclusive_values
+    I18n.t("coronavirus_form.questions.#{controller_name}.care_qualifications.options").map { |_, item| item.dig(:label) if item.dig(:exclusive) == true }.compact
   end
 
   def previous_path

@@ -474,7 +474,6 @@ en:
       expert_advice_type:
         title: "What kind of services or expertise can you offer?"
         hint: "Select all that apply."
-        or: "Or"
         options:
           medical:
             label: "Medical"
@@ -495,7 +494,9 @@ en:
             error_message: "Select the best way to describe the services or expertise you can offer"
           no_expertise:
             label: "I cannot offer expertise"
+            exclusive: true
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
+        exclusive_select_error: "You cannot select an expertise as well as ‘I cannot offer expertise’"
         expert_advice_type_other:
           custom_length_error: "Description of your expertise must be 1000 characters or fewer"
       construction_services:
@@ -575,9 +576,9 @@ en:
               error_message: "Enter the type of qualification that you or people in your business have"
             no_qualification:
               label: "I do not have a qualification"
-          or: "Or"
+              exclusive: true
           custom_select_error: "Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’"
-          custom_select_error_qualification_or_not: "You cannot select a qualification as well as ’I do not have a qualification’"
+          exclusive_select_error: "You cannot select a qualification as well as ‘I do not have a qualification’"
           offer_care_qualifications_type:
             custom_length_error: "Description of your qualification must be 1000 characters or fewer"
       care_cost:

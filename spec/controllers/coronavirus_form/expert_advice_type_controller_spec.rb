@@ -179,6 +179,13 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
       expect(response).to render_template(current_template)
     end
 
+    it "validates only the exclusive option is selected" do
+      post :submit, params: { expert_advice_type: [I18n.t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")] + selected }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
     described_class::TEXT_FIELDS.each do |field|
       it "validates that #{field} is 1000 or fewer characters" do
         params = { expert_advice_type: %w[Other] }
