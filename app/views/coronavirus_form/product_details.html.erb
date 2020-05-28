@@ -57,6 +57,13 @@
   error_message: error_items('product_quantity'),
   value: @product[:product_quantity],
 } %>
+
+<%= render "govuk_publishing_components/components/details", {
+  title: t("coronavirus_form.questions.product_details.ppe_amount_details.title"),
+} do %>
+  <%= sanitize(t("coronavirus_form.questions.product_details.ppe_amount_details.description")) %>
+<% end %>
+
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: t("coronavirus_form.questions.product_details.product_cost.label"),
