@@ -18,6 +18,9 @@
   "novalidate": "true"
 ) do %>
 <%= tag.input type: "hidden", name: "product_id", value: @product[:product_id] %>
+<%= render "govuk_publishing_components/components/inset_text" do %>
+  <%= sanitize(t("coronavirus_form.questions.product_details.ppe_tech_spec_callout")) %>
+<% end %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: t("coronavirus_form.questions.product_details.product_name.label")

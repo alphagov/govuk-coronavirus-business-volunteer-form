@@ -243,6 +243,8 @@ en:
         custom_select_error: "Select the best way to describe your business"
       product_details:
         title: "Tell us about the product you’re offering"
+        ppe_tech_spec_callout: |
+          <p class="govuk-body">The product must <a class="govuk-link" href="https://www.gov.uk/government/publications/technical-specifications-for-personal-protective-equipment-ppe">meet the technical specifications</a>, or your offer will not be accepted.</p>
         product_name:
           label: "Name of product"
           custom_error: "Enter the name of the product"
