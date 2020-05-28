@@ -219,6 +219,8 @@ en:
         custom_select_error: "Select if you have medical equipment to offer"
       medical_equipment_type:
         title: "What type of medical equipment can you offer?"
+        description: |
+          <p class="govuk-body">If you cannot offer more than 100,000 items of a personal protective equipment product, you should not use this form. <a class="govuk-link" href="/coordination-centres">Contact an NHS Regional Incident Coordination Centre to offer the product</a>.</p>
         hint: "Give details for one product at a time."
         options:
           number_ppe:

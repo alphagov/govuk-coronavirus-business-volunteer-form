@@ -7,6 +7,12 @@
   <%= render "govuk_publishing_components/components/back_link", { href: previous_path } %>
 <% end %>
 
+<% description_html = capture do %>
+  <%= render "govuk_publishing_components/components/inset_text" do %>
+     <%= sanitize(t("coronavirus_form.questions.medical_equipment_type.description")) %>
+  <% end %>
+<% end %>
+
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-medical-equipment-type",
   "data-question-key": "medical_equipment_type",
@@ -15,6 +21,7 @@
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t("coronavirus_form.questions.medical_equipment_type.title"),
+  description: description_html,
   hint: t("coronavirus_form.questions.medical_equipment_type.hint"),
   is_page_heading: true,
   name: "medical_equipment_type",
