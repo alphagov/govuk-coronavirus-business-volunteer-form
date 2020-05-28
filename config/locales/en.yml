@@ -250,7 +250,7 @@ en:
           custom_error: "Enter the name of the product"
         product_quantity:
           label: "Quantity of this product"
-          hint: "Approximate amount, for example 10, 500, 10000."
+          hint: "Approximate amount. For example, 100,000"
           custom_error: "Enter the approximate total number of items, do not include words or symbols"
           suffix: "items"
         product_cost:
