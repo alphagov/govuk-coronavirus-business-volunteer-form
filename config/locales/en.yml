@@ -160,6 +160,27 @@ en:
     heading: "Now send the form"
     confirmation: "By submitting this form you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
     submit: "Accept and send"
+  coordination_centres:
+    title: Offer your products to an NHS Regional Coordination Centre
+    body_text: |
+      <p class="govuk-body">If you’re offering less than 100,000 items of a personal protective equipment product, you should offer them to an NHS Regional Coordination Centre</p>
+      <h2 class="govuk-heading-m">How to offer your products</h2>
+      <p class="govuk-body">Email the centre giving details of the prod you’re offering, including whether they <a class="govuk-link" href="https://www.gov.uk/government/publications/technical-specifications-for-personal-protective-equipment-ppe">meet the technical specifications</a>.</p>
+      <p class="govuk-body">You will be contacted as soon as possible if your products are needed.</p>
+      <h2 class="govuk-heading-m">East of England</h2>
+      <p class="govuk-body"><a href="mailto:england.eastofengland-covid19@nhs.net" class="govuk-link">england.eastofengland-covid19@nhs.net</a></p>
+      <h2 class="govuk-heading-m">London</h2>
+      <p class="govuk-body"><a href="mailto:england.london-covid19@nhs.net" class="govuk-link">england.london-covid19@nhs.net</a></p>
+      <h2 class="govuk-heading-m">Midlands</h2>
+      <p class="govuk-body"><a href="mailto:england.mids-incident@nhs.net" class="govuk-link">england.mids-incident@nhs.net</a></p>
+      <h2 class="govuk-heading-m">North East and Yorkshire</h2>
+      <p class="govuk-body"><a href="mailto:england.eprrney@nhs.net" class="govuk-link">england.eprrney@nhs.net</a></p>
+      <h2 class="govuk-heading-m">North West</h2>
+      <p class="govuk-body"><a href="mailto:england.eprrnw@nhs.net" class="govuk-link">england.eprrnw@nhs.net</a></p>
+      <h2 class="govuk-heading-m">South East</h2>
+      <p class="govuk-body"><a href="mailto:england.se-incident@nhs.net" class="govuk-link">england.se-incident@nhs.net</a></p>
+      <h2 class="govuk-heading-m">South West</h2>
+      <p class="govuk-body"><a href="mailto:england.sw-incident1@nhs.net" class="govuk-link">england.sw-incident1@nhs.net</a></p>
   session_expired:
     title: Your session has ended due to inactivity
     body_text: |

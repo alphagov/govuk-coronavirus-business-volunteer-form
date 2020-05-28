@@ -123,5 +123,8 @@ Rails.application.routes.draw do
 
     # Other page - Session expired notice
     get "/session-expired", to: "session_expired#show"
+
+    # Other page - NHS Regional Coordination centres
+    get "/coordination-centres", to: "coordination_centres#show"
   end
 end
