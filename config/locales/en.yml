@@ -218,7 +218,7 @@ en:
             label: "No"
         custom_select_error: "Select if you have medical equipment to offer"
       medical_equipment_type:
-        title: "Tell us about the medical equipment you can offer"
+        title: "What type of medical equipment can you offer?"
         hint: "Give details for one product at a time."
         options:
           number_ppe:
