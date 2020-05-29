@@ -93,6 +93,8 @@ module FillInTheFormSteps
     choose I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label")
     click_button I18n.t("coronavirus_form.submit_and_next")
 
+    sleep 0.5
+
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_space_type.title"))
     check I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label")
     fill_in "warehouse_space_description", with: "1000"
