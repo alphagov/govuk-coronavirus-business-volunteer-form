@@ -249,6 +249,8 @@ en:
           title: If you cannot offer more than 100,000 items
           description: |
             <p class="govuk-body">If you cannot offer more than 100,000 items, you should not use this form. <a class="govuk-link" href="/coordination-centres">Contact an NHS Regional Incident Coordination Centre to offer the product</a>.</p>
+        ppe_amount_check_answers_callout: |
+          <p class="govuk-body">You cannot offer more than 100,000 items of this product. Contact an <a class="govuk-link" href="/coordination-centres">NHS Regional Incident Coordination Centre</a> to offer the product instead of using this form.</p>
         product_name:
           label: "Name of product"
           custom_error: "Enter the name of the product"
