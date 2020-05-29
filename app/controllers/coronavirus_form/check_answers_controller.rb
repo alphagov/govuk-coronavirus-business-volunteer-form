@@ -2,6 +2,7 @@
 
 class CoronavirusForm::CheckAnswersController < ApplicationController
   include SchemaHelper
+  include ProductHelper
 
   before_action :set_reference_number
 
@@ -24,9 +25,11 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
     send_confirmation_email if session.dig(:contact_details, :email).present?
 
     ref_number = session[:reference_number]
+    enough_product_items = ppe_products_with_not_enough_items.empty?
+
     reset_session
 
-    redirect_to thank_you_url(reference_number: ref_number)
+    redirect_to thank_you_url(reference_number: ref_number, enough_items: enough_product_items)
   end
 
 private

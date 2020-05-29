@@ -1,4 +1,6 @@
 module ProductHelper
+  MINIMUM_ACCEPTED_PRODUCT_QUANTITY = 100_000
+
   def add_product_to_session(product)
     session[:product_details] ||= []
     products = products_except(product.with_indifferent_access[:product_id])

@@ -91,10 +91,23 @@ RSpec.describe CoronavirusForm::CheckAnswersController, type: :controller do
       expect(session.to_hash).to eq({})
     end
 
-    it "redirects to thank you if sucessfully creates record" do
+    it "redirects to thank you if it successfully creates record and there are enough product items" do
+      session.merge!(valid_data)
       post :submit
 
-      expect(response).to redirect_to(thank_you_path(reference_number: "abc"))
+      expect(response).to redirect_to(thank_you_path(reference_number: "abc", enough_items: "true"))
+    end
+
+    it "redirects to thank you if it successfully creates record and there are not enough product items" do
+      data = valid_data
+      data[:product_details].each do |product|
+        product[:product_quantity] = (ProductHelper::MINIMUM_ACCEPTED_PRODUCT_QUANTITY - 1).to_s if product[:product_quantity]
+      end
+
+      session.merge!(data)
+      post :submit
+
+      expect(response).to redirect_to(thank_you_path(reference_number: "abc", enough_items: "false"))
     end
 
     it "doesn't create a FormResponse if the user is the smoke tester" do

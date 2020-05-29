@@ -1,4 +1,6 @@
 module FormResponseHelper
+  include ProductHelper
+
   def valid_data
     {
       medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options").map { |_, item| item[:label] }.sample,
@@ -75,7 +77,7 @@ module FormResponseHelper
           equipment_type: I18n.t("coronavirus_form.questions.product_details.equipment_type.options").map { |_, item| item[:label] }.sample,
           product_location: I18n.t("coronavirus_form.questions.product_details.product_location.options").map { |_, item| item[:label] }.sample,
           product_postcode: "E1 8QS",
-          product_quantity: "10000",
+          product_quantity: MINIMUM_ACCEPTED_PRODUCT_QUANTITY.to_s,
           certification_details: "None",
           medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
         },
