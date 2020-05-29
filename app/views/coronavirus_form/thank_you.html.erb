@@ -3,4 +3,8 @@
   title: t("coronavirus_form.thank_you.title")
 } %>
 
-<%= sanitize(t("coronavirus_form.thank_you.enough_items.description")) %>
+<% if @enough_items == "true" %>
+  <%= sanitize(t("coronavirus_form.thank_you.enough_items.description")) %>
+<% else %>
+  <%= sanitize(t("coronavirus_form.thank_you.too_few_items.description")) %>
+<% end %>

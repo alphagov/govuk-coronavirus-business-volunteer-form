@@ -707,3 +707,11 @@ en:
           <h2 class="govuk-heading-m">What happens next</h2>
           <p class="govuk-body">If your help is needed you’ll be contacted as soon as possible.</p>
           <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/done/coronavirus-support-from-business">What did you think of this service?</a> (takes 30 seconds)</p>
+      too_few_items:
+        description: |
+          <p class="govuk-body">We have sent you a confirmation email.</p>
+          <h2 class="govuk-heading-m">Offering less than 100,000 items of a product</h2>
+          <p class="govuk-body">Your offer of less than 100,000 items cannot be processed. Contact an <a class="govuk-link" href="/coordination-centres">NHS Regional Incident Coordination Centre to offer the product</a>.</p>
+          <h2 class="govuk-heading-m">What happens next</h2>
+          <p class="govuk-body">If your help is needed you’ll be contacted as soon as possible.</p>
+          <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/done/coronavirus-support-from-business">What did you think of this service?</a> (takes 30 seconds)</p>
