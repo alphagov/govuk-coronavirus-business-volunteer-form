@@ -701,7 +701,9 @@ en:
         custom_select_error: "Select if it would be a donation, a reduced price, or standard price"
     thank_you:
       title: "Thank you for offering support"
-      description: |
-        <p class="govuk-body">If your help is needed you’ll be contacted as soon as possible.</p>
-        <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/coronavirus">Find all information on coronavirus (COVID-19)</a>.</p>
-        <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/done/coronavirus-support-from-business">Give feedback on this service</a>.</p>
+      enough_items:
+        description: |
+          <p class="govuk-body">We have sent you a confirmation email.</p>
+          <h2 class="govuk-heading-m">What happens next</h2>
+          <p class="govuk-body">If your help is needed you’ll be contacted as soon as possible.</p>
+          <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/done/coronavirus-support-from-business">What did you think of this service?</a> (takes 30 seconds)</p>
