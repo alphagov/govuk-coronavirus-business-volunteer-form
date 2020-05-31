@@ -91,7 +91,9 @@ module FillInTheFormSteps
   def and_can_offer_space
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_space.title"))
     choose I18n.t("coronavirus_form.questions.offer_space.options.option_yes.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
+    click_button I18n.t("coronavirus_form.submit_and_next")
+
+    sleep 0.5
 
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_space_type.title"))
     check I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label")
