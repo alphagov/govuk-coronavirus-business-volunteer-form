@@ -42,6 +42,8 @@ Rails.application.configure do
     config.public_file_server.enabled = false
   end
 
+  config.upload_error_pages_to_s3 = true unless ENV["HEROKU_APP_NAME"]
+
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 

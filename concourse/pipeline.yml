@@ -127,6 +127,7 @@ jobs:
           SECRET_KEY_BASE: ((secret-key-base-staging))
           HOSTNAME: govuk-coronavirus-business-volunteer-form-stg
           SENTRY_DSN: https://((sentry-dsn))
+          AWS_ERROR_PAGES_BUCKET_NAME: govuk-coronavirus-business-volunteer-error-pages-staging
           AWS_ASSETS_BUCKET_NAME: govuk-coronavirus-business-volunteer-assets-staging
           GOVUK_NOTIFY_TEMPLATE_ID: b9661b65-805c-4290-9428-2495f3427964
           NOTIFY_API_KEY: ((notify-api-key-stg))
@@ -189,6 +190,7 @@ jobs:
           BASIC_AUTH_PASSWORD: ((basic-auth-password))
           AWS_ACCESS_KEY_ID: ((aws-access-key-id-prod))
           AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key-prod))
+          AWS_ERROR_PAGES_BUCKET_NAME: govuk-coronavirus-business-volunteer-error-pages-prod
           SECRET_KEY_BASE: ((secret-key-base-prod))
           HOSTNAME: govuk-coronavirus-business-volunteer-form-prod
           SENTRY_DSN: https://((sentry-dsn))
@@ -206,6 +208,7 @@ jobs:
               :kaboom:
               Deploy to production for the Business Volunteering service has failed
               Failed build: http://cd.gds-reliability.engineering/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+
 
   - name: smoke-test-prod
     plan:
