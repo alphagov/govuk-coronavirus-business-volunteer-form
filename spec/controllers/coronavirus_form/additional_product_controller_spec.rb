@@ -20,6 +20,21 @@ RSpec.describe CoronavirusForm::AdditionalProductController, type: :controller d
     end
   end
 
+  describe "#previous_path" do
+    context "products have been added" do
+      it "includes a query parameter for the last added product" do
+        session["product_details"] = [{ product_id: "first" }, { product_id: "last" }]
+        expect(URI.parse(@controller.send(:previous_path)).request_uri).to eq("/product-details?product_id=last")
+      end
+    end
+
+    context "products have not been added" do
+      it "returns a link to the previous page" do
+        expect(URI.parse(@controller.send(:previous_path)).request_uri).to eq("/product-details")
+      end
+    end
+  end
+
   describe "POST submit" do
     it "redirects to next step for yes response" do
       post :submit, params: { additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_yes.label") }
