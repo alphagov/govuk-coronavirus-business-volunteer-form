@@ -35,7 +35,7 @@ private
 
   def previous_path
     session["product_details"] ||= []
-    latest_product_id = (session["product_details"].last || {}).dig("product_id")
+    latest_product_id = session["product_details"].last&.with_indifferent_access&.dig("product_id")
     product_details_url(product_id: latest_product_id)
   end
 end
