@@ -4,6 +4,7 @@ class CoronavirusForm::OfferStaffTypeController < ApplicationController
   OPTIONS = I18n.t("coronavirus_form.questions.#{controller_name}.offer_staff_type.options")
   ALLOWED_VALUES = OPTIONS.map { |_, item| item.dig(:label) }
   DESCRIPTION_FIELDS = OPTIONS.map { |_, item| item.dig(:description, :id) }.freeze
+  TEXT_FIELDS = %w[offer_staff_description].freeze
 
   def submit
     @form_responses = {
@@ -47,6 +48,7 @@ private
     [
       validate_checkbox_field("#{controller_name}.offer_staff_type", values: @form_responses[:offer_staff_type], allowed_values: ALLOWED_VALUES),
       validate_description_fields(@form_responses[:offer_staff_type]),
+      validate_field_response_length(controller_name, TEXT_FIELDS),
       validate_radio_field("#{controller_name}.offer_staff_charge", radio: @form_responses[:offer_staff_charge]),
     ].flatten.compact
   end

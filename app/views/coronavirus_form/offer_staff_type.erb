@@ -40,16 +40,19 @@
     end
   } %>
 
-  <%= render "govuk_publishing_components/components/textarea", {
-    label: {
-      text: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.label"),
-      heading_size: "m",
+  <%= render "govuk_publishing_components/components/character_count", {
+    textarea: {
+      label: {
+        text: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.label"),
+        heading_size: "m",
+      },
+      name: "offer_staff_description",
+      hint: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.hint"),
+      error_message: error_items("offer_staff_description"),
+      value: @form_responses[:offer_staff_description]
     },
-    name: "offer_staff_description",
-    hint: t("coronavirus_form.questions.offer_staff_type.offer_staff_description.hint"),
-    id: "offer_staff_type_offer_staff_description",
-    error_message: error_items("offer_staff_type_offer_staff_description"),
-    value: @form_responses[:offer_staff_description]
+    id: "offer_staff_description",
+    maxlength: 1000,
   } %>
 
   <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "offer_staff_charge" } %>
