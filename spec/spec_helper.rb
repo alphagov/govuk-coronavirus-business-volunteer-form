@@ -2,6 +2,7 @@
 
 require "byebug"
 require "simplecov"
+require "simplecov-cobertura"
 require "capybara/rspec"
 require "capybara/apparition"
 
@@ -11,6 +12,7 @@ require "rspec/rails"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 SimpleCov.start
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 
 Capybara.javascript_driver = :apparition
 
