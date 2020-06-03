@@ -32,6 +32,7 @@ group :test do
   gem "mini_racer", "~> 0.2"
   gem "selenium-webdriver"
   gem "simplecov", "~> 0.16"
+  gem "simplecov-cobertura"
   gem "webdrivers"
 end
 
