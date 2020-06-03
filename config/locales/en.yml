@@ -180,6 +180,7 @@ en:
       date_order: "The end date must be after the start date"
       email_format: "Enter an email address in the correct format, like name@example.com"
       postcode_format: "Enter a real postcode"
+      page_title_prefix: 'Error: '
     testing_equipment:
       title: "Testing equipment"
       button:
