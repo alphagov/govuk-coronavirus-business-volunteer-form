@@ -28,13 +28,19 @@
       end
     } %>
 
-    <%= render "govuk_publishing_components/components/textarea", {
-      label: {
-        text: t("coronavirus_form.questions.construction_services_other.title"),
-        bold: true
+    <%= render "govuk_publishing_components/components/character_count", {
+      textarea: {
+        label: {
+          text: t("coronavirus_form.questions.construction_services.construction_services_other.label"),
+          heading_size: "m",
+        },
+        name: "construction_services_other",
+        hint: t("coronavirus_form.questions.construction_services.construction_services_other.hint"),
+        error_message: error_items("construction_services_other"),
+        value: @form_responses[:construction_services_other]
       },
-      name: "construction_services_other",
-      value: @form_responses[:construction_services_other]
+      id: "construction_services_other",
+      maxlength: 1000,
     } %>
 
     <%= render partial: "coronavirus_form/how_much_charge", locals: { cost_field: "construction_cost" } %>
