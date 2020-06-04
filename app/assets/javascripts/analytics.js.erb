@@ -1,6 +1,20 @@
 // Start cookie banner (display settings controlled internally by cookies)
 var element = document.querySelector('[data-module="cookie-banner"]')
+var PRODUCT_ID_PATTERN = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/
+var REFERENCE_NUMBER_PATTERN = /\d{8}-\d{6}-.{6}/
+
 new GOVUK.Modules.CookieBanner().start($(element))
+
+var stripPII = function(url) {
+  url = url.replace(REFERENCE_NUMBER_PATTERN, 'reference_number')
+  url = url.replace(PRODUCT_ID_PATTERN, 'product_id')
+
+  if(url.includes('reference_number' || 'product_id')) {
+    return url
+  } else {
+    return location.protocol + '//' + location.host + location.pathname
+  }
+}
 
 var analyticsInit = function() {
   <% if Rails.application.config.analytics_tracking_id.present? %>
@@ -19,6 +33,7 @@ var analyticsInit = function() {
       ga('create', trackingId, 'auto')
       ga('set', 'allowAdFeatures', false);
       ga('set', 'anonymizeIp', true);
+      ga('set', 'location', stripPII(window.location.href));
       ga('send', 'pageview');
 
       // Cross Government Domain Google Analytics
@@ -27,6 +42,7 @@ var analyticsInit = function() {
       ga('govuk_shared.set', 'anonymizeIp', true);
       ga('govuk_shared.set', 'allowAdFeatures', false);
       ga('govuk_shared.linker:autoLink', ['www.gov.uk']);
+      ga('govuk_shared.set', 'location', stripPII(window.location.href));
       ga('govuk_shared.send', 'pageview');
     }
   <% end %>
