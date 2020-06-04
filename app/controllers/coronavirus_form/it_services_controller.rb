@@ -10,13 +10,16 @@ class CoronavirusForm::ItServicesController < ApplicationController
       it_cost: strip_tags(params[:it_cost]).presence,
     }
 
-    invalid_fields = validate_field_response_length(controller_name, TEXT_FIELDS) +
-      validate_checkbox_field(
-        controller_name,
-        values: @form_responses[:it_services],
-        allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
-      ) +
-      validate_charge_field("it_cost", @form_responses[:it_cost])
+    invalid_fields =
+      [
+        validate_checkbox_field(
+          controller_name,
+          values: @form_responses[:it_services],
+          allowed_values: I18n.t("coronavirus_form.questions.#{controller_name}.options").map { |_, item| item.dig(:label) },
+        ),
+        validate_field_response_length(controller_name, TEXT_FIELDS),
+        validate_charge_field("it_cost", @form_responses[:it_cost]),
+      ].flatten.compact
 
     if invalid_fields.any?
       flash.now[:validation] = invalid_fields

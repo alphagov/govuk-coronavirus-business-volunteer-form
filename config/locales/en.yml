@@ -514,13 +514,12 @@ en:
             label: "Construction work"
           other:
             label: "Other"
-      construction_services_other:
-        title: "Give a description of the type of construction services (optional)"
-        hint: "For example, the amount of work you can do."
         construction_services_other:
+          label: "Give a description of the type of construction services (optional)"
+          hint: "For example, the amount of work you can do."
           custom_length_error: "Description of your qualification must be 1000 characters or fewer"
-      construction_cost:
-        title: "How much would you charge for the construction services?"
+        construction_cost:
+          title: "How much would you charge for the construction services?"
       it_services:
         title: What kind of IT services can you offer?
         hint: "Select the types of services you can offer."
@@ -537,13 +536,12 @@ en:
             label: "Virtual office tools"
           other:
             label: "Other"
-      it_services_other:
-        title: "Give a description of the type of IT services (optional)"
-        hint: "For example, the amount of services you can offer."
         it_services_other:
+          label: "Give a description of the type of IT services (optional)"
+          hint: "For example, the amount of services you can offer."
           custom_length_error: "Description of your qualification must be 1000 characters or fewer"
-      it_cost:
-        title: "How much would you charge for the IT services?"
+        it_cost:
+          title: "How much would you charge for the IT services?"
       offer_care:
         title: "Can you offer social care or childcare?"
         hint: "For example, nursing or assistance to other people."
