@@ -30,6 +30,6 @@ private
   end
 
   def previous_path
-    offer_care_url
+    session[:care_cost] ? offer_care_qualifications_url : offer_care_url
   end
 end
