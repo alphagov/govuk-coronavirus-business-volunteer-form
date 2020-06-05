@@ -39,6 +39,6 @@ private
   end
 
   def previous_path
-    medical_equipment_url
+    session[:additional_product] ? additional_product_url : medical_equipment_url
   end
 end
