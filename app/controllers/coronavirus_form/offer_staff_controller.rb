@@ -31,6 +31,6 @@ private
   end
 
   def previous_path
-    offer_space_url
+    session[:space_cost] ? offer_space_type_url : offer_space_url
   end
 end
