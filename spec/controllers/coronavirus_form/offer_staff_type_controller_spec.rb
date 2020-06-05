@@ -58,14 +58,14 @@ RSpec.describe CoronavirusForm::OfferStaffTypeController, type: :controller do
       post :submit, params: params
 
       expected_number_hash = {
-        cleaners_number: params[:cleaners_number],
-        developers_number: params[:developers_number],
-        medical_staff_number: params[:medical_staff_number],
-        office_staff_number: params[:office_staff_number],
-        security_staff_number: params[:security_staff_number],
-        trainers_number: params[:trainers_number],
-        translators_number: params[:translators_number],
-        other_staff_number: params[:other_staff_number],
+        cleaners_number: Integer(params[:cleaners_number]),
+        developers_number: Integer(params[:developers_number]),
+        medical_staff_number: Integer(params[:medical_staff_number]),
+        office_staff_number: Integer(params[:office_staff_number]),
+        security_staff_number: Integer(params[:security_staff_number]),
+        trainers_number: Integer(params[:trainers_number]),
+        translators_number: Integer(params[:translators_number]),
+        other_staff_number: Integer(params[:other_staff_number]),
       }
 
       expect(session[:offer_staff_type]).to eq params[:offer_staff_type]

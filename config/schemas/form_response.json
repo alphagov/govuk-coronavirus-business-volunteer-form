@@ -413,8 +413,7 @@
       "pattern": "^[A-Za-z0-9 ]{4,}$"
     },
     "whole_number": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
+      "type": "integer"
     },
     "how_much_charge": {
       "type": "string",

@@ -404,56 +404,56 @@ en:
                 id: cleaners_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             developers:
               label: "Developers"
               description:
                 id: developers_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             medical_staff:
               label: "Medical staff"
               description:
                 id: medical_staff_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             office_staff:
               label: "Office staff"
               description:
                 id: office_staff_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             security_staff:
               label: "Security staff"
               description:
                 id: security_staff_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             trainers:
               label: "Trainers or coaches"
               description:
                 id: trainers_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             translators:
               label: "Translators"
               description:
                 id: translators_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
             other_staff:
               label: "Other staff"
               description:
                 id: other_staff_number
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
-                error_message: Enter the approximate number of people you can offer
+                error_message: Enter the approximate number of people you can offer, do not include words or symbols
                 custom_length_error: "Description of staff you can offer must be 1000 characters or fewer"
         offer_staff_description:
           label: "Give a description of the type of staff (optional)"
