@@ -63,7 +63,7 @@ private
   end
 
   def previous_path
-    offer_staff_url
+    session[:offer_staff_charge] ? offer_staff_type_url : offer_staff_url
   end
 
   def next_page
