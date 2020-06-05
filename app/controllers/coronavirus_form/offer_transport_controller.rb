@@ -38,6 +38,6 @@ private
   end
 
   def previous_path
-    accommodation_url
+    session[:rooms_number] ? rooms_number_url : accommodation_url
   end
 end
