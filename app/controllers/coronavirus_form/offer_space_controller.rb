@@ -35,6 +35,6 @@ private
   end
 
   def previous_path
-    offer_transport_url
+    session[:transport_type] ? transport_type_url : offer_transport_url
   end
 end

@@ -38,10 +38,10 @@ private
   end
 
   def previous_path
-    if session[:expert_advice_type]&.include?(I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"))
-      construction_services_path
-    elsif session[:expert_advice_type]&.include?(I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"))
+    if session[:expert_advice_type]&.include?(I18n.t("coronavirus_form.questions.expert_advice_type.options.it.label"))
       it_services_path
+    elsif session[:expert_advice_type]&.include?(I18n.t("coronavirus_form.questions.expert_advice_type.options.construction.label"))
+      construction_services_path
     else
       expert_advice_type_path
     end
