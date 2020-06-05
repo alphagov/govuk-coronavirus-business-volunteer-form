@@ -26,7 +26,7 @@ RSpec.describe CoronavirusForm::OfferCareQualificationsController, type: :contro
   describe "POST submit" do
     let(:selected_type) { [I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label")] }
     let(:selected_qualification) { [I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label")] }
-    let(:selected_care_cost) { I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample }
+    let(:selected_care_cost) { I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample }
 
     it "sets session variables" do
       post :submit,

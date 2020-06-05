@@ -29,7 +29,7 @@ RSpec.describe CoronavirusForm::TransportTypeController, type: :controller do
     let(:selected) { [options, [options.sample]].sample }
 
     let(:cost) do
-      I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
     end
 
     let(:description) { "Something" }

@@ -38,7 +38,7 @@ RSpec.describe CoronavirusForm::OfferSpaceController, type: :controller do
     end
 
     it "clears previously entered space cost for a 'No' response" do
-      session[:space_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      session[:space_cost] = I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
 
       post :submit, params: { offer_space: I18n.t("coronavirus_form.questions.offer_space.options.option_no.label") }
 

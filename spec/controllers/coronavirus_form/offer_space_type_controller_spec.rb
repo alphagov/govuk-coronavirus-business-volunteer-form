@@ -40,7 +40,7 @@ RSpec.describe CoronavirusForm::OfferSpaceTypeController, type: :controller do
         offer_space_type_other: "500sqm",
         office_space_description: "400msq",
         general_space_description: "I have extra space of 1000msq",
-        space_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+        space_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       }
     end
 

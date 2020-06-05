@@ -48,7 +48,7 @@ RSpec.describe CoronavirusForm::AccommodationController, type: :controller do
     end
 
     it "clears previously entered care cost for a 'No' response" do
-      session[:accommodation_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      session[:accommodation_cost] = I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
 
       post :submit, params: { accommodation: I18n.t("coronavirus_form.questions.accommodation.options.no_option.label") }
 

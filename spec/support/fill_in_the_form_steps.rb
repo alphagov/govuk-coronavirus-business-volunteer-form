@@ -70,7 +70,7 @@ module FillInTheFormSteps
 
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.rooms_number.title"))
     fill_in "rooms_number", with: "500"
-    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
+    choose I18n.t("coronavirus_form.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
@@ -84,7 +84,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.transport_type.options.moving_goods.label")
     check I18n.t("coronavirus_form.questions.transport_type.options.other.label")
     fill_in "transport_description", with: "Testing"
-    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
+    choose I18n.t("coronavirus_form.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
@@ -103,7 +103,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.offer_space_type.options.other.label")
     fill_in "offer_space_type_other", with: "1000"
     fill_in "general_space_description", with: "Testing"
-    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
+    choose I18n.t("coronavirus_form.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
@@ -141,7 +141,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.construction_services.options.construction_work.label")
     check I18n.t("coronavirus_form.questions.construction_services.options.other.label")
     fill_in "construction_services_other", with: "Testing"
-    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
+    choose I18n.t("coronavirus_form.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
@@ -154,7 +154,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.it_services.options.virtual_tools.label")
     check I18n.t("coronavirus_form.questions.it_services.options.other.label")
     fill_in "it_services_other", with: "Testing"
-    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
+    choose I18n.t("coronavirus_form.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
@@ -169,7 +169,7 @@ module FillInTheFormSteps
     check I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.dbs_check.label")
     check I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options.nursing_or_healthcare_qualification.label")
     fill_in "offer_care_qualifications_type", with: "Testing"
-    choose I18n.t("coronavirus_form.questions.how_much_charge.options.nothing.label")
+    choose I18n.t("coronavirus_form.how_much_charge.options.nothing.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
     expect(page.body).to have_content(I18n.t("coronavirus_form.questions.offer_other_support.title"))

@@ -8,25 +8,25 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       ],
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
       rooms_number: "100",
-      accommodation_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       transport_type: [
         I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
       ],
-      transport_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      transport_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_space_type: I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
-      space_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      space_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label"),
-      care_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      care_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       offer_staff_type: [
         I18n.t("coronavirus_form.questions.offer_staff_type.offer_staff_type.options.developers.label"),
       ],
-      offer_staff_charge: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      offer_staff_charge: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       construction_services: I18n.t("coronavirus_form.questions.construction_services.options").map { |_, item| item[:label] },
       construction_services_other: "Build all the things",
-      construction_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      construction_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       it_services: I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] },
       it_services_other: "Supply all the things",
-      it_cost: I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample,
+      it_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
     }
   end
 

@@ -110,7 +110,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
     it "clears previously entered construction data if construction is no longer selected" do
       session[:construction_services] = I18n.t("coronavirus_form.questions.construction_services.options").map { |_, item| item[:label] }.sample
       session[:construction_services_other] = "Foo"
-      session[:construction_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      session[:construction_cost] = I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
 
       post :submit, params: { expert_advice_type: selected }
 
@@ -122,7 +122,7 @@ RSpec.describe CoronavirusForm::ExpertAdviceTypeController, type: :controller do
     it "clears previously entered it_cost if construction is no longer selected" do
       session[:it_services] = I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] }.sample
       session[:it_services_other] = "Foo"
-      session[:it_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      session[:it_cost] = I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
 
       post :submit, params: { expert_advice_type: selected }
 
