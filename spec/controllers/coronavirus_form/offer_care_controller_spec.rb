@@ -55,7 +55,7 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
     end
 
     it "clears previously entered care cost for a 'No' response" do
-      session[:care_cost] = I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      session[:care_cost] = I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
 
       post :submit, params: { offer_care: selected_no }
 

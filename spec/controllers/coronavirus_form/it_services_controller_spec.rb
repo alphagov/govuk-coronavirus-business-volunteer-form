@@ -22,7 +22,7 @@ RSpec.describe CoronavirusForm::ItServicesController, type: :controller do
     let(:selected) { options.first(2) }
 
     let(:cost) do
-      I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
     end
 
     it "sets session variables" do

@@ -23,7 +23,7 @@ RSpec.describe CoronavirusForm::RoomsNumberController, type: :controller do
   describe "POST submit" do
     let(:selected) { "100" }
     let(:cost) do
-      I18n.t("coronavirus_form.questions.how_much_charge.options").map { |_, item| item[:label] }.sample
+      I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
     end
     let(:description) { "Hotel rooms" }
 

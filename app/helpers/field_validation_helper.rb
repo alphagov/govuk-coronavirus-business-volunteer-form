@@ -106,7 +106,7 @@ module FieldValidationHelper
     if value.blank?
       return [{
         field: field,
-        text: t("coronavirus_form.questions.how_much_charge.custom_select_error"),
+        text: t("coronavirus_form.how_much_charge.custom_select_error"),
       }]
     end
 

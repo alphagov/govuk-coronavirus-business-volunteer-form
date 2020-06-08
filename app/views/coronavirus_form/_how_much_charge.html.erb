@@ -1,8 +1,8 @@
 <%= render "govuk_publishing_components/components/radio", {
-  heading: t('coronavirus_form.questions.how_much_charge.title'),
+  heading: t('coronavirus_form.how_much_charge.title'),
   name: cost_field,
   error_message: error_items(cost_field),
-  items: t('coronavirus_form.questions.how_much_charge.options').map do |_, item|
+  items: t('coronavirus_form.how_much_charge.options').map do |_, item|
     {
       value: item[:label],
       text: item[:label],
