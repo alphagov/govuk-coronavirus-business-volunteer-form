@@ -190,13 +190,13 @@ en:
       external_link: "https://www.gov.uk/guidance/help-the-government-increase-coronavirus-covid-19-testing-capacity"
     questions:
       medical_equipment:
-        title: "Can you offer medical equipment?"
+        title: "Can you offer personal protective equipment or testing equipment?"
         options:
           option_yes:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: "Select if you have medical equipment to offer"
+        custom_select_error: "Select yes if you have personal protective equipment or testing equipment to offer"
       medical_equipment_type:
         title: "Tell us about the medical equipment you can offer"
         hint: "Give details for one product at a time."
