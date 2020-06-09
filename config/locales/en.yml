@@ -157,9 +157,105 @@ en:
   check_your_answers:
     title: "Are you ready to send the form?"
     description: "Check your answers, then send the form."
-    heading: "Now send the form"
     confirmation: "By submitting this form you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
     submit: "Accept and send"
+    sections:
+      details_subsection:
+        title: "Details of your offer"
+      location:
+        title: "Location"
+      expertise:
+        title: "Services or expertise"
+      medical_equipment:
+        title: "Medical equipment"
+        product_details_title_prefix: "Product"
+      accommodation:
+        title: "Accommodation"
+      transport:
+        title: "Transport"
+      space:
+        title: "Space"
+      care:
+        title: "Social care or childcare"
+      staff:
+        title: "Staff"
+      construction:
+        title: "Construction"
+      it:
+        title: "IT Services"
+      offer_other_support:
+        title: "Other support"
+      contact_details:
+        title: "Contact Details"
+      business_details:
+        title: "Business Details"
+    fields:
+      rooms_number:
+        title: "Number of rooms you can offer"
+      accommodation_description:
+        title: "Description of the type of rooms"
+      accommodation_cost:
+        title: "How much will you charge"
+      transport_type:
+        title: "Kind of transport or logistics services you can offer"
+      transport_description:
+        title: "Description of your transport or logistics services"
+      transport_cost:
+        title: "How much will you charge"
+      offer_space_type:
+        title: "Kind of space you can offer"
+      offer_space_type_other:
+        title: "Description of your space"
+      space_cost:
+        title: "How much will you charge"
+      offer_staff_type:
+        title: "What kind of staff can you can offer"
+      offer_staff_description:
+        title: "Description of the type of staff"
+      offer_staff_charge:
+        title: "How much will you charge"
+      offer_care_type:
+        title: "Kind of care you can offer"
+      care_cost:
+        title: "How much will you charge"
+      offer_care_qualifications:
+        title: "Qualifications or certificates you have"
+      offer_care_qualifications_type:
+        title: "Type of nursing or healthcare qualification"
+      offer_other_support:
+        title: "Details of other support you can offer"
+      location:
+        title: "Details of where you can offer your services"
+      company_name:
+        title: "Company name"
+      company_number:
+        title: "Company number"
+      company_size:
+        title: "Company size"
+      company_location:
+        title: "Company location"
+      contact_name:
+        title: "Company location"
+      role:
+        title: "Role of main contact"
+      phone:
+        title: "Phone number of main contact"
+      email:
+        title: "Email address of main contact"
+      expert_advice_type:
+        title: "Kind of expertise you offer"
+      construction_services:
+        title: "Kind of construction services you can offer"
+      construction_services_other:
+        title: "Description of your construction services"
+      construction_cost:
+        title: "How much will you charge"
+      it_services:
+        title: "Kind of IT services you can offer"
+      it_services_other:
+        title: "Description of your IT services"
+      it_cost:
+        title: "How much will you charge"
   session_expired:
     title: Your session has ended due to inactivity
     body_text: |

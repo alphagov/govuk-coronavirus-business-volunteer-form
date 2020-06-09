@@ -10,32 +10,39 @@
 <%= render "govuk_publishing_components/components/title", {
   title: t("check_your_answers.title"),
   margin_top: 0,
-  margin_bottom: 3,
+  margin_bottom: 9,
 } %>
 
-<%= tag.p t("check_your_answers.description"), class: "govuk-body" %>
+<%= render "coronavirus_form/summary_list", medical_equipment_section %>
+<% product_details.each.with_index do |product| %>
+  <%= render "coronavirus_form/summary_list", product %>
+<% end %>
+<%= tag.div sanitize( tag.p(
+              link_to("Add another product",
+                      "/medical-equipment-type",
+                      class: "govuk-link"
+              ),
+            class: "govuk-body app-body--left")
+           ), class: "gem-c-summary__block" %>
 
-<%= render "govuk_publishing_components/components/summary_list", {
-  items: items_part_1,
-  block: sanitize(
-          tag.p(
-            link_to("Add an additional product",
-                    "/medical-equipment-type",
-                    class: "govuk-link"
-            ),
-          class: "govuk-body app-body--right")
-         )
-} %>
 
-<%= render "govuk_publishing_components/components/summary_list", {
-  items: items_part_2,
-} %>
-
-<%= render "govuk_publishing_components/components/heading", {
-  text: t("check_your_answers.heading"),
-  heading_level: 2,
-  margin_bottom: 3,
-} %>
+<%= render "coronavirus_form/summary_list", accommodation_section %>
+<%= render "coronavirus_form/summary_list", accommodation_details_section %>
+<%= render "coronavirus_form/summary_list", transport_section %>
+<%= render "coronavirus_form/summary_list", transport_details_section %>
+<%= render "coronavirus_form/summary_list", space_section %>
+<%= render "coronavirus_form/summary_list", space_details_section %>
+<%= render "coronavirus_form/summary_list", staff_section %>
+<%= render "coronavirus_form/summary_list", staff_details_section %>
+<%= render "coronavirus_form/summary_list", care_section %>
+<%= render "coronavirus_form/summary_list", care_details_section %>
+<%= render "coronavirus_form/summary_list", expertise_section %>
+<%= render "coronavirus_form/summary_list", construction_expertise_section %>
+<%= render "coronavirus_form/summary_list", it_expertise_section %>
+<%= render "coronavirus_form/summary_list", other_support_section %>
+<%= render "coronavirus_form/summary_list", location_section %>
+<%= render "coronavirus_form/summary_list", business_details_section %>
+<%= render "coronavirus_form/summary_list", contact_details_section %>
 
 <%= tag.p t("check_your_answers.confirmation"), class: "govuk-body" %>
 
