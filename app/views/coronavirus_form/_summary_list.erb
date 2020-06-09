@@ -50,7 +50,7 @@
             <%= tag.dt item[:field], class: "govuk-summary-list__key" %>
             <%= tag.dd class: "govuk-summary-list__value" do %>
               <% if item[:value].is_a?(Array) %>
-                <%= tag.ul do %>
+                <%= tag.ul class: "govuk-summary-list__nested__value" do %>
                   <% item[:value].each do |value_item| %>
                     <%= tag.li value_item %>
                   <% end %>
