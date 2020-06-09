@@ -28,6 +28,8 @@
 @import 'cookie-settings';
 
 // Application
+$color-red: #d4351c;
+
 .app-body--right {
   @include govuk-media-query($from: tablet) {
     text-align: right;
@@ -49,4 +51,8 @@
 .govuk-summary-list__nested__value {
   list-style-position: inside;
   padding-left: 0;
+}
+
+.delete-link:link {
+  color: $color-red;
 }

@@ -30,7 +30,7 @@
             <%= tag.li class: "govuk-summary-list__actions-list-item" do %>
               <% delete_link_text = delete[:link_text] || "Delete" %>
               <%= link_to delete.fetch(:href),
-                          class: "govuk-link",
+                          class: "delete-link govuk-link",
                           title: "#{delete_link_text} #{title.downcase}",
                           data: delete.fetch(:data_attributes, {}) do %>
                 <%= delete_link_text %><%= tag.span title, class: "govuk-visually-hidden" %>
@@ -77,7 +77,7 @@
                     <%= tag.li class: "govuk-summary-list__actions-list-item" do %>
                       <% delete_link_text = item[:delete][:link_text] || "Delete" %>
                       <%= link_to item[:delete].fetch(:href),
-                                  class: "govuk-link",
+                                  class: "delete-link govuk-link",
                                   title: "#{delete_link_text} #{item[:field].downcase}",
                                   data: item[:delete].fetch(:data_attributes, {}) do %>
                         <%= delete_link_text %><%= tag.span " #{item[:field]}", class: "govuk-visually-hidden" %>
