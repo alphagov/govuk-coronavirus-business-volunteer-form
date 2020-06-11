@@ -61,7 +61,7 @@ GEM
     apparition (0.5.0)
       capybara (~> 3.13, < 4)
       websocket-driver (>= 0.6.5)
-    asset_sync (2.11.0)
+    asset_sync (2.12.0)
       activemodel (>= 4.1.0)
       fog-core
       mime-types (>= 2.99)
@@ -394,7 +394,7 @@ PLATFORMS
 
 DEPENDENCIES
   apparition (~> 0.5.0)
-  asset_sync (~> 2.11.0)
+  asset_sync (~> 2.12.0)
   awesome_print (~> 1.8)
   aws-sdk-s3 (~> 1.68.0)
   better_errors (~> 2.7)
