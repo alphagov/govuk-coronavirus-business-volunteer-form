@@ -50,24 +50,24 @@ RSpec.feature "fill in the business volunteer form" do
   scenario "ensure we can perform a healthcheck" do
     visit healthcheck_path
 
-    expect(page.body).to have_content("OK")
+    expect(page).to have_content("OK")
   end
 
   scenario "ensure the privacy notice page is visible" do
     visit privacy_path
 
-    expect(page.body).to have_content(I18n.t("privacy_page.title"))
+    expect(page).to have_content(I18n.t("privacy_page.title"))
   end
 
   scenario "ensure the accessibility statement page is visible" do
     visit accessibility_statement_path
 
-    expect(page.body).to have_content(I18n.t("accessibility_statement.title"))
+    expect(page).to have_content(I18n.t("accessibility_statement.title"))
   end
 
   scenario "ensure the session expired page is visible" do
     visit session_expired_path
 
-    expect(page.body).to have_content(I18n.t("session_expired.title"))
+    expect(page).to have_content(I18n.t("session_expired.title"))
   end
 end
