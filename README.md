@@ -98,3 +98,7 @@ Data can be exported in JSON format for a single data using a Rake task:
 ```
 rake export:form_responses["2020-03-26"]
 ```
+
+## How to deploy breaking changes
+
+Details can be found [here](docs/how-to-deploy-breaking-changes.md).
