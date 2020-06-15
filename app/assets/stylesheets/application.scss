@@ -21,6 +21,7 @@
 @import 'govuk_publishing_components/components/radio';
 @import 'govuk_publishing_components/components/skip-link';
 @import 'govuk_publishing_components/components/summary-list';
+@import 'govuk_publishing_components/components/inset-text';
 @import 'govuk_publishing_components/components/table';
 @import 'govuk_publishing_components/components/textarea';
 @import 'govuk_publishing_components/components/title';
@@ -28,6 +29,8 @@
 @import 'cookie-settings';
 
 // Application
+$color-red: #d4351c;
+
 .app-body--right {
   @include govuk-media-query($from: tablet) {
     text-align: right;
@@ -44,4 +47,18 @@
   @include govuk-media-query($from: tablet) {
     width: 25%;
   }
+}
+
+.gem-c-summary-list {
+  border: None;
+  margin-bottom: 50px;
+}
+
+.govuk-summary-list__nested__value {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.delete-link:link {
+  color: $color-red;
 }
