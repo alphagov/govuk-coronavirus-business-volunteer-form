@@ -358,6 +358,22 @@ RSpec.describe SchemaHelper, type: :helper do
         expect(validate_against_form_response_schema(data).first).to include("company_name")
       end
 
+      it "returns a list of errors when company_is_uk_registered is missing" do
+        data = valid_data.tap do |valid_data|
+          valid_data[:business_details].delete(:company_is_uk_registered)
+        end
+
+        expect(validate_against_form_response_schema(data).first).to include("company_is_uk_registered")
+      end
+
+      it "returns a list of errors when company_is_uk_registered has an unexpected value" do
+        data = valid_data.tap do |valid_data|
+          valid_data[:business_details][:company_is_uk_registered] = "Foo"
+        end
+
+        expect(validate_against_form_response_schema(data).first).to include("company_is_uk_registered")
+      end
+
       it "allows company_number to be blank" do
         data = valid_data.tap do |valid_data|
           valid_data[:business_details].delete(:company_number)

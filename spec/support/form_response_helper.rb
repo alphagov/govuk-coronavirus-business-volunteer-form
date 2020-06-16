@@ -46,6 +46,7 @@ module FormResponseHelper
       offer_other_support: "All the support, all the time!",
       business_details: {
         company_name: "Mandalore Inc.",
+        company_is_uk_registered: I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
         company_number: "12345678",
         company_size: I18n.t("coronavirus_form.questions.business_details.company_size.options.under_50_people.label"),
         company_location: I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label"),

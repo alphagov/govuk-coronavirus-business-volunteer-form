@@ -183,7 +183,7 @@ en:
       invalid_date: "Enter a real %{field}"
       date_order: "The end date must be after the start date"
       email_format: "Enter an email address in the correct format, like name@example.com"
-      company_number: "Enter a Companies House registration number"
+      company_number: "Enter a valid Companies House registration number"
       postcode_format: "Enter a real postcode"
       page_title_prefix: 'Error: '
     testing_equipment:
@@ -626,8 +626,18 @@ en:
         company_name:
           label: "Company name"
           custom_error: "Enter the name of your company"
-        company_number:
-          label: "Company number (optional)"
+        company_is_uk_registered:
+          label: "Is your company registered in the UK?"
+          custom_error: "Select if your company is registered in the UK"
+          options:
+            united_kingdom:
+              label: "Yes"
+              company_number:
+                label: "Company number"
+                hint: "This is the Companies House registration number"
+                custom_error: "Enter a company number"
+            not_united_kingdom:
+              label: "No"
         company_size:
           label: "Company size"
           options:

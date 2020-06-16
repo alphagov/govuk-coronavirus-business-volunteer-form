@@ -197,6 +197,7 @@ module FillInTheFormSteps
   def and_has_given_their_business_details
     expect(page).to have_content(I18n.t("coronavirus_form.questions.business_details.title"))
     fill_in "company_name", with: "Government Digital Service"
+    choose I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label")
     fill_in "company_number", with: "AB123456"
     choose I18n.t("coronavirus_form.questions.business_details.company_size.options.under_50_people.label")
     choose I18n.t("coronavirus_form.questions.business_details.company_location.options.united_kingdom.label")
