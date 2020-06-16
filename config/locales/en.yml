@@ -174,7 +174,7 @@ en:
       heading: "There is a problem"
       radio_field: "Select %{field}"
       checkbox_field: "Select at least one %{field}"
-      field_length_error: "%{field} must be 1000 characters or fewer "
+      field_length_error: "%{field} must be 1,000 characters or fewer "
       missing_mandatory_text_field: "Enter %{field}"
       invalid_money: "%{field} must be an amount of money, like 15000"
       missing_year: "%{field} must include a year"
@@ -230,7 +230,7 @@ en:
           custom_error: "Enter the name of the product"
         product_quantity:
           label: "Quantity of this product"
-          hint: "Approximate amount, for example 10, 500, 10000."
+          hint: "Approximate amount, for example 10, 500, 10,000."
           custom_error: "Enter the approximate total number of items, do not include words or symbols"
           suffix: "items"
         product_cost:
@@ -309,14 +309,14 @@ en:
         custom_select_error: "Select yes if you can offer accommodation"
       rooms_number:
         title: "How many rooms can you offer?"
-        hint: "Approximate amount, for example 10, 500, 10000."
+        hint: "Approximate amount, for example 10, 500, 10,000."
         rooms_number:
           custom_error: "Enter the approximate amount of rooms you think you can offer"
         accommodation_description:
           label: "Give a description of the rooms (optional)"
           hint: "For example whether they’re in one location, or in different places."
           custom_error: "Enter a description"
-          custom_length_error: "Description must be 1000 characters or fewer"
+          custom_length_error: "Description must be 1,000 characters or fewer"
       accommodation_cost:
         title: "How much would you charge for the accommodation?"
       offer_transport:
@@ -342,7 +342,7 @@ en:
           label: "Give a description of the transport or logistics services (optional)"
           hint: "For example how many vehicles you can offer."
           custom_error: "Enter a description"
-          custom_length_error: "Description must be 1000 characters or fewer"
+          custom_length_error: "Description must be 1,000 characters or fewer"
       transport_cost:
         title: "How much would you charge for the transport or logistics services?"
       offer_space:
@@ -364,26 +364,26 @@ en:
               id: warehouse_space_description
               label: Approximate total size of all warehouses, in square feet
               error_message: Enter the approximate total size of the warehouses, in square feet
-              custom_length_error: "Description of warehouse space must be 1000 characters or fewer"
+              custom_length_error: "Description of warehouse space must be 1,000 characters or fewer"
           office_space:
             label: "Office space"
             description:
               id: office_space_description
               label: Approximate total size of all offices, in square feet
               error_message: Enter the approximate total size of the office space, in square feet
-              custom_length_error: "Description must be 1000 characters or fewer"
+              custom_length_error: "Description must be 1,000 characters or fewer"
           other:
             label: "Other"
             description:
               id: offer_space_type_other
               label: Approximate total size of all other spaces, in square feet
-              custom_length_error: "Description of other space must be 1000 characters or fewer"
+              custom_length_error: "Description of other space must be 1,000 characters or fewer"
               error_message: Enter the approximate total size of the spaces, in square feet
         general_space_description:
           label: "Give a description of the space (optional)"
           hint: "For example whether you have one space, or multiple units."
           custom_error: Enter a description
-          custom_length_error: Description of space must be 1000 characters or fewer
+          custom_length_error: Description of space must be 1,000 characters or fewer
         custom_select_error: Select the kind of space you can offer
       space_cost:
         title: "How much would you charge for the space?"
@@ -458,12 +458,12 @@ en:
                 label: "Approximate number of people"
                 hint: "For example, 10, 20, 100."
                 error_message: Enter the approximate number of people you can offer, do not include words or symbols
-                custom_length_error: "Description of staff you can offer must be 1000 characters or fewer"
+                custom_length_error: "Description of staff you can offer must be 1,000 characters or fewer"
         offer_staff_description:
           label: "Give a description of the type of staff (optional)"
           hint: "For example, whether they would be available to work full time."
           custom_error: "Enter a description"
-          custom_length_error: "Description of staff must be 1000 characters or fewer"
+          custom_length_error: "Description of staff must be 1,000 characters or fewer"
         offer_staff_charge:
           title: "How much would you charge?"
           options:
@@ -503,7 +503,7 @@ en:
         custom_select_error: "Select the best way to describe your expertise or consultancy experience"
         exclusive_select_error: "You cannot select an expertise as well as ‘I cannot offer expertise’"
         expert_advice_type_other:
-          custom_length_error: "Description of your expertise must be 1000 characters or fewer"
+          custom_length_error: "Description of your expertise must be 1,000 characters or fewer"
       construction_services:
         title: "What kind of construction services can you offer?"
         hint: "Select the types of services you can offer."
@@ -521,7 +521,7 @@ en:
         construction_services_other:
           label: "Give a description of the type of construction services (optional)"
           hint: "For example, the amount of work you can do."
-          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+          custom_length_error: "Description of your qualification must be 1,000 characters or fewer"
         construction_cost:
           title: "How much would you charge for the construction services?"
       it_services:
@@ -543,7 +543,7 @@ en:
         it_services_other:
           label: "Give a description of the type of IT services (optional)"
           hint: "For example, the amount of services you can offer."
-          custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+          custom_length_error: "Description of your qualification must be 1,000 characters or fewer"
         it_cost:
           title: "How much would you charge for the IT services?"
       offer_care:
@@ -583,14 +583,14 @@ en:
           custom_select_error: "Select the qualifications that you or people in your company have. If you do not have any select ‘I do not have a qualification’"
           exclusive_select_error: "You cannot select a qualification as well as ‘I do not have a qualification’"
           offer_care_qualifications_type:
-            custom_length_error: "Description of your qualification must be 1000 characters or fewer"
+            custom_length_error: "Description of your qualification must be 1,000 characters or fewer"
       care_cost:
         title: "How much would you charge for the social care or childcare?"
       offer_other_support:
           title: "Can you offer any other kind of support?"
           hint: "Give a description."
           offer_other_support:
-            custom_length_error: "Description of the support you can offer must be 1000 characters or fewer"
+            custom_length_error: "Description of the support you can offer must be 1,000 characters or fewer"
       location:
         title: "Where can you offer your services?"
         hint: "If your service is available anywhere, select all the regions."
