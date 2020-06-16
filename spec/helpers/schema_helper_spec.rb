@@ -366,6 +366,14 @@ RSpec.describe SchemaHelper, type: :helper do
         expect(validate_against_form_response_schema(data)).to be_empty
       end
 
+      it "returns a list of errors when company_number has an invalid value" do
+        data = valid_data.tap do |valid_data|
+          valid_data[:business_details][:company_number] = "Foo"
+        end
+
+        expect(validate_against_form_response_schema(data).first).to include("company_number")
+      end
+
       it "returns a list of errors when company_size is missing" do
         data = valid_data.tap do |valid_data|
           valid_data[:business_details].delete(:company_size)

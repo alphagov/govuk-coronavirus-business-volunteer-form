@@ -234,7 +234,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       it "concatenates business_details with a line break" do
         answer = {
           company_name: "Snow White Inc",
-          company_number: rand(10),
+          company_number: "AB123456",
           company_size: 1000,
           company_location: "UK",
           company_postcode: "E1 8QS",

@@ -25,7 +25,7 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
     let(:params) do
       {
         company_name: "My Company Ltd",
-        company_number: "1234",
+        company_number: "AA123456",
         company_size: "under_50_people",
         company_location: "united_kingdom",
         company_postcode: "AB11AA",

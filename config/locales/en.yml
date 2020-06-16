@@ -82,11 +82,11 @@ en:
       subject: You offered coronavirus support from your business
       body_text: |
         You told us that your business might be able to help with the response to coronavirus (COVID-19). Thank you.
-        
-        If you’ve offered personal protective equipment (PPE) your offer has been sent to the Department of Health and Social Care. If you’ve offered other types of support your offer has been sent to the Crown Commercial Service. 
+
+        If you’ve offered personal protective equipment (PPE) your offer has been sent to the Department of Health and Social Care. If you’ve offered other types of support your offer has been sent to the Crown Commercial Service.
 
         You’ll be contacted if your support is needed. This can take a few weeks. You do not need to do anything else.
-        
+
         Because we’re receiving a lot of offers, you might not hear back if your support is not needed.
 
         If you want to offer more products or services, answer the questions again with details of the new products or services:
@@ -183,6 +183,7 @@ en:
       invalid_date: "Enter a real %{field}"
       date_order: "The end date must be after the start date"
       email_format: "Enter an email address in the correct format, like name@example.com"
+      company_number: "Enter a Companies House registration number"
       postcode_format: "Enter a real postcode"
       page_title_prefix: 'Error: '
     testing_equipment:
@@ -675,7 +676,7 @@ en:
       custom_select_error: "Select if it would be a donation, a reduced price, or standard price"
     thank_you:
       title: "Thank you for offering support"
-      description: 
+      description:
         <p class="govuk-body">We’ve sent you a confirmation email.</p>
         <p class="govuk-body">If you’ve offered personal protective equipment (PPE) your offer has been sent to the Department of Health and Social Care. If you’ve offered other types of support your offer has been sent to the Crown Commercial Service.</p>
         <p class="govuk-body">You’ll be contacted if your support is needed. This can take a few weeks.</p>
