@@ -61,7 +61,7 @@ GEM
     apparition (0.5.0)
       capybara (~> 3.13, < 4)
       websocket-driver (>= 0.6.5)
-    asset_sync (2.12.0)
+    asset_sync (2.12.1)
       activemodel (>= 4.1.0)
       fog-core
       mime-types (>= 2.99)
@@ -114,7 +114,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
-    excon (0.73.0)
+    excon (0.74.0)
     execjs (2.7.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
@@ -395,7 +395,7 @@ PLATFORMS
 
 DEPENDENCIES
   apparition (~> 0.5.0)
-  asset_sync (~> 2.12.0)
+  asset_sync (~> 2.12.1)
   awesome_print (~> 1.8)
   aws-sdk-s3 (~> 1.68.1)
   better_errors (~> 2.7)
