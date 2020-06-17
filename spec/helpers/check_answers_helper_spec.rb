@@ -234,7 +234,8 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       it "concatenates business_details with a line break" do
         answer = {
           company_name: "Snow White Inc",
-          company_number: rand(10),
+          company_is_uk_registered: "Yes",
+          company_number: "AB123456",
           company_size: 1000,
           company_location: "UK",
           company_postcode: "E1 8QS",
@@ -242,6 +243,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
 
         expected_answer =
           "Company name: #{answer[:company_name]}<br>" \
+            "Company registered in the UK: #{answer[:company_is_uk_registered]}<br>" \
             "Company number: #{answer[:company_number]}<br>" \
             "Company size number: #{answer[:company_size]}<br>" \
             "Company location: #{answer[:company_location]}<br>" \
@@ -250,19 +252,25 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         expect(helper.concat_answer(answer, question)).to eq(expected_answer)
       end
 
-      it "returns nothing if the business details are empty" do
-        answer = {}
+      context "company_is_uk_registered" do
+        it "returns only company_is_uk_registered if all other business detail fields have no value" do
+          answer = {
+            company_is_uk_registered: "No",
+          }
 
-        expect(helper.concat_answer(answer, question)).to be_empty
-      end
+          expected_answer = "Company registered in the UK: No"
+          expect(helper.concat_answer(answer, question)).to eq(expected_answer)
+        end
 
-      it "only concatenates the fields that have a value" do
-        answer = {
-          company_name: "Snow White Inc",
-        }
+        it "only concatenates the other business detail fields that have a value" do
+          answer = {
+            company_name: "Snow White Inc",
+            company_is_uk_registered: "No",
+          }
 
-        expected_answer = "Company name: #{answer[:company_name]}"
-        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
+          expected_answer = "Company name: #{answer[:company_name]}<br>Company registered in the UK: No"
+          expect(helper.concat_answer(answer, question)).to eq(expected_answer)
+        end
       end
     end
 

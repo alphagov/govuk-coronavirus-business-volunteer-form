@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class CoronavirusForm::BusinessDetailsController < ApplicationController
-  REQUIRED_FIELDS = %w[company_name].freeze
+  REQUIRED_FIELDS = %w[company_name company_is_uk_registered].freeze
   TEXT_FIELDS = %w[company_name company_number].freeze
 
   def submit
     @form_responses = {
       business_details: sanitized_business_details(params),
     }
+
+    @form_responses[:business_details][:company_number] = "" if @form_responses[:business_details][:company_is_uk_registered] == I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.not_united_kingdom.label")
 
     invalid_fields = validate_fields
 
@@ -46,12 +48,21 @@ private
                 validate_postcode("company_postcode", @form_responses[:business_details][:company_postcode])
               end
 
+    errors << if @form_responses[:business_details][:company_is_uk_registered] == I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label") &&
+        @form_responses[:business_details][:company_number].blank?
+                { field: "company_number",
+                  text: t("coronavirus_form.questions.#{controller_name}.company_is_uk_registered.options.united_kingdom.company_number.custom_error") }
+              elsif @form_responses[:business_details][:company_is_uk_registered] == I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label")
+                validate_company_number(controller_name, @form_responses[:business_details][:company_number])
+              end
+
     errors.compact.flatten
   end
 
   def sanitized_business_details(params)
     {
       company_name: strip_tags(params[:company_name]).presence,
+      company_is_uk_registered: strip_tags(params[:company_is_uk_registered]).presence,
       company_number: strip_tags(params[:company_number]).presence,
       company_size: strip_tags(params[:company_size]).presence,
       company_location: strip_tags(params[:company_location]).presence,

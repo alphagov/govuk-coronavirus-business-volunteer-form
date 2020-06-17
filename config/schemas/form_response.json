@@ -340,6 +340,7 @@
       "type": "object",
       "required": [
         "company_name",
+        "company_is_uk_registered",
         "company_size",
         "company_location"
       ],
@@ -348,8 +349,12 @@
         "company_name": {
           "type": "string"
         },
+        "company_is_uk_registered": {
+          "$ref": "#/definitions/yes_no"
+        },
         "company_number": {
-          "type": ["string", "null"]
+          "type": "string",
+          "pattern": "^([0-9]{8}|[A-Za-z]{2}[0-9]{6})$"
         },
         "company_size": {
           "type": "string",

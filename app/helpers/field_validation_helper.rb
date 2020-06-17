@@ -102,6 +102,14 @@ module FieldValidationHelper
     end
   end
 
+  def validate_company_number(field, company_number)
+    if company_number =~ /^([0-9]{8}|[A-Za-z]{2}[0-9]{6})$/
+      []
+    else
+      [{ field: field.to_s.sub(".", "_"), text: t("coronavirus_form.errors.company_number") }]
+    end
+  end
+
   def validate_charge_field(field, value)
     if value.blank?
       return [{

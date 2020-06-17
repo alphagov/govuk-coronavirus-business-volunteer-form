@@ -25,7 +25,8 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
     let(:params) do
       {
         company_name: "My Company Ltd",
-        company_number: "1234",
+        company_is_uk_registered: "Yes",
+        company_number: "AA123456",
         company_size: "under_50_people",
         company_location: "united_kingdom",
         company_postcode: "AB11AA",
@@ -59,6 +60,57 @@ RSpec.describe CoronavirusForm::BusinessDetailsController, type: :controller do
 
     it "validates company name is entered" do
       post :submit, params: params.merge(company_name: "")
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
+    it "validates company registration option is chosen" do
+      post :submit, params: params.merge(company_is_uk_registered: "")
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
+    it "does not require a company number if the company registration is not UK" do
+      post :submit,
+           params: params.merge(
+             company_is_uk_registered: I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.not_united_kingdom.label"),
+           ).except(:company_number)
+
+      expect(response).to redirect_to(contact_details_path)
+    end
+
+    it "validates a company number is provided if company registration is UK" do
+      post :submit,
+           params: params.merge(
+             company_is_uk_registered: I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
+           ).except(:company_number)
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(current_template)
+    end
+
+    it "redirects to next step when a valid company number is provided" do
+      valid_company_numbers = %w[12345678 AA123456]
+
+      valid_company_numbers.each do |company_number|
+        post :submit,
+             params: params.merge(
+               company_is_uk_registered: I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
+               company_number: company_number,
+             )
+
+        expect(response).to redirect_to(contact_details_path)
+      end
+    end
+
+    it "does not redirect to next step when the company number is invalid" do
+      post :submit,
+           params: params.merge(
+             company_is_uk_registered: I18n.t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
+             company_number: "AAA12345",
+           )
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(current_template)

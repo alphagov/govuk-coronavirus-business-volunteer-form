@@ -22,6 +22,7 @@
 <%= render "govuk_publishing_components/components/input", {
   id: "company_name",
   name: "company_name",
+  heading_size: "s",
   label: {
     text: t("coronavirus_form.questions.business_details.company_name.label"),
   },
@@ -29,13 +30,35 @@
   value: @form_responses.dig(:business_details, :company_name),
 } %>
 
-<%= render "govuk_publishing_components/components/input", {
-  name: "company_number",
-  label: {
-    text: t("coronavirus_form.questions.business_details.company_number.label"),
-  },
-  error_message: error_items('company_number'),
-  value: @form_responses.dig(:business_details, :company_number),
+<%= render "govuk_publishing_components/components/radio", {
+  heading: t("coronavirus_form.questions.business_details.company_is_uk_registered.label"),
+  heading_size: "s",
+  name: "company_is_uk_registered",
+  error_message: error_items('company_is_uk_registered'),
+  items: [
+    {
+      id: "company_is_uk_registered",
+      value: t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
+      text: t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
+      checked: @form_responses.dig(:business_details, :company_is_uk_registered) == t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.label"),
+      conditional: render("govuk_publishing_components/components/input", {
+        label: {
+          text: t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.company_number.label"),
+        },
+        id: "company_number",
+        name: "company_number",
+        hint: t("coronavirus_form.questions.business_details.company_is_uk_registered.options.united_kingdom.company_number.hint"),
+        error_message: error_items('company_number'),
+        value: @form_responses.dig(:business_details, :company_number),
+        width: 10
+      })
+    },
+    {
+      value: t("coronavirus_form.questions.business_details.company_is_uk_registered.options.not_united_kingdom.label"),
+      text: t("coronavirus_form.questions.business_details.company_is_uk_registered.options.not_united_kingdom.label"),
+      checked: @form_responses.dig(:business_details, :company_is_uk_registered) == t("coronavirus_form.questions.business_details.company_is_uk_registered.options.not_united_kingdom.label"),
+    },
+  ]
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {

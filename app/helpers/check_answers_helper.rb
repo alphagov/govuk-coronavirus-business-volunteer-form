@@ -185,7 +185,8 @@ module CheckAnswersHelper
       joiner = "<br>"
     elsif question.eql?("business_details")
       concatenated_answer << "Company name: #{answer[:company_name]}" if answer[:company_name]
-      concatenated_answer << "Company number: #{answer[:company_number]}" if answer[:company_number]
+      concatenated_answer << "Company registered in the UK: #{answer[:company_is_uk_registered]}"
+      concatenated_answer << "Company number: #{answer[:company_number]}" if answer[:company_number].present?
       concatenated_answer << "Company size number: #{answer[:company_size]}" if answer[:company_size]
       concatenated_answer << "Company location: #{answer[:company_location]}" if answer[:company_location]
       concatenated_answer << "Company postcode: #{answer[:company_postcode]}" if answer[:company_postcode]
