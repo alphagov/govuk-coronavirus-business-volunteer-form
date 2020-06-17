@@ -8,7 +8,6 @@ class UploadErrorPages
   def upload
     error_pages.map do |error_page|
       path = Rails.root.join("public", error_page)
-      puts "Writing #{path} to S3 bucket #{bucket_name}"
       s3_client.put_object(
         acl: "public-read",
         body: File.open(path).read,
