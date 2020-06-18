@@ -203,13 +203,14 @@ en:
             label: "No"
         custom_select_error: "Select yes if you have personal protective equipment or testing equipment to offer"
       medical_equipment_type:
-        title: "Tell us about the medical equipment you can offer"
-        hint: "Give details for one product at a time."
+        title: "What type of medical equipment or services can you offer?"
         options:
           number_ppe:
-            label: "Personal protective equipment, for example masks, detergent and waste bags"
+            label: "Personal protective equipment (PPE)"
+            hint: "For example, masks, detergent and waste bags"
           number_testing_equipment:
-            label: "Testing equipment"
+            label: "Coronavirus tests or testing facilities"
+            hint: "For example new or existing types of coronavirus test, consumables and equipment, or laboratory capacity"
         custom_select_error: "Select the type of medical equipment you can offer"
       product_details:
         title: "Tell us about the product you’re offering"

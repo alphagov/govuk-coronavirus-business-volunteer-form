@@ -15,7 +15,6 @@
 ) do %>
 <%= render "govuk_publishing_components/components/radio", {
   heading: t("coronavirus_form.questions.medical_equipment_type.title"),
-  hint: t("coronavirus_form.questions.medical_equipment_type.hint"),
   is_page_heading: true,
   name: "medical_equipment_type",
   error_message: error_items('medical_equipment_type'),
@@ -23,11 +22,13 @@
     {
       value: t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
       text: t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
+      hint_text: t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.hint"),
       checked: @product["medical_equipment_type"] == t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
     },
     {
       value: t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
       text: t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
+      hint_text: t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.hint"),
       checked: @product["medical_equipment_type"] == t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
     },
   ]

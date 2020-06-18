@@ -43,7 +43,9 @@
             "type": "string",
             "enum": [
               "Personal protective equipment, for example masks, detergent and waste bags",
-              "Testing equipment"
+              "Testing equipment",
+              "Personal protective equipment (PPE)",
+              "Coronavirus tests or testing facilities"
             ]
           },
           "product_id": {
