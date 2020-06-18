@@ -195,7 +195,7 @@ en:
       external_link: "https://www.gov.uk/guidance/help-the-government-increase-coronavirus-covid-19-testing-capacity"
     questions:
       medical_equipment:
-        title: "Can you offer personal protective equipment or testing equipment?"
+        title: "Can you offer personal protective equipment, coronavirus tests, or testing facilities?"
         options:
           option_yes:
             label: "Yes"
