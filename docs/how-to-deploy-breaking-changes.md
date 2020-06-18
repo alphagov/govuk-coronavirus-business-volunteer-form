@@ -31,10 +31,10 @@ Once the first change has been deployed, a second PR should be created to either
 - Disallow the field
 - Remove extraneous options from the field in the JSON schema.
 
-The second PR should ideally be deployed at least 4 hours after the first one as this is the maximum about of time a user's session can live for.
+The second PR should ideally be deployed at least 4 hours after the first one as this is the maximum amount of time a user's session can live for.
 
 #### Notify other teams
 
-If new questions have been added, or the options for a question have changed the downstream data also need to be notified about the changes before they're deployed.
+If new questions have been added, or the options for a question have changed, the downstream data team also need to be notified about the changes before they're deployed.
 
 This is because changes to the fields won't get pulled through automatically and delivered to their consumers (for example Local Authorities or wholesalers), so they need to know to update their scripts.
