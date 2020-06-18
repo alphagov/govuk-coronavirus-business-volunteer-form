@@ -1,0 +1,7 @@
+src_files:
+  - 'app/assets/javascripts/stripPII.js'
+
+spec_files:
+  - '**/*_spec.js'
+
+spec_helper: spec/javascripts/support/jasmine_helper.rb
