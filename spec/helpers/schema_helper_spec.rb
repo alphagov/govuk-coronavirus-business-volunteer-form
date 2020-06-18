@@ -492,12 +492,12 @@ RSpec.describe SchemaHelper, type: :helper do
         expect(validate_against_form_response_schema(data)).to be_empty
       end
 
-      it "returns a list of errors when medical_equipment_type is missing" do
+      it "doesn't return error when medical_equipment_type is missing" do
         data = valid_data.tap do |valid_data|
           valid_data[:product_details].last.delete(:medical_equipment_type)
         end
 
-        expect(validate_against_form_response_schema(data).first).to include("medical_equipment_type")
+        expect(validate_against_form_response_schema(data).first).to be(nil)
       end
 
       it "returns a list of errors when medical_equipment_type has an unexpected value" do

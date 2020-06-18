@@ -23,13 +23,13 @@
       value: t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
       text: t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
       hint_text: t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.hint"),
-      checked: @product["medical_equipment_type"] == t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
+      checked: @form_responses[:medical_equipment_type] == t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
     },
     {
       value: t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
       text: t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
       hint_text: t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.hint"),
-      checked: @product["medical_equipment_type"] == t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
+      checked: @form_responses[:medical_equipment_type] == t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
     },
   ]
 } %>

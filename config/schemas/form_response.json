@@ -34,7 +34,6 @@
       "items": {
         "type": "object",
         "required": [
-          "medical_equipment_type",
           "product_id"
         ],
         "additionalProperties": false,
