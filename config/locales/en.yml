@@ -238,7 +238,7 @@ en:
             label: "Yes"
           option_no:
             label: "No"
-        custom_select_error: "Select yes if you have personal protective equipment or testing equipment to offer"
+        custom_select_error: "Select yes if you can offer personal protective equipment, coronavirus tests, or testing facilities"
       medical_equipment_type:
         title: "What type of medical equipment or services can you offer?"
         options:
@@ -248,7 +248,7 @@ en:
           number_testing_equipment:
             label: "Coronavirus tests or testing facilities"
             hint: "For example new or existing types of coronavirus test, consumables and equipment, or laboratory capacity"
-        custom_select_error: "Select the type of medical equipment you can offer"
+        custom_select_error: "Select the type of medical equipment or services you can offer"
       product_details:
         title: "Tell us about the product you’re offering"
         product_name:
