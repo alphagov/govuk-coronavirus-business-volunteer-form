@@ -34,7 +34,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
     it "redirects to next step" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to(product_details_path(product_id: "abcd1234"))
+      expect(response).to redirect_to(coordination_centres_path)
     end
 
     it "validates any option is chosen" do

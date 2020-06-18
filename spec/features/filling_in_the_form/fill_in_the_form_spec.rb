@@ -10,7 +10,6 @@ RSpec.feature "fill in the business volunteer form" do
       given_a_business_during_the_covid_19_pandemic
       that_can_offer_medical_equipment
       and_has_personal_protection_equipment_available
-      and_has_no_more_testing_equipment_to_offer
       and_can_offer_accommodation
       and_can_offer_transport_or_logistics
       and_can_offer_space

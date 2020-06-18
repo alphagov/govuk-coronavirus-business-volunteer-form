@@ -13,3 +13,11 @@
 } %>
 
 <%= sanitize(t("coordination_centres.body_text")) %>
+
+<div>
+  <%= render "govuk_publishing_components/components/button", {
+      text: t("coordination_centres.button.label"),
+      href: accommodation_url,
+      margin_bottom: true
+  } %>
+</div>

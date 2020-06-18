@@ -25,7 +25,7 @@ class CoronavirusForm::MedicalEquipmentTypeController < ApplicationController
       redirect_to testing_equipment_url
     else
       add_product_to_session(@product)
-      redirect_to product_details_url(product_id: @product[:product_id])
+      redirect_to coordination_centres_url
     end
   end
 
@@ -38,7 +38,7 @@ private
   end
 
   def previous_path
-    session[:product_details].empty? ? medical_equipment_url : additional_product_url
+    medical_equipment_url
   end
 
   def sanitized_product(params)
