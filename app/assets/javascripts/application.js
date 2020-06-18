@@ -7,6 +7,7 @@
 //= require govuk_publishing_components/components/cookie-banner
 //= require govuk_publishing_components/components/error-summary
 //= require govuk_publishing_components/components/radio
+//= require stripPII
 //= require analytics
 //= require cookies
 window.CookieSettings.start()
