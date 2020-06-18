@@ -1,6 +1,12 @@
 module CheckAnswersHelper
-  SKIPPABLE_QUESTIONS = %w[
+  EXCLUDED_QUESTIONS = %w[
+    additional_product
+    medical_equipment
+    medical_equipment_type
     product_details
+  ].freeze
+
+  SKIPPABLE_QUESTIONS = %w[
     rooms_number
     accommodation_cost
     transport_type
@@ -26,7 +32,6 @@ module CheckAnswersHelper
 
       next if skip_question?(question)
 
-      next product_details if question.eql?("product_details")
       next transport_type if question.eql?("transport_type")
       next offer_care_qualifications if question.eql?("offer_care_qualifications")
       next offer_staff_type if question.eql?("offer_staff_type")
@@ -55,55 +60,9 @@ module CheckAnswersHelper
   end
 
   def skip_question?(question)
-    return true if question.eql?("medical_equipment_type")
+    return true if question.in?(EXCLUDED_QUESTIONS)
 
     question.in?(SKIPPABLE_QUESTIONS) && session[question].blank?
-  end
-
-  def additional_product_index
-    items.index { |item| item[:field] == t("coronavirus_form.questions.additional_product.title") }
-  end
-
-  def items_part_1
-    items.select.with_index { |_, index| index < additional_product_index }
-  end
-
-  def items_part_2
-    items.select.with_index { |_, index| index > additional_product_index }
-  end
-
-  def product_details
-    products = session["product_details"]
-    return unless products && products.any?
-
-    products.map do |product|
-      {
-        field: "Details for product #{product[:product_name]}",
-        value: sanitize(product_info(product)),
-        edit: {
-          href: product_details_url(product_id: product[:product_id]),
-        },
-        delete: {
-          href: "/product-details/#{product[:product_id]}/delete",
-        },
-      }
-    end
-  end
-
-  def product_info(product)
-    prod = []
-    prod << "Type: #{product[:medical_equipment_type]}"
-    prod << "Product: #{product[:product_name]}" if product[:product_name]
-    prod << "Equipment type: #{product[:equipment_type]}" if product[:equipment_type]
-    prod << "Quantity: #{product[:product_quantity]}" if product[:product_quantity]
-    prod << "Cost: #{product[:product_cost]}" if product[:product_cost]
-    prod << "Certification details: #{product[:certification_details]}" if product[:certification_details]
-    prod << "Location: #{product[:product_location]}" if product[:product_location]
-    prod << "Postcode: #{product[:product_postcode]}" if product[:product_postcode]
-    prod << "URL: #{product[:product_url]}" if product[:product_url]
-    prod << "Lead time: #{product[:lead_time]}" if product[:lead_time]
-
-    prod.join("<br>")
   end
 
   def transport_type
