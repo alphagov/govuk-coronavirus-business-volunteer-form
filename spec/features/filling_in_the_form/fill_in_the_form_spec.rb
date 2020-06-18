@@ -42,7 +42,6 @@ RSpec.feature "fill in the business volunteer form" do
     that_can_offer_medical_equipment
     and_can_offer_testing_equipment
     then_they_see_the_external_testing_equipment_link
-    and_can_navigate_back_to_offer_another_product
   end
 
   scenario "ensure we can perform a healthcheck" do

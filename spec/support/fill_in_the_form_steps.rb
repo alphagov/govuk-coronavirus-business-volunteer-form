@@ -48,11 +48,6 @@ module FillInTheFormSteps
     expect(page).to have_selector(:css, "a[href='#{link}']")
   end
 
-  def and_can_navigate_back_to_offer_another_product
-    click_on I18n.t("coronavirus_form.testing_equipment.button.label")
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
-  end
-
   def and_can_offer_accommodation
     expect(page).to have_content(I18n.t("coronavirus_form.questions.accommodation.title"))
     choose I18n.t("coronavirus_form.questions.accommodation.options.yes_all_uses.label")

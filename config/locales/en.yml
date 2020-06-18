@@ -188,6 +188,13 @@ en:
       page_title_prefix: 'Error: '
     testing_equipment:
       title: "Testing equipment"
+      body_text: |
+        <p class="govuk-body">You can offer:</p>
+        <ul class="govuk-list govuk-list--bullet">
+        <li>new or existing types of coronavirus test</li>
+        <li>consumables and equipment</li>
+        <li>laboratory capacity</li>
+        </ul>
       button:
         label: "Continue offering other services"
       link:
