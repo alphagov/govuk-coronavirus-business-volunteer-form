@@ -6,9 +6,6 @@ class CoronavirusForm::CoordinationCentresController < ApplicationController
 private
 
   def previous_path
-    return first_question_path if session[:previous_path].blank?
-
-    path = URI(session[:previous_path]).path
-    path.presence || first_question_path
+    medical_equipment_type_url
   end
 end

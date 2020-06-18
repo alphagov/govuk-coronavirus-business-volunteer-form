@@ -38,7 +38,16 @@ private
     end
   end
 
+  # Accommodation can be reached from 3 different pages, so check which is best to go back to
   def previous_path
-    medical_equipment_url
+    if session[:medical_equipment] == I18n.t("coronavirus_form.questions.medical_equipment.options.option_no.label")
+      medical_equipment_url
+    elsif session[:medical_equipment_type] == I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label")
+      coordination_centres_url
+    elsif session[:medical_equipment_type] == I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label")
+      testing_equipment_url
+    else
+      medical_equipment_url
+    end
   end
 end
