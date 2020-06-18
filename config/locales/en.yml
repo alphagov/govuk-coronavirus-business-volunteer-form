@@ -683,7 +683,8 @@ en:
       title: "Thank you for offering support"
       description:
         <p class="govuk-body">We’ve sent you a confirmation email.</p>
-        <p class="govuk-body">If you’ve offered personal protective equipment (PPE) your offer has been sent to the Department of Health and Social Care. If you’ve offered other types of support your offer has been sent to the Crown Commercial Service.</p>
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">Your offer has been sent to the Crown Commercial Service.</p>
         <p class="govuk-body">You’ll be contacted if your support is needed. This can take a few weeks.</p>
         <p class="govuk-body">Because we’re receiving a lot of offers, you might not hear back if your support is not needed.</p>
         <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/coronavirus">Find all information on coronavirus (COVID-19)</a>.</p>
