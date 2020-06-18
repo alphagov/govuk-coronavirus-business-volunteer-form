@@ -3,9 +3,6 @@ require "spec_helper"
 RSpec.describe CheckAnswersHelper, type: :helper do
   let(:answers_to_skippable_questions) do
     {
-      are_you_a_manufacturer: [
-        I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label"),
-      ],
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
       rooms_number: "100",
       accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
@@ -81,7 +78,7 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     it "finds the index of the additional_product question" do
       session.merge!(answers_to_skippable_questions)
 
-      expect(helper.additional_product_index).to eq(2)
+      expect(helper.additional_product_index).to eq(1)
     end
   end
 

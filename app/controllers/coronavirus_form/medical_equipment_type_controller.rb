@@ -38,7 +38,7 @@ private
   end
 
   def previous_path
-    session[:product_details].empty? ? are_you_a_manufacturer_url : additional_product_url
+    session[:product_details].empty? ? medical_equipment_url : additional_product_url
   end
 
   def sanitized_product(params)

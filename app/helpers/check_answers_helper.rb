@@ -1,6 +1,5 @@
 module CheckAnswersHelper
   SKIPPABLE_QUESTIONS = %w[
-    are_you_a_manufacturer
     product_details
     rooms_number
     accommodation_cost

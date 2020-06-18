@@ -9,7 +9,6 @@ RSpec.feature "fill in the business volunteer form" do
     scenario "fill in the form" do
       given_a_business_during_the_covid_19_pandemic
       that_can_offer_medical_equipment
-      and_is_a_manufacturer_a_distributor_and_agent
       and_has_personal_protection_equipment_available
       and_has_no_more_testing_equipment_to_offer
       and_can_offer_accommodation
@@ -41,7 +40,6 @@ RSpec.feature "fill in the business volunteer form" do
   scenario "Fill in the form with Testing Equipment" do
     given_a_business_during_the_covid_19_pandemic
     that_can_offer_medical_equipment
-    and_is_a_manufacturer_a_distributor_and_agent
     and_can_offer_testing_equipment
     then_they_see_the_external_testing_equipment_link
     and_can_navigate_back_to_offer_another_product

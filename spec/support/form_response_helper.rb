@@ -81,7 +81,6 @@ module FormResponseHelper
           medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
         },
       ],
-      are_you_a_manufacturer: I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options").map { |_, item| item[:label] },
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options").map { |_, item| item[:label] }.sample,
       location: I18n.t("coronavirus_form.questions.location.options").map { |_, item| item[:label] },
     }

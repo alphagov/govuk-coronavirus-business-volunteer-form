@@ -589,13 +589,6 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
-    describe "are_you_a_manufacturer" do
-      it "returns a list of errors when are_you_a_manufacturer has an unexpected value" do
-        data = valid_data.merge(are_you_a_manufacturer: %w[Foo])
-        expect(validate_against_form_response_schema(data).first).to include("are_you_a_manufacturer")
-      end
-    end
-
     describe "additional_product" do
       it "returns a list of errors when additional_product has an unexpected value" do
         data = valid_data.merge(additional_product: "Foo")

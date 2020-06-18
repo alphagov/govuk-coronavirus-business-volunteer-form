@@ -13,16 +13,6 @@ module FillInTheFormSteps
     end
   end
 
-  def and_is_a_manufacturer_a_distributor_and_agent
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.are_you_a_manufacturer.title"))
-    within find(".govuk-main-wrapper") do
-      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label")
-      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.distributor.label")
-      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.agent.label")
-      click_on I18n.t("coronavirus_form.submit_and_next")
-    end
-  end
-
   def and_has_personal_protection_equipment_available
     expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
     choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label")

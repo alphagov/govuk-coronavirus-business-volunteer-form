@@ -211,19 +211,6 @@ en:
           number_testing_equipment:
             label: "Testing equipment"
         custom_select_error: "Select the type of medical equipment you can offer"
-      are_you_a_manufacturer:
-        title: "What kind of business are you?"
-        hint: "Select the best ways to describe your work."
-        options:
-          manufacturer:
-            label: "Manufacturer"
-          distributor:
-            label: "Distributor"
-          agent:
-            label: "Agent"
-          individual:
-            label: "Individual"
-        custom_select_error: "Select the best way to describe your business"
       product_details:
         title: "Tell us about the product you’re offering"
         product_name:
