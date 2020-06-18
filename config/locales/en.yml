@@ -217,7 +217,7 @@ en:
       postcode_format: "Enter a real postcode"
       page_title_prefix: 'Error: '
     testing_equipment:
-      title: "Testing equipment"
+      title: "Offer coronavirus tests or testing facilities"
       body_text: |
         <p class="govuk-body">You can offer:</p>
         <ul class="govuk-list govuk-list--bullet">
@@ -228,7 +228,7 @@ en:
       button:
         label: "Continue offering other services"
       link:
-        label: "Offer testing equipment (opens in a new tab)"
+        label: "Offer tests or testing facilities (opens in a new window)"
       external_link: "https://www.gov.uk/guidance/help-the-government-increase-coronavirus-covid-19-testing-capacity"
     questions:
       medical_equipment:
