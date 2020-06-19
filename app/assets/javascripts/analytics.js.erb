@@ -1,8 +1,3 @@
-// Start cookie banner (display settings controlled internally by cookies)
-var element = document.querySelector('[data-module="cookie-banner"]')
-
-new GOVUK.Modules.CookieBanner().start($(element))
-
 var analyticsInit = function() {
   <% if Rails.application.config.analytics_tracking_id.present? %>
     var trackingId = "<%= Rails.application.config.analytics_tracking_id %>"
