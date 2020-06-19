@@ -364,7 +364,7 @@
         },
         "company_number": {
           "type": "string",
-          "pattern": "^([0-9]{8}|[A-Za-z]{2}[0-9]{6})$"
+          "pattern": "^$|^([0-9]{8}|[A-Za-z]{2}[0-9]{6})$"
         },
         "company_size": {
           "type": "string",

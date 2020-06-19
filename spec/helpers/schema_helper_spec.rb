@@ -376,7 +376,7 @@ RSpec.describe SchemaHelper, type: :helper do
 
       it "allows company_number to be blank" do
         data = valid_data.tap do |valid_data|
-          valid_data[:business_details].delete(:company_number)
+          valid_data[:business_details][:company_number] = ""
         end
 
         expect(validate_against_form_response_schema(data)).to be_empty
