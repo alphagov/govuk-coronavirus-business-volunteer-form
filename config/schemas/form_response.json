@@ -17,6 +17,15 @@
     "medical_equipment": {
       "$ref": "#/definitions/yes_no"
     },
+    "medical_equipment_type": {
+      "type": "string",
+      "enum": [
+        "Personal protective equipment, for example masks, detergent and waste bags",
+        "Testing equipment",
+        "Personal protective equipment (PPE)",
+        "Coronavirus tests or testing facilities"
+      ]
+    },
     "are_you_a_manufacturer": {
       "type": "array",
       "items": {
