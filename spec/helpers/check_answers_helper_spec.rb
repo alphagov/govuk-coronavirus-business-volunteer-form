@@ -3,9 +3,6 @@ require "spec_helper"
 RSpec.describe CheckAnswersHelper, type: :helper do
   let(:answers_to_skippable_questions) do
     {
-      are_you_a_manufacturer: [
-        I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label"),
-      ],
       additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
       rooms_number: "100",
       accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
@@ -52,18 +49,16 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       session.merge!(answers_to_skippable_questions)
 
       questions.each do |question|
-        unless question.in? %w[medical_equipment_type product_details]
+        unless question.in? CheckAnswersHelper::EXCLUDED_QUESTIONS
           expect(helper.items.pluck(:field)).to include(I18n.t("coronavirus_form.questions.#{question}.title"))
         end
       end
     end
 
-    it "includes an entry for product_details" do
-      session.merge!(products)
-
+    it "doesn't include questions about products" do
       questions.each do |question|
-        if question == "product_details"
-          expect(helper.items.pluck(:field)).to include(a_string_matching(/#{session["product_details"].first["product_name"]}/))
+        if question.in? CheckAnswersHelper::EXCLUDED_QUESTIONS
+          expect(helper.items.pluck(:field)).to_not include(I18n.t("coronavirus_form.questions.#{question}.title"))
         end
       end
     end
@@ -74,76 +69,6 @@ RSpec.describe CheckAnswersHelper, type: :helper do
           expect(helper.items.pluck(:field)).to_not include(I18n.t("coronavirus_form.questions.#{question}.title"))
         end
       end
-    end
-  end
-
-  describe "#additional_product_index" do
-    it "finds the index of the additional_product question" do
-      session.merge!(answers_to_skippable_questions)
-
-      expect(helper.additional_product_index).to eq(2)
-    end
-  end
-
-  describe "#product_details" do
-    before do
-      session.merge!(products)
-    end
-
-    it "adds a link to edit each item" do
-      helper.product_details.each do |product|
-        expect(product[:edit][:href]).to include(product_details_url(product_id: product["product_id"]))
-      end
-    end
-
-    it "adds a link to delete each item" do
-      helper.product_details.each do |product|
-        expect(product[:delete][:href]).to include("/product-details/#{product[:product_id]}/delete")
-      end
-    end
-  end
-
-  describe "#product_info" do
-    it "concatenates product information with a line break" do
-      product = {
-        medical_equipment_type: I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        product_name: "Product name",
-        equipment_type: "Equipment type",
-        product_quantity: 100,
-        product_cost: 5,
-        certification_details: "Certification",
-        product_location: "UK",
-        product_postcode: "E1 8QS",
-        product_url: "https://www.example.com",
-        lead_time: 5,
-      }
-
-      expected_answer = "Type: #{product[:medical_equipment_type]}<br>" \
-                          "Product: #{product[:product_name]}<br>" \
-                          "Equipment type: #{product[:equipment_type]}<br>" \
-                          "Quantity: #{product[:product_quantity]}<br>" \
-                          "Cost: #{product[:product_cost]}<br>" \
-                          "Certification details: #{product[:certification_details]}<br>" \
-                          "Location: #{product[:product_location]}<br>" \
-                          "Postcode: #{product[:product_postcode]}<br>" \
-                          "URL: #{product[:product_url]}<br>" \
-                          "Lead time: #{product[:lead_time]}"
-
-      expect(helper.product_info(product)).to eq(expected_answer)
-    end
-
-    it "only concatenates the fields that have a value" do
-      product = {
-        medical_equipment_type: I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        product_name: "Product name",
-      }
-
-      expected_answer = "Type: #{product[:medical_equipment_type]}<br>Product: #{product[:product_name]}"
-      expect(helper.product_info(product)).to eq(expected_answer)
     end
   end
 

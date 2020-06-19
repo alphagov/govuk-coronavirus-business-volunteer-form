@@ -16,19 +16,7 @@
 <%= tag.p t("check_your_answers.description"), class: "govuk-body" %>
 
 <%= render "govuk_publishing_components/components/summary_list", {
-  items: items_part_1,
-  block: sanitize(
-          tag.p(
-            link_to("Add an additional product",
-                    "/medical-equipment-type",
-                    class: "govuk-link"
-            ),
-          class: "govuk-body app-body--right")
-         )
-} %>
-
-<%= render "govuk_publishing_components/components/summary_list", {
-  items: items_part_2,
+  items: items,
 } %>
 
 <%= render "govuk_publishing_components/components/heading", {

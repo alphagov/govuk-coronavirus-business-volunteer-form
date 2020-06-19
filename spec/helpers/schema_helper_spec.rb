@@ -492,12 +492,12 @@ RSpec.describe SchemaHelper, type: :helper do
         expect(validate_against_form_response_schema(data)).to be_empty
       end
 
-      it "returns a list of errors when medical_equipment_type is missing" do
+      it "doesn't return error when medical_equipment_type is missing" do
         data = valid_data.tap do |valid_data|
           valid_data[:product_details].last.delete(:medical_equipment_type)
         end
 
-        expect(validate_against_form_response_schema(data).first).to include("medical_equipment_type")
+        expect(validate_against_form_response_schema(data).first).to be(nil)
       end
 
       it "returns a list of errors when medical_equipment_type has an unexpected value" do
@@ -586,13 +586,6 @@ RSpec.describe SchemaHelper, type: :helper do
         end
 
         expect(validate_against_form_response_schema(data).first).to include("equipment_type")
-      end
-    end
-
-    describe "are_you_a_manufacturer" do
-      it "returns a list of errors when are_you_a_manufacturer has an unexpected value" do
-        data = valid_data.merge(are_you_a_manufacturer: %w[Foo])
-        expect(validate_against_form_response_schema(data).first).to include("are_you_a_manufacturer")
       end
     end
 

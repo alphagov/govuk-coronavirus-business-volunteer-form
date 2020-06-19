@@ -13,32 +13,13 @@ module FillInTheFormSteps
     end
   end
 
-  def and_is_a_manufacturer_a_distributor_and_agent
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.are_you_a_manufacturer.title"))
-    within find(".govuk-main-wrapper") do
-      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.manufacturer.label")
-      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.distributor.label")
-      check I18n.t("coronavirus_form.questions.are_you_a_manufacturer.options.agent.label")
-      click_on I18n.t("coronavirus_form.submit_and_next")
-    end
-  end
-
   def and_has_personal_protection_equipment_available
     expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
     choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label")
     click_on I18n.t("coronavirus_form.submit_and_next")
 
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.product_details.title"))
-    fill_in "product_name", with: "Testing"
-    choose I18n.t("coronavirus_form.questions.product_details.equipment_type.options.iir_face_masks.label")
-    fill_in "product_quantity", with: "500"
-    fill_in "product_cost", with: "0"
-    fill_in "certification_details", with: "CE marking"
-    choose I18n.t("coronavirus_form.questions.product_details.product_location.options.option_uk.label")
-    fill_in "product_postcode", with: "E1 8QS"
-    fill_in "product_url", with: "https://example.com"
-    fill_in "lead_time", with: "10"
-    click_on I18n.t("coronavirus_form.submit_and_next")
+    expect(page).to have_content(I18n.t("coordination_centres.title"))
+    click_on I18n.t("coordination_centres.button.label")
   end
 
   def and_can_offer_testing_equipment
@@ -46,21 +27,10 @@ module FillInTheFormSteps
     click_on I18n.t("coronavirus_form.submit_and_next")
   end
 
-  def and_has_no_more_testing_equipment_to_offer
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
-    choose I18n.t("coronavirus_form.questions.additional_product.options.option_no.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
-  end
-
   def then_they_see_the_external_testing_equipment_link
     link = I18n.t("coronavirus_form.testing_equipment.external_link")
     expect(page).to have_content(I18n.t("coronavirus_form.testing_equipment.link.label"))
     expect(page).to have_selector(:css, "a[href='#{link}']")
-  end
-
-  def and_can_navigate_back_to_offer_another_product
-    click_on I18n.t("coronavirus_form.testing_equipment.button.label")
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.additional_product.title"))
   end
 
   def and_can_offer_accommodation

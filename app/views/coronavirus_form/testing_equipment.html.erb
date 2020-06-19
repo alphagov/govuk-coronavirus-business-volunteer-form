@@ -12,6 +12,8 @@
   margin_top: 0
 } %>
 
+<%= sanitize(t("coronavirus_form.testing_equipment.body_text")) %>
+
 <p class="govuk-body govuk-!-margin-bottom-8">
   <a class="govuk-link" href="<%= t("coronavirus_form.testing_equipment.external_link") %>" target="_blank">
     <%= t("coronavirus_form.testing_equipment.link.label") %>
@@ -20,6 +22,6 @@
 
 <%= render "govuk_publishing_components/components/button", {
   text: t("coronavirus_form.testing_equipment.button.label"),
-  href: additional_product_url,
+  href: accommodation_url,
   margin_bottom: true
 } %>

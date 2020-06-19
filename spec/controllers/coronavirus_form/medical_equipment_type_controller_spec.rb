@@ -6,9 +6,6 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
   include_examples "session expiry"
 
   let(:current_template) { "coronavirus_form/medical_equipment_type" }
-  let(:session_key) { :product_details }
-
-  before { allow(SecureRandom).to receive(:uuid).and_return("abcd1234") }
 
   describe "GET show" do
     it "renders the form when first question answered" do
@@ -24,17 +21,17 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
   end
 
   describe "POST submit" do
-    let(:selected) { "Personal protection equipment" }
+    let(:selected) { "Personal protection equipment (PPE)" }
     it "sets session variables" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(session[session_key][0][:medical_equipment_type]).to eq selected
+      expect(session[:medical_equipment_type]).to eq selected
     end
 
     it "redirects to next step" do
       post :submit, params: { medical_equipment_type: selected }
 
-      expect(response).to redirect_to(product_details_path(product_id: "abcd1234"))
+      expect(response).to redirect_to(coordination_centres_path)
     end
 
     it "validates any option is chosen" do
@@ -46,7 +43,7 @@ RSpec.describe CoronavirusForm::MedicalEquipmentTypeController, type: :controlle
 
     it "doesn't store my response if it is invalid" do
       post :submit, params: { medical_equipment_type: nil }
-      expect(session[session_key]).to eq []
+      expect(session[:medical_equipment_type]).to eq nil
     end
 
     it "validates a valid option is chosen" do
