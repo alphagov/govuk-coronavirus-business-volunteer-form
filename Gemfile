@@ -29,7 +29,7 @@ end
 
 group :test do
   gem "apparition", "~> 0.6.0", require: false
-  gem "capybara", "~> 3.32.2"
+  gem "capybara", "~> 3.33.0"
   gem "mini_racer", "~> 0.2"
   gem "selenium-webdriver"
   gem "simplecov", "~> 0.16"
