@@ -20,6 +20,24 @@ RSpec.describe SchemaHelper, type: :helper do
       end
     end
 
+    describe "medical_equipment_type" do
+      it "doesn't return error when medical_equipment_type is missing" do
+        data = valid_data.tap do |valid_data|
+          valid_data.delete(:medical_equipment_type)
+        end
+
+        expect(validate_against_form_response_schema(data).first).to be(nil)
+      end
+
+      it "returns a list of errors when medical_equipment_type has an unexpected value" do
+        data = valid_data.tap do |valid_data|
+          valid_data[:medical_equipment_type] = "Foo"
+        end
+
+        expect(validate_against_form_response_schema(data).first).to include("medical_equipment_type")
+      end
+    end
+
     describe "accommodation" do
       it "returns a list of errors when accommodation is missing" do
         data = valid_data.except(:accommodation)
@@ -483,116 +501,6 @@ RSpec.describe SchemaHelper, type: :helper do
         end
 
         expect(validate_against_form_response_schema(data).first).to include("email")
-      end
-    end
-
-    describe "product_details" do
-      it "allows product_details to be blank" do
-        data = valid_data.except(:product_details)
-        expect(validate_against_form_response_schema(data)).to be_empty
-      end
-
-      it "doesn't return error when medical_equipment_type is missing" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last.delete(:medical_equipment_type)
-        end
-
-        expect(validate_against_form_response_schema(data).first).to be(nil)
-      end
-
-      it "returns a list of errors when medical_equipment_type has an unexpected value" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:medical_equipment_type] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("medical_equipment_type")
-      end
-
-      it "returns a list of errors when product_id is missing" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last.delete(:product_id)
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_id")
-      end
-
-      it "returns a list of errors when product_quantity is not a number" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:product_quantity] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_quantity")
-      end
-
-      it "returns a list of errors when product_quantity is not an integer" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:product_quantity] = "10.5"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_quantity")
-      end
-
-      it "returns a list of errors when product_cost is not a number" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:product_cost] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_cost")
-      end
-
-      it "returns a list of errors when product_cost has more than two decimal places" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:product_cost] = "10.123"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_cost")
-      end
-
-      it "returns a list of errors when product_location has an unexpected value" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:product_location] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_location")
-      end
-
-      it "returns a list of errors when product_postcode has an invalid value" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:product_postcode] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("product_postcode")
-      end
-
-      it "returns a list of errors when lead_time is not a number" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:lead_time] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("lead_time")
-      end
-
-      it "returns a list of errors when lead_time is not an integer" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:lead_time] = "10.5"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("lead_time")
-      end
-
-      it "returns a list of errors when equipment_type has an invalid value" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:product_details].last[:equipment_type] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("equipment_type")
-      end
-    end
-
-    describe "additional_product" do
-      it "returns a list of errors when additional_product has an unexpected value" do
-        data = valid_data.merge(additional_product: "Foo")
-        expect(validate_against_form_response_schema(data).first).to include("additional_product")
       end
     end
 

@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   include CheckAnswersHelper
   include FieldValidationHelper
   include FormFlowHelper
-  include ProductHelper
 
   rescue_from ActionController::InvalidAuthenticityToken, with: :session_expired
 

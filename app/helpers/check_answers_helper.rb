@@ -1,9 +1,7 @@
 module CheckAnswersHelper
   EXCLUDED_QUESTIONS = %w[
-    additional_product
     medical_equipment
     medical_equipment_type
-    product_details
   ].freeze
 
   SKIPPABLE_QUESTIONS = %w[

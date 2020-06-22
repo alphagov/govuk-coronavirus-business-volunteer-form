@@ -2,6 +2,7 @@ module FormResponseHelper
   def valid_data
     {
       medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options").map { |_, item| item[:label] }.sample,
+      medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
       accommodation: I18n.t("coronavirus_form.questions.accommodation.options").map { |_, item| item[:label] }.sample,
       rooms_number: "40",
       accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
@@ -58,30 +59,6 @@ module FormResponseHelper
         phone_number: "0123456789",
         email: "me@example.com",
       },
-      product_details: [
-        {
-          product_id: SecureRandom.uuid,
-          medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
-        },
-        {
-          product_id: SecureRandom.uuid,
-          medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
-        },
-        {
-          lead_time: 12,
-          product_id: SecureRandom.uuid,
-          product_url: "http://www.example.com",
-          product_cost: "1",
-          product_name: "Surgical Gloves",
-          equipment_type: I18n.t("coronavirus_form.questions.product_details.equipment_type.options").map { |_, item| item[:label] }.sample,
-          product_location: I18n.t("coronavirus_form.questions.product_details.product_location.options").map { |_, item| item[:label] }.sample,
-          product_postcode: "E1 8QS",
-          product_quantity: 10_000,
-          certification_details: "None",
-          medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label"),
-        },
-      ],
-      additional_product: I18n.t("coronavirus_form.questions.additional_product.options").map { |_, item| item[:label] }.sample,
       location: I18n.t("coronavirus_form.questions.location.options").map { |_, item| item[:label] },
     }
   end
