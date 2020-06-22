@@ -3,7 +3,6 @@ require "spec_helper"
 RSpec.describe CheckAnswersHelper, type: :helper do
   let(:answers_to_skippable_questions) do
     {
-      additional_product: I18n.t("coronavirus_form.questions.additional_product.options.option_no.label"),
       rooms_number: "100",
       accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
       transport_type: [
@@ -27,17 +26,6 @@ RSpec.describe CheckAnswersHelper, type: :helper do
     }
   end
 
-  let(:products) do
-    {
-      product_details: [{
-        medical_equipment_type: I18n.t(
-          "coronavirus_form.questions.medical_equipment_type.options.number_ppe.label",
-        ),
-        product_name: "Product name",
-      }],
-    }
-  end
-
   describe "#items" do
     it "adds a link to edit each item" do
       helper.items.each do |item|
@@ -51,14 +39,6 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       questions.each do |question|
         unless question.in? CheckAnswersHelper::EXCLUDED_QUESTIONS
           expect(helper.items.pluck(:field)).to include(I18n.t("coronavirus_form.questions.#{question}.title"))
-        end
-      end
-    end
-
-    it "doesn't include questions about products" do
-      questions.each do |question|
-        if question.in? CheckAnswersHelper::EXCLUDED_QUESTIONS
-          expect(helper.items.pluck(:field)).to_not include(I18n.t("coronavirus_form.questions.#{question}.title"))
         end
       end
     end

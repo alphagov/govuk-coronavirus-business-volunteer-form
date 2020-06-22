@@ -20,95 +20,9 @@
     "medical_equipment_type": {
       "type": "string",
       "enum": [
-        "Personal protective equipment, for example masks, detergent and waste bags",
-        "Testing equipment",
         "Personal protective equipment (PPE)",
         "Coronavirus tests or testing facilities"
       ]
-    },
-    "are_you_a_manufacturer": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "Manufacturer",
-          "Distributor",
-          "Agent",
-          "Individual"
-        ]
-      }
-    },
-    "product_details": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "product_id"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "medical_equipment_type": {
-            "type": "string",
-            "enum": [
-              "Personal protective equipment, for example masks, detergent and waste bags",
-              "Testing equipment",
-              "Personal protective equipment (PPE)",
-              "Coronavirus tests or testing facilities"
-            ]
-          },
-          "product_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "product_name": {
-            "type": "string"
-          },
-          "product_quantity": {
-            "$ref": "#/definitions/whole_number"
-          },
-          "product_cost": {
-            "type": "string",
-            "pattern": "^[0-9]*\.?[0-9]{0,2}$"
-          },
-          "certification_details": {
-            "type": "string"
-          },
-          "product_location": {
-            "type": "string",
-            "enum": [
-              "United Kingdom",
-              "European Union",
-              "Rest of world"
-            ]
-          },
-          "product_postcode": {
-            "$ref": "#/definitions/postcode"
-          },
-          "product_url": {
-            "type": ["string", "null"]
-          },
-          "lead_time": {
-            "$ref": "#/definitions/whole_number"
-          },
-          "equipment_type": {
-            "type": ["string"],
-            "enum": [
-              "FFP3 respirators",
-              "FFP2 respirators",
-              "Aprons",
-              "Gloves",
-              "Type IIR face masks",
-              "Safety glasses or visors",
-              "Alcohol hand gel",
-              "Gowns",
-              "Face fit test kit",
-              "Face fit test solution",
-              "General purpose detergent",
-              "Cleaning Equipment"
-            ]
-          }
-        }
-      }
     },
     "accommodation": {
       "type": "string",
@@ -413,9 +327,6 @@
     },
     "reference_number": {
       "type": "string"
-    },
-    "additional_product": {
-      "$ref": "#/definitions/yes_no"
     }
   },
   "definitions": {

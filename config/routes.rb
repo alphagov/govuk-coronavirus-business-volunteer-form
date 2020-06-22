@@ -16,26 +16,12 @@ Rails.application.routes.draw do
     get "/medical-equipment", to: "medical_equipment#show"
     post "/medical-equipment", to: "medical_equipment#submit"
 
-    # Question 1.1: What kind of business are you?
-    # Question removed so redirect to next question, for users currently trying to access
-    get "/are-you-a-manufacturer", to: redirect(path: "medical-equipment-type")
-    post "/are-you-a-manufacturer", to: redirect(path: "medical-equipment-type")
-
     # Question 1.2: Tell us about the medical equipment you can offer
     get "/medical-equipment-type", to: "medical_equipment_type#show"
     post "/medical-equipment-type", to: "medical_equipment_type#submit"
 
-    # Question 1.3: Tell us about the product you're offering
-    get "/product-details", to: "product_details#show"
-    get "/product-details/:id/delete", to: "product_details#destroy"
-    post "/product-details", to: "product_details#submit"
-
     # Question 1.4: Testing equipment
     get "/testing-equipment", to: "testing_equipment#show"
-
-    # Question 1.5: Can you offer another product?
-    get "/additional-product", to: "additional_product#show"
-    post "/additional-product", to: "additional_product#submit"
 
     # Question 2.0: Can you offer accommodation?
     get "/accommodation", to: "accommodation#show"
