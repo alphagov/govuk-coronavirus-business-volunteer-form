@@ -1,3 +1,5 @@
+/* eslint-env jquery */
+
 //= require jquery
 //= require govuk_publishing_components/modules
 //= require govuk_publishing_components/lib/cookie-functions
