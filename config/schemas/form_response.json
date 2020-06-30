@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "required": [
-    "medical_equipment",
     "accommodation",
     "offer_transport",
     "offer_space",

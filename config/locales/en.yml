@@ -160,36 +160,6 @@ en:
     heading: "Now send the form"
     confirmation: "By submitting this form you’re confirming that, to the best of your knowledge, the details you’re providing are correct."
     submit: "Accept and send"
-  coordination_centres:
-    title: Offer your products to an NHS Regional Coordination Centre
-    body_text: |
-      <p class="govuk-body">Email the centre giving details of the products you’re offering. For each product you should include:</p>
-      <ul class="govuk-list govuk-list--bullet">
-      <li>the name and type of product</li>
-      <li>the amount you can offer</li>
-      <li>certification details and information about whether it <a class="govuk-link" href="https://www.gov.uk/government/publications/technical-specifications-for-personal-protective-equipment-ppe">meets the technical specifications</a></li>
-      <li>the cost per item</li>
-      <li>the lead time</li>
-      </ul>
-      <p class="govuk-body">You should also include your company name and company number, if you have one.</p>
-      <p class="govuk-body">You can email any centre, but you will have to transport the products yourself or arrange for them to be delivered.</p>
-      <p class="govuk-body">You will be contacted as soon as possible if your products are needed.</p>
-      <h2 class="govuk-heading-m">East of England</h2>
-      <p class="govuk-body"><a href="mailto:england.eastofengland-covid19@nhs.net" class="govuk-link">england.eastofengland-covid19@nhs.net</a></p>
-      <h2 class="govuk-heading-m">London</h2>
-      <p class="govuk-body"><a href="mailto:england.london-covid19@nhs.net" class="govuk-link">england.london-covid19@nhs.net</a></p>
-      <h2 class="govuk-heading-m">Midlands</h2>
-      <p class="govuk-body"><a href="mailto:england.mids-incident@nhs.net" class="govuk-link">england.mids-incident@nhs.net</a></p>
-      <h2 class="govuk-heading-m">North East and Yorkshire</h2>
-      <p class="govuk-body"><a href="mailto:england.eprrney@nhs.net" class="govuk-link">england.eprrney@nhs.net</a></p>
-      <h2 class="govuk-heading-m">North West</h2>
-      <p class="govuk-body"><a href="mailto:england.eprrnw@nhs.net" class="govuk-link">england.eprrnw@nhs.net</a></p>
-      <h2 class="govuk-heading-m">South East</h2>
-      <p class="govuk-body"><a href="mailto:england.se-incident@nhs.net" class="govuk-link">england.se-incident@nhs.net</a></p>
-      <h2 class="govuk-heading-m">South West</h2>
-      <p class="govuk-body govuk-!-margin-bottom-8"><a href="mailto:england.sw-incident1@nhs.net" class="govuk-link">england.sw-incident1@nhs.net</a></p>
-    button:
-      label: "Continue offering other services"
   session_expired:
     title: Your session has ended due to inactivity
     body_text: |
@@ -231,24 +201,6 @@ en:
         label: "Offer tests or testing facilities (opens in a new window)"
       external_link: "https://www.gov.uk/guidance/help-the-government-increase-coronavirus-covid-19-testing-capacity"
     questions:
-      medical_equipment:
-        title: "Can you offer personal protective equipment, coronavirus tests, or testing facilities?"
-        options:
-          option_yes:
-            label: "Yes"
-          option_no:
-            label: "No"
-        custom_select_error: "Select yes if you can offer personal protective equipment, coronavirus tests, or testing facilities"
-      medical_equipment_type:
-        title: "What type of medical equipment or services can you offer?"
-        options:
-          number_ppe:
-            label: "Personal protective equipment (PPE)"
-            hint: "For example, masks, detergent and waste bags"
-          number_testing_equipment:
-            label: "Coronavirus tests or testing facilities"
-            hint: "For example new or existing types of coronavirus test, consumables and equipment, or laboratory capacity"
-        custom_select_error: "Select the type of medical equipment or services you can offer"
       accommodation:
         title: "Can you offer accommodation?"
         options:
