@@ -8,36 +8,6 @@ RSpec.describe SchemaHelper, type: :helper do
       expect(validate_against_form_response_schema(valid_data)).to be_empty
     end
 
-    describe "medical_equipment" do
-      it "returns a list of errors when medical_equipment is missing" do
-        data = valid_data.except(:medical_equipment)
-        expect(validate_against_form_response_schema(data).first).to include("medical_equipment")
-      end
-
-      it "returns a list of errors when medical_equipment has an unexpected value" do
-        data = valid_data.merge(medical_equipment: "Foo")
-        expect(validate_against_form_response_schema(data).first).to include("medical_equipment")
-      end
-    end
-
-    describe "medical_equipment_type" do
-      it "doesn't return error when medical_equipment_type is missing" do
-        data = valid_data.tap do |valid_data|
-          valid_data.delete(:medical_equipment_type)
-        end
-
-        expect(validate_against_form_response_schema(data).first).to be(nil)
-      end
-
-      it "returns a list of errors when medical_equipment_type has an unexpected value" do
-        data = valid_data.tap do |valid_data|
-          valid_data[:medical_equipment_type] = "Foo"
-        end
-
-        expect(validate_against_form_response_schema(data).first).to include("medical_equipment_type")
-      end
-    end
-
     describe "accommodation" do
       it "returns a list of errors when accommodation is missing" do
         data = valid_data.except(:accommodation)
