@@ -2,35 +2,7 @@
 
 module FillInTheFormSteps
   def given_a_business_during_the_covid_19_pandemic
-    visit medical_equipment_path
-  end
-
-  def that_can_offer_medical_equipment
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment.title"))
-    within find(".govuk-main-wrapper") do
-      choose I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
-      click_on I18n.t("coronavirus_form.submit_and_next")
-    end
-  end
-
-  def and_has_personal_protection_equipment_available
-    expect(page).to have_content(I18n.t("coronavirus_form.questions.medical_equipment_type.title"))
-    choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_ppe.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
-
-    expect(page).to have_content(I18n.t("coordination_centres.title"))
-    click_on I18n.t("coordination_centres.button.label")
-  end
-
-  def and_can_offer_testing_equipment
-    choose I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label")
-    click_on I18n.t("coronavirus_form.submit_and_next")
-  end
-
-  def then_they_see_the_external_testing_equipment_link
-    link = I18n.t("coronavirus_form.testing_equipment.external_link")
-    expect(page).to have_content(I18n.t("coronavirus_form.testing_equipment.link.label"))
-    expect(page).to have_selector(:css, "a[href='#{link}']")
+    visit accommodation_path
   end
 
   def and_can_offer_accommodation
