@@ -248,8 +248,6 @@ GEM
     rack (2.2.3)
     rack-cache (1.12.0)
       rack (>= 0.4)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.3.2)
@@ -362,11 +360,10 @@ GEM
       rubyzip (>= 1.2.2)
     sentry-raven (3.0.0)
       faraday (>= 1.0)
-    sidekiq (6.0.7)
+    sidekiq (6.1.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 2.0.0)
-      redis (>= 4.1.0)
+      redis (>= 4.2.0)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -446,7 +443,7 @@ DEPENDENCIES
   scss_lint-govuk (~> 0)
   selenium-webdriver
   sentry-raven (~> 3.0)
-  sidekiq (~> 6.0)
+  sidekiq (~> 6.1)
   simplecov (~> 0.16)
   simplecov-cobertura
   uglifier (~> 4.2)

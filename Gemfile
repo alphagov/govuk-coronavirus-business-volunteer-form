@@ -20,7 +20,7 @@ gem "rails", "~> 6.0.3"
 gem "redis", "~> 4.2.1"
 gem "sass-rails", "< 6"
 gem "sentry-raven", "~> 3.0"
-gem "sidekiq", "~> 6.0"
+gem "sidekiq", "~> 6.1"
 gem "uglifier", "~> 4.2"
 
 group :development do
