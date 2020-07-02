@@ -1,8 +1,6 @@
 module FormResponseHelper
   def valid_data
     {
-      medical_equipment: I18n.t("coronavirus_form.questions.medical_equipment.options").map { |_, item| item[:label] }.sample,
-      medical_equipment_type: I18n.t("coronavirus_form.questions.medical_equipment_type.options.number_testing_equipment.label"),
       accommodation: I18n.t("coronavirus_form.questions.accommodation.options").map { |_, item| item[:label] }.sample,
       rooms_number: "40",
       accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,

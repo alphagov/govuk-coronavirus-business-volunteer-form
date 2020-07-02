@@ -1,9 +1,4 @@
 module CheckAnswersHelper
-  EXCLUDED_QUESTIONS = %w[
-    medical_equipment
-    medical_equipment_type
-  ].freeze
-
   SKIPPABLE_QUESTIONS = %w[
     rooms_number
     accommodation_cost
@@ -58,8 +53,6 @@ module CheckAnswersHelper
   end
 
   def skip_question?(question)
-    return true if question.in?(EXCLUDED_QUESTIONS)
-
     question.in?(SKIPPABLE_QUESTIONS) && session[question].blank?
   end
 

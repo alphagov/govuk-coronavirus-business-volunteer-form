@@ -8,20 +8,16 @@ Rails.application.routes.draw do
   get "/", to: redirect("https://www.gov.uk/coronavirus-support-from-business")
 
   scope module: "coronavirus_form" do
-    first_question = "/medical-equipment"
+    first_question = "/accommodation"
 
     get "/start", to: redirect(path: first_question)
 
-    # Question 1.0: Can you offer medical equipment?
-    get "/medical-equipment", to: "medical_equipment#show"
-    post "/medical-equipment", to: "medical_equipment#submit"
-
-    # Question 1.2: Tell us about the medical equipment you can offer
-    get "/medical-equipment-type", to: "medical_equipment_type#show"
-    post "/medical-equipment-type", to: "medical_equipment_type#submit"
-
-    # Question 1.4: Testing equipment
-    get "/testing-equipment", to: "testing_equipment#show"
+    # Redirects for A-AB-B deployment...
+    get "/medical-equipment", to: redirect(path: "accommodation#show")
+    post "/medical-equipment", to: redirect(path: "accommodation#show")
+    get "/medical-equipment-type", to: redirect(path: "accommodation#show")
+    post "/medical-equipment-type", to: redirect(path: "accommodation#show")
+    get "/testing-equipment", to: redirect(path: "accommodation#show")
 
     # Question 2.0: Can you offer accommodation?
     get "/accommodation", to: "accommodation#show"
@@ -109,8 +105,5 @@ Rails.application.routes.draw do
 
     # Other page - Session expired notice
     get "/session-expired", to: "session_expired#show"
-
-    # Other page - NHS Regional Coordination centres
-    get "/coordination-centres", to: "coordination_centres#show"
   end
 end

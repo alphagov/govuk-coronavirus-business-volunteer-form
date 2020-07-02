@@ -8,8 +8,6 @@ RSpec.feature "fill in the business volunteer form" do
   shared_examples "completing the form" do
     scenario "fill in the form" do
       given_a_business_during_the_covid_19_pandemic
-      that_can_offer_medical_equipment
-      and_has_personal_protection_equipment_available
       and_can_offer_accommodation
       and_can_offer_transport_or_logistics
       and_can_offer_space
@@ -34,13 +32,6 @@ RSpec.feature "fill in the business volunteer form" do
     context "with javascript", js: true do
       it_behaves_like "completing the form"
     end
-  end
-
-  scenario "Fill in the form with Testing Equipment" do
-    given_a_business_during_the_covid_19_pandemic
-    that_can_offer_medical_equipment
-    and_can_offer_testing_equipment
-    then_they_see_the_external_testing_equipment_link
   end
 
   scenario "ensure we can perform a healthcheck" do

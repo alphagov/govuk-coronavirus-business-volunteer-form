@@ -9,7 +9,8 @@ RSpec.describe CoronavirusForm::ItServicesController, type: :controller do
 
   describe "GET show" do
     it "renders the form" do
-      session["medical_equipment"] = I18n.t("coronavirus_form.questions.medical_equipment.options.option_yes.label")
+      session["accommodation"] = I18n.t("coronavirus_form.questions.accommodation.options.option_yes.label")
+
       get :show
       expect(response).to render_template(current_template)
     end
