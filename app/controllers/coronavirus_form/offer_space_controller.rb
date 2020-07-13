@@ -30,7 +30,12 @@ private
     session[:offer_space] = @form_responses[:offer_space]
 
     if @form_responses[:offer_space] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
+      session[:offer_space_type] = nil
+      session[:general_space_description] = nil
       session[:space_cost] = nil
+      session[:offer_space_type_other] = nil
+      session[:warehouse_space_description] = nil
+      session[:office_space_description] = nil
     end
   end
 

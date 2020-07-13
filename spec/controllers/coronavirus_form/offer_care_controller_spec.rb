@@ -55,11 +55,17 @@ RSpec.describe CoronavirusForm::OfferCareController, type: :controller do
       expect(response).to redirect_to(offer_other_support_path)
     end
 
-    it "clears previously entered care cost for a 'No' response" do
+    it "clears previously entered answers given a 'No' response" do
+      session[:offer_care_type] = I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options").map { |_, item| item[:label] }.sample
+      session[:offer_care_qualifications] = "Gludwch destun ar hap yma."
+      session[:offer_care_qualifications_type] = I18n.t("coronavirus_form.questions.offer_care_qualifications.care_qualifications.options").map { |_, item| item[:label] }.sample
       session[:care_cost] = I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample
 
       post :submit, params: { offer_care: selected_no }
 
+      expect(session[:offer_care_type]).to be nil
+      expect(session[:offer_care_qualifications]).to be nil
+      expect(session[:offer_care_qualifications_type]).to be nil
       expect(session[:care_cost]).to be nil
     end
 
