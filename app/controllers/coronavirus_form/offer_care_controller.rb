@@ -33,6 +33,9 @@ private
     session[:offer_care] = @form_responses[:offer_care]
 
     if @form_responses[:offer_care] == I18n.t("coronavirus_form.questions.#{controller_name}.options.option_no.label")
+      session[:offer_care_type] = nil
+      session[:offer_care_qualifications] = nil
+      session[:offer_care_qualifications_type] = nil
       session[:care_cost] = nil
     end
   end
