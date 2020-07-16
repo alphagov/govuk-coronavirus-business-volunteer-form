@@ -157,4 +157,27 @@ module CheckAnswersHelper
       "#{item} (#{pluralize(delimited_number, 'person')})"
     end
   end
+
+  def care_items
+    [
+      {
+        field: I18n.t("care.type", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: session[:offer_care_type],
+        }),
+      },
+      {
+        field: I18n.t("care.qualifications", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: session[:offer_care_qualifications],
+        }),
+      },
+      {
+        field: charge_text,
+        value: session[:care_cost],
+      },
+    ]
+  end
 end

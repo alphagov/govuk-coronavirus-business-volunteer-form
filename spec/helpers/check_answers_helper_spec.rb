@@ -320,4 +320,43 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
     end
   end
+
+  describe "#care_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:offer_care_type],
+      })
+
+      expect(helper.care_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.care.type"))
+      expect(helper.care_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a qualifications field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:offer_care_qualifications],
+      })
+
+      expect(helper.care_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.care.qualifications"))
+      expect(helper.care_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.care_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.care_items.pluck(:value))
+        .to include(form_data[:care_cost])
+    end
+  end
 end
