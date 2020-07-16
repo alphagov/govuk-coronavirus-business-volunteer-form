@@ -427,4 +427,15 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         .to include(form_data[:it_cost])
     end
   end
+
+  describe "#other_support_items" do
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.other_support_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.other_support.description"))
+      expect(helper.other_support_items.pluck(:value))
+        .to include(form_data[:offer_other_support])
+    end
+  end
 end

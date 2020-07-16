@@ -220,4 +220,11 @@ module CheckAnswersHelper
       },
     ]
   end
+
+  def other_support_items
+    [{
+      field: t("other_support.description", scope: sections_scope),
+      value: session["offer_other_support"],
+    }]
+  end
 end
