@@ -111,4 +111,50 @@ module CheckAnswersHelper
       "#{item} (#{pluralize(delimited_number, 'square foot')})"
     end
   end
+
+  def staff_items
+    [
+      {
+        field: I18n.t("staff.type", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: staff_item_value_list,
+        }),
+      },
+      {
+        field: I18n.t("staff.description", scope: sections_scope),
+        value: session[:offer_staff_description],
+      },
+      {
+        field: charge_text,
+        value: session[:offer_staff_charge],
+      },
+    ]
+  end
+
+  def staff_item_value_list
+    session[:offer_staff_type].map do |item|
+      case item
+      when "Cleaners"
+        value = session.dig(:offer_staff_number, :cleaners_number)
+      when "Developers"
+        value = session.dig(:offer_staff_number, :developers_number)
+      when "Medical staff"
+        value = session.dig(:offer_staff_number, :medical_staff_number)
+      when "Office staff"
+        value = session.dig(:offer_staff_number, :office_staff_number)
+      when "Security staff"
+        value = session.dig(:offer_staff_number, :security_staff_number)
+      when "Trainers or coaches"
+        value = session.dig(:offer_staff_number, :trainers_number)
+      when "Translators"
+        value = session.dig(:offer_staff_number, :translators_number)
+      when "Other staff"
+        value = session.dig(:offer_staff_number, :other_staff_number)
+      end
+
+      delimited_number = number_with_delimiter(value.to_i, delimiter: ",")
+      "#{item} (#{pluralize(delimited_number, 'person')})"
+    end
+  end
 end

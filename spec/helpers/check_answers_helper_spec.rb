@@ -180,4 +180,144 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       expect(helper.space_item_value_list).to include("Office space (1 square foot)")
     end
   end
+
+  describe "#staff_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: staff_item_value_list,
+      })
+
+      expect(helper.staff_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.staff.type"))
+      expect(helper.staff_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.staff_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.staff.description"))
+      expect(helper.staff_items.pluck(:value))
+        .to include(form_data[:offer_staff_description])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.staff_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.staff_items.pluck(:value))
+        .to include(form_data[:offer_staff_charge])
+    end
+  end
+
+  describe "#staff_item_value_list" do
+    it "returns a list containing all items and values when all items and values are selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = [
+          "Cleaners",
+          "Developers",
+          "Medical staff",
+          "Office staff",
+          "Security staff",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff",
+        ]
+        form_data[:offer_staff_number][:cleaners_number] = 0
+        form_data[:offer_staff_number][:developers_number] = 1
+        form_data[:offer_staff_number][:medical_staff_number] = 10
+        form_data[:offer_staff_number][:office_staff_number] = 100
+        form_data[:offer_staff_number][:security_staff_number] = 1_000
+        form_data[:offer_staff_number][:trainers_number] = 10_000
+        form_data[:offer_staff_number][:translators_number] = 100_000
+        form_data[:offer_staff_number][:other_staff_number] = 1_000_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list).to include("Cleaners (0 people)")
+      expect(helper.staff_item_value_list).to include("Developers (1 person)")
+      expect(helper.staff_item_value_list).to include("Medical staff (10 people)")
+      expect(helper.staff_item_value_list).to include("Office staff (100 people)")
+      expect(helper.staff_item_value_list).to include("Security staff (1,000 people)")
+      expect(helper.staff_item_value_list).to include("Trainers or coaches (10,000 people)")
+      expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
+      expect(helper.staff_item_value_list).to include("Other staff (1,000,000 people)")
+    end
+
+    it "returns a list containing only the items and values selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = [
+          "Cleaners",
+          "Developers",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff",
+        ]
+        form_data[:offer_staff_number][:cleaners_number] = 0
+        form_data[:offer_staff_number][:developers_number] = 1
+        form_data[:offer_staff_number][:trainers_number] = 10_000
+        form_data[:offer_staff_number][:translators_number] = 100_000
+        form_data[:offer_staff_number][:other_staff_number] = 1_000_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list).to include("Cleaners (0 people)")
+      expect(helper.staff_item_value_list).to include("Developers (1 person)")
+      expect(helper.staff_item_value_list).to include("Trainers or coaches (10,000 people)")
+      expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
+      expect(helper.staff_item_value_list).to include("Other staff (1,000,000 people)")
+      expect(helper.staff_item_value_list.count).to be 5
+    end
+
+    it "returns an empty list if no space types have been selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = []
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list.count).to be 0
+    end
+
+    it "returns a list where item values default to zero if an item is selected but the value is is not supplied by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = [
+          "Cleaners",
+          "Developers",
+          "Medical staff",
+          "Office staff",
+          "Security staff",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff",
+        ]
+        form_data[:offer_staff_number].delete(:developers_number)
+        form_data[:offer_staff_number].delete(:office_staff_number)
+        form_data[:offer_staff_number].delete(:trainers_number)
+        form_data[:offer_staff_number].delete(:other_staff_number)
+        form_data[:offer_staff_number][:cleaners_number] = 0
+        form_data[:offer_staff_number][:medical_staff_number] = 1
+        form_data[:offer_staff_number][:security_staff_number] = 1_000
+        form_data[:offer_staff_number][:translators_number] = 100_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list).to include("Developers (0 people)")
+      expect(helper.staff_item_value_list).to include("Office staff (0 people)")
+      expect(helper.staff_item_value_list).to include("Trainers or coaches (0 people)")
+      expect(helper.staff_item_value_list).to include("Other staff (0 people)")
+      expect(helper.staff_item_value_list).to include("Cleaners (0 people)")
+      expect(helper.staff_item_value_list).to include("Medical staff (1 person)")
+      expect(helper.staff_item_value_list).to include("Security staff (1,000 people)")
+      expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
+    end
+  end
 end
