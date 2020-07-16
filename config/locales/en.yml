@@ -200,6 +200,59 @@ en:
       link:
         label: "Offer tests or testing facilities (opens in a new window)"
       external_link: "https://www.gov.uk/guidance/help-the-government-increase-coronavirus-covid-19-testing-capacity"
+    check_your_answers:
+      charge: "How much you will charge"
+      details: "Details of your offer"
+      sections:
+        accommodation:
+          title: "Accommodation"
+          type: "Number of rooms you can offer"
+          description: "Description of the type of rooms"
+        transport:
+          title: "Transport or logistics"
+          type: "Kind of transport or logistics services you can offer"
+          description: "Description of your transport or logistics"
+        staff:
+          title: "Staff"
+          type: "Kind of staff you can offer"
+          description: "Description of the type of staff"
+        space:
+          title: "Space"
+          type: "Kind of space you can offer"
+          description: "Description of your space"
+        care:
+          title: "Social care or childcare"
+          type: "Kind of care you can offer"
+          description: "Description of your care"
+          qualifications: "Qualifications or certificates you have"
+        services:
+          title: "Services or expertise"
+          construction:
+            title: "Construction"
+            type: "Kind of construction services you can offer"
+            description: "Description of your construction services"
+          it:
+            title: "IT services"
+            type: "Kind of IT services you can offer"
+            description: "Description of your IT services"
+        other_support:
+          title: "Other support"
+          description: "Details of other support you can offer"
+        location:
+          title: "Location"
+          description: "Details of where you can offer your services"
+        business_details:
+          title: "Business details"
+          name: "Company name"
+          number: "Company number"
+          size: "Company size"
+          location: "Company location"
+        contact_details:
+          title: "Contact details"
+          name: "Name of main contact"
+          role: "Role of main contact"
+          number: "Phone number of main contact"
+          email: "Email address of main contact"
     questions:
       accommodation:
         title: "Can you offer accommodation?"
