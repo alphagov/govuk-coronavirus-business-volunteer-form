@@ -266,4 +266,25 @@ module CheckAnswersHelper
       session.dig(:business_details, :company_location)
     end
   end
+
+  def contact_detail_items
+    [
+      {
+        field: t("contact_details.name", scope: sections_scope),
+        value: session.dig(:contact_details, :contact_name),
+      },
+      {
+        field: t("contact_details.role", scope: sections_scope),
+        value: session.dig(:contact_details, :role),
+      },
+      {
+        field: t("contact_details.number", scope: sections_scope),
+        value: session.dig(:contact_details, :phone_number),
+      },
+      {
+        field: t("contact_details.email", scope: sections_scope),
+        value: session.dig(:contact_details, :email),
+      },
+    ]
+  end
 end

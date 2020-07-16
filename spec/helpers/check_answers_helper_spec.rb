@@ -516,4 +516,42 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         .to include("#{form_data.dig(:business_details, :company_location)} (#{form_data.dig(:business_details, :company_postcode)})")
     end
   end
+
+  describe "#contact_detail_items" do
+    it "contains a name field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.name"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :contact_name))
+    end
+
+    it "contains a role field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.role"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :role))
+    end
+
+    it "contains a number field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.number"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :phone_number))
+    end
+
+    it "contains a email field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.email"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :email))
+    end
+  end
 end
