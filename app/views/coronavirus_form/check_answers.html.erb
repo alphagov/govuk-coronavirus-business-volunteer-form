@@ -13,15 +13,9 @@
   margin_bottom: 3,
 } %>
 
-<%= tag.p t("check_your_answers.description"), class: "govuk-body" %>
-
-<%= render "govuk_publishing_components/components/heading", {
-  text: t("check_your_answers.heading"),
-  heading_level: 2,
-  margin_bottom: 3,
+<%= render "govuk_publishing_components/components/inset_text", {
+  text: t("check_your_answers.confirmation")
 } %>
-
-<%= tag.p t("check_your_answers.confirmation"), class: "govuk-body" %>
 
 <%= form_tag({},
   "data-module": "track-coronavirus-form-business-check-your-answers",
