@@ -227,4 +227,14 @@ module CheckAnswersHelper
       value: session["offer_other_support"],
     }]
   end
+
+  def location_items
+    [{
+      field: t("location.description", scope: sections_scope),
+      value: render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: session[:location],
+      }),
+    }]
+  end
 end

@@ -438,4 +438,20 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         .to include(form_data[:offer_other_support])
     end
   end
+
+  describe "#location_items" do
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:location],
+      })
+
+      expect(helper.location_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.location.description"))
+      expect(helper.location_items.pluck(:value))
+        .to include(expected)
+    end
+  end
 end
