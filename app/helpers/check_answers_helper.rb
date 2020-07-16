@@ -237,4 +237,33 @@ module CheckAnswersHelper
       }),
     }]
   end
+
+  def business_detail_items
+    [
+      {
+        field: I18n.t("business_details.name", scope: sections_scope),
+        value: session.dig(:business_details, :company_name),
+      },
+      {
+        field: I18n.t("business_details.number", scope: sections_scope),
+        value: session.dig(:business_details, :company_number),
+      },
+      {
+        field: I18n.t("business_details.size", scope: sections_scope),
+        value: session.dig(:business_details, :company_size),
+      },
+      {
+        field: I18n.t("business_details.location", scope: sections_scope),
+        value: business_detail_location,
+      },
+    ]
+  end
+
+  def business_detail_location
+    if session.dig(:business_details, :company_postcode).present?
+      "#{session.dig(:business_details, :company_location)} (#{session.dig(:business_details, :company_postcode)})"
+    else
+      session.dig(:business_details, :company_location)
+    end
+  end
 end

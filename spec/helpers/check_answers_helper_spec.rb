@@ -454,4 +454,66 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         .to include(expected)
     end
   end
+
+  describe "#business_detail_items" do
+    it "contains a name field" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.name"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_name))
+    end
+
+    it "contains a number field" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.number"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_number))
+    end
+
+    it "contains a size field" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.size"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_size))
+    end
+
+    it "contains a location field where postcode is an empty string" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:business_details].delete(:company_postcode)
+      end
+      session.merge!(data_copy)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.location"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_location))
+    end
+
+    it "contains a location field where postcode is nil" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:business_details].delete(:company_postcode)
+      end
+      session.merge!(data_copy)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.location"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_location))
+    end
+
+    it "contains a location field with a postcode" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.location"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include("#{form_data.dig(:business_details, :company_location)} (#{form_data.dig(:business_details, :company_postcode)})")
+    end
+  end
 end
