@@ -35,4 +35,24 @@ RSpec.describe CheckAnswersHelper, type: :helper do
       )
     end
   end
+
+  describe "#accommodation_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expect(helper.accommodation_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.accommodation.type"))
+      expect(helper.accommodation_items.pluck(:value))
+        .to include(form_data[:rooms_number])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.accommodation_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.accommodation_items.pluck(:value))
+        .to include(form_data[:accommodation_cost])
+    end
+  end
 end

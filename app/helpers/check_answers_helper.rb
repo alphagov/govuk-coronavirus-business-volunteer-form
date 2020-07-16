@@ -38,4 +38,21 @@ module CheckAnswersHelper
       contact_details
     ]
   end
+
+  def accommodation_items
+    [
+      {
+        field: I18n.t("accommodation.type", scope: sections_scope),
+        value: session[:rooms_number],
+      },
+      {
+        field: I18n.t("accommodation.description", scope: sections_scope),
+        value: session[:accommodation_description],
+      },
+      {
+        field: charge_text,
+        value: session[:accommodation_cost],
+      },
+    ]
+  end
 end
