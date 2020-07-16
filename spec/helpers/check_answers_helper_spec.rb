@@ -359,4 +359,72 @@ RSpec.describe CheckAnswersHelper, type: :helper do
         .to include(form_data[:care_cost])
     end
   end
+
+  describe "#construction_service_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:construction_services],
+      })
+
+      expect(helper.construction_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.construction.type"))
+      expect(helper.construction_service_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.construction_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.construction.description"))
+      expect(helper.construction_service_items.pluck(:value))
+        .to include(form_data[:construction_services_other])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.construction_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.construction_service_items.pluck(:value))
+        .to include(form_data[:construction_cost])
+    end
+  end
+
+  describe "#it_service_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:it_services],
+      })
+
+      expect(helper.it_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.it.type"))
+      expect(helper.it_service_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.it_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.it.description"))
+      expect(helper.it_service_items.pluck(:value))
+        .to include(form_data[:it_services_other])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.it_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.it_service_items.pluck(:value))
+        .to include(form_data[:it_cost])
+    end
+  end
 end

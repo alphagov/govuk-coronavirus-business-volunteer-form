@@ -180,4 +180,44 @@ module CheckAnswersHelper
       },
     ]
   end
+
+  def construction_service_items
+    [
+      {
+        field: I18n.t("services.construction.type", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: session[:construction_services],
+        }),
+      },
+      {
+        field: I18n.t("services.construction.description", scope: sections_scope),
+        value: session[:construction_services_other],
+      },
+      {
+        field: charge_text,
+        value: session[:construction_cost],
+      },
+    ]
+  end
+
+  def it_service_items
+    [
+      {
+        field: I18n.t("services.it.type", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: session[:it_services],
+        }),
+      },
+      {
+        field: I18n.t("services.it.description", scope: sections_scope),
+        value: session[:it_services_other],
+      },
+      {
+        field: charge_text,
+        value: session[:it_cost],
+      },
+    ]
+  end
 end

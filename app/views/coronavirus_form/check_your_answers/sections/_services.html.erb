@@ -1,0 +1,31 @@
+<%= render "govuk_publishing_components/components/summary_list", {
+  title: t("coronavirus_form.check_your_answers.sections.services.title"),
+  heading_level: 2,
+  heading_size: "l",
+  items: question_items("expert_advice_type"),
+  edit: {
+    href: "expert-advice-type?change-answer",
+  },
+} %>
+
+<% unless session[:expert_advice_type] == [I18n.t("coronavirus_form.questions.expert_advice_type.options.no_expertise.label")] %>
+  <%= render "govuk_publishing_components/components/summary_list", {
+    title: t("coronavirus_form.check_your_answers.sections.services.construction.title"),
+    heading_level: 3,
+    heading_size: "m",
+    items: construction_service_items,
+    edit: {
+      href: "construction-services?change-answer",
+    },
+  } %>
+
+  <%= render "govuk_publishing_components/components/summary_list", {
+    title: t("coronavirus_form.check_your_answers.sections.services.it.title"),
+    heading_level: 3,
+    heading_size: "m",
+    items: it_service_items,
+    edit: {
+      href: "it-services?change-answer",
+    },
+  } %>
+<% end %>
