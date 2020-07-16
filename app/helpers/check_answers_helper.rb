@@ -75,4 +75,40 @@ module CheckAnswersHelper
       },
     ]
   end
+
+  def space_items
+    [
+      {
+        field: I18n.t("space.type", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: space_item_value_list,
+        }),
+      },
+      {
+        field: I18n.t("space.description", scope: sections_scope),
+        value: session[:general_space_description],
+      },
+      {
+        field: charge_text,
+        value: session[:space_cost],
+      },
+    ]
+  end
+
+  def space_item_value_list
+    session[:offer_space_type].map do |item|
+      case item
+      when "Warehouse space"
+        value = session[:warehouse_space_description]
+      when "Office space"
+        value = session[:office_space_description]
+      when "Other"
+        value = session[:offer_space_type_other]
+      end
+
+      delimited_number = number_with_delimiter(value.to_i, delimiter: ",")
+      "#{item} (#{pluralize(delimited_number, 'square foot')})"
+    end
+  end
 end
