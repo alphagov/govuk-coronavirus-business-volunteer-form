@@ -55,4 +55,24 @@ module CheckAnswersHelper
       },
     ]
   end
+
+  def transport_items
+    [
+      {
+        field: I18n.t("transport.type", scope: sections_scope),
+        value: render("govuk_publishing_components/components/list", {
+          visible_counters: true,
+          items: session[:transport_type],
+        }),
+      },
+      {
+        field: I18n.t("transport.description", scope: sections_scope),
+        value: session[:transport_description],
+      },
+      {
+        field: charge_text,
+        value: session[:transport_cost],
+      },
+    ]
+  end
 end
