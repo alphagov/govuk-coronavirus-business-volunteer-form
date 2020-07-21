@@ -1,0 +1,21 @@
+<%= render "govuk_publishing_components/components/summary_list", {
+  title: t("coronavirus_form.check_your_answers.sections.staff.title"),
+  heading_level: 2,
+  heading_size: "l",
+  items: question_items("offer_staff"),
+  edit: {
+    href: "offer-staff?change-answer",
+  },
+} %>
+
+<% unless session[:offer_staff] == I18n.t("coronavirus_form.questions.offer_staff.options.option_no.label") %>
+  <%= render "govuk_publishing_components/components/summary_list", {
+    title: t("coronavirus_form.check_your_answers.details"),
+    heading_level: 3,
+    heading_size: "m",
+    items: staff_items,
+    edit: {
+      href: "offer-staff-type?change-answer",
+    },
+  } %>
+<% end %>

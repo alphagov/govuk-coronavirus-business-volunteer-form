@@ -1,203 +1,557 @@
 require "spec_helper"
 
 RSpec.describe CheckAnswersHelper, type: :helper do
-  let(:answers_to_skippable_questions) do
-    {
-      rooms_number: "100",
-      accommodation_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-      transport_type: [
-        I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
-      ],
-      transport_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-      offer_space_type: I18n.t("coronavirus_form.questions.offer_space_type.options.warehouse_space.label"),
-      space_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-      offer_care_qualifications: I18n.t("coronavirus_form.questions.offer_care_qualifications.offer_care_type.options.adult_care.label"),
-      care_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-      offer_staff_type: [
-        I18n.t("coronavirus_form.questions.offer_staff_type.offer_staff_type.options.developers.label"),
-      ],
-      offer_staff_charge: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-      construction_services: I18n.t("coronavirus_form.questions.construction_services.options").map { |_, item| item[:label] },
-      construction_services_other: "Build all the things",
-      construction_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-      it_services: I18n.t("coronavirus_form.questions.it_services.options").map { |_, item| item[:label] },
-      it_services_other: "Supply all the things",
-      it_cost: I18n.t("coronavirus_form.how_much_charge.options").map { |_, item| item[:label] }.sample,
-    }
-  end
+  include FormResponseHelper
 
-  describe "#items" do
-    it "adds a link to edit each item" do
-      helper.items.each do |item|
-        expect(item[:edit][:href]).to include("?change-answer")
-      end
+  let(:form_data) { valid_data }
+
+  describe "#question_items(question)" do
+    it "contains a string" do
+      session.merge!(form_data)
+
+      expect(helper.question_items("accommodation")).to eq(
+        [
+          {
+            field: I18n.t("coronavirus_form.questions.accommodation.title"),
+            value: form_data[:accommodation],
+          },
+        ],
+      )
     end
 
-    it "has an entry for each regular question" do
-      session.merge!(answers_to_skippable_questions)
+    it "contains an array" do
+      session.merge!(form_data)
 
-      questions.each do |question|
-        expect(helper.items.pluck(:field)).to include(I18n.t("coronavirus_form.questions.#{question}.title"))
-      end
-    end
-
-    it "doesn't include questions that the user has skipped" do
-      questions.each do |question|
-        if question.in? CheckAnswersHelper::SKIPPABLE_QUESTIONS
-          expect(helper.items.pluck(:field)).to_not include(I18n.t("coronavirus_form.questions.#{question}.title"))
-        end
-      end
+      expect(helper.question_items("location")).to eq(
+        [
+          {
+            field: I18n.t("coronavirus_form.questions.location.title"),
+            value: render("govuk_publishing_components/components/list", {
+              visible_counters: true,
+              items: form_data[:location],
+            }),
+          },
+        ],
+      )
     end
   end
 
-  describe "#transport_type" do
-    it "adds a query string to the link for each item" do
-      helper.transport_type.each do |item|
-        expect(item[:edit][:href]).to include("?change-answer")
-      end
+  describe "#accommodation_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expect(helper.accommodation_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.accommodation.type"))
+      expect(helper.accommodation_items.pluck(:value))
+        .to include(form_data[:rooms_number])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.accommodation_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.accommodation_items.pluck(:value))
+        .to include(form_data[:accommodation_cost])
     end
   end
 
-  describe "#transport_type_info" do
-    it "concates transport type and description" do
-      session["transport_type"] = [
-        I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
-        I18n.t("coronavirus_form.questions.transport_type.options.moving_goods.label"),
-        I18n.t("coronavirus_form.questions.transport_type.options.other.label"),
-      ]
+  describe "#transport_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
 
-      session["transport_description"] = "Transport description"
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:transport_type],
+      })
 
-      expected_answer = "#{I18n.t('coronavirus_form.questions.transport_type.options.moving_people.label')}, " \
-                          "#{I18n.t('coronavirus_form.questions.transport_type.options.moving_goods.label')}, and " \
-                          "#{I18n.t('coronavirus_form.questions.transport_type.options.other.label')}<br>" \
-                          "#{session['transport_description']}"
-
-      expect(helper.transport_type_info).to eq(expected_answer)
+      expect(helper.transport_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.transport.type"))
+      expect(helper.transport_items.pluck(:value))
+        .to include(expected)
     end
 
-    it "only concatenates the fields that have a value" do
-      session["transport_type"] = [
-        I18n.t("coronavirus_form.questions.transport_type.options.moving_people.label"),
-      ]
+    it "contains a description field" do
+      session.merge!(form_data)
 
-      expected_answer = "#{I18n.t('coronavirus_form.questions.transport_type.options.moving_people.label')}<br>"
-      expect(helper.transport_type_info).to eq(expected_answer)
+      expect(helper.transport_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.transport.description"))
+      expect(helper.transport_items.pluck(:value))
+        .to include(form_data[:transport_description])
     end
-  end
 
-  describe "#offer_care_qualifications" do
-    it "adds a query string to the link for each item" do
-      helper.offer_care_qualifications.each do |item|
-        expect(item[:edit][:href]).to include("?change-answer")
-      end
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.transport_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.transport_items.pluck(:value))
+        .to include(form_data[:transport_cost])
     end
   end
 
-  describe "#concat_answer" do
-    context "contact_details" do
-      let(:question) { "contact_details" }
+  describe "#space_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
 
-      it "concatenates contact_details with a line break" do
-        answer = {
-          contact_name: "Snow White",
-          role: "COO",
-          phone_number: "012101234567",
-          email: "me@example.com",
-        }
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: space_item_value_list,
+      })
 
-        expected_answer =
-          "Name: #{answer[:contact_name]}<br>" \
-            "Role: #{answer[:role]}<br>" \
-            "Phone number: #{answer[:phone_number]}<br>" \
-            "Email: #{answer[:email]}"
-
-        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
-      end
-
-      it "returns nothing if the contact details are empty" do
-        answer = {}
-
-        expect(helper.concat_answer(answer, question)).to be_empty
-      end
-
-      it "only concatenates the fields that have a value" do
-        answer = {
-          email: "me@example.com",
-        }
-
-        expected_answer = "Email: #{answer[:email]}"
-        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
-      end
+      expect(helper.space_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.space.type"))
+      expect(helper.space_items.pluck(:value))
+        .to include(expected)
     end
 
-    context "business_details" do
-      let(:question) { "business_details" }
+    it "contains a description field" do
+      session.merge!(form_data)
 
-      it "concatenates business_details with a line break" do
-        answer = {
-          company_name: "Snow White Inc",
-          company_is_uk_registered: "Yes",
-          company_number: "AB123456",
-          company_size: 1000,
-          company_location: "UK",
-          company_postcode: "E1 8QS",
-        }
-
-        expected_answer =
-          "Company name: #{answer[:company_name]}<br>" \
-            "Company registered in the UK: #{answer[:company_is_uk_registered]}<br>" \
-            "Company number: #{answer[:company_number]}<br>" \
-            "Company size number: #{answer[:company_size]}<br>" \
-            "Company location: #{answer[:company_location]}<br>" \
-            "Company postcode: #{answer[:company_postcode]}"
-
-        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
-      end
-
-      context "company_is_uk_registered" do
-        it "returns only company_is_uk_registered if all other business detail fields have no value" do
-          answer = {
-            company_is_uk_registered: "No",
-          }
-
-          expected_answer = "Company registered in the UK: No"
-          expect(helper.concat_answer(answer, question)).to eq(expected_answer)
-        end
-
-        it "only concatenates the other business detail fields that have a value" do
-          answer = {
-            company_name: "Snow White Inc",
-            company_is_uk_registered: "No",
-          }
-
-          expected_answer = "Company name: #{answer[:company_name]}<br>Company registered in the UK: No"
-          expect(helper.concat_answer(answer, question)).to eq(expected_answer)
-        end
-      end
+      expect(helper.space_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.space.description"))
+      expect(helper.space_items.pluck(:value))
+        .to include(form_data[:general_space_description])
     end
 
-    context "general multipart questions" do
-      let(:question) { "question" }
+    it "contains a charge field" do
+      session.merge!(form_data)
 
-      it "concates other hash questions" do
-        answer = {
-          one: "One",
-          two: "Two",
-          three: "Three",
-        }
-
-        expected_answer = "One Two Three"
-        expect(helper.concat_answer(answer, question)).to eq(expected_answer)
-      end
+      expect(helper.space_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.space_items.pluck(:value))
+        .to include(form_data[:space_cost])
     end
   end
 
-  describe "#link_to_parent_page" do
-    it "links the user back to the page the question appeared on" do
-      helper.link_to_parent_page("question", "parent_question") do |item|
-        expect(item[:edit][:href]).to include("parent-question?change-answer")
+  describe "#space_item_value_list" do
+    it "returns a list containing all items and values when all items and values are selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_space_type] = ["Warehouse space", "Office space", "Other"]
+        form_data[:warehouse_space_description] = 0
+        form_data[:office_space_description] = 1
+        form_data[:offer_space_type_other] = 1_000_000
       end
+
+      session.merge!(data_copy)
+
+      expect(helper.space_item_value_list).to include("Other (1,000,000 square feet)")
+      expect(helper.space_item_value_list).to include("Warehouse space (0 square feet)")
+      expect(helper.space_item_value_list).to include("Office space (1 square foot)")
+    end
+
+    it "returns a list containing only the items and values selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_space_type] = ["Warehouse space", "Other"]
+        form_data[:warehouse_space_description] = 0
+        form_data[:office_space_description] = 1
+        form_data[:offer_space_type_other] = 1_000_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.space_item_value_list).to include("Other (1,000,000 square feet)")
+      expect(helper.space_item_value_list).to include("Warehouse space (0 square feet)")
+      expect(helper.space_item_value_list.count).to be 2
+    end
+
+    it "returns an empty list if no space types have been selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_space_type] = []
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.space_item_value_list.count).to be 0
+    end
+
+    it "returns a list where item values default to zero if an item is selected but the value is is not supplied by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_space_type] = ["Warehouse space", "Office space", "Other"]
+        form_data.delete(:warehouse_space_description)
+        form_data[:office_space_description] = 1
+        form_data[:offer_space_type_other] = 1_000_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.space_item_value_list).to include("Other (1,000,000 square feet)")
+      expect(helper.space_item_value_list).to include("Warehouse space (0 square feet)")
+      expect(helper.space_item_value_list).to include("Office space (1 square foot)")
+    end
+  end
+
+  describe "#staff_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: staff_item_value_list,
+      })
+
+      expect(helper.staff_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.staff.type"))
+      expect(helper.staff_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.staff_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.staff.description"))
+      expect(helper.staff_items.pluck(:value))
+        .to include(form_data[:offer_staff_description])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.staff_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.staff_items.pluck(:value))
+        .to include(form_data[:offer_staff_charge])
+    end
+  end
+
+  describe "#staff_item_value_list" do
+    it "returns a list containing all items and values when all items and values are selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = [
+          "Cleaners",
+          "Developers",
+          "Medical staff",
+          "Office staff",
+          "Security staff",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff",
+        ]
+        form_data[:offer_staff_number][:cleaners_number] = 0
+        form_data[:offer_staff_number][:developers_number] = 1
+        form_data[:offer_staff_number][:medical_staff_number] = 10
+        form_data[:offer_staff_number][:office_staff_number] = 100
+        form_data[:offer_staff_number][:security_staff_number] = 1_000
+        form_data[:offer_staff_number][:trainers_number] = 10_000
+        form_data[:offer_staff_number][:translators_number] = 100_000
+        form_data[:offer_staff_number][:other_staff_number] = 1_000_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list).to include("Cleaners (0 people)")
+      expect(helper.staff_item_value_list).to include("Developers (1 person)")
+      expect(helper.staff_item_value_list).to include("Medical staff (10 people)")
+      expect(helper.staff_item_value_list).to include("Office staff (100 people)")
+      expect(helper.staff_item_value_list).to include("Security staff (1,000 people)")
+      expect(helper.staff_item_value_list).to include("Trainers or coaches (10,000 people)")
+      expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
+      expect(helper.staff_item_value_list).to include("Other staff (1,000,000 people)")
+    end
+
+    it "returns a list containing only the items and values selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = [
+          "Cleaners",
+          "Developers",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff",
+        ]
+        form_data[:offer_staff_number][:cleaners_number] = 0
+        form_data[:offer_staff_number][:developers_number] = 1
+        form_data[:offer_staff_number][:trainers_number] = 10_000
+        form_data[:offer_staff_number][:translators_number] = 100_000
+        form_data[:offer_staff_number][:other_staff_number] = 1_000_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list).to include("Cleaners (0 people)")
+      expect(helper.staff_item_value_list).to include("Developers (1 person)")
+      expect(helper.staff_item_value_list).to include("Trainers or coaches (10,000 people)")
+      expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
+      expect(helper.staff_item_value_list).to include("Other staff (1,000,000 people)")
+      expect(helper.staff_item_value_list.count).to be 5
+    end
+
+    it "returns an empty list if no space types have been selected by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = []
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list.count).to be 0
+    end
+
+    it "returns a list where item values default to zero if an item is selected but the value is is not supplied by the user" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:offer_staff_type] = [
+          "Cleaners",
+          "Developers",
+          "Medical staff",
+          "Office staff",
+          "Security staff",
+          "Trainers or coaches",
+          "Translators",
+          "Other staff",
+        ]
+        form_data[:offer_staff_number].delete(:developers_number)
+        form_data[:offer_staff_number].delete(:office_staff_number)
+        form_data[:offer_staff_number].delete(:trainers_number)
+        form_data[:offer_staff_number].delete(:other_staff_number)
+        form_data[:offer_staff_number][:cleaners_number] = 0
+        form_data[:offer_staff_number][:medical_staff_number] = 1
+        form_data[:offer_staff_number][:security_staff_number] = 1_000
+        form_data[:offer_staff_number][:translators_number] = 100_000
+      end
+
+      session.merge!(data_copy)
+
+      expect(helper.staff_item_value_list).to include("Developers (0 people)")
+      expect(helper.staff_item_value_list).to include("Office staff (0 people)")
+      expect(helper.staff_item_value_list).to include("Trainers or coaches (0 people)")
+      expect(helper.staff_item_value_list).to include("Other staff (0 people)")
+      expect(helper.staff_item_value_list).to include("Cleaners (0 people)")
+      expect(helper.staff_item_value_list).to include("Medical staff (1 person)")
+      expect(helper.staff_item_value_list).to include("Security staff (1,000 people)")
+      expect(helper.staff_item_value_list).to include("Translators (100,000 people)")
+    end
+  end
+
+  describe "#care_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:offer_care_type],
+      })
+
+      expect(helper.care_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.care.type"))
+      expect(helper.care_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a qualifications field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:offer_care_qualifications],
+      })
+
+      expect(helper.care_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.care.qualifications"))
+      expect(helper.care_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.care_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.care_items.pluck(:value))
+        .to include(form_data[:care_cost])
+    end
+  end
+
+  describe "#construction_service_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:construction_services],
+      })
+
+      expect(helper.construction_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.construction.type"))
+      expect(helper.construction_service_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.construction_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.construction.description"))
+      expect(helper.construction_service_items.pluck(:value))
+        .to include(form_data[:construction_services_other])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.construction_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.construction_service_items.pluck(:value))
+        .to include(form_data[:construction_cost])
+    end
+  end
+
+  describe "#it_service_items" do
+    it "contains a type field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:it_services],
+      })
+
+      expect(helper.it_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.it.type"))
+      expect(helper.it_service_items.pluck(:value))
+        .to include(expected)
+    end
+
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.it_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.services.it.description"))
+      expect(helper.it_service_items.pluck(:value))
+        .to include(form_data[:it_services_other])
+    end
+
+    it "contains a charge field" do
+      session.merge!(form_data)
+
+      expect(helper.it_service_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.charge"))
+      expect(helper.it_service_items.pluck(:value))
+        .to include(form_data[:it_cost])
+    end
+  end
+
+  describe "#other_support_items" do
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expect(helper.other_support_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.other_support.description"))
+      expect(helper.other_support_items.pluck(:value))
+        .to include(form_data[:offer_other_support])
+    end
+  end
+
+  describe "#location_items" do
+    it "contains a description field" do
+      session.merge!(form_data)
+
+      expected = render("govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items: form_data[:location],
+      })
+
+      expect(helper.location_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.location.description"))
+      expect(helper.location_items.pluck(:value))
+        .to include(expected)
+    end
+  end
+
+  describe "#business_detail_items" do
+    it "contains a name field" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.name"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_name))
+    end
+
+    it "contains a number field" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.number"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_number))
+    end
+
+    it "contains a size field" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.size"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_size))
+    end
+
+    it "contains a location field where postcode is an empty string" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:business_details].delete(:company_postcode)
+      end
+      session.merge!(data_copy)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.location"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_location))
+    end
+
+    it "contains a location field where postcode is nil" do
+      data_copy = form_data.tap do |form_data|
+        form_data[:business_details].delete(:company_postcode)
+      end
+      session.merge!(data_copy)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.location"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include(form_data.dig(:business_details, :company_location))
+    end
+
+    it "contains a location field with a postcode" do
+      session.merge!(form_data)
+
+      expect(helper.business_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.business_details.location"))
+      expect(helper.business_detail_items.pluck(:value))
+        .to include("#{form_data.dig(:business_details, :company_location)} (#{form_data.dig(:business_details, :company_postcode)})")
+    end
+  end
+
+  describe "#contact_detail_items" do
+    it "contains a name field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.name"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :contact_name))
+    end
+
+    it "contains a role field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.role"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :role))
+    end
+
+    it "contains a number field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.number"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :phone_number))
+    end
+
+    it "contains a email field" do
+      session.merge!(form_data)
+
+      expect(helper.contact_detail_items.pluck(:field))
+        .to include(I18n.t("coronavirus_form.check_your_answers.sections.contact_details.email"))
+      expect(helper.contact_detail_items.pluck(:value))
+        .to include(form_data.dig(:contact_details, :email))
     end
   end
 end

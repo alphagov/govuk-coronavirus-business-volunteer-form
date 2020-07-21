@@ -1,0 +1,9 @@
+<%= render "govuk_publishing_components/components/summary_list", {
+  title: t("coronavirus_form.check_your_answers.sections.location.title"),
+  heading_level: 2,
+  heading_size: "l",
+  items: location_items,
+  edit: {
+    href: "location?change-answer",
+  }
+} %>
