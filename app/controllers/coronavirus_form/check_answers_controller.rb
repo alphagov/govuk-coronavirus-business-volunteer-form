@@ -19,7 +19,7 @@ class CoronavirusForm::CheckAnswersController < ApplicationController
       )
     end
 
-    FormResponse.create(form_response: parsed_session) unless smoke_tester?
+    FormResponse.create!(form_response: parsed_session) unless smoke_tester?
 
     send_confirmation_email if session.dig(:contact_details, :email).present?
 
