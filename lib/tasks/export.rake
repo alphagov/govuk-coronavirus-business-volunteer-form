@@ -14,7 +14,7 @@ namespace :export do
     args.with_defaults(date: Date.yesterday.to_s)
 
     start_time = Date.parse(args.date).beginning_of_day
-    end_time = Time.current
+    end_time = Time.zone.now
     puts "finding responses between #{start_time} and #{end_time}"
 
     responses = FormResponse.where(created_at: start_time..end_time)
