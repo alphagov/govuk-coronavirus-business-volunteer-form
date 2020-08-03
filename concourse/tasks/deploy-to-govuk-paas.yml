@@ -39,12 +39,12 @@ run:
       cf api "$CF_API"
       cf auth
       cf t -o "$CF_ORG" -s "$CF_SPACE"
-      cf v3-create-app govuk-coronavirus-business-volunteer-form || true
-      cf v3-apply-manifest -f manifest.yml
+      cf create-app govuk-coronavirus-business-volunteer-form || true
+      cf apply-manifest -f manifest.yml
       cf set-env govuk-coronavirus-business-volunteer-form CF_STARTUP_TIMEOUT "$CF_STARTUP_TIMEOUT"
 
-      cf v3-scale --process web -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
-      cf v3-scale --process worker -i "$WORKER_INSTANCES" govuk-coronavirus-business-volunteer-form
+      cf scale --process web -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
+      cf scale --process worker -i "$WORKER_INSTANCES" govuk-coronavirus-business-volunteer-form
 
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ASSETS_BUCKET_NAME "$AWS_ASSETS_BUCKET_NAME"
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ERROR_PAGES_BUCKET_NAME "$AWS_ERROR_PAGES_BUCKET_NAME"
