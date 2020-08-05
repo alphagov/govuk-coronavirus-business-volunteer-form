@@ -3,7 +3,7 @@ image_resource:
   type: docker-image
   source:
     repository: governmentpaas/cf-cli
-    tag: 5b44bd954693937ddd07ee6c9e113923bc620aed
+    tag: latest
 inputs:
   - name: git-master
     path: src
@@ -39,12 +39,12 @@ run:
       cf api "$CF_API"
       cf auth
       cf t -o "$CF_ORG" -s "$CF_SPACE"
-      cf v3-create-app govuk-coronavirus-business-volunteer-form || true
-      cf v3-apply-manifest -f manifest.yml
+      cf create-app govuk-coronavirus-business-volunteer-form || true
+      cf apply-manifest -f manifest.yml
       cf set-env govuk-coronavirus-business-volunteer-form CF_STARTUP_TIMEOUT "$CF_STARTUP_TIMEOUT"
 
-      cf v3-scale --process web -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
-      cf v3-scale --process worker -i "$WORKER_INSTANCES" govuk-coronavirus-business-volunteer-form
+      cf scale --process web -i "$INSTANCES" govuk-coronavirus-business-volunteer-form
+      cf scale --process worker -i "$WORKER_INSTANCES" govuk-coronavirus-business-volunteer-form
 
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ASSETS_BUCKET_NAME "$AWS_ASSETS_BUCKET_NAME"
       cf set-env govuk-coronavirus-business-volunteer-form AWS_ERROR_PAGES_BUCKET_NAME "$AWS_ERROR_PAGES_BUCKET_NAME"
@@ -63,5 +63,5 @@ run:
       cf set-env govuk-coronavirus-business-volunteer-form GOVUK_NOTIFY_TEMPLATE_ID "$GOVUK_NOTIFY_TEMPLATE_ID"
       cf set-env govuk-coronavirus-business-volunteer-form NOTIFY_API_KEY "$NOTIFY_API_KEY"
       cf set-env govuk-coronavirus-business-volunteer-form PAAS_ENV "$CF_SPACE"
-      cf v3-zdt-push govuk-coronavirus-business-volunteer-form --wait-for-deploy-complete --no-route
+      cf push govuk-coronavirus-business-volunteer-form --strategy rolling
       cf map-route govuk-coronavirus-business-volunteer-form cloudapps.digital --hostname "$HOSTNAME"
