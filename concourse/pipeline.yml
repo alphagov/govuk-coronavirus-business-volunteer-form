@@ -209,37 +209,6 @@ jobs:
               Deploy to production for the Business Volunteering service has failed
               Failed build: http://cd.gds-reliability.engineering/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
 
-
-  - name: smoke-test-prod
-    plan:
-      - get: git-master
-        trigger: true
-        passed: [deploy-to-prod]
-      - get: tests-image
-        passed:
-          - build-tests-image
-      - task: smoke-test
-        file: git-master/concourse/tasks/smoke-test.yml
-        params:
-          URL: 'https://coronavirus-business-volunteers.service.gov.uk/accommodation'
-          MESSAGE: "Checks that the application deployed to production is not serving HTTP error codes"
-      - task: run-smoke-tests
-        image: tests-image
-        file: git-master/concourse/tasks/run-smoke-tests.yml
-        params:
-          TEST_URL: 'https://coronavirus-business-volunteers.service.gov.uk'
-        on_failure:
-          put: govuk-coronavirus-services-tech-slack
-          params:
-            channel: '#govuk-corona-services-tech'
-            username: 'Concourse (Business Volunteering Service)'
-            icon_emoji: ':concourse:'
-            silent: true
-            text: |
-              :kaboom:
-              Production smoke tests for the Business Volunteering service have failed
-              Failed build: http://cd.gds-reliability.engineering/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
-
   - name: export-form-responses-periodically
     plan:
       - get: git-master
