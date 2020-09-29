@@ -41,7 +41,7 @@ group :development, :test do
   gem "awesome_print", "~> 1.8"
   gem "better_errors", "~> 2.7"
   gem "binding_of_caller", "~> 0.8.0"
-  gem "brakeman", "~> 4.9"
+  gem "brakeman", "~> 4.10"
   gem "byebug", "~> 11"
   gem "foreman", "~> 0.87.1"
   gem "govuk_test", "~> 1.0"
